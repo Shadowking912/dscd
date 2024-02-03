@@ -1,0 +1,36 @@
+syntax="proto3";
+package market;
+service MarketPlace
+{
+    rpc RegisterSeller(RegisterSellerRequest) returns (StatusResponse);
+
+    rpc SellItem(SellItemRequest) returns (StatusResponse);
+}
+message RegisterRequest
+{
+    message IPAddress
+    {
+        required uint32 firstSegment=1;
+        required uint32 secondSegment=2;
+        required uint32 thirdSegment=3;
+        required uint32 fourthSegment=4;
+    }
+    required IPAddress ip = 1;
+    required uint32 portNumber = 2;
+    required string uuid = 3;
+}
+message SellItem
+{
+    string productName = 1;
+    enum Category
+    {
+        ELECTRONICS=1;
+        FASHION=2;
+        OTHERS=3;
+    }
+    Category productCategory = 2;
+}
+message StatusResponse
+{
+    string status=1;
+}
