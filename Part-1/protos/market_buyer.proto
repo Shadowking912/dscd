@@ -1,5 +1,5 @@
 syntax="proto3";
-package market;
+package market_communication_with_client;
 service MarketPlace
 {
     rpc SearchItem(SearchRequest) returns ()
