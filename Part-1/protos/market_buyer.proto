@@ -1,0 +1,6 @@
+syntax="proto3";
+package market;
+service MarketPlace
+{
+    rpc SearchItem(SearchRequest) returns ()
+}

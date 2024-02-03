@@ -5,8 +5,11 @@ service MarketPlace
     rpc RegisterSeller(RegisterSellerRequest) returns (StatusResponse);
 
     rpc SellItem(SellItemRequest) returns (StatusResponse);
+
+    rpc UpdateItem(UpdateItemRequest) returns (StatusResponse);
+    
 }
-message RegisterRequest
+message RegisterSellerRequest
 {
     message IPAddress
     {
@@ -29,7 +32,13 @@ message SellItem
         OTHERS=3;
     }
     Category productCategory = 2;
+    int quantity = 3;
+    string description=4;
+    string sellerAddress=5;
+    int pricePerUnit=5;
+    required string uuid=6;
 }
+
 message StatusResponse
 {
     string status=1;
