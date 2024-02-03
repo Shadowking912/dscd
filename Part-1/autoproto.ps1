@@ -1,0 +1,3 @@
+python -m grpc_tools.protoc -I protos --python_out=. --grpc_python_out=. protos/market_seller.proto
+
+python -m grpc_tools.protoc -I protos --python_out=. --grpc_python_out=. protos/market_buyer.proto

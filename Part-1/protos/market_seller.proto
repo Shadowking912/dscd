@@ -20,12 +20,14 @@ message Address
 message RegisterSellerRequest
 {
      Address ip = 1;
+     string uuid = 2;
 }
 enum Category
 {
     ELECTRONICS=0;
     FASHION=1;
     OTHERS=2;
+    ANY=3;
 }
 message SellItemRequest
 {
