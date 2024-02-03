@@ -3,13 +3,13 @@ from concurrent import futures
 import grpc
 import market_seller_pb2
 import market_seller_pb2_grpc
-import Helper_Classes.Product
+import Helper_Classes.Product as Product
 
 
 class MarketPlaceService(market_seller_pb2_grpc.MarketPlaceServicer):
     def __init__(self):
         self.sellers={}
-        self.products=[]
+        self.currentProducts=0
     
     def RegisterSeller(self, request, context):
         seller_uuid = request.uuid
@@ -23,7 +23,23 @@ class MarketPlaceService(market_seller_pb2_grpc.MarketPlaceServicer):
         return status_response
     
     def SellItem(self, request, context):
-        return super().SellItem(request, context)
+        seller_uuid = request.uuid
+        status_response = market_seller_pb2.StatusResponse()
+        if seller_uuid not in self.sellers:
+            status_response.status = "FAILURE"
+        else:
+            product_id  = self.currentProducts+1
+            self.currentProducts+=1
+            product_name  = request.productName
+            product_category = request.productCategory
+            product_quantity = request.quantity
+            product_description = request.description
+            new_product = Product(product_id,product_name,product_category,product_quantity,product_description)
+            self.sellers[seller_uuid][1].append(new_product)
+            self.sellers[seller_uuid][0] = context.peer()
+            status_response.status="SUCCESS"
+        return status_response
+
     
     def UpdateItem(self, request, context):
         return super().UpdateItem(request, context)

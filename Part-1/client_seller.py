@@ -25,7 +25,7 @@ def sell(stub,unique_id,ip_address=None,port_number=None):
     price_per_unit = float(input())
 
     sell_request = market_seller_pb2.SellItemRequest(productName=product_name,productCategory=category,quantity=quantity,description=description,pricePerUnit=price_per_unit,uuid=unique_id)
-    sell_response = market_seller_pb2.stub.RegisterSeller(sell_request)
+    sell_response = stub.RegisterSeller(sell_request)
     print(sell_response.status)
 
 def run(unique_id):
@@ -42,13 +42,12 @@ def run(unique_id):
         print("Please select which service you would like to avail ?")
         choice = int(input())
 
-        
-
         if choice==1:
             register(stub,unique_id)
         elif choice==2:
             sell(stub,unique_id)
         # elif choice==3:
+        #     u
             
         # elif choice==4:
             
