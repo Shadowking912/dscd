@@ -1,8 +1,11 @@
+from concurrent import futures
+
 import grpc
 import market_buyer_pb2_grpc
 import market_buyer_pb2
 import uuid
 
+# class BuyerNotif(market_buyer_pb2_grpc.BuyerNotificationServer)
 def SearchItem(stub,unique_id):
     print("Available categories:\n ELECTRONICS-0\n FASHION-1\n OTHERS-2\n ANY-3")
     category = -1
@@ -30,25 +33,23 @@ def SearchItem(stub,unique_id):
 def BuyItem(stub,unique_id):
     itemid=int(input("Item id: "))
     qty=int(input("Quantity: "))
-    usrname=input("Username: ")
-    buyrequest=market_buyer_pb2.BuyRequest(username=usrname,id=itemid,quantity=qty)
+    buyrequest=market_buyer_pb2.BuyRequest(id=itemid,quantity=qty)
     buyresponse=stub.BuyItem(buyrequest)
     print(buyresponse)
 
-def AddTOWishList(stub):
+def AddTOWishList(stub,unique_id):
     itemid=int(input("Item id: "))
-    usrname=input("Username: ")
-    wishreq=market_buyer_pb2.WishRequest(username=usrname,id=itemid)
+    wishreq=market_buyer_pb2.WishRequest(uuid=unique_id,id=itemid)
     wishresponse=stub.AddWish(wishreq)
     print(wishresponse)
 
 def RateItem(stub):
     print("Available Ratings : 1-5(integers)")
     itemid=int(input("Item id: "))
-    usrname=input("Username: ")
     ratings=int(input("Rating: "))
-    raterequest=market_buyer_pb2.RateRequest(id=itemid,username=usrname,rating=ratings)
+    raterequest=market_buyer_pb2.RateRequest(id=itemid,rating=ratings)
     rateresponse=stub.RateItem(raterequest)
+    print(rateresponse)
 
 def run(unique_id):
     with grpc.insecure_channel('localhost:50051') as channel:
@@ -69,7 +70,10 @@ def run(unique_id):
                 SearchItem(stub,unique_id)
             elif choice==2:
                 BuyItem(stub,unique_id)
-        # elif choice==3:
+            elif choice==3:
+                AddTOWishList(stub,unique_id)
+            elif choice==4:
+                RateItem(stub)
         #     u
             
         # elif choice==4:

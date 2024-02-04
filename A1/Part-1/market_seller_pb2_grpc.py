@@ -37,7 +37,7 @@ class MarketPlaceStub(object):
         self.DisplaySellerItems = channel.unary_stream(
                 '/market_communication_with_seller.MarketPlace/DisplaySellerItems',
                 request_serializer=market__seller__pb2.ProductDisplayRequest.SerializeToString,
-                response_deserializer=market__seller__pb2.ItemResponse.FromString,
+                response_deserializer=market__seller__pb2.ProductDisplayResponse.FromString,
                 )
 
 
@@ -100,7 +100,7 @@ def add_MarketPlaceServicer_to_server(servicer, server):
             'DisplaySellerItems': grpc.unary_stream_rpc_method_handler(
                     servicer.DisplaySellerItems,
                     request_deserializer=market__seller__pb2.ProductDisplayRequest.FromString,
-                    response_serializer=market__seller__pb2.ItemResponse.SerializeToString,
+                    response_serializer=market__seller__pb2.ProductDisplayResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -193,6 +193,6 @@ class MarketPlace(object):
             metadata=None):
         return grpc.experimental.unary_stream(request, target, '/market_communication_with_seller.MarketPlace/DisplaySellerItems',
             market__seller__pb2.ProductDisplayRequest.SerializeToString,
-            market__seller__pb2.ItemResponse.FromString,
+            market__seller__pb2.ProductDisplayResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

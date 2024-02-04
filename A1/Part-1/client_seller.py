@@ -24,17 +24,47 @@ def sell(stub,unique_id):
     quantity = int(input())
     print("\nPlease add the description of the product : ")
     description = input()
-    print(description)
     print("\nPlease enter the price per unit :")
     price_per_unit = float(input())
-    print(price_per_unit)
 
     sell_request = market_seller_pb2.SellItemRequest(productName=product_name,productCategory=category,quantity=quantity,pricePerUnit=price_per_unit,description=description,uuid=unique_id)
     sell_response = stub.SellItem(sell_request)
     print(sell_response.status)
 
+def displayItems(stub,unique_id):
+    displayrequest = market_seller_pb2.ProductDisplayRequest(uuid=unique_id)
+    displayresponses = stub.DisplaySellerItems(displayrequest)
+    for displayresponse in displayresponses:
+        print(f"Item ID: {displayresponse.id},Price: {displayresponse.price},Name: {displayresponse.name},Category: {displayresponse.productCategory}")
+        print(f"Description: {displayresponse.description}")
+        print(f"Quantity Reamining: {displayresponse.quantityRemaining}")
+        print(f"Rating : {displayresponse.rating}/5 | Seller: {displayresponse.sellerAddress}")
+        print()
+
+def update(stub,unique_id):
+    print("Here is a list of all the available items that you registered :-")
+    displayItems(stub,unique_id)
+    print("Please enter the id of the product you wish to update : ")
+    id = int(input())
+    print("Please enter the updated quantity")
+    quantity = int(input())
+    print("Please enter the updated price")
+    price = float(input())
+    updateitemrequest = market_seller_pb2.UpdateItemRequest(uuid=unique_id,id=id,newPrice=price,newQuantity=quantity)
+    updateitemresponse = stub.UpdateItem(updateitemrequest)
+    print(updateitemresponse)
+
+def delete(stub,unique_id):
+    print("Here is a list of all the available items that you registered :-")
+    displayItems(stub,unique_id)
+    print("Please enter the id of the product you wish to update : ")
+    id = int(input())
+    deleteitemrequest = market_seller_pb2.DeleteItemRequest(uuid=unique_id,id=id)
+    deleteitemresponse = stub.DeleteItem(deleteitemrequest)
+    print(deleteitemresponse)
 
 def run(unique_id):
+    
     with grpc.insecure_channel('localhost:50051') as channel:
         stub = market_seller_pb2_grpc.MarketPlaceStub(channel)
         while(1):
@@ -53,16 +83,15 @@ def run(unique_id):
                 register(stub,unique_id)
             elif choice==2:
                 sell(stub,unique_id)
+            elif choice==3:
+                update(stub,unique_id)
+            elif choice==4:
+                delete(stub,unique_id)
+            elif choice==5:
+                displayItems(stub,unique_id)
             elif choice==6:
                 break
-            # elif choice==3:
-            #     u
-                
-            # elif choice==4:
-                
-            # elif choice==5:
             
-
 if __name__=="__main__":
     unique_id=str(uuid.uuid1())
     run(unique_id)
