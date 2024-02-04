@@ -12,7 +12,13 @@ class User:
         self.MessageServerSocket.connect("tcp://"+(self.MessageServerAddress))
         self.GroupList = []
         self.JoinedGroups= []
-        self.GroupSockets = []
+        self.GroupSockets = {}
+
+    def show_groups(self):
+        i=1
+        for j in self.JoinedGroups:
+            print(f"{i}. {j}")
+            i+=1
 
     def get_group_list(self):
         self.MessageServerSocket.send_json({'action': 'get_group_list', 'user_uuid':self.user_id})
@@ -34,31 +40,52 @@ class User:
         # print("DEB: Sending JSON")
         socket.send_json({'action': 'add_user', 'user_uuid': self.user_id})
         # print("DEB: Sent Json")
+        self.GroupSockets[group_id] = socket
+        self.JoinedGroups.append(group_id)
         response = socket.recv_string()
         print(response)
 
     def leave_group(self, group_name):
-        self.socket.send_json({'action': 'leave_group', 'group_name': group_name, 'user_id': self.user_id})
-        response = self.socket.recv_string()
+        try:
+            group_socket = self.GroupSockets[group_name]
+        except KeyError:
+            print(f"FAIL: Group '{group_name}' not found.")
+            return 
+        group_socket.send_json({'action': 'leave_group', 'user_id': self.user_id})
+        response = group_socket.recv_string()
+        self.JoinedGroups.remove(group_name)
+        self.GroupSockets.pop(group_name)
         print(response)
 
     def get_messages(self, group_name, timestamp=None):
-        request = {'action': 'get_messages', 'group_name': group_name}
+        try:
+            group_socket = self.GroupSockets[group_name]
+        except KeyError:
+            print(f"FAIL: Group '{group_name}' not found.")
+            return 
+        request = {'action': 'get_messages', 'group_name': group_name, 'user_uuid':self.user_id}
         if timestamp:
             request['timestamp'] = timestamp
-        self.socket.send_json(request)
-        messages = self.socket.recv_json()
+        group_socket.send_json(request)
+        messages = group_socket.recv_json()
         print(f"Messages from group {group_name}:")
         for message in messages:
             print(message)
+        print("----------------------------------")
+    
 
     def send_message(self, group_name, message):
-        timestamp = datetime.datetime.now().timestamp()
-        self.socket.send_json({'action': 'send_message', 'group_name': group_name, 'user_id': self.user_id, 'message': message, 'timestamp':timestamp})
-        # response = self.socket.recv_string()
+        try:
+            group_socket = self.GroupSockets[group_name]
+        except KeyError:
+            print(f"FAIL: Group '{group_name}' not found.")
+            return 
+        timestamp = datetime.datetime.now().strftime('%H:%M:%S')
+        group_socket.send_json({'action': 'send_message', 'group_name': group_name, 'user_id': self.user_id, 'message': message, 'timestamp':timestamp})
+        # response = group_socket.recv_string()
         # print(response)
         try:
-            response = self.socket.recv_string()
+            response = group_socket.recv_string()
             print(response)
         except zmq.Again:
             print("FAIL")
@@ -67,11 +94,12 @@ class User:
         print("Available commands:")
         print("1. list_groups - Get the list of available groups")
         print("2. join_group <group_name> - Join a group")
-        print("3. leave_group <group_name> - Leave a group")
-        print("4. get_messages <group_name> [<timestamp>] - Get messages from a group")
-        print("5. send_message <group_name> <message> - Send a message to a group")
-        print("6. help - Display available commands")
-        print("7. exit - Exit the application")
+        print("3. show_groups - Show Joined Groups")
+        print("4. leave_group <group_name> - Leave a group")
+        print("5. get_messages <group_name> [<timestamp>] - Get messages from a group")
+        print("6. send_message <group_name> <message> - Send a message to a group")
+        print("7. help - Display available commands")
+        print("8. exit - Exit the application")
 
 def main():
     if len(sys.argv) != 2:
@@ -79,7 +107,7 @@ def main():
         sys.exit(1)
 
     user_id = str(uuid.uuid1())
-    server_address = sys.argv[2]
+    server_address = sys.argv[1]
 
     user = User(user_id, server_address)
     user.display_help()
@@ -98,14 +126,19 @@ def main():
                 group_name = command[1]
                 user.join_group(group_name)
 
-        elif action == '3' or action == 'leave_group':
+        elif action == '3' or action == 'show_groups':
+            if len(command) != 1:
+                print("Usage: show_groups")
+            else:
+                user.show_groups()
+        elif action == '4' or action == 'leave_group':
             if len(command) != 2:
                 print("Usage: leave_group <group_name>")
             else:
                 group_name = command[1]
                 user.leave_group(group_name)
 
-        elif action == '4' or action == 'get_messages':
+        elif action == '5' or action == 'get_messages':
             if len(command) < 2 or len(command) > 3:
                 print("Usage: get_messages <group_name> [<timestamp>]")
             else:
@@ -113,7 +146,7 @@ def main():
                 timestamp = command[2] if len(command) == 3 else None
                 user.get_messages(group_name, timestamp)
 
-        elif action == '5' or action == 'send_message':
+        elif action == '6' or action == 'send_message':
             if len(command) < 3:
                 print("Usage: send_message <group_name> <message>")
             else:
@@ -121,10 +154,10 @@ def main():
                 message = ' '.join(command[2:])
                 user.send_message(group_name, message)
 
-        elif action == '6' or action == 'help':
+        elif action == '7' or action == 'help':
             user.display_help()
 
-        elif action == '7' or action == 'exit':
+        elif action == '8' or action == 'exit':
             print("Exiting...")
             break
 

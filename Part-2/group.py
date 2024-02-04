@@ -1,5 +1,6 @@
 import zmq
 import uuid
+import datetime
 import sys
 
 class Group:
@@ -7,7 +8,7 @@ class Group:
         self.id = id
         self.name = name
         self.users = []
-        self.messages = []
+        self.messages = {}
         self.registration_status = False
         self.MessageServerSocket = ""
         self.GroupAddress = "tcp://"
@@ -17,12 +18,12 @@ class Group:
 
     def add_user(self, user_uuid):
         self.users.append(user_uuid)
-        print(f" New User ID: {user_uuid} \n Added to group ID: {self.id}")
+        # print(f" New User ID: {user_uuid} \n Added to group ID: {self.id}")
 
     def remove_user(self, user_uuid):
         if user_uuid in self.users:
             self.users.remove(user_uuid)
-            print(f"User ID: {user_uuid} removed from group ID: {self.id}")
+            # print(f"User ID: {user_uuid} removed from group ID: {self.id}")
         else:
             print(f"User ID: {user_uuid} not found in group ID: {self.id}")
 
@@ -51,22 +52,29 @@ class Group:
 
             if message['action'] == 'add_user':
                 user_uuid = message['user_uuid']
+                print(f"JOIN REQUEST FROM {user_uuid}")
                 self.add_user(user_uuid)
                 socket.send_string("SUCCESS")
 
-            elif message['action'] == 'remove_user':
-                user_uuid = message['user_uuid']
+            elif message['action'] == 'leave_group':
+                user_uuid = message['user_id']
+                print(f"LEAVE REQUEST FROM {user_uuid}")
                 self.remove_user(user_uuid)
                 socket.send_string("SUCCESS")
 
             elif message['action'] == 'get_messages':
                 timestamp = message.get('timestamp', None)
+                user_uuid = message['user_uuid']
+                # print("DE: Get MEssage")
                 messages = self.get_messages(timestamp)
+                print(f"MESSAGE REQUEST FROM {user_uuid}")
                 socket.send_json(messages)
 
-            elif message['action'] == 'add_message':
+            elif message['action'] == 'send_message':
                 new_message = message['message']
-                self.add_message(new_message)
+                user_uuid = message['user_id']
+                timestamp = message['timestamp']
+                self.add_message(new_message,user_uuid,timestamp)
                 print(f"MESSAGE SEND FROM {message['user_id']}")
                 socket.send_string("SUCCESS")
 
@@ -75,14 +83,28 @@ class Group:
             else:
                 print("Invalid Request")
 
+    # def get_messages(self, timestamp=None):
+    #     if timestamp:
+    #         return [msg for msg in self.messages if msg['timestamp'] >= timestamp]
+    #     else:
+    #         return self.messages.items()
     def get_messages(self, timestamp=None):
         if timestamp:
-            return [msg for msg in self.messages if msg['timestamp'] >= timestamp]
+            timestamp_datetime = datetime.datetime.strptime(timestamp, '%H:%M:%S')
+            filtered_messages = [msg for msg in self.messages.values() if datetime.datetime.strptime(msg['timestamp'], '%H:%M:%S') >= timestamp_datetime]
+            sorted_messages = sorted(filtered_messages, key=lambda x: datetime.datetime.strptime(x['timestamp'], '%H:%M:%S'))
+            return sorted_messages
         else:
-            return self.messages
+            # If no timestamp is provided, return all messages sorted by timestamp
+            return sorted(self.messages.values(), key=lambda x: datetime.datetime.strptime(x['timestamp'], '%H:%M:%S'))
 
-    def add_message(self, message):
-        self.messages.append(message)
+    def add_message(self, message, user_uuid, timestamp):
+        message_uuid = str(uuid.uuid1())
+        self.messages[message_uuid] = {
+            'user_uuid': user_uuid,
+            'message': message,
+            'timestamp': timestamp
+        }
         
 
 # Main function to run the group interface
