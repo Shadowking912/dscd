@@ -2,7 +2,7 @@ syntax="proto3";
 package market_communication_with_client;
 service MarketPlace
 {
-    rpc SearchItem(SearchRequest) returns (stream ItemInfo);
+    rpc SearchItem(SearchRequest) returns (stream ProductDisplayResponse);
     rpc BuyItem(BuyRequest) returns (StatusResponse);
     rpc AddWish(WishRequest) returns (StatusResponse);
     rpc RateItem(RateRequest) returns (StatusResponse);
@@ -26,32 +26,24 @@ message ProductDisplayResponse
     string name = 3;
     Category productCategory=4;
     uint32 quantityRemaining=5;
-    Address address = 6;
-    float rating = 7;
-}
-message ItemInfo
-{
-    repeated ProductDisplayResponse products=1;
-}
-message Address
-{
-    string ipAddress=1;
-    uint32 portNumber=2;
+    float rating = 6;
+    string sellerAddress=7;
+    string description = 8;
 }
 message BuyRequest
 {
-    Address address=1;
+    string username=1;
     uint64 id=2;
     uint32 quantity=3;
 }
 message WishRequest
 {
-    Address address=1;
+    string username=1;
     uint64 id=2;
 }
 message RateRequest
 {
-    Address address=1;
+    string username=1;
     uint64 id=2;
     int32 rating=3;
 }

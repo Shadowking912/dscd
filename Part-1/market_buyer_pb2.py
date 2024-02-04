@@ -14,31 +14,27 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x12market_buyer.proto\x12 market_communication_with_client\"`\n\rSearchRequest\x12\x11\n\titem_name\x18\x01 \x01(\t\x12<\n\x08\x63\x61tegory\x18\x02 \x01(\x0e\x32*.market_communication_with_client.Category\"\xed\x01\n\x16ProductDisplayResponse\x12\n\n\x02id\x18\x01 \x01(\x04\x12\r\n\x05price\x18\x02 \x01(\x02\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x43\n\x0fproductCategory\x18\x04 \x01(\x0e\x32*.market_communication_with_client.Category\x12\x19\n\x11quantityRemaining\x18\x05 \x01(\r\x12:\n\x07\x61\x64\x64ress\x18\x06 \x01(\x0b\x32).market_communication_with_client.Address\x12\x0e\n\x06rating\x18\x07 \x01(\x02\"V\n\x08ItemInfo\x12J\n\x08products\x18\x01 \x03(\x0b\x32\x38.market_communication_with_client.ProductDisplayResponse\"0\n\x07\x41\x64\x64ress\x12\x11\n\tipAddress\x18\x01 \x01(\t\x12\x12\n\nportNumber\x18\x02 \x01(\r\"f\n\nBuyRequest\x12:\n\x07\x61\x64\x64ress\x18\x01 \x01(\x0b\x32).market_communication_with_client.Address\x12\n\n\x02id\x18\x02 \x01(\x04\x12\x10\n\x08quantity\x18\x03 \x01(\r\"U\n\x0bWishRequest\x12:\n\x07\x61\x64\x64ress\x18\x01 \x01(\x0b\x32).market_communication_with_client.Address\x12\n\n\x02id\x18\x02 \x01(\x04\"e\n\x0bRateRequest\x12:\n\x07\x61\x64\x64ress\x18\x01 \x01(\x0b\x32).market_communication_with_client.Address\x12\n\n\x02id\x18\x02 \x01(\x04\x12\x0e\n\x06rating\x18\x03 \x01(\x05\" \n\x0eStatusResponse\x12\x0e\n\x06status\x18\x01 \x01(\t*=\n\x08\x43\x61tegory\x12\x0f\n\x0b\x45LECTRONICS\x10\x00\x12\x0b\n\x07\x46\x41SHION\x10\x01\x12\n\n\x06OTHERS\x10\x02\x12\x07\n\x03\x41NY\x10\x03\x32\xbe\x03\n\x0bMarketPlace\x12k\n\nSearchItem\x12/.market_communication_with_client.SearchRequest\x1a*.market_communication_with_client.ItemInfo0\x01\x12i\n\x07\x42uyItem\x12,.market_communication_with_client.BuyRequest\x1a\x30.market_communication_with_client.StatusResponse\x12j\n\x07\x41\x64\x64Wish\x12-.market_communication_with_client.WishRequest\x1a\x30.market_communication_with_client.StatusResponse\x12k\n\x08RateItem\x12-.market_communication_with_client.RateRequest\x1a\x30.market_communication_with_client.StatusResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x12market_buyer.proto\x12 market_communication_with_client\"`\n\rSearchRequest\x12\x11\n\titem_name\x18\x01 \x01(\t\x12<\n\x08\x63\x61tegory\x18\x02 \x01(\x0e\x32*.market_communication_with_client.Category\"\xdd\x01\n\x16ProductDisplayResponse\x12\n\n\x02id\x18\x01 \x01(\x04\x12\r\n\x05price\x18\x02 \x01(\x02\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x43\n\x0fproductCategory\x18\x04 \x01(\x0e\x32*.market_communication_with_client.Category\x12\x19\n\x11quantityRemaining\x18\x05 \x01(\r\x12\x0e\n\x06rating\x18\x06 \x01(\x02\x12\x15\n\rsellerAddress\x18\x07 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x08 \x01(\t\"<\n\nBuyRequest\x12\x10\n\x08username\x18\x01 \x01(\t\x12\n\n\x02id\x18\x02 \x01(\x04\x12\x10\n\x08quantity\x18\x03 \x01(\r\"+\n\x0bWishRequest\x12\x10\n\x08username\x18\x01 \x01(\t\x12\n\n\x02id\x18\x02 \x01(\x04\";\n\x0bRateRequest\x12\x10\n\x08username\x18\x01 \x01(\t\x12\n\n\x02id\x18\x02 \x01(\x04\x12\x0e\n\x06rating\x18\x03 \x01(\x05\" \n\x0eStatusResponse\x12\x0e\n\x06status\x18\x01 \x01(\t*=\n\x08\x43\x61tegory\x12\x0f\n\x0b\x45LECTRONICS\x10\x00\x12\x0b\n\x07\x46\x41SHION\x10\x01\x12\n\n\x06OTHERS\x10\x02\x12\x07\n\x03\x41NY\x10\x03\x32\xcc\x03\n\x0bMarketPlace\x12y\n\nSearchItem\x12/.market_communication_with_client.SearchRequest\x1a\x38.market_communication_with_client.ProductDisplayResponse0\x01\x12i\n\x07\x42uyItem\x12,.market_communication_with_client.BuyRequest\x1a\x30.market_communication_with_client.StatusResponse\x12j\n\x07\x41\x64\x64Wish\x12-.market_communication_with_client.WishRequest\x1a\x30.market_communication_with_client.StatusResponse\x12k\n\x08RateItem\x12-.market_communication_with_client.RateRequest\x1a\x30.market_communication_with_client.StatusResponseb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'market_buyer_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
-  _globals['_CATEGORY']._serialized_start=860
-  _globals['_CATEGORY']._serialized_end=921
+  _globals['_CATEGORY']._serialized_start=580
+  _globals['_CATEGORY']._serialized_end=641
   _globals['_SEARCHREQUEST']._serialized_start=56
   _globals['_SEARCHREQUEST']._serialized_end=152
   _globals['_PRODUCTDISPLAYRESPONSE']._serialized_start=155
-  _globals['_PRODUCTDISPLAYRESPONSE']._serialized_end=392
-  _globals['_ITEMINFO']._serialized_start=394
-  _globals['_ITEMINFO']._serialized_end=480
-  _globals['_ADDRESS']._serialized_start=482
-  _globals['_ADDRESS']._serialized_end=530
-  _globals['_BUYREQUEST']._serialized_start=532
-  _globals['_BUYREQUEST']._serialized_end=634
-  _globals['_WISHREQUEST']._serialized_start=636
-  _globals['_WISHREQUEST']._serialized_end=721
-  _globals['_RATEREQUEST']._serialized_start=723
-  _globals['_RATEREQUEST']._serialized_end=824
-  _globals['_STATUSRESPONSE']._serialized_start=826
-  _globals['_STATUSRESPONSE']._serialized_end=858
-  _globals['_MARKETPLACE']._serialized_start=924
-  _globals['_MARKETPLACE']._serialized_end=1370
+  _globals['_PRODUCTDISPLAYRESPONSE']._serialized_end=376
+  _globals['_BUYREQUEST']._serialized_start=378
+  _globals['_BUYREQUEST']._serialized_end=438
+  _globals['_WISHREQUEST']._serialized_start=440
+  _globals['_WISHREQUEST']._serialized_end=483
+  _globals['_RATEREQUEST']._serialized_start=485
+  _globals['_RATEREQUEST']._serialized_end=544
+  _globals['_STATUSRESPONSE']._serialized_start=546
+  _globals['_STATUSRESPONSE']._serialized_end=578
+  _globals['_MARKETPLACE']._serialized_start=644
+  _globals['_MARKETPLACE']._serialized_end=1104
 # @@protoc_insertion_point(module_scope)
