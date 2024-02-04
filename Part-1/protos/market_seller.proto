@@ -12,15 +12,10 @@ service MarketPlace
     
     rpc DisplaySellerItems(ProductDisplayRequest) returns (stream ItemResponse);
 }
-message Address
-{
-    string ipAddress=1;
-    uint32 portNumber=2;
-}
 message RegisterSellerRequest
 {
-     Address ip = 1;
-     string uuid = 2;
+    string address = 1;
+    string uuid = 2;
 }
 enum Category
 {
@@ -36,27 +31,23 @@ message SellItemRequest
     uint32 quantity = 3;
     string description=4;
     float pricePerUnit = 5;
-    Address address = 6;
-    string uuid=7;
+    string uuid=6;
 }
 message UpdateItemRequest
 {
     uint64 id=1;
     float newPrice=2;
     uint32 newQuantity=3;
-    Address address = 4;
-    string uuid=5;
+    string uuid=4;
 }
 message DeleteItemRequest
 {
     uint64 id=1;
-    Address address=2;
-    string uuid=3;
+    string uuid=2;
 }
 message ProductDisplayRequest
 {
-    Address address = 1;
-    string uuid = 2;
+    string uuid = 1;
 }
 message ProductDisplayResponse
 {
@@ -65,7 +56,6 @@ message ProductDisplayResponse
     string name = 3;
     Category productCategory=4;
     uint32 quantityRemaining=5;
-    Address address = 6;
     float rating = 7;
 }
 message ItemResponse
