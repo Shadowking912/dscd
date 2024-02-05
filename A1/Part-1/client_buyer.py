@@ -66,6 +66,17 @@ def RateItem(stub):
     rateresponse=stub.RateItem(raterequest)
     print(rateresponse)
 
+def DisplayWishlist(stub,unique_id):
+    print("wishlist")
+    displayrequest = market_buyer_pb2.ProductDisplayRequest(uuid=unique_id)
+    displayresponses = stub.DisplayWishlist(displayrequest)
+    for displayresponse in displayresponses:
+        print(f"Item ID: {displayresponse.id},Price: {displayresponse.price},Name: {displayresponse.name},Category: {displayresponse.productCategory}")
+        print(f"Description: {displayresponse.description}")
+        print(f"Quantity Reamining: {displayresponse.quantityRemaining}")
+        print(f"Rating : {displayresponse.rating}/5 | Seller: {displayresponse.Address}")
+        print()
+
 def run(unique_id,addr="localhost:50052"):
     # Notification Server
 
@@ -86,7 +97,8 @@ def run(unique_id,addr="localhost:50052"):
         print("2) Buy Item")
         print("3) Add to Wishlist")
         print("4) Rate Item")
-        print("5) Logout")
+        print("5) Display Wishlist")
+        print("6) Logout")
 
         print("Please select which service you would like to avail ?")
         choice = int(input())
@@ -100,9 +112,11 @@ def run(unique_id,addr="localhost:50052"):
         elif choice==4:
             RateItem(stub)
         elif choice==5:
+            DisplayWishlist(stub,unique_id)
+        elif choice==6:
             break
             
 
 if __name__=="__main__":
     unique_id=str(uuid.uuid1())
-    run(unique_id,sys.argv[1][0])
+    run(unique_id,sys.argv[1])

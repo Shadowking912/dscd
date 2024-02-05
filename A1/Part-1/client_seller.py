@@ -122,4 +122,4 @@ def run(unique_id,addr="localhost:50053"):
             
 if __name__=="__main__":
     unique_id=str(uuid.uuid1())
-    run(unique_id,sys.argv[1][0])
+    run(unique_id,sys.argv[1])

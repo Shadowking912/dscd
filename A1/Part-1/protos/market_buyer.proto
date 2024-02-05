@@ -6,6 +6,7 @@ service MarketPlace
     rpc BuyItem(BuyRequest) returns (StatusResponse);
     rpc AddWish(WishRequest) returns (StatusResponse);
     rpc RateItem(RateRequest) returns (StatusResponse);
+    rpc DisplayWishlist(ProductDisplayRequest) returns (stream ProductDisplayResponse);
 }
 service BuyerNotificationServer
 {
@@ -58,4 +59,8 @@ message StatusResponse
 message Notification
 {
     ProductDisplayResponse notification=1;
+}
+message ProductDisplayRequest
+{
+    string uuid = 1;
 }

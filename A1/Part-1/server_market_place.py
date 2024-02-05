@@ -60,6 +60,7 @@ class MarketPlaceService(market_seller_pb2_grpc.MarketPlaceServicer,market_buyer
     def notification_info(self,desired_product,client,address):
         file=None
         stub=None
+        print(address)
         if client=="Buyer":
             channel= grpc.insecure_channel(address)
             stub = market_buyer_pb2_grpc.BuyerNotificationServerStub(channel)
@@ -106,7 +107,8 @@ class MarketPlaceService(market_seller_pb2_grpc.MarketPlaceServicer,market_buyer
 
         #send notification
         for i in self.buyers:
-            if desired_product in self.buyers[i].wishlist:
+            if desired_product in self.buyers[i].wishlist.values():
+                print("sending notification")
                 self.notification_info(desired_product,"Buyer",self.buyers[i].address)
         
         return status_response
@@ -225,11 +227,12 @@ class MarketPlaceService(market_seller_pb2_grpc.MarketPlaceServicer,market_buyer
         if(buyeruuid in self.buyers):
             self.buyers[buyeruuid].wishlist[itemid]=self.products[itemid]
         else:
-            new_buyer=Buyer(buyeruuid)
+            new_buyer=Buyer(buyeruuid,addr)
             new_buyer.wishlist[itemid]=self.products[itemid]
             self.buyers[buyeruuid]=new_buyer 
         self.buyers[buyeruuid].address=addr
-        status_response.status="SUCCESS"    
+        status_response.status="SUCCESS" 
+        print(self.buyers[buyeruuid].wishlist)   
         return status_response
     
     def RateItem(self, request, context):
@@ -244,9 +247,29 @@ class MarketPlaceService(market_seller_pb2_grpc.MarketPlaceServicer,market_buyer
             status_response.status="SUCCESS"
         return status_response
 
+    def DisplayWishlist(self,request,context):
+        uuid=request.uuid
+        if uuid in self.buyers:
+            for i in self.buyers[uuid].wishlist.values():
+                product_info=i
+                print(product_info,product_info.id)
+                market_product_reply = market_buyer_pb2.ProductDisplayResponse()
+                market_product_reply.id=product_info.id
+                market_product_reply.price=product_info.price
+                market_product_reply.name=product_info.name
+                market_product_reply.quantityRemaining=product_info.quantity
+                market_product_reply.rating=product_info.ratings
+                market_product_reply.Address = product_info.seller_address
+                market_product_reply.productCategory = product_info.category
+                market_product_reply.description=product_info.description
+                yield market_product_reply
+        else:
+            market_product_reply = market_buyer_pb2.ProductDisplayResponse()
+            return market_product_reply
+
+
 def serve():
 
-  
     # Adding the market place server 
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     market=MarketPlaceService()

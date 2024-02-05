@@ -10,7 +10,7 @@ service MarketPlace
 
     rpc DeleteItem(DeleteItemRequest) returns (StatusResponse);
     
-    rpc DisplaySellerItems(Notification) returns (stream ProductDisplayResponse);
+    rpc DisplaySellerItems(ProductDisplayRequest) returns (stream ProductDisplayResponse);
 }
 service SellerNotificationServer
 {
