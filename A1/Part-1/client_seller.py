@@ -4,10 +4,11 @@ import grpc
 import market_seller_pb2_grpc
 import market_seller_pb2
 import uuid
+import sys
 
 class SellerNotificationServer(market_seller_pb2_grpc.SellerNotificationServerServicer):
     def ReceiveNotification(self,request,context):
-        product=request
+        product=request.notification
         print(f"Item ID:{product.id},Price:{product.price},Name:{product.name},Category:{product.productCategory}")
         print(f"Description:{product.description}")
         print(f"Quantity Reamining:{product.quantityRemaining}")
@@ -17,9 +18,9 @@ class SellerNotificationServer(market_seller_pb2_grpc.SellerNotificationServerSe
         status_response.status = "SUCCESS"
         return status_response
 
-def register(stub,unique_id):
-    address = "0.0.0.0:" + str(4000)
-    register_request = market_seller_pb2.RegisterSellerRequest(address=address,uuid=unique_id)
+def register(stub,unique_id,addr):
+    # address = "0.0.0.0:" + str(4000)
+    register_request = market_seller_pb2.RegisterSellerRequest(address=addr,uuid=unique_id)
     registration_response = stub.RegisterSeller(register_request)
     print(registration_response.status)
 
@@ -80,18 +81,19 @@ def delete(stub,unique_id):
 
 
 
-def run(unique_id):
+def run(unique_id,addr="localhost:50053"):
 
     # Notification Server
     seller_notification_server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     notification_server = SellerNotificationServer()
-    market_seller_pb2_grpc.add_BuyerNotificationServerServicer_to_server(notification_server,seller_notification_server)
-    seller_notification_server.add_insecure_port("localhost:50053")
+    notification_server_addr=addr
+    market_seller_pb2_grpc.add_SellerNotificationServerServicer_to_server(notification_server,seller_notification_server)
+    seller_notification_server.add_insecure_port(notification_server_addr)
     seller_notification_server.start()
 
 
     # Client
-    channel= grpc.insecure_channel('localhost:50051')
+    channel= grpc.insecure_channel('localhost:50050')
     stub = market_seller_pb2_grpc.MarketPlaceStub(channel)
     while(1):
         print("Welcome to the Shop Seller :-")
@@ -106,7 +108,7 @@ def run(unique_id):
         choice = int(input())
 
         if choice==1:
-            register(stub,unique_id)
+            register(stub,unique_id,notification_server_addr)
         elif choice==2:
             sell(stub,unique_id)
         elif choice==3:
@@ -120,4 +122,4 @@ def run(unique_id):
             
 if __name__=="__main__":
     unique_id=str(uuid.uuid1())
-    run(unique_id)
+    run(unique_id,sys.argv[1][0])

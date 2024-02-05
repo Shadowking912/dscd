@@ -36,7 +36,7 @@ class MarketPlaceStub(object):
                 )
         self.DisplaySellerItems = channel.unary_stream(
                 '/market_communication_with_seller.MarketPlace/DisplaySellerItems',
-                request_serializer=market__seller__pb2.Notification.SerializeToString,
+                request_serializer=market__seller__pb2.ProductDisplayRequest.SerializeToString,
                 response_deserializer=market__seller__pb2.ProductDisplayResponse.FromString,
                 )
 
@@ -99,7 +99,7 @@ def add_MarketPlaceServicer_to_server(servicer, server):
             ),
             'DisplaySellerItems': grpc.unary_stream_rpc_method_handler(
                     servicer.DisplaySellerItems,
-                    request_deserializer=market__seller__pb2.Notification.FromString,
+                    request_deserializer=market__seller__pb2.ProductDisplayRequest.FromString,
                     response_serializer=market__seller__pb2.ProductDisplayResponse.SerializeToString,
             ),
     }
@@ -192,7 +192,7 @@ class MarketPlace(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_stream(request, target, '/market_communication_with_seller.MarketPlace/DisplaySellerItems',
-            market__seller__pb2.Notification.SerializeToString,
+            market__seller__pb2.ProductDisplayRequest.SerializeToString,
             market__seller__pb2.ProductDisplayResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -209,7 +209,7 @@ class SellerNotificationServerStub(object):
         """
         self.ReceiveNotification = channel.unary_unary(
                 '/market_communication_with_seller.SellerNotificationServer/ReceiveNotification',
-                request_serializer=market__seller__pb2.ProductDisplayResponse.SerializeToString,
+                request_serializer=market__seller__pb2.Notification.SerializeToString,
                 response_deserializer=market__seller__pb2.StatusResponse.FromString,
                 )
 
@@ -228,7 +228,7 @@ def add_SellerNotificationServerServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'ReceiveNotification': grpc.unary_unary_rpc_method_handler(
                     servicer.ReceiveNotification,
-                    request_deserializer=market__seller__pb2.ProductDisplayResponse.FromString,
+                    request_deserializer=market__seller__pb2.Notification.FromString,
                     response_serializer=market__seller__pb2.StatusResponse.SerializeToString,
             ),
     }
@@ -253,7 +253,7 @@ class SellerNotificationServer(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/market_communication_with_seller.SellerNotificationServer/ReceiveNotification',
-            market__seller__pb2.ProductDisplayResponse.SerializeToString,
+            market__seller__pb2.Notification.SerializeToString,
             market__seller__pb2.StatusResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

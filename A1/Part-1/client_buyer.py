@@ -4,14 +4,16 @@ import grpc
 import market_buyer_pb2_grpc
 import market_buyer_pb2
 import uuid
+import sys
 
 class BuyerNotificationServer(market_buyer_pb2_grpc.BuyerNotificationServerServicer):
     def ReceiveNotification(self,request,context):
-        product=request
-        print(f"Item ID:{product.id},Price:${product.price},Name:${product.name},Category:${product.productCategory}")
+        print("yes")
+        product=request.notification
+        print(f"Item ID:{product.id},Price:{product.price},Name:{product.name},Category:{product.productCategory}")
         print(f"Description:{product.description}")
         print(f"Quantity Reamining:{product.quantityRemaining}")
-        print(f"Rating : {product.rating}/5 | Seller:${product.sellerAddress}")
+        print(f"Rating : {product.rating}/5 | Seller:{product.Address}")
         print()
         status_response = market_buyer_pb2.StatusResponse()
         status_response.status = "SUCCESS"
@@ -20,7 +22,6 @@ class BuyerNotificationServer(market_buyer_pb2_grpc.BuyerNotificationServerServi
 
 # class BuyerNotif(market_buyer_pb2_grpc.BuyerNotificationServer)
 def SearchItem(stub,unique_id):
-    print("Available categories:\n ELECTRONICS-0\n FASHION-1\n OTHERS-2\n ANY-3")
     category = -1
     while(category<0 or category>3):
         print("\nEnter the Category")
@@ -41,19 +42,19 @@ def SearchItem(stub,unique_id):
         print(f"Item ID:{searchresponse.id},Price:{searchresponse.price},Name:{searchresponse.name},Category:{searchresponse.productCategory}")
         print(f"Description:{searchresponse.description}")
         print(f"Quantity Reamining:{searchresponse.quantityRemaining}")
-        print(f"Rating : {searchresponse.rating}/5 | Seller:{searchresponse.sellerAddress}")
+        print(f"Rating : {searchresponse.rating}/5 | Seller:{searchresponse.Address}")
         print()
 
-def BuyItem(stub1,stub2,unique_id):
+def BuyItem(stub,notification_server_addr):
     itemid=int(input("Item id: "))
     qty=int(input("Quantity: "))
-    buyrequest=market_buyer_pb2.BuyRequest(id=itemid,quantity=qty)
-    buyresponse=stub1.BuyItem(buyrequest)
+    buyrequest=market_buyer_pb2.BuyRequest(id=itemid,quantity=qty,Address=notification_server_addr)
+    buyresponse=stub.BuyItem(buyrequest)
     print(buyresponse)
 
-def AddTOWishList(stub,unique_id):
+def AddTOWishList(stub,unique_id,addr):
     itemid=int(input("Item id: "))
-    wishreq=market_buyer_pb2.WishRequest(uuid=unique_id,id=itemid)
+    wishreq=market_buyer_pb2.WishRequest(uuid=unique_id,id=itemid,Address=addr)
     wishresponse=stub.AddWish(wishreq)
     print(wishresponse)
 
@@ -65,16 +66,18 @@ def RateItem(stub):
     rateresponse=stub.RateItem(raterequest)
     print(rateresponse)
 
-def run(unique_id):
+def run(unique_id,addr="localhost:50052"):
     # Notification Server
+
     buyer_notification_server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     notification_server = BuyerNotificationServer()
+    notification_server_addr=addr
     market_buyer_pb2_grpc.add_BuyerNotificationServerServicer_to_server(notification_server,buyer_notification_server)
-    buyer_notification_server.add_insecure_port("localhost:50052")
+    buyer_notification_server.add_insecure_port(notification_server_addr)
     buyer_notification_server.start()
 
     # Client
-    channel= grpc.insecure_channel('localhost:50051')
+    channel= grpc.insecure_channel('localhost:50050')
     stub= market_buyer_pb2_grpc.MarketPlaceStub(channel)
     while(1):
         print("Welcome to the Shop Buyer :-")
@@ -91,9 +94,9 @@ def run(unique_id):
         if choice==1:
             SearchItem(stub,unique_id)
         elif choice==2:
-            BuyItem(stub,unique_id)
+            BuyItem(stub,notification_server_addr)
         elif choice==3:
-            AddTOWishList(stub,unique_id)
+            AddTOWishList(stub,unique_id,notification_server_addr)
         elif choice==4:
             RateItem(stub)
         elif choice==5:
@@ -102,4 +105,4 @@ def run(unique_id):
 
 if __name__=="__main__":
     unique_id=str(uuid.uuid1())
-    run(unique_id)
+    run(unique_id,sys.argv[1][0])
