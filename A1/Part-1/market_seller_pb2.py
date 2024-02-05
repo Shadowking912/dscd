@@ -14,15 +14,15 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x13market_seller.proto\x12 market_communication_with_seller\"6\n\x15RegisterSellerRequest\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x01(\t\x12\x0c\n\x04uuid\x18\x02 \x01(\t\"\xb6\x01\n\x0fSellItemRequest\x12\x13\n\x0bproductName\x18\x01 \x01(\t\x12\x43\n\x0fproductCategory\x18\x02 \x01(\x0e\x32*.market_communication_with_seller.Category\x12\x10\n\x08quantity\x18\x03 \x01(\r\x12\x13\n\x0b\x64\x65scription\x18\x04 \x01(\t\x12\x14\n\x0cpricePerUnit\x18\x05 \x01(\x02\x12\x0c\n\x04uuid\x18\x06 \x01(\t\"T\n\x11UpdateItemRequest\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x10\n\x08newPrice\x18\x02 \x01(\x02\x12\x13\n\x0bnewQuantity\x18\x03 \x01(\r\x12\x0c\n\x04uuid\x18\x04 \x01(\t\"-\n\x11\x44\x65leteItemRequest\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x0c\n\x04uuid\x18\x02 \x01(\t\"%\n\x15ProductDisplayRequest\x12\x0c\n\x04uuid\x18\x01 \x01(\t\"\xdd\x01\n\x16ProductDisplayResponse\x12\n\n\x02id\x18\x01 \x01(\x04\x12\r\n\x05price\x18\x02 \x01(\x02\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x43\n\x0fproductCategory\x18\x04 \x01(\x0e\x32*.market_communication_with_seller.Category\x12\x19\n\x11quantityRemaining\x18\x05 \x01(\r\x12\x0e\n\x06rating\x18\x06 \x01(\x02\x12\x15\n\rsellerAddress\x18\x07 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x08 \x01(\t\" \n\x0eStatusResponse\x12\x0e\n\x06status\x18\x01 \x01(\t*=\n\x08\x43\x61tegory\x12\x0f\n\x0b\x45LECTRONICS\x10\x00\x12\x0b\n\x07\x46\x41SHION\x10\x01\x12\n\n\x06OTHERS\x10\x02\x12\x07\n\x03\x41NY\x10\x03\x32\xf1\x04\n\x0bMarketPlace\x12{\n\x0eRegisterSeller\x12\x37.market_communication_with_seller.RegisterSellerRequest\x1a\x30.market_communication_with_seller.StatusResponse\x12o\n\x08SellItem\x12\x31.market_communication_with_seller.SellItemRequest\x1a\x30.market_communication_with_seller.StatusResponse\x12s\n\nUpdateItem\x12\x33.market_communication_with_seller.UpdateItemRequest\x1a\x30.market_communication_with_seller.StatusResponse\x12s\n\nDeleteItem\x12\x33.market_communication_with_seller.DeleteItemRequest\x1a\x30.market_communication_with_seller.StatusResponse\x12\x89\x01\n\x12\x44isplaySellerItems\x12\x37.market_communication_with_seller.ProductDisplayRequest\x1a\x38.market_communication_with_seller.ProductDisplayResponse0\x01\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x13market_seller.proto\x12 market_communication_with_seller\"6\n\x15RegisterSellerRequest\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x01(\t\x12\x0c\n\x04uuid\x18\x02 \x01(\t\"\xb6\x01\n\x0fSellItemRequest\x12\x13\n\x0bproductName\x18\x01 \x01(\t\x12\x43\n\x0fproductCategory\x18\x02 \x01(\x0e\x32*.market_communication_with_seller.Category\x12\x10\n\x08quantity\x18\x03 \x01(\r\x12\x13\n\x0b\x64\x65scription\x18\x04 \x01(\t\x12\x14\n\x0cpricePerUnit\x18\x05 \x01(\x02\x12\x0c\n\x04uuid\x18\x06 \x01(\t\"T\n\x11UpdateItemRequest\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x10\n\x08newPrice\x18\x02 \x01(\x02\x12\x13\n\x0bnewQuantity\x18\x03 \x01(\r\x12\x0c\n\x04uuid\x18\x04 \x01(\t\"-\n\x11\x44\x65leteItemRequest\x12\n\n\x02id\x18\x01 \x01(\x04\x12\x0c\n\x04uuid\x18\x02 \x01(\t\"%\n\x15ProductDisplayRequest\x12\x0c\n\x04uuid\x18\x01 \x01(\t\"\xdd\x01\n\x16ProductDisplayResponse\x12\n\n\x02id\x18\x01 \x01(\x04\x12\r\n\x05price\x18\x02 \x01(\x02\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x43\n\x0fproductCategory\x18\x04 \x01(\x0e\x32*.market_communication_with_seller.Category\x12\x19\n\x11quantityRemaining\x18\x05 \x01(\r\x12\x0e\n\x06rating\x18\x06 \x01(\x02\x12\x15\n\rsellerAddress\x18\x07 \x01(\t\x12\x13\n\x0b\x64\x65scription\x18\x08 \x01(\t\" \n\x0eStatusResponse\x12\x0e\n\x06status\x18\x01 \x01(\t\"^\n\x0cNotification\x12N\n\x0cnotification\x18\x01 \x01(\x0b\x32\x38.market_communication_with_seller.ProductDisplayResponse*=\n\x08\x43\x61tegory\x12\x0f\n\x0b\x45LECTRONICS\x10\x00\x12\x0b\n\x07\x46\x41SHION\x10\x01\x12\n\n\x06OTHERS\x10\x02\x12\x07\n\x03\x41NY\x10\x03\x32\xe8\x04\n\x0bMarketPlace\x12{\n\x0eRegisterSeller\x12\x37.market_communication_with_seller.RegisterSellerRequest\x1a\x30.market_communication_with_seller.StatusResponse\x12o\n\x08SellItem\x12\x31.market_communication_with_seller.SellItemRequest\x1a\x30.market_communication_with_seller.StatusResponse\x12s\n\nUpdateItem\x12\x33.market_communication_with_seller.UpdateItemRequest\x1a\x30.market_communication_with_seller.StatusResponse\x12s\n\nDeleteItem\x12\x33.market_communication_with_seller.DeleteItemRequest\x1a\x30.market_communication_with_seller.StatusResponse\x12\x80\x01\n\x12\x44isplaySellerItems\x12..market_communication_with_seller.Notification\x1a\x38.market_communication_with_seller.ProductDisplayResponse0\x01\x32\x9e\x01\n\x18SellerNotificationServer\x12\x81\x01\n\x13ReceiveNotification\x12\x38.market_communication_with_seller.ProductDisplayResponse\x1a\x30.market_communication_with_seller.StatusResponseb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'market_seller_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
-  _globals['_CATEGORY']._serialized_start=728
-  _globals['_CATEGORY']._serialized_end=789
+  _globals['_CATEGORY']._serialized_start=824
+  _globals['_CATEGORY']._serialized_end=885
   _globals['_REGISTERSELLERREQUEST']._serialized_start=57
   _globals['_REGISTERSELLERREQUEST']._serialized_end=111
   _globals['_SELLITEMREQUEST']._serialized_start=114
@@ -37,6 +37,10 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _globals['_PRODUCTDISPLAYRESPONSE']._serialized_end=692
   _globals['_STATUSRESPONSE']._serialized_start=694
   _globals['_STATUSRESPONSE']._serialized_end=726
-  _globals['_MARKETPLACE']._serialized_start=792
-  _globals['_MARKETPLACE']._serialized_end=1417
+  _globals['_NOTIFICATION']._serialized_start=728
+  _globals['_NOTIFICATION']._serialized_end=822
+  _globals['_MARKETPLACE']._serialized_start=888
+  _globals['_MARKETPLACE']._serialized_end=1504
+  _globals['_SELLERNOTIFICATIONSERVER']._serialized_start=1507
+  _globals['_SELLERNOTIFICATIONSERVER']._serialized_end=1665
 # @@protoc_insertion_point(module_scope)

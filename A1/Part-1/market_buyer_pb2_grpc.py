@@ -176,7 +176,7 @@ class BuyerNotificationServerStub(object):
         """
         self.ReceiveNotification = channel.unary_unary(
                 '/market_communication_with_client.BuyerNotificationServer/ReceiveNotification',
-                request_serializer=market__buyer__pb2.ProductDisplayResponse.SerializeToString,
+                request_serializer=market__buyer__pb2.Notification.SerializeToString,
                 response_deserializer=market__buyer__pb2.StatusResponse.FromString,
                 )
 
@@ -195,7 +195,7 @@ def add_BuyerNotificationServerServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'ReceiveNotification': grpc.unary_unary_rpc_method_handler(
                     servicer.ReceiveNotification,
-                    request_deserializer=market__buyer__pb2.ProductDisplayResponse.FromString,
+                    request_deserializer=market__buyer__pb2.Notification.FromString,
                     response_serializer=market__buyer__pb2.StatusResponse.SerializeToString,
             ),
     }
@@ -220,7 +220,7 @@ class BuyerNotificationServer(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/market_communication_with_client.BuyerNotificationServer/ReceiveNotification',
-            market__buyer__pb2.ProductDisplayResponse.SerializeToString,
+            market__buyer__pb2.Notification.SerializeToString,
             market__buyer__pb2.StatusResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

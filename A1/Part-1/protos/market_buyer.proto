@@ -9,7 +9,7 @@ service MarketPlace
 }
 service BuyerNotificationServer
 {
-    rpc ReceiveNotification(ProductDisplayResponse) returns (StatusResponse);
+    rpc ReceiveNotification(Notification) returns (StatusResponse);
 }
 enum Category
 {
@@ -52,4 +52,8 @@ message RateRequest
 message StatusResponse
 {
     string status=1;
+}
+message Notification
+{
+    ProductDisplayResponse notification=1;
 }

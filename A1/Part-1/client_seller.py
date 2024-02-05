@@ -1,7 +1,22 @@
+from concurrent import futures
+
 import grpc
 import market_seller_pb2_grpc
 import market_seller_pb2
 import uuid
+
+class SellerNotificationServer(market_seller_pb2_grpc.SellerNotificationServerServicer):
+    def ReceiveNotification(self,request,context):
+        product=request
+        print(f"Item ID:{product.id},Price:{product.price},Name:{product.name},Category:{product.productCategory}")
+        print(f"Description:{product.description}")
+        print(f"Quantity Reamining:{product.quantityRemaining}")
+        print(f"Rating : {product.rating}/5 | Seller:{product.Address}")
+        print()
+        status_response = market_seller_pb2.StatusResponse()
+        status_response.status = "SUCCESS"
+        return status_response
+
 def register(stub,unique_id):
     address = "0.0.0.0:" + str(4000)
     register_request = market_seller_pb2.RegisterSellerRequest(address=address,uuid=unique_id)
@@ -38,7 +53,7 @@ def displayItems(stub,unique_id):
         print(f"Item ID: {displayresponse.id},Price: {displayresponse.price},Name: {displayresponse.name},Category: {displayresponse.productCategory}")
         print(f"Description: {displayresponse.description}")
         print(f"Quantity Reamining: {displayresponse.quantityRemaining}")
-        print(f"Rating : {displayresponse.rating}/5 | Seller: {displayresponse.sellerAddress}")
+        print(f"Rating : {displayresponse.rating}/5 | Seller: {displayresponse.Address}")
         print()
 
 def update(stub,unique_id):
@@ -57,40 +72,51 @@ def update(stub,unique_id):
 def delete(stub,unique_id):
     print("Here is a list of all the available items that you registered :-")
     displayItems(stub,unique_id)
-    print("Please enter the id of the product you wish to update : ")
+    print("Please enter the id of the product you wish to delete : ")
     id = int(input())
     deleteitemrequest = market_seller_pb2.DeleteItemRequest(uuid=unique_id,id=id)
     deleteitemresponse = stub.DeleteItem(deleteitemrequest)
     print(deleteitemresponse)
 
-def run(unique_id):
-    
-    with grpc.insecure_channel('localhost:50051') as channel:
-        stub = market_seller_pb2_grpc.MarketPlaceStub(channel)
-        while(1):
-            print("Welcome to the Shop Seller :-")
-            print("Here are your possible options : -")
-            print("1) Register yourself as a seller")
-            print("2) Sell item")
-            print("3) Update item record")
-            print("4) Delete item")
-            print("5) Display your listed items")
-            print("6) Exit")
-            print("Please select which service you would like to avail ?")
-            choice = int(input())
 
-            if choice==1:
-                register(stub,unique_id)
-            elif choice==2:
-                sell(stub,unique_id)
-            elif choice==3:
-                update(stub,unique_id)
-            elif choice==4:
-                delete(stub,unique_id)
-            elif choice==5:
-                displayItems(stub,unique_id)
-            elif choice==6:
-                break
+
+def run(unique_id):
+
+    # Notification Server
+    seller_notification_server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+    notification_server = SellerNotificationServer()
+    market_seller_pb2_grpc.add_BuyerNotificationServerServicer_to_server(notification_server,seller_notification_server)
+    seller_notification_server.add_insecure_port("localhost:50053")
+    seller_notification_server.start()
+
+
+    # Client
+    channel= grpc.insecure_channel('localhost:50051')
+    stub = market_seller_pb2_grpc.MarketPlaceStub(channel)
+    while(1):
+        print("Welcome to the Shop Seller :-")
+        print("Here are your possible options : -")
+        print("1) Register yourself as a seller")
+        print("2) Sell item")
+        print("3) Update item record")
+        print("4) Delete item")
+        print("5) Display your listed items")
+        print("6) Exit")
+        print("Please select which service you would like to avail ?")
+        choice = int(input())
+
+        if choice==1:
+            register(stub,unique_id)
+        elif choice==2:
+            sell(stub,unique_id)
+        elif choice==3:
+            update(stub,unique_id)
+        elif choice==4:
+            delete(stub,unique_id)
+        elif choice==5:
+            displayItems(stub,unique_id)
+        elif choice==6:
+            break
             
 if __name__=="__main__":
     unique_id=str(uuid.uuid1())

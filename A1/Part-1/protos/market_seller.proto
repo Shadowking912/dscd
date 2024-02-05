@@ -10,7 +10,11 @@ service MarketPlace
 
     rpc DeleteItem(DeleteItemRequest) returns (StatusResponse);
     
-    rpc DisplaySellerItems(ProductDisplayRequest) returns (stream ProductDisplayResponse);
+    rpc DisplaySellerItems(Notification) returns (stream ProductDisplayResponse);
+}
+service SellerNotificationServer
+{
+    rpc ReceiveNotification(Notification) returns (StatusResponse);
 }
 message RegisterSellerRequest
 {
@@ -57,10 +61,14 @@ message ProductDisplayResponse
     Category productCategory=4;
     uint32 quantityRemaining=5;
     float rating = 6;
-    string sellerAddress=7;
+    string Address=7;
     string description = 8;
 }
 message StatusResponse
 {
     string status=1;
+}
+message Notification
+{
+    ProductDisplayResponse notification=1;
 }

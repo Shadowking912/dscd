@@ -36,7 +36,7 @@ class MarketPlaceStub(object):
                 )
         self.DisplaySellerItems = channel.unary_stream(
                 '/market_communication_with_seller.MarketPlace/DisplaySellerItems',
-                request_serializer=market__seller__pb2.ProductDisplayRequest.SerializeToString,
+                request_serializer=market__seller__pb2.Notification.SerializeToString,
                 response_deserializer=market__seller__pb2.ProductDisplayResponse.FromString,
                 )
 
@@ -99,7 +99,7 @@ def add_MarketPlaceServicer_to_server(servicer, server):
             ),
             'DisplaySellerItems': grpc.unary_stream_rpc_method_handler(
                     servicer.DisplaySellerItems,
-                    request_deserializer=market__seller__pb2.ProductDisplayRequest.FromString,
+                    request_deserializer=market__seller__pb2.Notification.FromString,
                     response_serializer=market__seller__pb2.ProductDisplayResponse.SerializeToString,
             ),
     }
@@ -192,7 +192,68 @@ class MarketPlace(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_stream(request, target, '/market_communication_with_seller.MarketPlace/DisplaySellerItems',
-            market__seller__pb2.ProductDisplayRequest.SerializeToString,
+            market__seller__pb2.Notification.SerializeToString,
             market__seller__pb2.ProductDisplayResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+
+class SellerNotificationServerStub(object):
+    """Missing associated documentation comment in .proto file."""
+
+    def __init__(self, channel):
+        """Constructor.
+
+        Args:
+            channel: A grpc.Channel.
+        """
+        self.ReceiveNotification = channel.unary_unary(
+                '/market_communication_with_seller.SellerNotificationServer/ReceiveNotification',
+                request_serializer=market__seller__pb2.ProductDisplayResponse.SerializeToString,
+                response_deserializer=market__seller__pb2.StatusResponse.FromString,
+                )
+
+
+class SellerNotificationServerServicer(object):
+    """Missing associated documentation comment in .proto file."""
+
+    def ReceiveNotification(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+
+def add_SellerNotificationServerServicer_to_server(servicer, server):
+    rpc_method_handlers = {
+            'ReceiveNotification': grpc.unary_unary_rpc_method_handler(
+                    servicer.ReceiveNotification,
+                    request_deserializer=market__seller__pb2.ProductDisplayResponse.FromString,
+                    response_serializer=market__seller__pb2.StatusResponse.SerializeToString,
+            ),
+    }
+    generic_handler = grpc.method_handlers_generic_handler(
+            'market_communication_with_seller.SellerNotificationServer', rpc_method_handlers)
+    server.add_generic_rpc_handlers((generic_handler,))
+
+
+ # This class is part of an EXPERIMENTAL API.
+class SellerNotificationServer(object):
+    """Missing associated documentation comment in .proto file."""
+
+    @staticmethod
+    def ReceiveNotification(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/market_communication_with_seller.SellerNotificationServer/ReceiveNotification',
+            market__seller__pb2.ProductDisplayResponse.SerializeToString,
+            market__seller__pb2.StatusResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
