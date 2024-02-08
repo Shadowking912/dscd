@@ -1,18 +1,21 @@
-import pika
 import sys
+import pika
+import json
+import uuid
 
-class Youtuber:
-    def __init__(self, youtuber_name, video_name):
-        self.youtuber_name = youtuber_name
-        self.video_name = video_name
-        self.connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
-        self.channel = self.connection.channel()
 
-    def publishVideo(self):
-        self.channel.queue_declare(queue='youtuber_requests')
-        message = f"{self.youtuber_name} uploaded {self.video_name}"
-        self.channel.basic_publish(exchange='', routing_key='youtuber_requests', body=message)
-        print("SUCCESS: Video published")
+def publishVideo(youtuber_name,video_name,channel):
+    channel.queue_declare(queue='youtuber_requests')
+    # message = f"{self.youtuber_name} uploaded {self.video_name}"
+    
+    message={
+        "youtuber_uuid":f"{uuid.uuid1()}",
+        "youtuber_name":f"{youtuber_name}",
+        "video_name":f"{video_name}"
+    }
+    message = json.dumps(message)
+    channel.basic_publish(exchange='', routing_key='youtuber_requests', body=message)
+    print("SUCCESS: Video published")
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
@@ -20,5 +23,8 @@ if __name__ == "__main__":
     else:
         youtuber_name = sys.argv[1]
         video_name = sys.argv[2]
-        youtuber = Youtuber(youtuber_name, video_name)
-        youtuber.publishVideo()
+        youtuber_name = youtuber_name
+        video_name = video_name
+        connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
+        channel = connection.channel()
+        publishVideo(youtuber_name,video_name,channel)

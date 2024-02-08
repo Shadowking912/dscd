@@ -2,9 +2,20 @@ import pika
 import json
 import uuid
 
+# class Youtuber:
+#     def __init__(self,youtuber_name,video_name):
+#         self.videos=[]
+#         self.youtuber_name=youtuber_name
+#         self.videos.append(video_name)
+    
+#     def add_video(self,video_name):
+#         self.videos.append(video_name)
+
 class YoutubeServer:
-    def __init__(self,channel):
-        self.channel = channel
+    def __init__(self):
+
+        self.connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
+        self.channel = self.connection.channel()
         self.channel.queue_declare(queue='user_requests')
         self.channel.queue_declare(queue='youtuber_requests')
         self.channel.queue_declare(queue='notifications')
@@ -25,7 +36,7 @@ class YoutubeServer:
             
 
         self.channel.basic_consume(queue='youtuber_requests',on_message_callback=callback,auto_ack=True)
-        # self.channel.start_consuming()
+        self.channel.start_consuming()
     
     # def notify_users(self):
     #     def callback(ch, method, properties, body):
@@ -39,47 +50,37 @@ class YoutubeServer:
         def callback(ch,method,properties,body):
             message = body.decode('utf-8')
             message = json.loads(body)
+            print(message)
             user_name = message['user_name']
             youtuber_name = message['youtuber_name']
             request_type = message['subscribe']
 
             if youtuber_name=="":
                 if user_name not in self.users:
-                    self.users[user_name] =[True,[]]
+                    self.users[user_name] =(True,[])
                     print(f"{user_name} logged in")
-                    ch.basic_ack(delivery_tag=method.delivery_tag)
                 else:
                     self.users[user_name][0]=~(self.users[user_name][0])
                     if(not self.users[user_name][0]):
-                        print(f"{user_name} logged out")         
-                        ch.basic_ack(delivery_tag=method.delivery_tag)    
+                        print(f"{user_name} logged out")             
             else:
                 if user_name not in self.users:
-                    self.users[user_name] =[True,[]]
-                print(f"{user_name} logged in")
+                    self.users[user_name] =(True,[])
                 if request_type=='s':
-                    if(youtuber_name in self.youtubers):
-                        self.users[user_name][1].append(youtuber_name)
-                        print(f"{user_name} subscribed to {youtuber_name}")
-                        ch.basic_ack(delivery_tag=method.delivery_tag)
-                    else:
-                        print(f"youtuber doesn't exist")
+                    self.users[user_name][1].append(youtuber_name)
+                    print(f"{user_name} subscribed to {youtuber_name}")
                 else:
                     if youtuber_name in self.users[user_name][1]:
                         self.users[user_name][1].remove(youtuber_name)
                         print(f"{user_name} unsubscribed to {youtuber_name}")
-                        ch.basic_ack(delivery_tag=method.delivery_tag)
     
-        channel.basic_consume(queue='user_requests',on_message_callback=callback)
+        self.channel.basic_consume(queue='user_requests',on_message_callback=callback,auto_ack=True)
+        self.channel.start_consuming()
         
 if __name__ == "__main__":
-    connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
-    channel = connection.channel()
-    
-    server = YoutubeServer(channel)
+    server = YoutubeServer()
     server.consume_user_requests()
     server.consume_youtuber_requests()
-    channel.start_consuming()
     # server.notify_users()
 '''
 

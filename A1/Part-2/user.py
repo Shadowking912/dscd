@@ -110,9 +110,10 @@ def main():
     server_address = sys.argv[1]
 
     user = User(user_id, server_address)
-    user.display_help()
+   
 
     while True:
+        user.display_help()
         command = input("Enter command: ").strip().split(' ')
         action = command[0]
 
