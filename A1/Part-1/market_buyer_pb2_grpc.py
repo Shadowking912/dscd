@@ -34,6 +34,11 @@ class MarketPlaceStub(object):
                 request_serializer=market__buyer__pb2.RateRequest.SerializeToString,
                 response_deserializer=market__buyer__pb2.StatusResponse.FromString,
                 )
+        self.DisplayWishlist = channel.unary_stream(
+                '/market_communication_with_client.MarketPlace/DisplayWishlist',
+                request_serializer=market__buyer__pb2.ProductDisplayRequest.SerializeToString,
+                response_deserializer=market__buyer__pb2.ProductDisplayResponse.FromString,
+                )
 
 
 class MarketPlaceServicer(object):
@@ -63,6 +68,12 @@ class MarketPlaceServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def DisplayWishlist(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
 
 def add_MarketPlaceServicer_to_server(servicer, server):
     rpc_method_handlers = {
@@ -85,6 +96,11 @@ def add_MarketPlaceServicer_to_server(servicer, server):
                     servicer.RateItem,
                     request_deserializer=market__buyer__pb2.RateRequest.FromString,
                     response_serializer=market__buyer__pb2.StatusResponse.SerializeToString,
+            ),
+            'DisplayWishlist': grpc.unary_stream_rpc_method_handler(
+                    servicer.DisplayWishlist,
+                    request_deserializer=market__buyer__pb2.ProductDisplayRequest.FromString,
+                    response_serializer=market__buyer__pb2.ProductDisplayResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -160,6 +176,84 @@ class MarketPlace(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/market_communication_with_client.MarketPlace/RateItem',
             market__buyer__pb2.RateRequest.SerializeToString,
+            market__buyer__pb2.StatusResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def DisplayWishlist(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_stream(request, target, '/market_communication_with_client.MarketPlace/DisplayWishlist',
+            market__buyer__pb2.ProductDisplayRequest.SerializeToString,
+            market__buyer__pb2.ProductDisplayResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+
+class BuyerNotificationServerStub(object):
+    """Missing associated documentation comment in .proto file."""
+
+    def __init__(self, channel):
+        """Constructor.
+
+        Args:
+            channel: A grpc.Channel.
+        """
+        self.ReceiveNotification = channel.unary_unary(
+                '/market_communication_with_client.BuyerNotificationServer/ReceiveNotification',
+                request_serializer=market__buyer__pb2.Notification.SerializeToString,
+                response_deserializer=market__buyer__pb2.StatusResponse.FromString,
+                )
+
+
+class BuyerNotificationServerServicer(object):
+    """Missing associated documentation comment in .proto file."""
+
+    def ReceiveNotification(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+
+def add_BuyerNotificationServerServicer_to_server(servicer, server):
+    rpc_method_handlers = {
+            'ReceiveNotification': grpc.unary_unary_rpc_method_handler(
+                    servicer.ReceiveNotification,
+                    request_deserializer=market__buyer__pb2.Notification.FromString,
+                    response_serializer=market__buyer__pb2.StatusResponse.SerializeToString,
+            ),
+    }
+    generic_handler = grpc.method_handlers_generic_handler(
+            'market_communication_with_client.BuyerNotificationServer', rpc_method_handlers)
+    server.add_generic_rpc_handlers((generic_handler,))
+
+
+ # This class is part of an EXPERIMENTAL API.
+class BuyerNotificationServer(object):
+    """Missing associated documentation comment in .proto file."""
+
+    @staticmethod
+    def ReceiveNotification(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/market_communication_with_client.BuyerNotificationServer/ReceiveNotification',
+            market__buyer__pb2.Notification.SerializeToString,
             market__buyer__pb2.StatusResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

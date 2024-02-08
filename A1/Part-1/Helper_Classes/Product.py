@@ -7,5 +7,5 @@ class Product:
         self.description = description
         self.price = price_per_unit
         self.ratings = ratings
+        self.rating_list=[]
         self.seller_address = seller_address
-    
