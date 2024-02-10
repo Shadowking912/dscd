@@ -24,7 +24,7 @@ def register(stub,unique_id,addr):
     registration_response = stub.RegisterSeller(register_request)
     print(registration_response.status)
 
-def sell(stub,unique_id):
+def sell(stub,unique_id,addr):
     print("Enter the product name : ")
     product_name = input()
     category = -1
@@ -43,12 +43,12 @@ def sell(stub,unique_id):
     print("\nPlease enter the price per unit :")
     price_per_unit = float(input())
 
-    sell_request = market_seller_pb2.SellItemRequest(productName=product_name,productCategory=category,quantity=quantity,pricePerUnit=price_per_unit,description=description,uuid=unique_id)
+    sell_request = market_seller_pb2.SellItemRequest(productName=product_name,productCategory=category,quantity=quantity,pricePerUnit=price_per_unit,description=description,uuid=unique_id,address=addr)
     sell_response = stub.SellItem(sell_request)
     print(sell_response.status)
 
-def displayItems(stub,unique_id):
-    displayrequest = market_seller_pb2.ProductDisplayRequest(uuid=unique_id)
+def displayItems(stub,unique_id,addr):
+    displayrequest = market_seller_pb2.ProductDisplayRequest(uuid=unique_id,address=addr)
     displayresponses = stub.DisplaySellerItems(displayrequest)
     for displayresponse in displayresponses:
         print(f"Item ID: {displayresponse.id},Price: {displayresponse.price},Name: {displayresponse.name},Category: {displayresponse.productCategory}")
@@ -57,7 +57,7 @@ def displayItems(stub,unique_id):
         print(f"Rating : {displayresponse.rating}/5 | Seller: {displayresponse.Address}")
         print()
 
-def update(stub,unique_id):
+def update(stub,unique_id,addr):
     print("Here is a list of all the available items that you registered :-")
     displayItems(stub,unique_id)
     print("Please enter the id of the product you wish to update : ")
@@ -66,16 +66,16 @@ def update(stub,unique_id):
     quantity = int(input())
     print("Please enter the updated price")
     price = float(input())
-    updateitemrequest = market_seller_pb2.UpdateItemRequest(uuid=unique_id,id=id,newPrice=price,newQuantity=quantity)
+    updateitemrequest = market_seller_pb2.UpdateItemRequest(uuid=unique_id,id=id,newPrice=price,newQuantity=quantity,address=addr)
     updateitemresponse = stub.UpdateItem(updateitemrequest)
     print(updateitemresponse)
 
-def delete(stub,unique_id):
+def delete(stub,unique_id,addr):
     print("Here is a list of all the available items that you registered :-")
     displayItems(stub,unique_id)
     print("Please enter the id of the product you wish to delete : ")
     id = int(input())
-    deleteitemrequest = market_seller_pb2.DeleteItemRequest(uuid=unique_id,id=id)
+    deleteitemrequest = market_seller_pb2.DeleteItemRequest(uuid=unique_id,id=id,address=addr)
     deleteitemresponse = stub.DeleteItem(deleteitemrequest)
     print(deleteitemresponse)
 
@@ -110,13 +110,13 @@ def run(unique_id,addr="localhost:50053"):
         if choice==1:
             register(stub,unique_id,notification_server_addr)
         elif choice==2:
-            sell(stub,unique_id)
+            sell(stub,unique_id,notification_server_addr)
         elif choice==3:
-            update(stub,unique_id)
+            update(stub,unique_id,notification_server_addr)
         elif choice==4:
-            delete(stub,unique_id)
+            delete(stub,unique_id,notification_server_addr)
         elif choice==5:
-            displayItems(stub,unique_id)
+            displayItems(stub,unique_id,notification_server_addr)
         elif choice==6:
             break
             

@@ -8,7 +8,7 @@ import sys
 
 class BuyerNotificationServer(market_buyer_pb2_grpc.BuyerNotificationServerServicer):
     def ReceiveNotification(self,request,context):
-        print("yes")
+        # print("yes")
         product=request.notification
         print(f"Item ID:{product.id},Price:{product.price},Name:{product.name},Category:{product.productCategory}")
         print(f"Description:{product.description}")
@@ -58,11 +58,11 @@ def AddTOWishList(stub,unique_id,addr):
     wishresponse=stub.AddWish(wishreq)
     print(wishresponse)
 
-def RateItem(stub):
+def RateItem(stub,addr):
     print("Available Ratings : 1-5(integers)")
     itemid=int(input("Item id: "))
     ratings=int(input("Rating: "))
-    raterequest=market_buyer_pb2.RateRequest(id=itemid,rating=ratings)
+    raterequest=market_buyer_pb2.RateRequest(id=itemid,rating=ratings,address=addr)
     rateresponse=stub.RateItem(raterequest)
     print(rateresponse)
 
@@ -110,7 +110,7 @@ def run(unique_id,addr="localhost:50052"):
         elif choice==3:
             AddTOWishList(stub,unique_id,notification_server_addr)
         elif choice==4:
-            RateItem(stub)
+            RateItem(stub,notification_server_addr)
         elif choice==5:
             DisplayWishlist(stub,unique_id)
         elif choice==6:

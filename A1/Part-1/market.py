@@ -6,9 +6,38 @@ import market_seller_pb2_grpc
 import market_buyer_pb2
 import market_buyer_pb2_grpc
 
-from Helper_Classes.Product import Product
-from Helper_Classes.Seller  import Seller
-from Helper_Classes.Buyer import Buyer
+class Product:
+    def __init__(self,id,name,category,quantity,description,price_per_unit,ratings,seller_address):
+        self.id = id
+        self.name = name
+        self.category=category
+        self.quantity = quantity
+        self.description = description
+        self.price = price_per_unit
+        self.ratings = ratings
+        self.rating_list=[]
+        self.seller_address = seller_address
+
+class Seller:
+    def __init__(self,uuid,seller_notification_server_address):
+        self.uuid = uuid
+        self.address = seller_notification_server_address
+        self.__product_list={}
+    
+    def add_product(self,product):
+        self.__product_list[product.id] = product
+    
+    def update_product(self):
+        pass
+
+    def get_product_list(self):
+        return self.__product_list
+
+class Buyer:
+    def __init__(self,uuid,buyer_notification_server_address):
+        self.wishlist={}
+        self.id=uuid
+        self.address = buyer_notification_server_address
 
 class MarketPlaceService(market_seller_pb2_grpc.MarketPlaceServicer,market_buyer_pb2_grpc.MarketPlaceServicer):
     
@@ -24,20 +53,19 @@ class MarketPlaceService(market_seller_pb2_grpc.MarketPlaceServicer,market_buyer
         seller_notification_server_address = request.address
         seller_uuid = request.uuid
         new_seller = Seller(seller_uuid,seller_notification_server_address)
-        print(f"Seller join request from  {context.peer()}[ip:port], uuid={seller_uuid}")
+        print(f"Seller join request from  {seller_notification_server_address}[ip:port], uuid={seller_uuid}")
         status_response = market_seller_pb2.StatusResponse()
         if seller_uuid not in self.sellers:
             status_response.status = "SUCCESS"
             self.sellers[seller_uuid] = new_seller
-            # print("Sellers = ",self.sellers)
-            # print(self.sellers[seller_uuid].uuid)
         else:
             status_response.status="FAILURE"
         return status_response
     
     def SellItem(self, request, context):
-        print(f"Sell Item request from {context.peer()}[ip:port]")
         seller_uuid = request.uuid
+        seller_address = request.address
+        print(f"Sell Item request from {seller_address}[ip:port]")
         status_response = market_seller_pb2.StatusResponse()
         if seller_uuid not in self.sellers:
             status_response.status = "FAILURE"
@@ -49,7 +77,7 @@ class MarketPlaceService(market_seller_pb2_grpc.MarketPlaceServicer,market_buyer
             product_quantity = request.quantity
             product_description = request.description
             producrprice_per_unit = request.pricePerUnit
-            print(product_description)
+            # print(product_description)
             new_product = Product(product_id,product_name,product_category,product_quantity,product_description,producrprice_per_unit,0,self.sellers[seller_uuid].address)
             # print(self.sellers[seller_uuid].uuid)
             self.sellers[seller_uuid].add_product(new_product)
@@ -60,7 +88,7 @@ class MarketPlaceService(market_seller_pb2_grpc.MarketPlaceServicer,market_buyer
     def notification_info(self,desired_product,client,address):
         file=None
         stub=None
-        print(address)
+        # print(address)
         if client=="Buyer":
             channel= grpc.insecure_channel(address)
             stub = market_buyer_pb2_grpc.BuyerNotificationServerStub(channel)
@@ -82,13 +110,15 @@ class MarketPlaceService(market_seller_pb2_grpc.MarketPlaceServicer,market_buyer
         market_product_request.description=product.description
         market_product_request =file.Notification(notification=market_product_request)
         notification_response = stub.ReceiveNotification(market_product_request)
-        print(notification_response)
+        # print(notification_response)
     
     def UpdateItem(self, request, context):
-        print("updating")
+        # print("updating")
         product_id = request.id
-        print(f"Update Item {product_id}[id] request from {context.peer()}[ip:port]")
         seller_uuid = request.uuid
+        seller_address = request.address
+        print(f"Update Item {product_id}[id] request from {seller_address}[ip:port]")
+        
         updated_quantity = request.newQuantity
         updated_price = request.newPrice
         status_response = market_seller_pb2.StatusResponse()
@@ -96,7 +126,7 @@ class MarketPlaceService(market_seller_pb2_grpc.MarketPlaceServicer,market_buyer
             status_response.status = "FAILURE"
             return status_response
         product_list = self.sellers[seller_uuid].get_product_list()
-        print("Product List = ",product_list)
+        # print("Product List = ",product_list)
         if product_id not in product_list.keys():
             status_response.status="FAILURE"
             return status_response
@@ -108,7 +138,7 @@ class MarketPlaceService(market_seller_pb2_grpc.MarketPlaceServicer,market_buyer
         #send notification
         for i in self.buyers:
             if desired_product in self.buyers[i].wishlist.values():
-                print("sending notification")
+                # print("sending notification")
                 self.notification_info(desired_product,"Buyer",self.buyers[i].address)
         
         return status_response
@@ -116,7 +146,8 @@ class MarketPlaceService(market_seller_pb2_grpc.MarketPlaceServicer,market_buyer
     def DeleteItem(self, request, context):
         product_id = request.id
         seller_uuid = request.uuid
-        print(f"Delete Item {product_id}[id] request from {context.peer()}")
+        seller_address = request.address
+        print(f"Delete Item {product_id}[id] request from {seller_address}")
         status_response = market_seller_pb2.StatusResponse()
         if seller_uuid not in self.sellers.keys():
             status_response.status="FAILURE"
@@ -139,14 +170,15 @@ class MarketPlaceService(market_seller_pb2_grpc.MarketPlaceServicer,market_buyer
         return status_response
     
     def DisplaySellerItems(self, request, context):
-        print(f"Display Items request from {context.peer()}")
-        seller_display_reply = market_seller_pb2.ProductDisplayResponse()
         seller_uuid = request.uuid
+        seller_address = request.address
+        print(f"Display Items request from {seller_address}")
+        seller_display_reply = market_seller_pb2.ProductDisplayResponse()
         if seller_uuid not in self.sellers:
             return seller_display_reply    
         seller = self.sellers[seller_uuid]
         product_list = seller.get_product_list()
-        print("Product List = ",product_list)
+        # print("Product List = ",product_list)
         if len(product_list)==0:
             return seller_display_reply
         else:
@@ -165,6 +197,7 @@ class MarketPlaceService(market_seller_pb2_grpc.MarketPlaceServicer,market_buyer
     def SearchItem(self,request,context):
         item_name=request.item_name
         category=request.category
+        print(f"Search request for item name : {item_name}, Category: {category}")
         info=[]
         if(item_name==""):
             if(category!=3):
@@ -203,7 +236,7 @@ class MarketPlaceService(market_seller_pb2_grpc.MarketPlaceServicer,market_buyer
         itemid=request.id
         qty=request.quantity
         buyer_addr=request.Address
-        print(f"Buy request {qty}[quantity] of item {itemid}[item id] from {context.peer()}[buyer address]")
+        print(f"Buy request {qty}[quantity] of item {itemid}[item id] from {buyer_addr}[buyer address]")
         status_response = market_buyer_pb2.StatusResponse()
         if itemid in self.products:
             if(self.products[itemid].quantity>=qty):
@@ -220,6 +253,7 @@ class MarketPlaceService(market_seller_pb2_grpc.MarketPlaceServicer,market_buyer
         itemid=request.id
         buyeruuid=request.uuid
         addr=request.Address
+        print(f"Wishlist request from {itemid}[item id] from {addr}")
         status_response = market_buyer_pb2.StatusResponse()
         if itemid not in self.products.keys():
             status_response.status="FAILURE"
@@ -232,16 +266,18 @@ class MarketPlaceService(market_seller_pb2_grpc.MarketPlaceServicer,market_buyer
             self.buyers[buyeruuid]=new_buyer 
         self.buyers[buyeruuid].address=addr
         status_response.status="SUCCESS" 
-        print(self.buyers[buyeruuid].wishlist)   
+        # print(self.buyers[buyeruuid].wishlist)   
         return status_response
     
     def RateItem(self, request, context):
         itemid=request.id
         rating=request.rating
+        address =request.address
         status_response = market_buyer_pb2.StatusResponse()
         if itemid not in self.products.keys():
             status_response.status="FAILURE"
         else:
+            print(f"{address} rated item {itemid} with {rating} stars")
             self.products[itemid].rating_list.append(rating)
             self.products[itemid].ratings=sum(self.products[itemid].rating_list)/(len(self.products[itemid].rating_list))
             status_response.status="SUCCESS"
@@ -252,7 +288,7 @@ class MarketPlaceService(market_seller_pb2_grpc.MarketPlaceServicer,market_buyer
         if uuid in self.buyers:
             for i in self.buyers[uuid].wishlist.values():
                 product_info=i
-                print(product_info,product_info.id)
+                # print(product_info,product_info.id)
                 market_product_reply = market_buyer_pb2.ProductDisplayResponse()
                 market_product_reply.id=product_info.id
                 market_product_reply.price=product_info.price

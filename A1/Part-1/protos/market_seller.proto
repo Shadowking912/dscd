@@ -36,6 +36,7 @@ message SellItemRequest
     string description=4;
     float pricePerUnit = 5;
     string uuid=6;
+    string address=7;
 }
 message UpdateItemRequest
 {
@@ -43,15 +44,18 @@ message UpdateItemRequest
     float newPrice=2;
     uint32 newQuantity=3;
     string uuid=4;
+    string address=5;
 }
 message DeleteItemRequest
 {
     uint64 id=1;
     string uuid=2;
+    string address=3;
 }
 message ProductDisplayRequest
 {
     string uuid = 1;
+    string address=2;
 }
 message ProductDisplayResponse
 {
