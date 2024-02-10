@@ -1,39 +1,39 @@
 import pika
 import json
-import uuid
 
+ 
+                    
 class YoutubeServer:
-    def __init__(self,channel):
+    def __init__(self,channel,channel2):
         self.channel = channel
         self.channel.queue_declare(queue='user_requests')
         self.channel.queue_declare(queue='youtuber_requests')
-        self.channel.queue_declare(queue='notifications')
+        # self.channel.queue_declare(queue='notifications')
         self.youtubers={}
         self.users = {} # Dictionary with key as user name and tuple (1st element of tuple : status (offline/online),2nd element of tuple : list of subscriptions)
-
-    def consume_youtuber_requests(self): #Instatties new youtuber
+        self.channel2 = channel2
+        self.channel2.exchange_declare(exchange='logs',exchange_type='fanout')
+    
+    def consume_youtuber_requests(self): #Instantiates new youtuber
         def callback(ch,method,properties,body):
             body  = body.decode('utf-8')
             message = json.loads(body)
             youtuber_name = message['youtuber_name']
             video_name = message['video_name']
+            # Creating an object of the new youtuber
+            new_youtuber = Youtuber(youtuber_name)
             if youtuber_name not in self.youtubers:
-                self.youtubers[youtuber_name] =[video_name]  
+                # Adding the youtuber object in the dictionary having username as key
+                self.youtubers[youtuber_name] = new_youtuber
+                new_youtuber.add_video(video_name)  
             else:
-                self.youtubers[youtuber_name].append(video_name)
+                self.youtubers[youtuber_name].add_video(video_name)
             print(f"{youtuber_name} uploaded  {video_name}")
+            self.notify_users(self.youtubers[youtuber_name],youtuber_name,video_name)
             
-
         self.channel.basic_consume(queue='youtuber_requests',on_message_callback=callback,auto_ack=True)
-        # self.channel.start_consuming()
-    
-    # def notify_users(self):
-    #     def callback(ch, method, properties, body):
-    #         print("New Notification:", body.decode('utf-8'))
-
-    #     self.channel.basic_consume(queue='notifications', on_message_callback=callback, auto_ack=True)
-    #     print("Waiting for notifications...")
-    #     self.channel.start_consuming()
+               
+        
     
     def consume_user_requests(self):
         def callback(ch,method,properties,body):
@@ -43,46 +43,42 @@ class YoutubeServer:
             youtuber_name = message['youtuber_name']
             request_type = message['subscribe']
 
-            if youtuber_name=="":
-                if user_name not in self.users:
-                    self.users[user_name] =[True,[]]
-                    print(f"{user_name} logged in")
-                    ch.basic_ack(delivery_tag=method.delivery_tag)
-                else:
-                    self.users[user_name][0]=~(self.users[user_name][0])
-                    if(not self.users[user_name][0]):
-                        print(f"{user_name} logged out")         
-                        ch.basic_ack(delivery_tag=method.delivery_tag)    
-            else:
-                if user_name not in self.users:
-                    self.users[user_name] =[True,[]]
-                print(f"{user_name} logged in")
-                if request_type=='s':
-                    if(youtuber_name in self.youtubers):
-                        self.users[user_name][1].append(youtuber_name)
-                        print(f"{user_name} subscribed to {youtuber_name}")
-                        ch.basic_ack(delivery_tag=method.delivery_tag)
-                    else:
-                        print(f"youtuber doesn't exist")
-                else:
-                    if youtuber_name in self.users[user_name][1]:
-                        self.users[user_name][1].remove(youtuber_name)
-                        print(f"{user_name} unsubscribed to {youtuber_name}")
-                        ch.basic_ack(delivery_tag=method.delivery_tag)
+            if user_name not in self.users:
+                queue=self.channel2.queue_declare(queue=user_name)
+                user=User(user_name,queue)
+                self.users[user_name]=user
+
+            if request_type=='s':
+                if(youtuber_name in self.youtubers):
+                    self.users[user_name].add_subscription(youtuber_name)
+                    self.youtubers[youtuber_name].add_subscriber(user_name)
+                    print(f"{user_name} subscribed to {youtuber_name}")
+            
+            elif request_type=='u':
+                if youtuber_name in self.users[user_name]:
+                    self.users[user_name].delete_subscription(youtuber_name)
+                    self.youtubers[youtuber_name].remove_subscriber(user_name)
+                    print(f"{user_name} unsubscribed to {youtuber_name}")
     
-        channel.basic_consume(queue='user_requests',on_message_callback=callback)
+        channel.basic_consume(queue='user_requests',on_message_callback=callback,auto_ack=True)
+
+    def notify_users(self,youtuber,youtuber_name,video_name):
+        subscribers = youtuber.get_subscribers()
+        channel2 = connection.channel()
         
+        for subscriber in subscribers:
+            channel2.queue_declare(queue=subscriber)
+            channel2.queue_bind(exchange='logs',queue=subscriber)
+        
+        notification =f"{youtuber_name} uploaded {video_name}"
+        channel2.basic_publish(exchange='logs',routing_key='',body=notification) 
+       
 if __name__ == "__main__":
     connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
     channel = connection.channel()
-    
-    server = YoutubeServer(channel)
+    channel2 = connection.channel()
+
+    server = YoutubeServer(channel,channel2)
     server.consume_user_requests()
     server.consume_youtuber_requests()
     channel.start_consuming()
-    # server.notify_users()
-'''
-
-
-
-'''
