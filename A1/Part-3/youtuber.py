@@ -11,16 +11,16 @@ class Youtuber:
     def add_subscriber(self,subscriber_name):
         self.subscribers.add(subscriber_name)
         # Debugging Statement
-        print(self.subscribers)
+        # print(self.subscribers)
         
     def add_video(self,video_name):
         self.videos.add(video_name)
         # Debugging Statement
-        print(self.videos)
+        # print(self.videos)
     def remove_subscriber(self,subscriber_name):
         self.subscribers.discard(subscriber_name)
-        # Debugging Statement
-        print(self.subscribers)
+        # # Debugging Statement
+        # print(self.subscribers)
 
     def get_subscribers(self):
         return self.subscribers
