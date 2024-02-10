@@ -21,7 +21,7 @@ class YoutubeServer:
             message = json.loads(body)
             youtuber_name = message['youtuber_name']
             video_name = message['video_name']
-            
+
             # Creating an object of the new youtuber
             new_youtuber = Youtuber(youtuber_name)
             if youtuber_name not in self.youtubers:
@@ -46,8 +46,7 @@ class YoutubeServer:
             request_type = message['subscribe']
 
             if user_name not in self.users:
-                queue=self.channel2.queue_declare(queue=user_name)
-                user=User(user_name,queue)
+                user=User(user_name)
                 self.users[user_name]=user
 
             if request_type=='s':
