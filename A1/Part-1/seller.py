@@ -59,7 +59,7 @@ def displayItems(stub,unique_id,addr):
 
 def update(stub,unique_id,addr):
     print("Here is a list of all the available items that you registered :-")
-    displayItems(stub,unique_id)
+    displayItems(stub,unique_id,addr)
     print("Please enter the id of the product you wish to update : ")
     id = int(input())
     print("Please enter the updated quantity")
@@ -72,7 +72,7 @@ def update(stub,unique_id,addr):
 
 def delete(stub,unique_id,addr):
     print("Here is a list of all the available items that you registered :-")
-    displayItems(stub,unique_id)
+    displayItems(stub,unique_id,addr)
     print("Please enter the id of the product you wish to delete : ")
     id = int(input())
     deleteitemrequest = market_seller_pb2.DeleteItemRequest(uuid=unique_id,id=id,address=addr)
@@ -86,14 +86,14 @@ def run(unique_id,addr,market_addr):
     # Notification Server
     seller_notification_server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     notification_server = SellerNotificationServer()
-    notification_server_addr=addr+":50051"
+    notification_server_addr=addr
     market_seller_pb2_grpc.add_SellerNotificationServerServicer_to_server(notification_server,seller_notification_server)
     seller_notification_server.add_insecure_port(notification_server_addr)
     seller_notification_server.start()
 
 
     # Client
-    channel= grpc.insecure_channel(market_addr+":50051")
+    channel= grpc.insecure_channel(market_addr)
     stub = market_seller_pb2_grpc.MarketPlaceStub(channel)
     while(1):
         print("Welcome to the Shop Seller :-")
@@ -105,7 +105,10 @@ def run(unique_id,addr,market_addr):
         print("5) Display your listed items")
         print("6) Exit")
         print("Please select which service you would like to avail ?")
-        choice = int(input())
+        try:
+            choice = int(input())
+        except:
+            continue
 
         if choice==1:
             register(stub,unique_id,notification_server_addr)
@@ -122,4 +125,6 @@ def run(unique_id,addr,market_addr):
             
 if __name__=="__main__":
     unique_id=str(uuid.uuid1())
-    run(unique_id,sys.argv[1],sys.argv[2])
+    notification_server_address = sys.argv[1] + ":50051"
+    market_address = sys.argv[2]+":50051"
+    run(unique_id,notification_server_address,market_address)
