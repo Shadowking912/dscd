@@ -82,7 +82,7 @@ def run(unique_id,addr,market_addr):
 
     buyer_notification_server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     notification_server = BuyerNotificationServer()
-    notification_server_addr=addr+"50051"
+    notification_server_addr=addr+":50051"
     market_buyer_pb2_grpc.add_BuyerNotificationServerServicer_to_server(notification_server,buyer_notification_server)
     buyer_notification_server.add_insecure_port(notification_server_addr)
     buyer_notification_server.start()
