@@ -5,6 +5,7 @@ import market_seller_pb2
 import market_seller_pb2_grpc
 import market_buyer_pb2
 import market_buyer_pb2_grpc
+import sys
 
 class Product:
     def __init__(self,id,name,category,quantity,description,price_per_unit,ratings,seller_address):
@@ -311,7 +312,7 @@ def serve():
     market=MarketPlaceService()
     market_seller_pb2_grpc.add_MarketPlaceServicer_to_server(market,server)
     market_buyer_pb2_grpc.add_MarketPlaceServicer_to_server(market,server)
-    server.add_insecure_port("localhost:50050")
+    server.add_insecure_port(sys.argv[1]+":50051")
     server.start()
     server.wait_for_termination()
 
