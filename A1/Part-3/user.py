@@ -47,9 +47,10 @@ def receiveNotifications(username,connection):
     channel2.start_consuming()
     
 if __name__ == "__main__":
+    server='localhost'
     if len(sys.argv)==2:
         username=sys.argv[1]
-        connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
+        connection = pika.BlockingConnection(pika.ConnectionParameters(server))
         updateSubscription(connection.channel(),username,"","")
         receiveNotifications(username,connection)
 
@@ -57,7 +58,7 @@ if __name__ == "__main__":
         username=sys.argv[1]
         option=sys.argv[2]
         youtuber_name = sys.argv[3]
-        connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
+        connection = pika.BlockingConnection(pika.ConnectionParameters(server))
         channel = connection.channel()
         updateSubscription(channel,username,youtuber_name,option)
         receiveNotifications(username,connection)

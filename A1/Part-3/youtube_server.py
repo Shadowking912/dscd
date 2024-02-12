@@ -2,7 +2,7 @@ import pika
 import json
 from user import User
 from youtuber import Youtuber
- 
+import sys
                     
 class YoutubeServer:
     def __init__(self,channel,channel2):
@@ -70,7 +70,8 @@ class YoutubeServer:
             self.channel2.basic_publish(exchange='notifications',routing_key=subscriber,body=notification) 
        
 if __name__ == "__main__":
-    connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
+    host=sys.argv[1]
+    connection = pika.BlockingConnection(pika.ConnectionParameters(host))
     channel = connection.channel()
     channel2 = connection.channel()
 
