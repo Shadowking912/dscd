@@ -305,17 +305,18 @@ class MarketPlaceService(market_seller_pb2_grpc.MarketPlaceServicer,market_buyer
             return market_product_reply
 
 
-def serve():
+def serve(market_address):
 
     # Adding the market place server 
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     market=MarketPlaceService()
     market_seller_pb2_grpc.add_MarketPlaceServicer_to_server(market,server)
     market_buyer_pb2_grpc.add_MarketPlaceServicer_to_server(market,server)
-    server.add_insecure_port(sys.argv[1]+":50051")
+    server.add_insecure_port(market_address)
     server.start()
     server.wait_for_termination()
 
 
 if __name__=="__main__":
-    serve()
+    market_address = sys.argv[1]+":50051"
+    serve(market_address)

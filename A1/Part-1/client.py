@@ -37,8 +37,6 @@ def SearchItem(stub,unique_id):
     searchresponses=stub.SearchItem(searchrequest)
     # print(searchresponses)
     for searchresponse in searchresponses:
-        # print(searchresponse)
-        print("The following item has been updated : ")
         print(f"Item ID:{searchresponse.id},Price:{searchresponse.price},Name:{searchresponse.name},Category:{searchresponse.productCategory}")
         print(f"Description:{searchresponse.description}")
         print(f"Quantity Reamining:{searchresponse.quantityRemaining}")
@@ -82,13 +80,13 @@ def run(unique_id,addr,market_addr):
 
     buyer_notification_server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     notification_server = BuyerNotificationServer()
-    notification_server_addr=addr+":50051"
+    notification_server_addr=addr
     market_buyer_pb2_grpc.add_BuyerNotificationServerServicer_to_server(notification_server,buyer_notification_server)
     buyer_notification_server.add_insecure_port(notification_server_addr)
     buyer_notification_server.start()
 
     # Client
-    channel= grpc.insecure_channel(market_addr+":50051")
+    channel= grpc.insecure_channel(market_addr)
     stub= market_buyer_pb2_grpc.MarketPlaceStub(channel)
     while(1):
         print("Welcome to the Shop Buyer :-")
@@ -101,8 +99,10 @@ def run(unique_id,addr,market_addr):
         print("6) Logout")
 
         print("Please select which service you would like to avail ?")
-        choice = int(input())
-
+        try:
+            choice = int(input())
+        except:
+            continue
         if choice==1:
             SearchItem(stub,unique_id)
         elif choice==2:
@@ -115,8 +115,11 @@ def run(unique_id,addr,market_addr):
             DisplayWishlist(stub,unique_id)
         elif choice==6:
             break
+        
             
 
 if __name__=="__main__":
     unique_id=str(uuid.uuid1())
-    run(unique_id,sys.argv[1],sys.argv[2])
+    notification_server_address = sys.argv[1] + ":50051"
+    market_address = sys.argv[2]+":50051"
+    run(unique_id,notification_server_address,market_address)
