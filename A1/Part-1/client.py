@@ -77,18 +77,18 @@ def DisplayWishlist(stub,unique_id):
         print(f"Rating : {displayresponse.rating}/5 | Seller: {displayresponse.Address}")
         print()
 
-def run(unique_id,addr="localhost:50052"):
+def run(unique_id,addr,market_addr):
     # Notification Server
 
     buyer_notification_server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     notification_server = BuyerNotificationServer()
-    notification_server_addr=addr
+    notification_server_addr=addr+"50051"
     market_buyer_pb2_grpc.add_BuyerNotificationServerServicer_to_server(notification_server,buyer_notification_server)
     buyer_notification_server.add_insecure_port(notification_server_addr)
     buyer_notification_server.start()
 
     # Client
-    channel= grpc.insecure_channel('localhost:50050')
+    channel= grpc.insecure_channel(market_addr+":50051")
     stub= market_buyer_pb2_grpc.MarketPlaceStub(channel)
     while(1):
         print("Welcome to the Shop Buyer :-")
@@ -119,4 +119,4 @@ def run(unique_id,addr="localhost:50052"):
 
 if __name__=="__main__":
     unique_id=str(uuid.uuid1())
-    run(unique_id,sys.argv[1])
+    run(unique_id,sys.argv[1],sys.argv[2])

@@ -81,19 +81,19 @@ def delete(stub,unique_id,addr):
 
 
 
-def run(unique_id,addr="localhost:50053"):
+def run(unique_id,addr,market_addr):
 
     # Notification Server
     seller_notification_server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     notification_server = SellerNotificationServer()
-    notification_server_addr=addr
+    notification_server_addr=addr+":50051"
     market_seller_pb2_grpc.add_SellerNotificationServerServicer_to_server(notification_server,seller_notification_server)
     seller_notification_server.add_insecure_port(notification_server_addr)
     seller_notification_server.start()
 
 
     # Client
-    channel= grpc.insecure_channel('localhost:50050')
+    channel= grpc.insecure_channel(market_addr+":50051")
     stub = market_seller_pb2_grpc.MarketPlaceStub(channel)
     while(1):
         print("Welcome to the Shop Seller :-")
@@ -122,4 +122,4 @@ def run(unique_id,addr="localhost:50053"):
             
 if __name__=="__main__":
     unique_id=str(uuid.uuid1())
-    run(unique_id,sys.argv[1])
+    run(unique_id,sys.argv[1],sys.argv[2])
