@@ -71,7 +71,8 @@ class YoutubeServer:
        
 if __name__ == "__main__":
     host=sys.argv[1]
-    connection = pika.BlockingConnection(pika.ConnectionParameters(host))
+    connection = pika.BlockingConnection(pika.ConnectionParameters(host, 5672, 'bot', pika.PlainCredentials('bot', 'bot')))
+    channel = connection.channel()
     channel = connection.channel()
     channel2 = connection.channel()
 

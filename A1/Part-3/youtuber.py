@@ -46,6 +46,6 @@ if __name__ == "__main__":
         for i in range(2,len(sys.argv)):
             video_name+=sys.argv[i]+" "
         server='localhost'
-        connection = pika.BlockingConnection(pika.ConnectionParameters(server))
+        connection = pika.BlockingConnection(pika.ConnectionParameters(server, 5672, 'bot', pika.PlainCredentials('bot', 'bot')))
         channel = connection.channel()
         publish_video(youtuber_name, video_name, channel)

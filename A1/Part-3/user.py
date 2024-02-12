@@ -30,14 +30,14 @@ def updateSubscription(channel, user_name,youtuber_name, subscribe):
     channel.basic_publish(exchange='', routing_key='user_requests', body=json.dumps(message))
     if youtuber_name!="":
         print("SUCCESS: Subscription updated")
-    else:
-        print("Logged In")
+        
 
 def receiveNotifications(username,connection):
     def callback(ch,method,properties,body):
         body = body.decode('utf-8')
         print(body)
-
+    
+    print("Logged In")
     channel2  = connection.channel()
     channel2.exchange_declare(exchange='notifications', exchange_type='direct')
     result = channel2.queue_declare(queue='', exclusive=True)
@@ -50,7 +50,7 @@ if __name__ == "__main__":
     server='localhost'
     if len(sys.argv)==2:
         username=sys.argv[1]
-        connection = pika.BlockingConnection(pika.ConnectionParameters(server))
+        connection = pika.BlockingConnection(pika.ConnectionParameters(server, 5672, 'bot', pika.PlainCredentials('bot', 'bot')))
         updateSubscription(connection.channel(),username,"","")
         receiveNotifications(username,connection)
 
@@ -58,7 +58,7 @@ if __name__ == "__main__":
         username=sys.argv[1]
         option=sys.argv[2]
         youtuber_name = sys.argv[3]
-        connection = pika.BlockingConnection(pika.ConnectionParameters(server))
+        connection = pika.BlockingConnection(pika.ConnectionParameters(server, 5672, 'bot', pika.PlainCredentials('bot', 'bot')))
         channel = connection.channel()
         updateSubscription(channel,username,youtuber_name,option)
         receiveNotifications(username,connection)
