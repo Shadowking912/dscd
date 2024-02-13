@@ -25,7 +25,7 @@ class Youtuber:
         return self.youtuber_name
 
 def publish_video(youtuber_name, video_name, channel):
-    channel.queue_declare(queue='youtuber_requests')
+    channel.queue_declare(queue='youtuber_requests',durable=True)
 
     message = {
         "youtuber_uuid": str(uuid.uuid1()),
