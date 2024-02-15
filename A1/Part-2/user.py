@@ -36,6 +36,7 @@ class User:
         context = zmq.Context()
         socket = context.socket(zmq.REQ)
         socket.connect("tcp://"+(group_address))
+
         # socket.connect("tcp://127.0.0.1:5556")
         # print("DEB: Sending JSON")
         socket.send_json({'action': 'add_user', 'user_uuid': self.user_id})

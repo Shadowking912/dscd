@@ -2,7 +2,9 @@ import zmq
 import uuid
 import datetime
 import sys
+import socket 
 # group_address="tcp://127.0.0.1:5556"
+internal_ip  = socket.gethostbyname(socket.gethostname())
 class Group:
     def __init__(self, id, name,group_address):
         self.id = id
@@ -44,7 +46,8 @@ class Group:
         print("Listening for User Commands\n")
         context = zmq.Context()
         socket = context.socket(zmq.REP)
-        socket.bind(f"tcp://{self.GroupAddress}")
+        ip,port = self.GroupAddress.split(":")
+        socket.bind(f"tcp://{internal_ip}:{port}")
 
         while True:
             message = socket.recv_json()
