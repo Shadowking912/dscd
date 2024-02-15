@@ -1,5 +1,6 @@
 import zmq
-server_address="tcp://127.0.0.1:5555"
+import sys
+
 
 class MessageServer:
     def __init__(self):
@@ -38,5 +39,9 @@ def main():
             socket.send_json(group_list)
 
 if __name__ == "__main__":
-    main()
+    if len(sys.argv)<2:
+        print("Usage: python message_server.py <ip-address>")
+    else:
+        server_address =f"tcp://{sys.argv[1]}:5555"
+        main()
     

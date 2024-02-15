@@ -2,16 +2,16 @@ import zmq
 import uuid
 import datetime
 import sys
-
+# group_address="tcp://127.0.0.1:5556"
 class Group:
-    def __init__(self, id, name):
+    def __init__(self, id, name,group_address):
         self.id = id
         self.name = name
         self.users = []
         self.messages = {}
         self.registration_status = False
         self.MessageServerSocket = ""
-        self.GroupAddress = "tcp://"
+        self.GroupAddress = group_address
 
     def print_group_details(self):
         print(f"Group Details are:\n ID: {self.id} \n Name: {self.name}\n UserList:{self.users}\n Registration Status: {self.registration_status}\n Group Server Address: {self.GroupAddress}\n") 
@@ -31,11 +31,11 @@ class Group:
         context = zmq.Context()
         socket = context.socket(zmq.REQ)
         socket.connect("tcp://"+server_address)
+        ip,port = self.GroupAddress.split(":")
         socket.send_json({'action': 'register_group', 'group_id': self.id, 'group_name': self.name,
-                           'ip_address': '127.0.0.1', 'port': 5556})  # group Server Address
+                           'ip_address': ip, 'port': port})  # group Server Address
         self.registration_status = True
         self.MessageServerSocket = socket
-        self.GroupAddress=self.GroupAddress+"127.0.0.1:5556"
         response = self.MessageServerSocket.recv_string()
         print(response)
         self.print_group_details()
@@ -44,7 +44,7 @@ class Group:
         print("Listening for User Commands\n")
         context = zmq.Context()
         socket = context.socket(zmq.REP)
-        socket.bind("tcp://127.0.0.1:5556")
+        socket.bind(f"tcp://{self.GroupAddress}")
 
         while True:
             message = socket.recv_json()
@@ -109,15 +109,16 @@ class Group:
 
 # Main function to run the group interface
 def main():
-    if len(sys.argv) != 2:
-        print("Usage: python group.py <server_address>")
+    if len(sys.argv) < 3:
+        print("Usage: python group.py <server_address> <group_address:port_no>")
         sys.exit(1)
 
     server_address = sys.argv[1]
-
+    group_address = sys.argv[2]
+    
     unique_id = str(uuid.uuid1())
     group_name = input("Enter group name: ")
-    group = Group(unique_id, group_name)
+    group = Group(unique_id, group_name,group_address)
 
     while True:
         print("\nCommands:")
