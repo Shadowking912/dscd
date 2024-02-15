@@ -44,7 +44,7 @@ class YoutubeServer:
             user_name = message['user_name']
             youtuber_name = message['youtuber_name']
             request_type = message['subscribe']
-
+            print(f"{user_name} logged in")
             if user_name not in self.users:
                 user=User(user_name)
                 self.users[user_name]=user

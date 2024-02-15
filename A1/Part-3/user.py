@@ -51,17 +51,17 @@ def receiveNotifications(username,connection):
         sys.exit(0)
 
 if __name__ == "__main__":
-    server='localhost'
-    if len(sys.argv)==2:
-        username=sys.argv[1]
+    server=sys.argv[1]
+    if len(sys.argv)==3:
+        username=sys.argv[2]
         connection = pika.BlockingConnection(pika.ConnectionParameters(server, 5672, 'bot', pika.PlainCredentials('bot', 'bot')))
         updateSubscription(connection.channel(),username,"","")
         receiveNotifications(username,connection)
 
-    elif len(sys.argv)==4:
-        username=sys.argv[1]
-        option=sys.argv[2]
-        youtuber_name = sys.argv[3]
+    elif len(sys.argv)==5:
+        username=sys.argv[2]
+        option=sys.argv[3]
+        youtuber_name = sys.argv[4]
         connection = pika.BlockingConnection(pika.ConnectionParameters(server, 5672, 'bot', pika.PlainCredentials('bot', 'bot')))
         channel = connection.channel()
         updateSubscription(channel,username,youtuber_name,option)

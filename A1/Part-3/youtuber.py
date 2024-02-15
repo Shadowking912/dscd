@@ -37,15 +37,15 @@ def publish_video(youtuber_name, video_name, channel):
     print("SUCCESS: Video published")
 
 if __name__ == "__main__":
-    if len(sys.argv) != 3:
+    if len(sys.argv) != 4:
         print("Usage: python Youtuber.py <YoutuberName> <VideoName>")
     else:
-        youtuber_name = sys.argv[1]
+        youtuber_name = sys.argv[2]
         video_name=""
         # video_name = sys.argv[2]
-        for i in range(2,len(sys.argv)):
+        for i in range(3,len(sys.argv)):
             video_name+=sys.argv[i]+" "
-        server='localhost'
+        server=sys.argv[1]
         connection = pika.BlockingConnection(pika.ConnectionParameters(server, 5672, 'bot', pika.PlainCredentials('bot', 'bot')))
         channel = connection.channel()
         publish_video(youtuber_name, video_name, channel)
