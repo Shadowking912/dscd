@@ -21,7 +21,7 @@ class User:
 
     
 def updateSubscription(channel, user_name,youtuber_name, subscribe):
-    channel.queue_declare(queue='user_requests',durable=True)
+    channel.queue_declare(queue='user_requests')
     message = {
         "user_name": user_name,
         "youtuber_name": youtuber_name,
@@ -40,12 +40,16 @@ def receiveNotifications(username,connection):
     print("Logged In")
     channel2  = connection.channel()
     channel2.exchange_declare(exchange='notifications', exchange_type='direct')
-    result = channel2.queue_declare(queue='', exclusive=True,durable=True)
+    result = channel2.queue_declare(queue=f'{username}')
     queue_name = result.method.queue
     channel2.queue_bind(exchange='notifications', queue=queue_name, routing_key=username)
     channel2.basic_consume(queue=queue_name,on_message_callback=callback,auto_ack=True)
-    channel2.start_consuming()
-    
+    try:
+        channel2.start_consuming()
+    except KeyboardInterrupt:
+        channel2.stop_consuming()
+        sys.exit(0)
+
 if __name__ == "__main__":
     server='localhost'
     if len(sys.argv)==2:

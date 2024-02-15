@@ -10,6 +10,7 @@ class BuyerNotificationServer(market_buyer_pb2_grpc.BuyerNotificationServerServi
     def ReceiveNotification(self,request,context):
         # print("yes")
         product=request.notification
+        print()
         print(f"Item ID:{product.id},Price:{product.price},Name:{product.name},Category:{product.productCategory}")
         print(f"Description:{product.description}")
         print(f"Quantity Reamining:{product.quantityRemaining}")
@@ -32,10 +33,11 @@ def SearchItem(stub,unique_id):
         print("3) ANY")
         print("\nPlease enter your category choice : ")
         category = int(input())
-    item=input("Item Name")
+    item=input("Item Name : ")
     searchrequest=market_buyer_pb2.SearchRequest(item_name=item,category=category)
     searchresponses=stub.SearchItem(searchrequest)
     # print(searchresponses)
+    print()
     for searchresponse in searchresponses:
         print(f"Item ID:{searchresponse.id},Price:{searchresponse.price},Name:{searchresponse.name},Category:{searchresponse.productCategory}")
         print(f"Description:{searchresponse.description}")
@@ -101,7 +103,7 @@ def run(unique_id,addr,market_addr):
         print("Please select which service you would like to avail ?")
         try:
             choice = int(input())
-        except:
+        except ValueError:
             continue
         if choice==1:
             SearchItem(stub,unique_id)
@@ -120,6 +122,9 @@ def run(unique_id,addr,market_addr):
 
 if __name__=="__main__":
     unique_id=str(uuid.uuid1())
-    notification_server_address = sys.argv[1] + ":50051"
-    market_address = sys.argv[2]+":50051"
-    run(unique_id,notification_server_address,market_address)
+    if len(sys.argv)<3:
+        print("Usage: python client.py <notification_server_ip:port> <market_address_ip:port>")
+    else:
+        notification_server_address = sys.argv[1]
+        market_address = sys.argv[2]
+        run(unique_id,notification_server_address,market_address)

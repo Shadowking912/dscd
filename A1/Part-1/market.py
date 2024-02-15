@@ -318,5 +318,8 @@ def serve(market_address):
 
 
 if __name__=="__main__":
-    market_address = sys.argv[1]+":50051"
-    serve(market_address)
+    if len(sys.argv)<2:
+        print("Usage: python market.py <market_address_ip:port>")
+    else:
+        market_address = sys.argv[1]
+        serve(market_address)

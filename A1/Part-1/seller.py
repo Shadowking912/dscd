@@ -9,6 +9,7 @@ import sys
 class SellerNotificationServer(market_seller_pb2_grpc.SellerNotificationServerServicer):
     def ReceiveNotification(self,request,context):
         product=request.notification
+        print()
         print(f"Item ID:{product.id},Price:{product.price},Name:{product.name},Category:{product.productCategory}")
         print(f"Description:{product.description}")
         print(f"Quantity Reamining:{product.quantityRemaining}")
@@ -50,6 +51,9 @@ def sell(stub,unique_id,addr):
 def displayItems(stub,unique_id,addr):
     displayrequest = market_seller_pb2.ProductDisplayRequest(uuid=unique_id,address=addr)
     displayresponses = stub.DisplaySellerItems(displayrequest)
+    print()
+    print("Here is a list of your items :-")
+    print()
     for displayresponse in displayresponses:
         print(f"Item ID: {displayresponse.id},Price: {displayresponse.price},Name: {displayresponse.name},Category: {displayresponse.productCategory}")
         print(f"Description: {displayresponse.description}")
@@ -107,9 +111,8 @@ def run(unique_id,addr,market_addr):
         print("Please select which service you would like to avail ?")
         try:
             choice = int(input())
-        except:
+        except ValueError:
             continue
-
         if choice==1:
             register(stub,unique_id,notification_server_addr)
         elif choice==2:
@@ -125,6 +128,9 @@ def run(unique_id,addr,market_addr):
             
 if __name__=="__main__":
     unique_id=str(uuid.uuid1())
-    notification_server_address = sys.argv[1] + ":50051"
-    market_address = sys.argv[2]+":50051"
+    if len(sys.argv)<3:
+        print("Usage: python client.py <notification_server_ip:port> <market_address_ip:port")
+    else:
+        notification_server_address = sys.argv[1]
+        market_address = sys.argv[2]
     run(unique_id,notification_server_address,market_address)

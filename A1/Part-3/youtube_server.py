@@ -67,7 +67,7 @@ class YoutubeServer:
         subscribers = youtuber.get_subscribers()
         for subscriber in subscribers:
             notification =f"{youtuber_name} uploaded {video_name}"
-            self.channel2.basic_publish(exchange='notifications',routing_key=subscriber,body=notification) 
+            self.channel2.basic_publish(exchange='notifications',routing_key=subscriber,body=notification,properties=pika.BasicProperties(delivery_mode=2)) 
        
 if __name__ == "__main__":
     host=sys.argv[1]
