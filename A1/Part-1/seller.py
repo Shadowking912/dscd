@@ -129,7 +129,7 @@ def run(unique_id,addr,market_addr):
 if __name__=="__main__":
     unique_id=str(uuid.uuid1())
     if len(sys.argv)<3:
-        print("Usage: python client.py <notification_server_ip:port> <market_address_ip:port")
+        print("Usage: python client.py <notification_server_ip:port> <market_address_ip:port>")
     else:
         notification_server_address = sys.argv[1]
         market_address = sys.argv[2]
