@@ -113,7 +113,7 @@ class Group:
 # Main function to run the group interface
 def main():
     if len(sys.argv) < 3:
-        print("Usage: python group.py <server_address> <group_address:port_no>")
+        print("Usage: python group.py <server_address:port_no> <group_address:port_no>")
         sys.exit(1)
 
     server_address = sys.argv[1]
