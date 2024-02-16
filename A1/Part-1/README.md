@@ -22,7 +22,7 @@ This Python script implements a marketplace service using gRPC, allowing sellers
 1. Navigate to the project directory:
 
     ```bash
-    cd grpc-marketplace
+    cd Part-1
     ```
 
 2. Generating stub code from the proto files
@@ -68,16 +68,6 @@ python market.py <market_address_ip:port>
 
 - `<market_external_ip_address:port>`: IP address and port where the marketplace service will be hosted.
 
-
-###Imports
-```python
-from concurrent import futures
-import grpc
-import market_seller_pb2
-import market_seller_pb2_grpc
-import market_buyer_pb2
-import market_buyer_pb2_grpc
-```
 
 ## Assosciated Classes
 
@@ -161,7 +151,7 @@ python seller.py <notification_server_external_ip:port> <market_address_ip:port>
 7. **Receive Notificaiton**
     - `ReceiveNotification()`:Receives the notification from the server and prints it on the seller side when the seller buys a product list by that particular seller which includes details of items they are interested in, such as price, name, category, description, quantity remaining, rating, and seller address.
 
-## 3.Buyer Client
+## 3. Client
 
 ### Usage
 
@@ -178,19 +168,19 @@ python client.py <notification_server_external_ip:port> <market_address_ip:port>
 ## Functionality
 
 1. **Search Item**:
-    - Allows buyers to search for items based on item name and category.
+    - `SearchItem()`: Allows buyers to search for items based on item name and category.
 
 2. **Buy Item**:
-    - Allows buyers to purchase items by specifying the item ID and quantity.
+    - `BuyItem()` : Allows buyers to purchase items by specifying the item ID and quantity.
 
 3. **Add to Wishlist**:
-    - Enables buyers to add items to their wishlist by specifying the item ID.
+    - `AddTOWishList()` : Enables buyers to add items to their wishlist by specifying the item ID.
 
 4. **Rate Item**:
-    - Allows buyers to rate items by specifying the item ID and rating.
+    - `RateItem()` : Allows buyers to rate items by specifying the item ID and rating.
 
 5. **Display Wishlist**:
-    - Displays the wishlist containing items added by the buyer.
+    - `DsplayWishlist()` : Displays the wishlist containing items added by the buyer.
 
 6. **Logout**:
     - Quits the client application.

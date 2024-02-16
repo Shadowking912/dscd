@@ -70,7 +70,7 @@ python youtube_server.py <internal_ip>
   |----------------------|----------------------------|--------------|--------------|----------------------|    
   |(un)subscribe requests|Simple Client Server        |User          |Youtube_Server|1 publisher+1 consumer|
   |Upload Video          |Simple Client Server        |Youtuber      |Youtube_Server|1 publisher+1 consumer|                                              
-  |Notifications         |Routing(Publish subscriber) |Youtube_Server|User          |1 publisher + many consumers with message routing based on type of messages subscribed by the client|                  
+  |Notifications         |Routing |Youtube_Server|User          |1 publisher + many consumers with message routing based on type of messages subscribed by the client|                  
 
 ## 2. Youtuber (`youtuber.py`)
 
