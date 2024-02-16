@@ -51,14 +51,16 @@ def receiveNotifications(username,connection):
         sys.exit(0)
 
 if __name__ == "__main__":
-    server=sys.argv[1]
+    
     if len(sys.argv)==3:
+        server=sys.argv[1]
         username=sys.argv[2]
         connection = pika.BlockingConnection(pika.ConnectionParameters(server, 5672, 'bot', pika.PlainCredentials('bot', 'bot')))
         updateSubscription(connection.channel(),username,"","")
         receiveNotifications(username,connection)
 
     elif len(sys.argv)==5:
+        server=sys.argv[1]
         username=sys.argv[2]
         option=sys.argv[3]
         youtuber_name = sys.argv[4]
@@ -69,7 +71,7 @@ if __name__ == "__main__":
 
     else:
         print("Usage:")
-        print("python user.py <username>")
-        print("python user.py <username> s/u <youtuber name>")
+        print("python user.py <server_ip-address> <username>")
+        print("python user.py <server_ip-address> <username> s/u <youtuber name>")
     
 

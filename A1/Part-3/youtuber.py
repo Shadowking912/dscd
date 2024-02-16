@@ -38,7 +38,7 @@ def publish_video(youtuber_name, video_name, channel):
 
 if __name__ == "__main__":
     if len(sys.argv) != 4:
-        print("Usage: python Youtuber.py <YoutuberName> <VideoName>")
+        print("Usage: python Youtuber.py <server-ip-address> <YoutuberName> <VideoName>")
     else:
         youtuber_name = sys.argv[2]
         video_name=""

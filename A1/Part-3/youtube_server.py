@@ -70,13 +70,16 @@ class YoutubeServer:
             self.channel2.basic_publish(exchange='notifications',routing_key=subscriber,body=notification,properties=pika.BasicProperties(delivery_mode=2)) 
        
 if __name__ == "__main__":
-    host=sys.argv[1]
-    connection = pika.BlockingConnection(pika.ConnectionParameters(host, 5672, 'bot', pika.PlainCredentials('bot', 'bot')))
-    channel = connection.channel()
-    channel = connection.channel()
-    channel2 = connection.channel()
+    if len(sys.argv)<2:
+        print("Usage: python youtube_server.py <ip-address>")
+    else:
+        host=sys.argv[1]
+        connection = pika.BlockingConnection(pika.ConnectionParameters(host, 5672, 'bot', pika.PlainCredentials('bot', 'bot')))
+        channel = connection.channel()
+        channel = connection.channel()
+        channel2 = connection.channel()
 
-    server = YoutubeServer(channel,channel2)
-    server.consume_user_requests()
-    server.consume_youtuber_requests()
-    channel.start_consuming()
+        server = YoutubeServer(channel,channel2)
+        server.consume_user_requests()
+        server.consume_youtuber_requests()
+        channel.start_consuming()
