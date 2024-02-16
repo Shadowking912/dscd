@@ -104,7 +104,7 @@ class User:
 
 def main():
     if len(sys.argv) != 2:
-        print("Usage: python user.py <server_address>")
+        print("Usage: python user.py <server_address:port>")
         sys.exit(1)
 
     user_id = str(uuid.uuid1())
