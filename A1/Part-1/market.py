@@ -27,9 +27,6 @@ class Seller:
     
     def add_product(self,product):
         self.__product_list[product.id] = product
-    
-    def update_product(self):
-        pass
 
     def get_product_list(self):
         return self.__product_list
