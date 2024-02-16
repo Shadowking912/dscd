@@ -133,4 +133,4 @@ if __name__=="__main__":
     else:
         notification_server_address = sys.argv[1]
         market_address = sys.argv[2]
-    run(unique_id,notification_server_address,market_address)
+        run(unique_id,notification_server_address,market_address)
