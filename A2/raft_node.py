@@ -33,11 +33,11 @@ class RaftNode:
                 self.voted_for = message['candidate_id']
                 self.reset_election_timeout()
 
-                socket.send_json({"Vote":"True"})
+                socket.send_json({"Vote":"True",'No-response':False})
             else:
-                socket.send_json({"Vote":"False"})
+                socket.send_json({"Vote":"False",'No-response':False})
         else:
-            socket.send_json({"Vote":"False"})
+            socket.send_json({"Vote":"False",'No-response':False})
 
     def handle_client_request(self, client_socket,request):
         # if self.state != 'leader':
@@ -55,7 +55,8 @@ class RaftNode:
             self.replicate_log_entries()
             response = {
                     'status': 'success',
-                    'message': f"Value for key '{key}': {value}"
+                    'message': f"Value for key '{key}': {value}",
+                    'No-response':False
                 }
             self.socket.send_json(response)
         elif request_type == 'GET':
@@ -66,14 +67,16 @@ class RaftNode:
                 response = {
                     'type': 'client_response',
                     'status': 'success',
-                    'message': f"Value for key '{key}': {value}"
+                    'message': f"Value for key '{key}': {value}",
+                    'No-response':False
                 }
                 self.socket.send_json(response)
             else:
                 response = {
                     'type': 'client_response',
                     'status': 'failure',
-                    'message': f"Key '{key}' not found"
+                    'message': f"Key '{key}' not found",
+                    'No-response':False
                 }
                 client_socket.send_json(response)
 
@@ -95,8 +98,8 @@ class RaftNode:
 
     def send_vote_requests(self):
         print(f"Node:{self.node_id} sent vote req")
-        # for peer in self.peers:
-        for peer in range(0,3):
+        for peer in self.peers:
+        # for peer in range(0,3):
             if peer != self.node_id:
                 request = {
                     'type': 'request_vote',
@@ -104,11 +107,13 @@ class RaftNode:
                     'candidate_id': self.node_id
                 }
                 res = self.send_message(peer, request)
-                if(res['Vote']=='True'):
+                if(res["No-Response"]==True):
+                    print(f"No Response from {peer} in voting")
+                elif(res['Vote']=='True'):
                     self.vote_count+=1
         print(f"Node {self.node_id}, vote_cnt {self.vote_count}")
-        # if(self.vote_count >= len(peers)//2):
-        if(self.vote_count >= 2):
+        if(self.vote_count >= len(peers)//2):
+        # if(self.vote_count >= 2):
             self.state = 'leader'
             print(f"New Leader is {self.node_id}")
 
@@ -120,7 +125,8 @@ class RaftNode:
                         request = {
                             'type': 'heartbeat',
                             'term': self.term,
-                            'leader_id': self.node_id
+                            'leader_id': self.node_id,
+                            'No-response':False
                         }
                         self.send_message(peer, request)
             time.sleep(self.heartbeat_interval)
@@ -130,8 +136,21 @@ class RaftNode:
         socket = context.socket(zmq.REQ)
         socket.connect(f"tcp://127.0.0.1:555{peer}")
         socket.send_json(message)
-        response = socket.recv_json()
-        print(f"Response from {peer}: {response}")
+            # response = socket.recv_json()
+        # Timer of 
+        timeout = 2 #seconds
+        poller = zmq.Poller()
+        poller.register(socket, zmq.POLLIN)
+        socks = dict(poller.poll(timeout* 1000))  # Convert timeout to milliseconds
+        response = {"No-Response":True}
+        
+        if socket in socks:
+            response = socket.recv_json()
+            print(f"Response from {peer}: {response}")
+        else:
+            print(f"No response received from {peer} within {timeout} seconds.")
+
+        # print(f"Response from {peer}: {response}")
         socket.close()
         return response
 
@@ -177,6 +196,6 @@ if __name__ == "__main__":
     node_id = int(input("Enter Node ID: "))
     server_address = f"tcp://127.0.0.1:555{node_id}"
     print(f"Node Listening at {server_address}")
-    peers = [0, 1, 2, 3, 4]  # Assuming 5 nodes
+    peers = [0, 1, 2]  # Assuming 5 nodes
     node = RaftNode(node_id, server_address, peers)
     node.run()
