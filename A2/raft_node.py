@@ -3,6 +3,12 @@ import json
 import threading
 import time
 
+#Update: Node server 
+#Fixed ZMQ error for Election 
+#Fixed ZMQ error for HeartBeat 
+#Full election working 
+#Full HEartbeat Working
+
 class RaftNode:
     def __init__(self, node_id, address, peers):
         self.node_id = node_id
