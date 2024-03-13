@@ -9,7 +9,7 @@ class RaftNode:
         self.address = address
         self.peers = peers
         self.state = 'follower'
-        self.leader_id = None
+        self.leader_id = -1
         self.term = 0
         self.vote_count = 0
         self.voted_for = None
@@ -23,7 +23,7 @@ class RaftNode:
 
     def handle_heartbeat(self, message):
         print(f"Received heartbeat from leader {message['leader_id']}")
-        if self.state == 'follower':
+        if self.state == 'follower': 
             self.reset_election_timeout()
 
     def handle_vote_request(self, socket,message):
@@ -87,14 +87,37 @@ class RaftNode:
         self.election_timer.start()
 
     def start_election(self):
-        print(f"Node:{self.node_id} started election")
-        if self.state != 'leader':
+        print("DEG:",f"Leader id: {self.leader_id}")
+        if self.leader_id!=-1:
+            self.reset_election_timeout()
+        elif self.state != 'leader':
+            print(f"Node:{self.node_id} started election")
             self.state = 'candidate'
             self.term += 1
             self.voted_for = self.node_id
             self.vote_count = 1  # Vote for self
             # self.reset_election_timeout()
             self.send_vote_requests()
+
+    def broadcast_leader(self,leader):
+        for peer in self.peers:
+            if peer != self.node_id:
+                request = {
+                    'type': 'leader_message',
+                    'term': self.term,
+                    'leader_id': self.node_id,
+                    'No-response':False
+                }
+                self.send_recv_message(peer, request)
+
+
+    def handle_leader_message(self, client_socket,request):
+        self.leader_id = request.get('leader_id')
+        if(self.state == 'candidate'):
+            self.state = 'follower'
+        print(f"Node {self.node_id} got leader id:{self.leader_id}")
+        client_socket.send_json({"response": "ACK", "address": self.address})
+        #implement term handling from leader
 
     def send_vote_requests(self):
         print(f"Node:{self.node_id} sent vote req")
@@ -106,16 +129,19 @@ class RaftNode:
                     'term': self.term,
                     'candidate_id': self.node_id
                 }
-                res = self.send_message(peer, request)
-                if(res["No-Response"]==True):
+                res = self.send_recv_message(peer, request)
+                # print("DEB",res)
+                if(res['No-response']==True):
                     print(f"No Response from {peer} in voting")
                 elif(res['Vote']=='True'):
                     self.vote_count+=1
         print(f"Node {self.node_id}, vote_cnt {self.vote_count}")
-        if(self.vote_count >= len(peers)//2):
+        if(self.vote_count >= len(peers)//2 +1):
         # if(self.vote_count >= 2):
             self.state = 'leader'
             print(f"New Leader is {self.node_id}")
+            self.broadcast_leader(self.node_id)
+
 
     def send_heartbeat(self):
         while True:
@@ -131,10 +157,20 @@ class RaftNode:
                         self.send_message(peer, request)
             time.sleep(self.heartbeat_interval)
 
-    def send_message(self, peer, message):
+    def send_message(self, peer, message): #only send message
         context = zmq.Context()
         socket = context.socket(zmq.REQ)
         socket.connect(f"tcp://127.0.0.1:555{peer}")
+        print("DEB:","Sending Message")
+        socket.send_json(message)
+        socket.close()
+    
+
+    def send_recv_message(self, peer, message): # send message and w8 2s for response
+        context = zmq.Context()
+        socket = context.socket(zmq.REQ)
+        socket.connect(f"tcp://127.0.0.1:555{peer}")
+        print("DEB:","Sending & Recv Message")
         socket.send_json(message)
             # response = socket.recv_json()
         # Timer of 
@@ -142,7 +178,7 @@ class RaftNode:
         poller = zmq.Poller()
         poller.register(socket, zmq.POLLIN)
         socks = dict(poller.poll(timeout* 1000))  # Convert timeout to milliseconds
-        response = {"No-Response":True}
+        response = {"No-response":True}
         
         if socket in socks:
             response = socket.recv_json()
@@ -165,7 +201,7 @@ class RaftNode:
                         'entries': self.logs,
                         'commit_index': self.commit_index
                     }
-                    self.send_message(peer, request)
+                    self.send_recv_message(peer, request)
 
     def run(self):
         context = zmq.Context()
@@ -174,22 +210,31 @@ class RaftNode:
 
         self.election_timer = threading.Timer(self.election_timeout, self.start_election)
         self.election_timer.start()
+       
+        # if(self.node_id == 0): #TEMp
+        #     self.state = 'leader'
+        #     heartbeat_thread = threading.Thread(target=self.send_heartbeat)
+        #     heartbeat_thread.start()
 
         heartbeat_thread = threading.Thread(target=self.send_heartbeat)
         heartbeat_thread.start()
+        
 
         while True:
+            print("DEB:","Listening State")
             message = self.socket.recv_json()
             print(message)
 
             if message['type'] == 'heartbeat':
                 self.handle_heartbeat(message)
-                # self.socket.send_json({"response": "SUC", "address": self.address})
+                self.socket.send_json({"response": "SUC", "address": self.address})
             elif message['type'] == 'request_vote':
                 self.handle_vote_request(self.socket,message)
                 # self.socket.send_json({"response": "SUC", "address": self.address})
             elif message['type'] == 'client_request':
                 self.handle_client_request(self.socket,message)
+            elif message['type'] == 'leader_message':
+                self.handle_leader_message(self.socket,message)    
                
 
 if __name__ == "__main__":
