@@ -2,9 +2,17 @@ import zmq
 import json
 import threading
 import time
+import sys
+import signal
+
+
+signal.signal(signal.SIGINT, signal.SIG_DFL)
 
 class RaftNode:
+    
+
     def __init__(self, node_id, address, peers):
+        global socket
         self.node_id = node_id
         self.address = address
         self.peers = peers
@@ -16,10 +24,21 @@ class RaftNode:
         self.socket = None
         self.election_timeout = 5  # Election timeout in seconds
         self.heartbeat_interval = 1  # Heartbeat interval in seconds
-        self.logs = []
+        self.logs = [] #List of (logterm,value)          
         self.commit_index = 0
         self.last_applied = 0
         self.key_value_store = {}
+        self.prevLogIndex=0
+        self.prevLogTerm=0
+        self.cur_index=0
+        if self.node_id == 0:
+            self.state = 'leader'
+            self.leader_id = self.node_id
+            self.logs=[(0,"hello"),(0,"world"),(1,"gg")]
+        
+        elif self.node_id ==1:
+            self.logs=[(0,"hello"),(0,"world")]
+        socket=self.socket
 
     def handle_heartbeat(self, message):
         print(f"Received heartbeat from leader {message['leader_id']}")
@@ -59,6 +78,7 @@ class RaftNode:
                     'No-response':False
                 }
             self.socket.send_json(response)
+        
         elif request_type == 'GET':
             print(f"Received GET request for key '{key}'")
             # print(key,self.key_value_store.keys(),key in self.key_value_store.keys())
@@ -107,6 +127,7 @@ class RaftNode:
                     'candidate_id': self.node_id
                 }
                 res = self.send_message(peer, request)
+                print(res)
                 if(res["No-Response"]==True):
                     print(f"No Response from {peer} in voting")
                 elif(res['Vote']=='True'):
@@ -116,6 +137,7 @@ class RaftNode:
         # if(self.vote_count >= 2):
             self.state = 'leader'
             print(f"New Leader is {self.node_id}")
+            #send leader message
 
     def send_heartbeat(self):
         while True:
@@ -134,7 +156,7 @@ class RaftNode:
     def send_message(self, peer, message):
         context = zmq.Context()
         socket = context.socket(zmq.REQ)
-        socket.connect(f"tcp://127.0.0.1:555{peer}")
+        socket.connect(f"tcp://127.0.0.1:556{peer}")
         socket.send_json(message)
             # response = socket.recv_json()
         # Timer of 
@@ -154,6 +176,47 @@ class RaftNode:
         socket.close()
         return response
 
+    def listen_replication_requests(self,request):
+        if self.state == 'leader':
+            print(request['success'])
+            # if request['type'] == 'append_entries':
+            #     self.replicate_log_entries(request)
+
+        else:
+            # Long Way (Actual Way)
+            leader_log_index = request['prevLogIndex']
+            leader_log_term = request['prevLogTerm']
+            
+            if self.term>leader_log_term:
+                logresults={
+                    'success':False,
+                    
+                }
+            matching_index=-1
+            
+            for i in range(len(self.logs)-1,-1,-1):
+                if self.logs[i][0]==leader_log_term:
+                    if i==leader_log_index:
+                        matching_index=i
+                        break
+                    else:
+                        matching_index=i-1
+                        break
+                    
+            if matching_index==leader_log_index:
+                logresults={
+                    'success':True
+                }
+                self.send_message(self.node_id,logresults)
+
+            else:
+                logresults = {
+                    'success':False
+                }
+                self.logs=self.logs[:matching_index+1]
+                self.send_message(self.node_id,logresults)
+            print("sent")
+        
     def replicate_log_entries(self):
         if self.state == 'leader':
             for peer in self.peers:
@@ -163,39 +226,63 @@ class RaftNode:
                         'term': self.term,
                         'leader_id': self.node_id,
                         'entries': self.logs,
-                        'commit_index': self.commit_index
+                        'prevLogIndex':self.cur_index,
+                        'prevLogTerm':self.logs[self.cur_index][0],
+                        'LeaderCommit':self.commit_index
                     }
                     self.send_message(peer, request)
-
+                    print("sent")
+       
+                
     def run(self):
         context = zmq.Context()
         self.socket = context.socket(zmq.REP)
         self.socket.bind(self.address)
 
-        self.election_timer = threading.Timer(self.election_timeout, self.start_election)
-        self.election_timer.start()
+       
 
-        heartbeat_thread = threading.Thread(target=self.send_heartbeat)
-        heartbeat_thread.start()
+
+        
+        # self.election_timer = threading.Timer(self.election_timeout, self.start_election)
+        # self.election_timer.start()
+
+        # heartbeat_thread = threading.Thread(target=self.send_heartbeat)
+        # heartbeat_thread.start()
+
+
+            
 
         while True:
-            message = self.socket.recv_json()
-            print(message)
+            try:
+                # message = self.socket.recv_json(zmq.NOBLOCK)
+                message = self.socket.recv_json()
+                print(message)
+                if message['type'] == 'heartbeat':
+                    self.handle_heartbeat(message)
+                    # self.socket.send_json({"response": "SUC", "address": self.address})
+                elif message['type'] == 'request_vote':
+                    self.handle_vote_request(self.socket,message)
+                    # self.socket.send_json({"response": "SUC", "address": self.address})
+                elif message['type'] == 'client_request':
+                    print("yes")
+                    self.cur_index=len(self.logs)-1
+                    self.replicate_log_entries()
+                    # self.handle_client_request(self.socket,message)
+                elif message['type'] == 'append_entries':
+                    print("got")
+                    self.listen_replication_requests(message)
 
-            if message['type'] == 'heartbeat':
-                self.handle_heartbeat(message)
-                # self.socket.send_json({"response": "SUC", "address": self.address})
-            elif message['type'] == 'request_vote':
-                self.handle_vote_request(self.socket,message)
-                # self.socket.send_json({"response": "SUC", "address": self.address})
-            elif message['type'] == 'client_request':
-                self.handle_client_request(self.socket,message)
-               
+            except KeyboardInterrupt:
+                print ("W: interrupt received, killing server…")    
+                if self.socket:
+                    self.socket.close()
+                sys.exit(0)
+
 
 if __name__ == "__main__":
     node_id = int(input("Enter Node ID: "))
-    server_address = f"tcp://127.0.0.1:555{node_id}"
+    server_address = f"tcp://127.0.0.1:556{node_id}"
     print(f"Node Listening at {server_address}")
-    peers = [0, 1, 2]  # Assuming 5 nodes
+    peers = [0, 1]  # Assuming 5 nodes
     node = RaftNode(node_id, server_address, peers)
     node.run()

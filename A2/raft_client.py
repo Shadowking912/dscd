@@ -1,5 +1,8 @@
 import zmq
+import signal
 
+
+signal.signal(signal.SIGINT, signal.SIG_DFL)
 class RaftClient:
     def __init__(self, client_id, server_address):
         self.client_id = client_id
@@ -32,7 +35,7 @@ class RaftClient:
 if __name__ == "__main__":
     client_id = int(input("Enter Client ID: "))
     # server_address = input("Enter Server Address (e.g., tcp://127.0.0.1:5555): ")
-    server_address = "tcp://127.0.0.1:5555"
+    server_address = "tcp://127.0.0.1:5560"
     client = RaftClient(client_id, server_address)
 
     while True:
