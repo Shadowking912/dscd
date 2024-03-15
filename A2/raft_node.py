@@ -38,6 +38,9 @@ class RaftNode:
         elif self.node_id ==1:
             self.logs=[(0,"hello"),(0,"world")]
 
+        elif self.node_id==2:
+            self.logs=[(0,"hello"),(1,"y")]
+
     def handle_heartbeat(self, message):
         print(f"Received heartbeat from leader {message['leader_id']}")
         if self.state == 'follower': 
@@ -57,9 +60,6 @@ class RaftNode:
             socket.send_json({"Vote":"False",'No-response':False})
 
     def handle_client_request(self, client_socket,request):
-        # if self.state != 'leader':
-        #     print("Only leader can handle client requests.")
-        #     return
 
         request_type = request.get('sub-type')
         key = request.get('key')
@@ -210,7 +210,6 @@ class RaftNode:
 
     
     def listen_replication_requests(self,request):
-        # Long Way (Actual Way)
         leader_log_index = request['prevLogIndex']
         leader_log_term = request['prevLogTerm']
         
@@ -224,9 +223,8 @@ class RaftNode:
         else:
             curr_log_term=-1
             matching_index=-1
-            print(len(self.logs)-1)
+
             for i in range(len(self.logs)-1,-1,-1):
-                print("logs",self.logs[i][0])
                 if self.logs[i][0]==leader_log_term:
                     curr_log_term=self.logs[i][0]
                     if i==leader_log_index:
@@ -235,47 +233,30 @@ class RaftNode:
                     else:
                         matching_index=i-1
                         break
-            print(matching_index,leader_log_index)        
+
             if matching_index==leader_log_index:
                 logresults={
                     'type':'append_entries',
                     'node_id':self.node_id,
                     'success':True
                 }
-                self.logs.pop()
+                self.logs=self.logs[:matching_index]
                 for i in request['entries']:
-                    self.logs.append(tuple(i))
+                    self.logs.append(i)
                 print(self.logs)
+            
             else:
                 logresults = {
                     'type':'append_entries',
                     'node_id':self.node_id,
                     'success':False
                 }
-            # elif matching_index!=leader_log_index and curr_log_term!=-1:
-            #     logresults = {
-            #         'type':'append_entries',
-            #         'node_id':self.node_id,
-            #         'success':False
-            #     }
-            #     self.logs=self.logs[:matching_index]
-            # elif matching_index!=leader_log_index and curr_log_term==-1:
-            #     logresults = {
-            #         'type':'append_entries',
-            #         'node_id':self.node_id,
-            #         'success':False
-            #     }
-    
-
         self.socket.send_json(logresults)
-        print("node sent")
+        print("sent response to leader")
 
     def replicate_log_entries(self):
-      
         dealers=[]
         context = zmq.Context()
-        
-        # dealer_socket.bind(f"tcp://localhost:555{self.node_id}")
         majority=0
         for i in range(len(self.peers)):
                 peer=self.peers[i]
@@ -314,9 +295,7 @@ class RaftNode:
                         print("Message content:", message2)
                         if message2['success']==False:
                             self.cur_index[message2['node_id']]-=1
-                            print(self.cur_index[message2['node_id']])
                             socket.send(b"", zmq.SNDMORE)
-                            print("logs",self.logs[self.cur_index[peer]:])
                             request = {
                                 'type': 'append_entries',
                                 'term': self.term,
@@ -330,7 +309,8 @@ class RaftNode:
                         else:
                             majority+=1
             print("Majority:",majority)
-        print("working")
+        print("logs updated")
+       
                 
     def run(self):
         context = zmq.Context()
@@ -377,6 +357,6 @@ if __name__ == "__main__":
     node_id = int(input("Enter Node ID: "))
     server_address = f"tcp://127.0.0.1:555{node_id}"
     print(f"Node Listening at {server_address}")
-    peers = [0, 1]  # Assuming 5 nodes
+    peers = [0, 1,2]  # Assuming 5 nodes
     node = RaftNode(node_id, server_address, peers)
     node.run()
