@@ -2,6 +2,7 @@ import zmq
 import signal
 
 
+
 signal.signal(signal.SIGINT, signal.SIG_DFL)
 class RaftClient:
     def __init__(self, client_id, server_address):
