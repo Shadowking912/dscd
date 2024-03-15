@@ -4,9 +4,10 @@ import threading
 import time
 import sys
 import signal
-
+import os
 #Merge Conflict resolved code
 
+path=""
 signal.signal(signal.SIGINT, signal.SIG_DFL)
 
 class RaftNode:
@@ -24,11 +25,12 @@ class RaftNode:
         self.heartbeat_interval = 1  # Heartbeat interval in seconds
         self.logs = []#List of (logterm,value)         
         self.commit_index = 0
-        self.last_applied = 0
+        # self.
+        # self.last_applied = 0
         self.key_value_store = {}
-        self.prevLogIndex=0
-        self.prevLogTerm=0
-        self.cur_index=0
+        # self.prevLogIndex=0
+        # self.prevLogTerm=0
+        # self.cur_index=0
 
     def handle_heartbeat(self, message):
         print(f"Received heartbeat from leader {message['leader_id']}")
@@ -49,25 +51,30 @@ class RaftNode:
             socket.send_json({"Vote":"False",'No-response':False})
 
     def handle_client_request(self, client_socket,request):
-        # if self.state != 'leader':
-        #     print("Only leader can handle client requests.")
-        #     return
-
+        if self.state != 'leader':
+            response={
+                'status':'failure',
+                'leaderId':self.leader_id,
+                'No-response':False
+            }
+            self.socket.send_json(response)
         request_type = request.get('sub-type')
         key = request.get('key')
         value = request.get('value')
 
+        # if self.state!=
         if request_type == 'SET':
             print(f"Received SET request for key '{key}' with value '{value}'")
-            self.key_value_store[key] = value
-            self.logs.append({'term': self.term, 'command': f"SET {key} {value}"})
-            self.replicate_log_entries()
-            response = {
-                    'status': 'success',
-                    'message': f"Value for key '{key}': {value}",
-                    'No-response':False
-                }
-            self.socket.send_json(response)
+            if self.state=='leader':     
+                self.key_value_store[key] = value
+                self.logs.append({'term': self.term, 'command': "SET",'key':key,'value':value})
+                # self.replicate_log_entries()
+                response = {
+                        'status': 'success',
+                        'message': f"Value for key '{key}': {value}",
+                        'No-response':False
+                    }
+                self.socket.send_json(response)
         elif request_type == 'GET':
             print(f"Received GET request for key '{key}'")
             # print(key,self.key_value_store.keys(),key in self.key_value_store.keys())
@@ -176,6 +183,8 @@ class RaftNode:
     
 
     def send_recv_message(self, peer, message): # send message and w8 2s for response
+
+        print("Here in send_recv_message function")
         context = zmq.Context()
         socket = context.socket(zmq.REQ)
         socket.connect(f"tcp://127.0.0.1:555{peer}")
@@ -244,6 +253,7 @@ class RaftNode:
         if self.state == 'leader':
             for peer in self.peers:
                 if peer != self.node_id:
+                    self.store_log_entries()
                     request = {
                         'type': 'append_entries',
                         'term': self.term,
@@ -253,10 +263,26 @@ class RaftNode:
                         'prevLogTerm':self.logs[self.cur_index][0],
                         'LeaderCommit':self.commit_index
                     }
+                 
                     self.send_message(peer, request)
                     print("sent")
 
+
+    def store_log_entries(self):
+        peer_id = self.node_id
+        if os.path.isdir(os.path.join(path,f'logs_node_{peer_id}'))==False:
+            os.makedirs(os.path.join(path,f'logs_node_{peer_id}'))
+
+        
+    # def recover_logs(self):
+    #     peer_id = self.node_id
+    #     if os.path.isdir(os.path.join(path,f'logs_node_{peer_id}'))==False:
+    #         return
+    #     else:
+
+
     def run(self):
+        # self.recover_logs()
         context = zmq.Context()
         self.socket = context.socket(zmq.REP)
         self.socket.bind(self.address)
@@ -286,8 +312,8 @@ class RaftNode:
                     # self.socket.send_json({"response": "SUC", "address": self.address})
                 elif message['type'] == 'client_request':
                     # self.handle_client_request(self.socket,message)
-                    self.cur_index=len(self.logs)-1
-                    self.replicate_log_entries()
+                    # self.cur_index=len(self.logs)-1
+                    # self.replicate_log_entries()
                     self.handle_client_request(self.socket,message)
                 elif message['type'] == 'leader_message':
                     self.handle_leader_message(self.socket,message) 
