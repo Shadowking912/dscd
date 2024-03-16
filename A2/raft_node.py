@@ -16,7 +16,8 @@ class RaftNode:
         self.address = address
         self.peers = peers
         self.state = 'follower'
-        self.leader_id = -1
+        self.leader_id = 0
+        self.leader_address=f"tcp://127.0.0.1:555{self.leader_id}"
         self.term = 0
         self.vote_count = 0
         self.voted_for = None
@@ -28,9 +29,19 @@ class RaftNode:
         # self.
         # self.last_applied = 0
         self.key_value_store = {}
-        # self.prevLogIndex=0
-        # self.prevLogTerm=0
-        # self.cur_index=0
+        self.prevLogIndex=0
+        self.prevLogTerm=0
+        self.cur_index={}
+        if self.node_id == 0:
+            self.state = 'leader'
+            self.leader_id = self.node_id
+            self.logs=[(0,"hello"),(0,"world"),(1,"gg")]
+
+        elif self.node_id ==1:
+            self.logs=[(0,"hello"),(0,"world")]
+
+        elif self.node_id==2:
+            self.logs=[(0,"hello"),(1,"y")]
 
     def handle_heartbeat(self, message):
         print(f"Received heartbeat from leader {message['leader_id']}")
@@ -58,6 +69,7 @@ class RaftNode:
                 'No-response':False
             }
             self.socket.send_json(response)
+
         request_type = request.get('sub-type')
         key = request.get('key')
         value = request.get('value')
@@ -65,16 +77,18 @@ class RaftNode:
         # if self.state!=
         if request_type == 'SET':
             print(f"Received SET request for key '{key}' with value '{value}'")
+
             if self.state=='leader':     
                 self.key_value_store[key] = value
                 self.logs.append({'term': self.term, 'command': "SET",'key':key,'value':value})
-                # self.replicate_log_entries()
+                self.replicate_log_entries()
                 response = {
                         'status': 'success',
                         'message': f"Value for key '{key}': {value}",
                         'No-response':False
                     }
                 self.socket.send_json(response)
+
         elif request_type == 'GET':
             print(f"Received GET request for key '{key}'")
             # print(key,self.key_value_store.keys(),key in self.key_value_store.keys())
@@ -180,7 +194,7 @@ class RaftNode:
         print("DEB:","Sending Message")
         socket.send_json(message)
         socket.close()
-    
+        print("closed")
 
     def send_recv_message(self, peer, message): # send message and w8 2s for response
 
@@ -208,78 +222,113 @@ class RaftNode:
         socket.close()
         return response
 
+    
     def listen_replication_requests(self,request):
-        if self.state == 'leader':
-            print(request['success'])
-            # if request['type'] == 'append_entries':
-            #     self.replicate_log_entries(request)
-
+        leader_log_index = request['prevLogIndex']
+        leader_log_term = request['prevLogTerm']
+        
+        if self.term>leader_log_term:
+            print("found error")
+            logresults = {
+                'type':'append_entries',
+                'node_id':self.node_id,
+                'success':False
+            }
         else:
-            # Long Way (Actual Way)
-            leader_log_index = request['prevLogIndex']
-            leader_log_term = request['prevLogTerm']
-            
-            if self.term>leader_log_term:
-                logresults={
-                    'success':False,
-                    
-                }
+            curr_log_term=-1
             matching_index=-1
-            
+
             for i in range(len(self.logs)-1,-1,-1):
                 if self.logs[i][0]==leader_log_term:
+                    curr_log_term=self.logs[i][0]
                     if i==leader_log_index:
                         matching_index=i
                         break
                     else:
                         matching_index=i-1
                         break
-                    
+
             if matching_index==leader_log_index:
                 logresults={
+                    'type':'append_entries',
+                    'node_id':self.node_id,
                     'success':True
                 }
-                self.send_message(self.node_id,logresults)
-
+                self.logs=self.logs[:matching_index]
+                for i in request['entries']:
+                    self.logs.append(i)
+                print(self.logs)
+            
             else:
                 logresults = {
+                    'type':'append_entries',
+                    'node_id':self.node_id,
                     'success':False
                 }
-                self.logs=self.logs[:matching_index+1]
-                self.send_message(self.node_id,logresults)
-            print("sent")
+        self.socket.send_json(logresults)
+        print("sent response to leader")
+    def store_log_entries(self):
+        peer_id = self.node_id
+        if os.path.isdir(os.path.join(path,f'logs_node_{peer_id}'))==False:
+            os.makedirs(os.path.join(path,f'logs_node_{peer_id}'))
 
     def replicate_log_entries(self):
-        if self.state == 'leader':
-            for peer in self.peers:
+        dealers=[]
+        context = zmq.Context()
+        majority=0
+        for i in range(len(self.peers)):
+                peer=self.peers[i]
                 if peer != self.node_id:
                     self.store_log_entries()
                     request = {
                         'type': 'append_entries',
                         'term': self.term,
                         'leader_id': self.node_id,
-                        'entries': self.logs,
-                        'prevLogIndex':self.cur_index,
-                        'prevLogTerm':self.logs[self.cur_index][0],
+                        'entries': self.logs[self.cur_index[peer]:],
+                        'prevLogIndex':self.cur_index[peer],
+                        'prevLogTerm':self.logs[self.cur_index[peer]][0],
                         'LeaderCommit':self.commit_index
                     }
-                 
-                    self.send_message(peer, request)
-                    print("sent")
+                    dealer_socket = context.socket(zmq.DEALER)
+                    dealer_socket.connect(f"tcp://localhost:555{peer}")
+                    dealer_socket.send(b"", zmq.SNDMORE)
+                    # dealer_socket.send_multipart([b"", zmq.SNDMORE])
+                    dealer_socket.send_json(request)
+                    dealers.append(dealer_socket)
 
-
-    def store_log_entries(self):
-        peer_id = self.node_id
-        if os.path.isdir(os.path.join(path,f'logs_node_{peer_id}'))==False:
-            os.makedirs(os.path.join(path,f'logs_node_{peer_id}'))
-
-        
-    # def recover_logs(self):
-    #     peer_id = self.node_id
-    #     if os.path.isdir(os.path.join(path,f'logs_node_{peer_id}'))==False:
-    #         return
-    #     else:
-
+        poller = zmq.Poller()
+        for i in dealers:
+            poller.register(i, zmq.POLLIN)
+        timeout=2
+        while(majority<((len(self.peers)-1)//2+1)):
+            socks = dict(poller.poll(timeout* 1000))
+            if not socks:
+                print("Timeout occurred, no incoming messages.")
+                break
+            for socket in dealers:
+                if socket in socks and socks[socket] == zmq.POLLIN:
+                    message1 = socket.recv(zmq.DONTWAIT)
+                    if message1 == b"":
+                        message2=socket.recv_json(zmq.DONTWAIT)
+                        print("Received message from:", message2)
+                        print("Message content:", message2)
+                        if message2['success']==False:
+                            self.cur_index[message2['node_id']]-=1
+                            socket.send(b"", zmq.SNDMORE)
+                            request = {
+                                'type': 'append_entries',
+                                'term': self.term,
+                                'leader_id': self.node_id,
+                                'entries': self.logs[self.cur_index[peer]:],
+                                'prevLogIndex':self.cur_index[peer],
+                                'prevLogTerm':self.logs[self.cur_index[peer]][0],
+                                'LeaderCommit':self.commit_index
+                            }
+                            socket.send_json(request)
+                        else:
+                            majority+=1
+            print("Majority:",majority)
+        print("logs updated")
 
     def run(self):
         # self.recover_logs()
@@ -287,17 +336,16 @@ class RaftNode:
         self.socket = context.socket(zmq.REP)
         self.socket.bind(self.address)
 
-        self.election_timer = threading.Timer(self.election_timeout, self.start_election)
-        self.election_timer.start()
+        # self.election_timer = threading.Timer(self.election_timeout, self.start_election)
+        # self.election_timer.start()
        
         # if(self.node_id == 0): #TEMp
         #     self.state = 'leader'
         #     heartbeat_thread = threading.Thread(target=self.send_heartbeat)
         #     heartbeat_thread.start()
 
-        heartbeat_thread = threading.Thread(target=self.send_heartbeat)
-        heartbeat_thread.start()
-        
+        # heartbeat_thread = threading.Thread(target=self.send_heartbeat)
+        # heartbeat_thread.start()
 
         while True:
             print("DEB:","Listening State")
@@ -312,25 +360,22 @@ class RaftNode:
                     # self.socket.send_json({"response": "SUC", "address": self.address})
                 elif message['type'] == 'client_request':
                     # self.handle_client_request(self.socket,message)
-                    # self.cur_index=len(self.logs)-1
-                    # self.replicate_log_entries()
+                    self.cur_index={i:len(self.logs)-1 for i in self.peers}
                     self.handle_client_request(self.socket,message)
                 elif message['type'] == 'leader_message':
                     self.handle_leader_message(self.socket,message) 
+                
                 elif message['type'] == 'append_entries':
                         print("got")
                         self.listen_replication_requests(message)   
-            except KeyboardInterrupt:
-                print ("W: interrupt received, killing server…")    
-                if self.socket:
-                    self.socket.close()
-                sys.exit(0)
+            except zmq.ZMQError as e:
+                print(e)
                
 
 if __name__ == "__main__":
     node_id = int(input("Enter Node ID: "))
     server_address = f"tcp://127.0.0.1:555{node_id}"
     print(f"Node Listening at {server_address}")
-    peers = [0, 1, 2]  # Assuming 5 nodes
+    peers = [0, 1,2]  # Assuming 5 nodes
     node = RaftNode(node_id, server_address, peers)
     node.run()
