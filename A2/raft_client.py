@@ -13,6 +13,13 @@ class RaftClient:
         self.socket = self.context.socket(zmq.REQ)
         self.socket.connect(self.server_address)
 
+
+    def change_socket_connection(self):
+        self.close_connection() 
+        self.context = zmq.Context()
+        self.socket = self.context.socket(zmq.REQ)
+        self.socket.connect(self.server_address)
+
     def send_request(self, request_type, key=None, value=None):
         request = {
             'client_id':self.client_id,
@@ -25,7 +32,23 @@ class RaftClient:
         try:
             self.socket.send_json(request)
             response = self.socket.recv_json()
-            print(f"Response from server: {response}")
+
+            status = response['status']
+            while status!='success':
+                # Debugging statement
+                print("In the while loop")
+                leader = response['leaderId']
+                if leader==-1:
+                    print("No leader found")
+                    break
+                self.server_address = f"tcp://127.0.0.1:555{leader}"
+                self.change_socket_connection()
+                self.socket.send_json(request)
+                print(f"Response from server : {response}")
+                response  = self.socket.recv_json()
+                status = response['status']
+            
+            print("Message added successfully")
         except zmq.ZMQError as e:
             print(f"Error occurred: {str(e)}")
 
@@ -38,6 +61,9 @@ if __name__ == "__main__":
     # server_address = input("Enter Server Address (e.g., tcp://127.0.0.1:5555): ")
     server_address = "tcp://127.0.0.1:5550"
     client = RaftClient(client_id, server_address)
+
+    # client.run()
+
 
     while True:
         print("\nOptions:")
@@ -60,3 +86,5 @@ if __name__ == "__main__":
             break
         else:
             print("Invalid choice. Please enter 1, 2, or 3.")
+
+        # message = self.socket.recv_json()
