@@ -5,8 +5,6 @@ import time
 import sys
 import signal
 
-#Merge Conflict resolved code
-
 signal.signal(signal.SIGINT, signal.SIG_DFL)
 
 class RaftNode:
@@ -31,7 +29,7 @@ class RaftNode:
         self.prevLogIndex=0
         self.prevLogTerm=0
         # self.cur_index={}
-        self.cur_index={i:len(self.logs)-1 for i in self.peers}
+        
         if self.node_id == 0:
             # self.state = 'leader'
             # self.leader_id = self.node_id
@@ -50,6 +48,7 @@ class RaftNode:
             self.logs=[{'term': 0, 'command': "SET",'key':0,'value':"hello"},{'term':1,'command':'SET','key':1,'value':"y"}]
             self.key_value_store={0:"hello",1:"y"}
             self.term = 1
+        self.cur_index={i:len(self.logs)-1 for i in self.peers}
 
     def handle_heartbeat(self, message):
         print(f"Received heartbeat from leader {message['leader_id']}")
@@ -89,29 +88,29 @@ class RaftNode:
             if self.state=='leader':     
                 self.key_value_store[key] = value
             # self.key_value_store[key] = value
-            self.logs.append({'term': self.term, 'command': f"SET {key} {value}"})
-            response = {
-                    'status': 'success',
-                    'message': f"Value for key '{key}': {value}",
-                    'No-response':False
-            }
-            self.socket.send_json(response)
-            # if self.replicate_log_entries()>=((len(self.peers)-1)//2+1):
-            #         # self.commit()
-            #     response = {
+            self.logs.append({'term': self.term, 'command': 'SET','key': key, 'value': f'{value}'})
+            # response = {
             #         'status': 'success',
             #         'message': f"Value for key '{key}': {value}",
             #         'No-response':False
-            #     }
-            #     self.socket.send_json(response)
-            #     pass
-            # else:
-            #         response = {
-            #             'type':'client_response',
-            #             'status':'failure',
-            #             'No-response':False
-            #         }
-            #         self.socket.send_json(response)
+            # }
+            # self.socket.send_json(response)
+            if self.replicate_log_entries()>=((len(self.peers)-1)//2+1):
+                    # self.commit()
+                response = {
+                    'status': 'success',
+                    'message': f"Value for key '{key}': {value}",
+                    'No-response':False
+                }
+                self.socket.send_json(response)
+                pass
+            else:
+                    response = {
+                        'type':'client_response',
+                        'status':'failure',
+                        'No-response':False
+                    }
+                    self.socket.send_json(response)
 
         elif request_type == 'GET':
             print(f"Received GET request for key '{key}'")
@@ -238,7 +237,7 @@ class RaftNode:
                     x = socket.recv(zmq.DONTWAIT)
                     if(x==b""):
                         response = socket.recv_json(zmq.DONTWAIT)
-                        print(f"Response from {peer}: {response}")
+                        # print(f"Response from {peer}: {response}")
                 # else:
                     # print(f"No response received from {peer} within {timeout} seconds.")
 
@@ -294,6 +293,7 @@ class RaftNode:
 
             for i in range(len(self.logs)-1,-1,-1):
                 if self.logs[i]['term']==leader_log_term:
+                    # {'term': 0, 'command': 'SET', 'key': 0, 'value': 'hello'}
                     curr_log_term=self.logs[i]['term']
                     if i==leader_log_index:
                         matching_index=i
@@ -316,6 +316,7 @@ class RaftNode:
                 # Appending the entries starting from the commit index
                 if leader_commit_index>self.commit_index:
                     for i in range(self.commit_index,leader_commit_index+1):
+                        print("i:",i,self.logs)
                         self.key_value_store[self.logs[i]['key']] = self.logs[i]['value']
 
                 print(f"Node id = {self.node_id}")
@@ -399,7 +400,7 @@ class RaftNode:
                                         'prevLogTerm':self.logs[self.cur_index[peer]]['term'],
                                         'LeaderCommit':self.commit_index
                                 }
-                                # socket.send_json(request)
+                                socket.send_json(request)
                         else: # If success was received
                             # peer_index = message2['ack']  
                             # self.cur_index[message2['node_id']] = peer_index
