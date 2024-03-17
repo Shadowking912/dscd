@@ -5,6 +5,7 @@ import time
 import sys
 import signal
 
+
 signal.signal(signal.SIGINT, signal.SIG_DFL)
 
 class RaftNode:
@@ -70,6 +71,7 @@ class RaftNode:
             socket.send_json({"Vote":"False",'No-response':False})
 
     def handle_client_request(self, client_socket,request):
+        
 
         request_type = request.get('sub-type')
         key = request.get('key')
