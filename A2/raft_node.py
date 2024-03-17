@@ -26,8 +26,9 @@ class RaftNode:
         self.election_timeout = 5  # Election timeout in seconds
         self.heartbeat_interval = 2  # Heartbeat interval in seconds
         self.timeout = 5 #in seconds
-        self.logs = []#List of (logterm,value)         
-        self.commit_index = 0
+        self.logs = []#List of (logterm,value)    
+        # Denotes the index of the entry of the log last commited succesfully  
+        self.commit_index = -1
         # self.
         # self.last_applied = 0
         self.key_value_store = {}
@@ -37,13 +38,21 @@ class RaftNode:
         if self.node_id == 0:
             self.state = 'leader'
             self.leader_id = self.node_id
-            self.logs=[(0,"hello"),(0,"world"),(1,"gg")]
+            self.logs = [{'term': 0, 'command': "SET",'key':"0",'value':"hello"},{'term':0,'command':'SET','key':"1",'value':"world"},{'term':1,'command':'SET','key':"2",'value':"gg"}]
+            # self.logs=[(0,"hello"),(0,"world"),(1,"gg")]
+            self.key_value_store = {"0":"hello","1":"world","2":"gg"}
+            self.commit_index=1
+            self.term = 1
 
         elif self.node_id ==1:
-            self.logs=[(0,"hello"),(0,"world")]
-
+            self.logs = [{'term': 0, 'command': "SET",'key':0,'value':"hello"},{'term':0,'command':'SET','key':1,'value':"world"}]
+            self.key_value_store={0:"hello",1:"world"}
+            self.term  = 0
         elif self.node_id==2:
-            self.logs=[(0,"hello"),(1,"y")]
+            # self.logs=[(0,"hello"),(1,"y")]
+            self.logs=[{'term': 0, 'command': "SET",'key':0,'value':"hello"},{'term':1,'command':'SET','key':1,'value':"y"}]
+            self.key_value_store={0:"hello",1:"y"}
+            self.term = 1
 
     def handle_heartbeat(self, message):
         print(f"Received heartbeat from leader {message['leader_id']}")
@@ -83,13 +92,24 @@ class RaftNode:
             if self.state=='leader':     
                 self.key_value_store[key] = value
                 self.logs.append({'term': self.term, 'command': "SET",'key':key,'value':value})
-                self.replicate_log_entries()
-                response = {
+              
+                if self.replicate_log_entries()>=((len(self.peers)-1)//2+1):
+                    # self.commit()
+                    response = {
                         'status': 'success',
                         'message': f"Value for key '{key}': {value}",
                         'No-response':False
                     }
-                self.socket.send_json(response)
+                    self.socket.send_json(response)
+                    pass
+                else:
+                    response = {
+                        'type':'client_response',
+                        'status':'failure',
+                        'No-response':False
+                    }
+                    self.socket.send_json(response)
+  
 
         elif request_type == 'GET':
             print(f"Received GET request for key '{key}'")
@@ -202,8 +222,15 @@ class RaftNode:
                 poller = zmq.Poller()
                 for i in dealers:
                     poller.register(i, zmq.POLLIN)
-                socks = dict(poller.poll(timeout* 1000*1000))  # Convert timeout to seconds
+                # socks = dict(poller.poll(timeout* 1000*1000))  # Convert timeout to seconds
                 response = {"No-response":True}
+                
+                socks = dict(poller.poll(timeout* 1000))
+                if not socks:
+                    print("Timeout occurred, no incoming messages.")
+                    for sock in dealers:
+                        sock.close()
+
                 
                 for socket in dealers:
                     if socket in socks:
@@ -215,7 +242,9 @@ class RaftNode:
                         # print(f"No response received from {peer} within {timeout} seconds.")
 
                     # print(f"Response from {peer}: {response}")
-                    socket.close()
+                       
+                            socket.close()
+                    
             time.sleep(self.heartbeat_interval)
 
 
@@ -252,8 +281,13 @@ class RaftNode:
     def listen_replication_requests(self,request):
         leader_log_index = request['prevLogIndex']
         leader_log_term = request['prevLogTerm']
+        # Getting the leader's term for checking the condition of denial of log replication
+        leader_term = request['term']
+        # Leader commit index, received as part of communication from the leader
+        leader_commit_index = request['LeaderCommit']
         
-        if self.term>leader_log_term:
+        # self.term to be checked with leader_term
+        if self.term>leader_term:
             print("found error")
             logresults = {
                 'type':'append_entries',
@@ -265,15 +299,15 @@ class RaftNode:
             matching_index=-1
 
             for i in range(len(self.logs)-1,-1,-1):
-                if self.logs[i][0]==leader_log_term:
-                    curr_log_term=self.logs[i][0]
+                if self.logs[i]['term']==leader_log_term:
+                    curr_log_term=self.logs[i]['term']
                     if i==leader_log_index:
                         matching_index=i
                         break
                     else:
                         matching_index=i-1
                         break
-
+            
             if matching_index==leader_log_index:
                 logresults={
                     'type':'append_entries',
@@ -284,11 +318,22 @@ class RaftNode:
                 for i in request['entries']:
                     self.logs.append(i)
                 print(self.logs)
-            
+                # Checking the commit index of the leader is higher than the commit index of the current node
+                # Appending the entries starting from the commit index
+                if leader_commit_index>self.commit_index:
+                    for i in range(self.commit_index,leader_commit_index+1):
+                        self.key_value_store[self.logs[i]['key']] = self.logs[i]['value']
+
+                print(f"Node id = {self.node_id}")
+                print(f"Key value store = {self.key_value_store}")
+                # print(self.)
+                # Setting the commit index equal to the commit index of the leader
+                self.commit_index = leader_commit_index
             else:
                 logresults = {
                     'type':'append_entries',
                     'node_id':self.node_id,
+                    'term':self.term,
                     'success':False
                 }
         self.socket.send_json(logresults)
@@ -305,16 +350,18 @@ class RaftNode:
         for i in range(len(self.peers)):
                 peer=self.peers[i]
                 if peer != self.node_id:
-                    self.store_log_entries()
+                    # self.store_log_entries()
+                    print("Current Index = ",self.cur_index)
                     request = {
                         'type': 'append_entries',
                         'term': self.term,
                         'leader_id': self.node_id,
                         'entries': self.logs[self.cur_index[peer]:],
                         'prevLogIndex':self.cur_index[peer],
-                        'prevLogTerm':self.logs[self.cur_index[peer]][0],
+                        'prevLogTerm':self.logs[self.cur_index[peer]]['term'],
                         'LeaderCommit':self.commit_index
                     }
+              
                     dealer_socket = context.socket(zmq.DEALER)
                     dealer_socket.connect(f"tcp://localhost:555{peer}")
                     dealer_socket.send(b"", zmq.SNDMORE)
@@ -330,6 +377,8 @@ class RaftNode:
             socks = dict(poller.poll(timeout* 1000))
             if not socks:
                 print("Timeout occurred, no incoming messages.")
+                for sock in dealers:
+                    sock.close()
                 break
             for socket in dealers:
                 if socket in socks and socks[socket] == zmq.POLLIN:
@@ -339,22 +388,38 @@ class RaftNode:
                         print("Received message from:", message2)
                         print("Message content:", message2)
                         if message2['success']==False:
-                            self.cur_index[message2['node_id']]-=1
-                            socket.send(b"", zmq.SNDMORE)
-                            request = {
-                                'type': 'append_entries',
-                                'term': self.term,
-                                'leader_id': self.node_id,
-                                'entries': self.logs[self.cur_index[peer]:],
-                                'prevLogIndex':self.cur_index[peer],
-                                'prevLogTerm':self.logs[self.cur_index[peer]][0],
-                                'LeaderCommit':self.commit_index
-                            }
-                            socket.send_json(request)
-                        else:
+                            # Added the condition of term of the node being greater than the term of the leader
+                            node_term = message2['term']
+                            # term of the node is greater than the term of the leader
+                            if node_term>self.term:
+                                self.status="folllower"
+                                self.voted_for=None
+                                self.reset_election_timeout()
+                                self.term = node_term
+                                break
+                            else:
+                                self.cur_index[message2['node_id']]-=1
+                                socket.send(b"", zmq.SNDMORE)
+                                request = {
+                                        'type': 'append_entries',
+                                        'term': self.term,
+                                        'leader_id': self.node_id,
+                                        'entries': self.logs[self.cur_index[peer]:],
+                                        'prevLogIndex':self.cur_index[peer],
+                                        'prevLogTerm':self.logs[self.cur_index[peer]]['term'],
+                                        'LeaderCommit':self.commit_index
+                                }
+                                # socket.send_json(request)
+                        else: # If success was received
+                            # peer_index = message2['ack']  
+                            # self.cur_index[message2['node_id']] = peer_index
                             majority+=1
             print("Majority:",majority)
+        
+        # Checking for the role and the term number
+        # if self.state=='leader' and self.term==
         print("logs updated")
+        return majority
 
     def run(self):
         # self.recover_logs()
@@ -383,7 +448,10 @@ class RaftNode:
                 elif message['type'] == 'client_request':
                     # self.handle_client_request(self.socket,message)
                     self.cur_index={i:len(self.logs)-1 for i in self.peers}
+                    
+                    # sys.exit(0)
                     self.handle_client_request(self.socket,message)
+                      
                 elif message['type'] == 'leader_message':
                     self.handle_leader_message(self.socket,message) 
                 
