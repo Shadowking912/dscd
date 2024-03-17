@@ -5,6 +5,7 @@ import time
 import sys
 import signal
 
+#Merge Conflict resolved code
 
 signal.signal(signal.SIGINT, signal.SIG_DFL)
 
@@ -29,7 +30,8 @@ class RaftNode:
         self.key_value_store = {}
         self.prevLogIndex=0
         self.prevLogTerm=0
-        self.cur_index={}
+        # self.cur_index={}
+        self.cur_index={i:len(self.logs)-1 for i in self.peers}
         if self.node_id == 0:
             # self.state = 'leader'
             # self.leader_id = self.node_id
@@ -51,6 +53,7 @@ class RaftNode:
 
     def handle_heartbeat(self, message):
         print(f"Received heartbeat from leader {message['leader_id']}")
+        # self.commit_entries()
         if self.state == 'follower': 
             self.reset_election_timeout()
 
@@ -201,11 +204,20 @@ class RaftNode:
             if self.state == 'leader':
                 for peer in self.peers:
                     if peer != self.node_id:
+                        # request = {
+                        #     'type': 'heartbeat',
+                        #     'term': self.term,
+                        #     'leader_id': self.node_id,
+                        #     'No-response':False
+                        # }
                         request = {
                             'type': 'heartbeat',
                             'term': self.term,
                             'leader_id': self.node_id,
-                            'No-response':False
+                            'entries': [],
+                            'prevLogIndex':self.cur_index[peer],
+                            'prevLogTerm':self.logs[self.cur_index[peer]]['term'],
+                            'LeaderCommit':self.commit_index
                         }
                         # self.send_message(peer, request)
                         dealer_socket = context.socket(zmq.DEALER)
