@@ -233,14 +233,25 @@ class RaftNode:
                         #     'leader_id': self.node_id,
                         #     'No-response':False
                         # }
-                        request = {
-                            'type': 'heartbeat',
-                            'term': self.term,
-                            'leader_id': self.node_id,
-                            'entries': [],
-                            'prevLogIndex':self.cur_index[peer],
-                            'prevLogTerm':self.logs[self.cur_index[peer]]['term'],
-                            'LeaderCommit':self.commit_index
+                        if len(self.logs)>0:
+                            request = {
+                                'type': 'append_entries',
+                                'term': self.term,
+                                'leader_id': self.node_id,
+                                'entries': self.logs[self.cur_index[peer]:],
+                                'prevLogIndex':self.cur_index[peer],
+                                'prevLogTerm':self.logs[self.cur_index[peer]]['term'],
+                                'LeaderCommit':self.commit_index
+                            }
+                        else:
+                            request = {
+                                'type': 'append_entries',
+                                'term': self.term,
+                                'leader_id': self.node_id,
+                                'entries': self.logs,
+                                'prevLogIndex':-1,
+                                'prevLogTerm':-1,
+                                'LeaderCommit':self.commit_index
                         }
                         # self.send_message(peer, request)
                         dealer_socket = context.socket(zmq.DEALER)
