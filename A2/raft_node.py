@@ -250,6 +250,9 @@ class RaftNode:
             self.lease_timer = threading.Timer(self.leasetime,self.end_lease)
             self.lease_timer.start()
 
+            #sending NO_OP
+            self.logs.append({'term': self.term, 'command': "NO-OP",'key':None,'value':None})
+            
             heartbeat_thread = threading.Thread(target=self.send_heartbeat)
             heartbeat_thread.start()
 
