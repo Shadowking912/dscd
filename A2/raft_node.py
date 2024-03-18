@@ -235,20 +235,20 @@ class RaftNode:
                         # }
                         if len(self.logs)>0:
                             request = {
-                                'type': 'append_entries',
+                                'type': 'heartbeat',
                                 'term': self.term,
                                 'leader_id': self.node_id,
-                                'entries': self.logs[self.cur_index[peer]:],
+                                'entries': [],
                                 'prevLogIndex':self.cur_index[peer],
                                 'prevLogTerm':self.logs[self.cur_index[peer]]['term'],
                                 'LeaderCommit':self.commit_index
                             }
                         else:
                             request = {
-                                'type': 'append_entries',
+                                'type': 'heartbeat',
                                 'term': self.term,
                                 'leader_id': self.node_id,
-                                'entries': self.logs,
+                                'entries': [],
                                 'prevLogIndex':-1,
                                 'prevLogTerm':-1,
                                 'LeaderCommit':self.commit_index
