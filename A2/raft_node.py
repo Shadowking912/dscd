@@ -37,6 +37,7 @@ class RaftNode:
         self.key_value_store = {}
         self.prevLogIndex=0
         self.prevLogTerm=0
+        self.leasetime = 10 #Lease time in sec
         # self.cur_index={}
         
         if self.node_id == 0:
@@ -172,6 +173,22 @@ class RaftNode:
         self.election_timer = threading.Timer(self.election_timeout, self.start_election)
         self.election_timer.start()
 
+    # def reset_lease(self):
+    #     self.lease_timer.cancel()
+    #     self.vote_count=0
+    #     self.lease_timer = threading.Timer(self.lease, self.end_lease)
+    #     self.lease_timer.start()
+    
+    def end_lease(self):
+        if(self.state == 'leader'):
+            print(f"Ended Lease for Leader {self.node_id}")
+            self.state = 'follower'
+            self.voted_for = None
+            self.leader_id = -1
+            self.vote_count = 0
+            
+
+
     def start_election(self):
         print("DEG:",f"Leader id: {self.leader_id}")
         if self.leader_id!=-1:
@@ -181,7 +198,7 @@ class RaftNode:
             self.state = 'candidate'
             self.term += 1
             self.voted_for = self.node_id
-            self.vote_count = 1  # Vote for self
+            self.vote_count += 1  # Vote for self
             # self.reset_election_timeout()
             self.send_vote_requests()
 
@@ -227,6 +244,13 @@ class RaftNode:
             self.state = 'leader'
             self.leader_id = self.node_id
             print(f"New Leader is {self.node_id}")
+
+            self.lease_timer = threading.Timer(self.leasetime,self.end_lease)
+            self.lease_timer.start()
+
+            heartbeat_thread = threading.Thread(target=self.send_heartbeat)
+            heartbeat_thread.start()
+
             self.broadcast_leader(self.node_id)
 
 
@@ -465,14 +489,16 @@ class RaftNode:
 
         self.election_timer = threading.Timer(self.election_timeout, self.start_election)
         self.election_timer.start()
+
+        
+        
        
         # if(self.node_id == 0): #TEMp
         #     self.state = 'leader'
         #     heartbeat_thread = threading.Thread(target=self.send_heartbeat)
         #     heartbeat_thread.start()
 
-        heartbeat_thread = threading.Thread(target=self.send_heartbeat)
-        heartbeat_thread.start()
+        
 
         while True:
             print("DEB:","Listening State")
@@ -503,6 +529,6 @@ if __name__ == "__main__":
     node_id = int(input("Enter Node ID: "))
     server_address = f"tcp://127.0.0.1:555{node_id}"
     print(f"Node Listening at {server_address}")
-    peers = [0, 1,2,3]  # Assuming 5 nodes
+    peers = [0, 1,2]  # Assuming 5 nodes
     node = RaftNode(node_id, server_address, peers)
     node.run()
