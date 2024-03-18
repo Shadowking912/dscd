@@ -21,6 +21,14 @@ class RaftNode:
         self.voted_for = None
         self.socket = None
         self.election_timeout = 5  # Election timeout in seconds
+        #TEMP
+        if(self.node_id==0):
+            self.election_timeout = 5
+        elif(self.node_id==1):
+            self.election_timeout = 9
+        elif(self.node_id==2):
+            self.election_timeout = 10
+        #TEMP
         self.heartbeat_interval = 1  # Heartbeat interval in seconds
         self.logs = []#List of (logterm,value)    
         # Denotes the index of the entry of the log last commited succesfully  
@@ -159,6 +167,8 @@ class RaftNode:
     def reset_election_timeout(self):
         self.election_timer.cancel()
         self.vote_count=0
+        self.leader_id = -1
+        self.voted_for = None
         self.election_timer = threading.Timer(self.election_timeout, self.start_election)
         self.election_timer.start()
 
@@ -206,7 +216,7 @@ class RaftNode:
                     'candidate_id': self.node_id
                 }
                 res = self.send_recv_message(peer, request)
-                # print("DEB",res)
+                print("DEB",res)
                 if(res['No-response']==True):
                     print(f"No Response from {peer} in voting")
                 elif(res['Vote']=='True'):
@@ -302,7 +312,7 @@ class RaftNode:
         else:
             print(f"No response received from {peer} within {timeout} seconds.")
 
-        # print(f"Response from {peer}: {response}")
+        # print(f"Response from out {peer}: {response}")
         socket.close()
         return response
 
@@ -493,6 +503,6 @@ if __name__ == "__main__":
     node_id = int(input("Enter Node ID: "))
     server_address = f"tcp://127.0.0.1:555{node_id}"
     print(f"Node Listening at {server_address}")
-    peers = [0, 1,2]  # Assuming 5 nodes
+    peers = [0, 1,2,3]  # Assuming 5 nodes
     node = RaftNode(node_id, server_address, peers)
     node.run()
