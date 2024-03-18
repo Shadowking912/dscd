@@ -332,7 +332,10 @@ class RaftNode:
                     'node_id':self.node_id,
                     'success':True
                 }
-                self.logs=self.logs[:matching_index]
+                if matching_index!=-1:
+                    self.logs=self.logs[:matching_index]
+                else:
+                    self.logs=[]
                 for i in request['entries']:
                     self.logs.append(i)
                 print(self.logs)
@@ -355,15 +358,26 @@ class RaftNode:
                 if peer != self.node_id:
                     # self.store_log_entries()
                     print("Current Index = ",self.cur_index)
-                    request = {
-                        'type': 'append_entries',
-                        'term': self.term,
-                        'leader_id': self.node_id,
-                        'entries': self.logs[self.cur_index[peer]:],
-                        'prevLogIndex':self.cur_index[peer],
-                        'prevLogTerm':self.logs[self.cur_index[peer]]['term'],
-                        'LeaderCommit':self.commit_index
-                    }
+                    if len(self.logs)>0:
+                        request = {
+                            'type': 'append_entries',
+                            'term': self.term,
+                            'leader_id': self.node_id,
+                            'entries': self.logs[self.cur_index[peer]:],
+                            'prevLogIndex':self.cur_index[peer],
+                            'prevLogTerm':self.logs[self.cur_index[peer]]['term'],
+                            'LeaderCommit':self.commit_index
+                        }
+                    else:
+                        request = {
+                            'type': 'append_entries',
+                            'term': self.term,
+                            'leader_id': self.node_id,
+                            'entries': self.logs,
+                            'prevLogIndex':-1,
+                            'prevLogTerm':-1,
+                            'LeaderCommit':self.commit_index
+                        }
                     dealer_socket = context.socket(zmq.DEALER)
                     dealer_socket.connect(f"tcp://localhost:555{peer}")
                     dealer_socket.send(b"", zmq.SNDMORE)
