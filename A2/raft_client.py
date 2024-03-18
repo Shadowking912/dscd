@@ -48,7 +48,8 @@ class RaftClient:
                 response  = self.socket.recv_json()
                 status = response['status']
             
-            print("Message added successfully")
+            
+            
         except zmq.ZMQError as e:
             print(f"Error occurred: {str(e)}")
 
@@ -59,7 +60,7 @@ class RaftClient:
 if __name__ == "__main__":
     client_id = int(input("Enter Client ID: "))
     # server_address = input("Enter Server Address (e.g., tcp://127.0.0.1:5555): ")
-    server_address = "tcp://127.0.0.1:5552"
+    server_address = "tcp://127.0.0.1:5550"
     client = RaftClient(client_id, server_address)
 
     # client.run()

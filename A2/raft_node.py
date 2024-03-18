@@ -37,23 +37,52 @@ class RaftNode:
             self.logs = [{'term': 0, 'command': "SET",'key':"0",'value':"hello"},{'term':0,'command':'SET','key':"1",'value':"world"},{'term':1,'command':'SET','key':"2",'value':"gg"}]
             # self.logs=[(0,"hello"),(0,"world"),(1,"gg")]
             self.key_value_store = {"0":"hello","1":"world","2":"gg"}
-            self.commit_index=1
+            self.commit_index=0
             self.term = 1
 
         elif self.node_id ==1:
-            self.logs = [{'term': 0, 'command': "SET",'key':0,'value':"hello"},{'term':0,'command':'SET','key':1,'value':"world"}]
-            self.key_value_store={0:"hello",1:"world"}
+            self.logs = [{'term': 0, 'command': "SET",'key':'0','value':"hello"},{'term':0,'command':'SET','key':'1','value':"world"}]
+            self.key_value_store={'0':"hello",'1':"world"}
             self.term  = 0
+            self.commit_index=-1
         elif self.node_id==2:
             # self.logs=[(0,"hello"),(1,"y")]
-            self.logs=[{'term': 0, 'command': "SET",'key':0,'value':"hello"},{'term':1,'command':'SET','key':1,'value':"y"}]
-            self.key_value_store={0:"hello",1:"y"}
+            self.logs=[{'term': 0, 'command': "SET",'key':'0','value':"hello"},{'term':1,'command':'SET','key':'1','value':"y"}]
+            self.key_value_store={'0':"hello",'1':"y"}
             self.term = 1
+            self.commit_index=-1
         self.cur_index={i:len(self.logs)-1 for i in self.peers}
+
+
+        # Function for handling the commiting entries at each heartbeat
+    def handle_commit_requests(self,leader_commit_index):
+        # leaderIndex = message["LeaderCommit"]
+        print("Logs = ",self.logs)
+        if leader_commit_index >self.commit_index:
+            for i in range(self.commit_index+1,leader_commit_index):
+                print("Value of i  = ",i)
+                self.key_value_store[self.logs[i]['key']] = self.logs[i]['value']
+                print(f"Commited {self.logs[i]['key']}  : {self.logs[i]['value']} to the log")
+    
+            self.commit_index = leader_commit_index
+            print(f"Commit Index of the node {self.node_id} {self.commit_index}")
+
+        # Else clause just for the sake of debugging
+        else:
+            print("No change in commit index needed")
+
+    def commit_log_entries(self):
+        print("Commiting log entries by the leader")
+        for i in range(self.commit_index+1,len(self.logs)):
+            self.key_value_store[self.logs[i]['key']] = self.logs[i]['value']
+        
+        self.commit_index=len(self.logs)-1
+        print(f"Leader {self.leader_id} with commit index : {self.commit_index}")
 
     def handle_heartbeat(self, message):
         print(f"Received heartbeat from leader {message['leader_id']}")
         # self.commit_entries()
+        self.handle_commit_requests(message['LeaderCommit'])
         if self.state == 'follower': 
             self.reset_election_timeout()
 
@@ -71,69 +100,61 @@ class RaftNode:
             socket.send_json({"Vote":"False",'No-response':False})
 
     def handle_client_request(self, client_socket,request):
-        
-
-        request_type = request.get('sub-type')
-        key = request.get('key')
-        value = request.get('value')
-
-        if request_type == 'SET':
-            if self.state != 'leader':
-                response={
+        if self.state != 'leader':
+            response={
                     'status':'failure',
                     'leaderId':self.leader_id,
                     'No-response':False
-                }
-                self.socket.send_json(response)
-                return
-            print(f"Received SET request for key '{key}' with value '{value}'")
-            if self.state=='leader':     
-                self.key_value_store[key] = value
-            # self.key_value_store[key] = value
-            self.logs.append({'term': self.term, 'command': 'SET','key': key, 'value': f'{value}'})
-            # response = {
-            #         'status': 'success',
-            #         'message': f"Value for key '{key}': {value}",
-            #         'No-response':False
-            # }
-            # self.socket.send_json(response)
-            if self.replicate_log_entries()>=((len(self.peers)-1)//2+1):
-                    # self.commit()
-                response = {
-                    'status': 'success',
-                    'message': f"Value for key '{key}': {value}",
-                    'No-response':False
-                }
-                self.socket.send_json(response)
-                pass
-            else:
+            }
+            self.socket.send_json(response)
+        else:
+            request_type = request.get('sub-type')
+            key = request.get('key')
+            value = request.get('value')
+
+            if request_type == 'SET':
+                print(f"Received SET request for key '{key}' with value '{value}'")
+                if self.state=='leader':     
+                    self.key_value_store[key] = value
+                # self.key_value_store[key] = value
+                self.logs.append({'term': self.term, 'command': 'SET','key': key, 'value': f'{value}'})
+
+                if self.replicate_log_entries()>=((len(self.peers)-1)//2+1):
+                    self.commit_log_entries()
                     response = {
-                        'type':'client_response',
-                        'status':'failure',
+                        'status': 'success',
+                        'message': f"Value for key '{key}': {value}",
                         'No-response':False
                     }
                     self.socket.send_json(response)
+                else:
+                        response = {
+                            'type':'client_response',
+                            'status':'failure',
+                            'No-response':False
+                        }
+                        self.socket.send_json(response)
 
-        elif request_type == 'GET':
-            print(f"Received GET request for key '{key}'")
-            # print(key,self.key_value_store.keys(),key in self.key_value_store.keys())
-            if key in self.key_value_store.keys():
-                value = self.key_value_store[key]
-                response = {
-                    'type': 'client_response',
-                    'status': 'success',
-                    'message': f"Value for key '{key}': {value}",
-                    'No-response':False
-                }
-                self.socket.send_json(response)
-            else:
-                response = {
-                    'type': 'client_response',
-                    'status': 'failure',
-                    'message': f"Key '{key}' not found",
-                    'No-response':False
-                }
-                client_socket.send_json(response)
+            elif request_type == 'GET':
+                print(f"Received GET request for key '{key}'")
+                # print(key,self.key_value_store.keys(),key in self.key_value_store.keys())
+                if key in self.key_value_store.keys():
+                    value = self.key_value_store[key]
+                    response = {
+                        'type': 'client_response',
+                        'status': 'success',
+                        'message': f"Value for key '{key}': {value}",
+                        'No-response':False
+                    }
+                    self.socket.send_json(response)
+                else:
+                    response = {
+                        'type': 'client_response',
+                        'status': 'failure',
+                        'message': f"Key '{key}' not found",
+                        'No-response':False
+                    }
+                    self.socket.send_json(response)
 
     def reset_election_timeout(self):
         self.election_timer.cancel()
@@ -194,6 +215,7 @@ class RaftNode:
         if(self.vote_count >= len(peers)//2 +1):
         # if(self.vote_count >= 2):
             self.state = 'leader'
+            self.leader_id = self.node_id
             print(f"New Leader is {self.node_id}")
             self.broadcast_leader(self.node_id)
 
@@ -314,19 +336,6 @@ class RaftNode:
                 for i in request['entries']:
                     self.logs.append(i)
                 print(self.logs)
-                # Checking the commit index of the leader is higher than the commit index of the current node
-                # Appending the entries starting from the commit index
-                if leader_commit_index>self.commit_index:
-                    for i in range(self.commit_index,leader_commit_index+1):
-                        print("i:",i,self.logs)
-                        self.key_value_store[self.logs[i]['key']] = self.logs[i]['value']
-
-                print(f"Node id = {self.node_id}")
-                print(f"Key value store = {self.key_value_store}")
-                # print(self.)
-                # Setting the commit index equal to the commit index of the leader
-                self.commit_index = leader_commit_index
-            
             else:
                 logresults = {
                     'type':'append_entries',
