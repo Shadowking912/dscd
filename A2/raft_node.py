@@ -257,6 +257,7 @@ class RaftNode:
     def send_heartbeat(self):
         dealers=[]
         context = zmq.Context()
+        context.setsockopt(zmq.LINGER, 0)
         while True:
             if self.state == 'leader':
                 for peer in self.peers:
@@ -318,6 +319,7 @@ class RaftNode:
 
     def send_recv_message(self, peer, message): # send message and w8 2s for response
         context = zmq.Context()
+        context.setsockopt(zmq.LINGER, 0)
         socket = context.socket(zmq.REQ)
         socket.connect(f"tcp://127.0.0.1:555{peer}")
         print("DEB:","Sending & Recv Message")
@@ -399,6 +401,7 @@ class RaftNode:
     def replicate_log_entries(self):
         dealers=[]
         context = zmq.Context()
+        context.setsockopt(zmq.LINGER, 0)
         majority=0
         for i in range(len(self.peers)):
                 peer=self.peers[i]
@@ -486,6 +489,7 @@ class RaftNode:
                 
     def run(self):
         context = zmq.Context()
+        context.setsockopt(zmq.LINGER, 0)
         self.socket = context.socket(zmq.REP)
         self.socket.bind(self.address)
 
