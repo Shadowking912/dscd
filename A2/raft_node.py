@@ -37,7 +37,7 @@ class RaftNode:
         self.key_value_store = {}
         self.prevLogIndex=0
         self.prevLogTerm=0
-        self.leasetime = 10 #Lease time in sec
+        self.leasetime = 40 #Lease time in sec
         # self.cur_index={}
         
         if self.node_id == 0:
@@ -89,7 +89,7 @@ class RaftNode:
         print(f"Leader {self.leader_id} with commit index : {self.commit_index}")
 
     def handle_heartbeat(self, message):
-        print(f"Received heartbeat from leader {message['leader_id']}")
+        print(f"Received heartbeat from leader {message['leader_id']}",self.leader_id)
         # self.commit_entries()
         self.handle_commit_requests(message['LeaderCommit'])
         if self.state == 'follower': 
@@ -115,6 +115,7 @@ class RaftNode:
                     'leaderId':self.leader_id,
                     'No-response':False
             }
+            print("DEH",response)
             self.socket.send_json(response)
         else:
             request_type = request.get('sub-type')
@@ -168,7 +169,6 @@ class RaftNode:
     def reset_election_timeout(self):
         self.election_timer.cancel()
         self.vote_count=0
-        self.leader_id = -1
         self.voted_for = None
         self.election_timer = threading.Timer(self.election_timeout, self.start_election)
         self.election_timer.start()
@@ -186,7 +186,7 @@ class RaftNode:
             self.voted_for = None
             self.leader_id = -1
             self.vote_count = 0
-            
+            self.broadcast_leader(-1)
 
 
     def start_election(self):
@@ -208,13 +208,14 @@ class RaftNode:
                 request = {
                     'type': 'leader_message',
                     'term': self.term,
-                    'leader_id': self.node_id,
+                    'leader_id': leader,
                     'No-response':False
                 }
                 self.send_recv_message(peer, request)
 
 
     def handle_leader_message(self, client_socket,request):
+        # print("GOT LEADER HEADER -- \n\n\n\n")
         self.leader_id = request.get('leader_id')
         if(self.state == 'candidate'):
             self.state = 'follower'
@@ -244,6 +245,7 @@ class RaftNode:
             self.state = 'leader'
             self.leader_id = self.node_id
             print(f"New Leader is {self.node_id}")
+            self.broadcast_leader(self.node_id)
 
             self.lease_timer = threading.Timer(self.leasetime,self.end_lease)
             self.lease_timer.start()
@@ -251,7 +253,7 @@ class RaftNode:
             heartbeat_thread = threading.Thread(target=self.send_heartbeat)
             heartbeat_thread.start()
 
-            self.broadcast_leader(self.node_id)
+            
 
 
     def send_heartbeat(self):
@@ -354,6 +356,7 @@ class RaftNode:
             logresults = {
                 'type':'append_entries',
                 'node_id':self.node_id,
+                'term':self.term,
                 'success':False
             }
         else:
@@ -375,6 +378,7 @@ class RaftNode:
                 logresults={
                     'type':'append_entries',
                     'node_id':self.node_id,
+                    'term':self.term,
                     'success':True
                 }
                 if matching_index!=-1:
