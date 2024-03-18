@@ -354,6 +354,7 @@ class RaftNode:
             logresults = {
                 'type':'append_entries',
                 'node_id':self.node_id,
+                'term':self.term,
                 'success':False
             }
         else:
@@ -375,6 +376,7 @@ class RaftNode:
                 logresults={
                     'type':'append_entries',
                     'node_id':self.node_id,
+                    'term':self.term,
                     'success':True
                 }
                 if matching_index!=-1:
