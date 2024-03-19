@@ -4,6 +4,8 @@ import threading
 import time
 import sys
 import signal
+import os
+import json
 
 
 signal.signal(signal.SIGINT, signal.SIG_DFL)
@@ -38,6 +40,7 @@ class RaftNode:
         self.prevLogIndex=0
         self.prevLogTerm=0
         self.leasetime = 40 #Lease time in sec
+        self.logs_path = os.path.join(os.getcwd(),f'logs_node_{self.node_id}')
         # self.cur_index={}
         
         if self.node_id == 0:
@@ -62,7 +65,45 @@ class RaftNode:
             self.commit_index=-1
         self.cur_index={i:len(self.logs)-1 for i in self.peers}
 
+        # Creating a directory for the node if it does not already exist for the logs and dumps
+        if os.path.isdir(os.path.join(self.logs_path))==False:
+            os.makedirs(os.path.join(self.logs_path))
+        else:
+        #   Write the functionality for loading the logs list from the text file (TO BE COMPLETED)
+            # Reading the logs
+            with open(self.logs_path+"/logs.json","r") as f:
+                self.logs = json.load(f)
+            
+            # Reading the metadata
+            with open(self.logs_path+"/metadata.json","r") as f:
+                metadata  = json.load(f)    
+                self.commit_index=metadata["Commit-Length"]-1
+                self.term = metadata["Term"]
+                self.voted_for=metadata["Voted For"]
 
+                print("Commit index = ",self.commit_index)
+                print("Term = ",self.term)
+                print("Voted For = ",self.voted_for)
+            
+
+    def dump_data(self,data):
+        with open(f"{self.logs_path}/dump.txt","w") as f:
+            f.write(data)
+
+    def write_metadata(self):
+        with open(self.logs_path+"/metadata.json","w") as f:
+            metadata={
+                'Commit-Length':self.commit_index+1,
+                'Term':self.term,
+                'Voted For':self.voted_for
+            }
+            json_object = json.dumps(metadata,indent=4)
+            f.write(json_object)
+
+    def write_logs(self):
+        with open(self.logs_path+"/logs.json","w") as f:
+            json_object = json.dumps(self.logs,indent=4)
+            f.write(json_object)
         # Function for handling the commiting entries at each heartbeat
     def handle_commit_requests(self,leader_commit_index):
         # leaderIndex = message["LeaderCommit"]
@@ -71,11 +112,13 @@ class RaftNode:
             for i in range(self.commit_index+1,leader_commit_index):
                 print("Value of i  = ",i)
                 self.key_value_store[self.logs[i]['key']] = self.logs[i]['value']
-                print(f"Commited {self.logs[i]['key']}  : {self.logs[i]['value']} to the log")
+                # Dump Point-7 
+                self.dump_data(f"Node {self.node_id} (follower) commited the entry {self.logs[i]['command']} {self.logs[i]['key']}  : {self.logs[i]['value']} to the state machine.")
     
+            self.write_logs()
             self.commit_index = leader_commit_index
             print(f"Commit Index of the node {self.node_id} {self.commit_index}")
-
+            self.write_metadata()
         # Else clause just for the sake of debugging
         else:
             print("No change in commit index needed")
@@ -84,9 +127,14 @@ class RaftNode:
         print("Commiting log entries by the leader")
         for i in range(self.commit_index+1,len(self.logs)):
             self.key_value_store[self.logs[i]['key']] = self.logs[i]['value']
+            # Dump Point-9
+            self.dump_data(f"Node {self.node_id} (leader) commited the entry {self.logs[i]['command']} {self.logs[i]['key']} {self.logs[i]['value']} to the state machine")
         
+        self.write_logs()
         self.commit_index=len(self.logs)-1
         print(f"Leader {self.leader_id} with commit index : {self.commit_index}")
+        self.write_metadata()
+
 
     def handle_heartbeat(self, message):
         print(f"Received heartbeat from leader {message['leader_id']}",self.leader_id)
@@ -100,12 +148,18 @@ class RaftNode:
         if self.state == 'follower':
             if self.voted_for is None or self.voted_for == message['candidate_id']:
                 self.voted_for = message['candidate_id']
+                # Dump Point-12
+                self.dump_data(f"Vote granted for Node {self.voted_for} in term {message['term']}")
                 self.reset_election_timeout()
 
                 socket.send_json({"Vote":"True",'No-response':False})
             else:
+                # Dump Point-13
+                self.dump_data(f"Vote denied for Node {message['candidate_id']} in term {message['term']}")
                 socket.send_json({"Vote":"False",'No-response':False})
         else:
+            # Dump Point-13
+            self.dump_data(f"Vote denied for Node {message['candidate_od']} in term {message['term']}")
             socket.send_json({"Vote":"False",'No-response':False})
 
     def handle_client_request(self, client_socket,request):
@@ -124,6 +178,8 @@ class RaftNode:
 
             if request_type == 'SET':
                 print(f"Received SET request for key '{key}' with value '{value}'")
+                # Dump Point-8
+                self.dump_data(f"Node {self.node_id}(leader) received an {request_type} {key} {value} request")
                 if self.state=='leader':     
                     self.key_value_store[key] = value
                 # self.key_value_store[key] = value
@@ -181,6 +237,10 @@ class RaftNode:
     
     def end_lease(self):
         if(self.state == 'leader'):
+             #  Point 2 of the dump
+            self.dump_data(f"Leader {self.node_id} lease renewal failed. Stepping Down.")
+            # Point 14 of the sump
+            self.dump_data(f"Leader {self.node_id} stepping down")
             print(f"Ended Lease for Leader {self.node_id}")
             self.state = 'follower'
             self.voted_for = None
@@ -194,6 +254,8 @@ class RaftNode:
         if self.leader_id!=-1:
             self.reset_election_timeout()
         elif self.state != 'leader':
+            # Dump Point 4
+            self.dump_data(f"Node {self.node_id} election timer timed out, Starting election.")
             print(f"Node:{self.node_id} started election")
             self.state = 'candidate'
             self.term += 1
@@ -241,7 +303,8 @@ class RaftNode:
                     self.vote_count+=1
         print(f"Node {self.node_id}, vote_cnt {self.vote_count}")
         if(self.vote_count >= len(peers)//2 +1):
-        # if(self.vote_count >= 2):
+            # Dump Point-5
+            self.dump_data(f"Node {self.node_id} became the leader for term {self.term}")
             self.state = 'leader'
             self.leader_id = self.node_id
             print(f"New Leader is {self.node_id}")
@@ -252,7 +315,8 @@ class RaftNode:
 
             #sending NO_OP
             self.logs.append({'term': self.term, 'command': "NO-OP",'key':None,'value':None})
-            
+            # Dump Point-1
+            self.dump_data(f"Leader {self.node_id} sending heartbeat and Renewing Lease")
             heartbeat_thread = threading.Thread(target=self.send_heartbeat)
             heartbeat_thread.start()
 
@@ -392,6 +456,9 @@ class RaftNode:
                     self.logs=[]
                 for i in request['entries']:
                     self.logs.append(i)
+
+                # Dump Point-10
+                self.dump_data(f"Node {self.node_id} accepted AppendEntries RPC from {self.leader_id}")
                 print(self.logs)
             else:
                 logresults = {
@@ -400,6 +467,8 @@ class RaftNode:
                     'term':self.term,
                     'success':False
                 }
+                # Dump Point-11
+                self.dump_data(f"Node {self.node_id} rejected AppendEntries RPC from {self.leader_id}")
         self.socket.send_json(logresults)
         print("sent response to leader")
 
@@ -467,6 +536,8 @@ class RaftNode:
                                 self.voted_for=None
                                 self.reset_election_timeout()
                                 self.term = node_term
+                                # Dump Point-14
+                                self.dump_data(f"{self.node_id} Stepping down")
                                 break
                             else:
                                 self.cur_index[message2['node_id']]-=1

@@ -1,0 +1,14 @@
+[
+    {
+        "term": 0,
+        "command": "SET",
+        "key": "0",
+        "value": "hello"
+    },
+    {
+        "term": 1,
+        "command": "SET",
+        "key": "1",
+        "value": "y"
+    }
+]
