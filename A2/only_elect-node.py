@@ -28,7 +28,7 @@ class RaftNode:
         self.election_timeout = 5  # Election timeout in seconds
         #TEMP
         if(self.node_id==0):
-            self.election_timeout = 5
+            self.election_timeout = 15
         elif(self.node_id==1):
             self.election_timeout = 9
         elif(self.node_id==2):
@@ -58,9 +58,9 @@ class RaftNode:
             self.term = 1
 
         elif self.node_id ==1:
-            self.logs = [{'term': 0, 'command': "SET",'key':'0','value':"M1"},{'term':0,'command':'SET','key':'1','value':"M2"}]
-            self.key_value_store={'0':"M1",'1':"M2"}
-            self.term  = 0
+            self.logs = [{'term': 0, 'command': "SET",'key':'0','value':"M1"},{'term':0,'command':'SET','key':'1','value':"M2"},{'term':1,'command':'SET','key':'2','value':"M3"}]
+            self.key_value_store={'0':"M1",'1':"M2",'2':"M3"}
+            self.term  = 1
             self.prevLogIndex = 1
             self.prevLogTerm = 0
             self.commit_index=-1
@@ -68,7 +68,7 @@ class RaftNode:
             # self.logs=[(0,"hello"),(1,"y")]
             self.logs = [{'term': 0, 'command': "SET",'key':'0','value':"M1"},{'term':0,'command':'SET','key':'1','value':"M2"}]
             self.key_value_store={'0':"M1",'1':"M2"}
-            self.term = 1
+            self.term = 0
             self.prevLogIndex = 1
             self.prevLogTerm = 0
             self.commit_index=-1
@@ -162,55 +162,32 @@ class RaftNode:
 
     def handle_vote_request(self, socket,message):
         print(f"Received vote request from candidate {message['candidate_id']}")
-        cand_id = message['candidate_id']
-        candidate_term = message['term']
-        if(candidate_term>self.term):
-            self.term = candidate_term
-            self.state = 'follower'
-            self.voted_for = None
-        lastTerm = 0
-        if(len(self.logs)>0):
-            lastTerm = self.logs[-1]['term']
-        logOK = (candidate_term>lastTerm) or ((candidate_term==lastTerm) and (message['last_log_index']+1>=len(self.logs)))
-        if((candidate_term==self.term)and logOK and self.voted_for in {cand_id,None}):
-            self.voted_for = cand_id
-            socket.send_json({"Vote":"True",'Node_id':self.node_id,'current_term':self.term,'No-response':False})
-            # #TEMP COMMENT
-            # # Dump Point-12
-            # self.dump_data(f"Vote granted for Node {self.voted_for} in term {message['term']}")
-            # #TEMP COMMENT
-        else:
-            socket.send_json({"Vote":"False",'Node_id':self.node_id,'current_term':self.term,'No-response':False})
-            # #TEMP COMMENT
-            # # Dump Point-13
-            # self.dump_data(f"Vote denied for Node {message['candidate_id']} in term {message['term']}")
-            # #TEMP COMMENT
+        if self.state == 'follower':
+            candidate_term = message['term']
+            print("DEF", candidate_term,self.term)
+            if (self.voted_for is None or self.voted_for == message['candidate_id']) and candidate_term>self.term:
+                self.voted_for = message['candidate_id']
 
-
-        # if self.state == 'follower':
-        #     if self.voted_for is None or self.voted_for == message['candidate_id']:
-        #         self.voted_for = message['candidate_id']
-
-        #         # #TEMP COMMENT
-        #         # # Dump Point-12
-        #         # self.dump_data(f"Vote granted for Node {self.voted_for} in term {message['term']}")
-        #         # #TEMP COMMENT
+                #TEMP COMMENT
+                # Dump Point-12
+                self.dump_data(f"Vote granted for Node {self.voted_for} in term {message['term']}\n")
+                #TEMP COMMENT
                 
-        #         self.reset_election_timeout()
+                self.reset_election_timeout()
 
-        #         socket.send_json({"Vote":"True",'No-response':False})
-        #     else:
-        #         # #TEMP COMMENT
-        #         # # Dump Point-13
-        #         # self.dump_data(f"Vote denied for Node {message['candidate_id']} in term {message['term']}")
-        #         # #TEMP COMMENT
-        #         socket.send_json({"Vote":"False",'No-response':False})
-        # else:
-        #     # #TEMP COMMENT
-        #     # # Dump Point-13
-        #     # self.dump_data(f"Vote denied for Node {message['candidate_od']} in term {message['term']}")
-        #     # #TEMP COMMENT
-        #     socket.send_json({"Vote":"False",'No-response':False})
+                socket.send_json({"Vote":"True",'No-response':False})
+            else:
+                #TEMP COMMENT
+                # Dump Point-13
+                self.dump_data(f"Vote denied for Node {message['candidate_id']} in term {message['term']}\n")
+                #TEMP COMMENT
+                socket.send_json({"Vote":"False",'No-response':False})
+        else:
+            # TEMP COMMENT
+            # Dump Point-13
+            self.dump_data(f"Vote denied for Node {message['candidate_od']} in term {message['term']}\n")
+            #TEMP COMMENT
+            socket.send_json({"Vote":"False",'No-response':False})
 
     def handle_client_request(self, client_socket,request):
         if self.state != 'leader':
@@ -302,6 +279,7 @@ class RaftNode:
             self.leader_id = -1
             self.vote_count = 0
             self.broadcast_leader(-1)
+            self.election_timeout = 20#TEMP
             self.reset_election_timeout()
 
 
@@ -362,18 +340,22 @@ class RaftNode:
                 }
                 res = self.send_recv_message(peer, request)
                 # print("DEB",res)
+                # if(res['No-response']==True):
+                #     print(f"No Response from {peer} in voting")
+                # elif(res['Vote']=='True' and (self.state == 'candidate' and res['current_term']<=self.term)):
+                #     self.vote_count+=1
+                # elif(self.term < res['current_term']):
+                #     self.term = res['current_term']
+                #     self.state = 'follower'
+                #     self.voted_for = None
+                #     return
+                # else:
+                #     print(f"Vote Issue Fail from {res['Node_id']}")
+                #     # self.reset_election_timeout()
                 if(res['No-response']==True):
                     print(f"No Response from {peer} in voting")
-                elif(res['Vote']=='True' and (self.state == 'candidate' and res['current_term']<=self.term)):
+                elif(res['Vote']=='True'):
                     self.vote_count+=1
-                elif(self.term < res['current_term']):
-                    self.term = res['current_term']
-                    self.state = 'follower'
-                    self.voted_for = None
-                    return
-                else:
-                    print(f"Vote Issue Fail from {res['Node_id']}")
-                    self.reset_election_timeout()
         print(f"Node {self.node_id}, vote_cnt {self.vote_count}")
         if(self.vote_count >= len(peers)//2 +1):
             # #TEMP COMMENT
@@ -399,6 +381,14 @@ class RaftNode:
 
             heartbeat_thread = threading.Thread(target=self.send_heartbeat)
             heartbeat_thread.start()
+        else:
+            #If not elected Leader due to less votes
+            print(f"Node {self.node_id} lost election")
+            self.vote_count=0
+            self.voted_for=None
+            self.state = 'follower'
+            self.term-=1
+            self.reset_election_timeout()
 
             
 
