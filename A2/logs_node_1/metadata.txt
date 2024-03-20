@@ -1,3 +1,0 @@
-Commit-Length : 1
-Term : 0
-Voter For : None

@@ -43,26 +43,26 @@ class RaftNode:
         self.logs_path = os.path.join(os.getcwd(),f'logs_node_{self.node_id}')
         # self.cur_index={}
         
-        if self.node_id == 0:
-            # self.state = 'leader'
-            # self.leader_id = self.node_id
-            self.logs = [{'term': 0, 'command': "SET",'key':"0",'value':"hello"},{'term':0,'command':'SET','key':"1",'value':"world"},{'term':1,'command':'SET','key':"2",'value':"gg"}]
-            # self.logs=[(0,"hello"),(0,"world"),(1,"gg")]
-            self.key_value_store = {"0":"hello","1":"world","2":"gg"}
-            self.commit_index=0
-            self.term = 1
+        # if self.node_id == 0:
+        #     # self.state = 'leader'
+        #     # self.leader_id = self.node_id
+        #     self.logs = [{'term': 0, 'command': "SET",'key':"0",'value':"hello"},{'term':0,'command':'SET','key':"1",'value':"world"},{'term':1,'command':'SET','key':"2",'value':"gg"}]
+        #     # self.logs=[(0,"hello"),(0,"world"),(1,"gg")]
+        #     self.key_value_store = {"0":"hello","1":"world","2":"gg"}
+        #     self.commit_index=0
+        #     self.term = 1
 
-        elif self.node_id ==1:
-            self.logs = [{'term': 0, 'command': "SET",'key':'0','value':"hello"},{'term':0,'command':'SET','key':'1','value':"world"}]
-            self.key_value_store={'0':"hello",'1':"world"}
-            self.term  = 0
-            self.commit_index=-1
-        elif self.node_id==2:
-            # self.logs=[(0,"hello"),(1,"y")]
-            self.logs=[{'term': 0, 'command': "SET",'key':'0','value':"hello"},{'term':1,'command':'SET','key':'1','value':"y"}]
-            self.key_value_store={'0':"hello",'1':"y"}
-            self.term = 1
-            self.commit_index=-1
+        # elif self.node_id ==1:
+        #     self.logs = [{'term': 0, 'command': "SET",'key':'0','value':"hello"},{'term':0,'command':'SET','key':'1','value':"world"}]
+        #     self.key_value_store={'0':"hello",'1':"world"}
+        #     self.term  = 0
+        #     self.commit_index=-1
+        # elif self.node_id==2:
+        #     # self.logs=[(0,"hello"),(1,"y")]
+        #     self.logs=[{'term': 0, 'command': "SET",'key':'0','value':"hello"},{'term':1,'command':'SET','key':'1','value':"y"}]
+        #     self.key_value_store={'0':"hello",'1':"y"}
+        #     self.term = 1
+        #     self.commit_index=-1
         
 
         # Creating a directory for the node if it does not already exist for the logs and dumps
@@ -93,8 +93,9 @@ class RaftNode:
         self.cur_index={i:len(self.logs)-1 for i in self.peers}
 
     def dump_data(self,data):
-        with open(f"{self.logs_path}/dump.txt","w") as f:
+        with open(f"{self.logs_path}/dump.txt","a") as f:
             f.write(data)
+            f.write("\n")
 
     def write_metadata(self):
         with open(self.logs_path+"/metadata.json","w") as f:
@@ -183,7 +184,7 @@ class RaftNode:
         if self.state != 'leader':
             response={
                     'status':'failure',
-                    'leaderId':self.leader_id,
+                    'leaderid':self.leader_id,
                     'No-response':False
             }
             print("DEH",response)
@@ -194,7 +195,7 @@ class RaftNode:
             value = request.get('value')
 
             if request_type == 'SET':
-                print(f"Received SET request for key '{key}' with value '{value}'")
+                # print(f"Received SET request for key '{key}' with value '{value}'")
                 #TEMP COMMENT
                 # Dump Point-8
                 self.dump_data(f"Node {self.node_id}(leader) received an {request_type} {key} {value} request")
@@ -210,7 +211,7 @@ class RaftNode:
                     self.commit_log_entries()
                     response = {
                         'status': 'success',
-                        'message': f"Value for key '{key}': {value}",
+                        'message': f"SET operation successful the value for key '{key}': was set to {value}",
                         'No-response':False
                     }
                     self.socket.send_json(response)
@@ -224,14 +225,14 @@ class RaftNode:
                
 
             elif request_type == 'GET':
-                print(f"Received GET request for key '{key}'")
+                # print(f"Received GET request for key '{key}'")
                 # print(key,self.key_value_store.keys(),key in self.key_value_store.keys())
                 if key in self.key_value_store.keys():
                     value = self.key_value_store[key]
                     response = {
                         'type': 'client_response',
                         'status': 'success',
-                        'message': f"Value for key '{key}': {value}",
+                        'message': f"GET operation successful, the value for key '{key}': is {value}",
                         'No-response':False
                     }
                     self.socket.send_json(response)
@@ -487,7 +488,7 @@ class RaftNode:
 
                 # Dump Point-10
                 self.dump_data(f"Node {self.node_id} accepted AppendEntries RPC from {self.leader_id}")
-                print(self.logs)
+                # print("Logs after appending = ",self.logs)
             else:
                 logresults = {
                     'type':'append_entries',
@@ -613,7 +614,7 @@ class RaftNode:
         while True:
             print("DEB:","Listening State")
             message = self.socket.recv_json()
-            print(message)
+            # print(message)
             try:
                 if message['type'] == 'heartbeat':
                     self.handle_heartbeat(message)
@@ -629,7 +630,7 @@ class RaftNode:
                     self.handle_leader_message(self.socket,message) 
                 
                 elif message['type'] == 'append_entries':
-                        print("got")
+                        # print("got")
                         self.listen_replication_requests(message)   
             except zmq.ZMQError as e:
                 print(e,message['type'])

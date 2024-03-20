@@ -1,14 +1,92 @@
 [
     {
-        "term": 0,
-        "command": "SET",
-        "key": "0",
-        "value": "hello"
+        "term": 1,
+        "command": "NO-OP",
+        "key": null,
+        "value": null
     },
     {
         "term": 1,
         "command": "SET",
-        "key": "1",
-        "value": "y"
+        "key": "0.0",
+        "value": "1"
+    },
+    {
+        "term": 1,
+        "command": "SET",
+        "key": "0.1",
+        "value": "2"
+    },
+    {
+        "term": 1,
+        "command": "SET",
+        "key": "0.2",
+        "value": "3"
+    },
+    {
+        "term": 2,
+        "command": "NO-OP",
+        "key": null,
+        "value": null
+    },
+    {
+        "term": 3,
+        "command": "NO-OP",
+        "key": null,
+        "value": null
+    },
+    {
+        "term": 3,
+        "command": "SET",
+        "key": "0.6",
+        "value": "6"
+    },
+    {
+        "term": 4,
+        "command": "NO-OP",
+        "key": null,
+        "value": null
+    },
+    {
+        "term": 4,
+        "command": "SET",
+        "key": "0.8",
+        "value": "9"
+    },
+    {
+        "term": 5,
+        "command": "NO-OP",
+        "key": null,
+        "value": null
+    },
+    {
+        "term": 5,
+        "command": "SET",
+        "key": "0.9",
+        "value": "12"
+    },
+    {
+        "term": 5,
+        "command": "SET",
+        "key": "0.10",
+        "value": "12"
+    },
+    {
+        "term": 5,
+        "command": "SET",
+        "key": "0.11",
+        "value": "13"
+    },
+    {
+        "term": 6,
+        "command": "NO-OP",
+        "key": null,
+        "value": null
+    },
+    {
+        "term": 6,
+        "command": "SET",
+        "key": "0.15",
+        "value": "15"
     }
 ]
