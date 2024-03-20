@@ -42,7 +42,7 @@ class RaftNode:
         self.key_value_store = {}
         self.prevLogIndex=0
         self.prevLogTerm=0
-        self.leasetime = 40 #Lease time in sec
+        self.leasetime = 20 #Lease time in sec
         self.logs_path = os.path.join(os.getcwd(),f'logs_node_{self.node_id}')
         # self.cur_index={}
         
@@ -53,18 +53,24 @@ class RaftNode:
             # self.logs=[(0,"hello"),(0,"world"),(1,"gg")]
             self.key_value_store = {"0":"M1","1":"M2","2":"M3"}
             self.commit_index=0
+            self.prevLogIndex = 2
+            self.prevLogTerm = 1
             self.term = 1
 
         elif self.node_id ==1:
             self.logs = [{'term': 0, 'command': "SET",'key':'0','value':"M1"},{'term':0,'command':'SET','key':'1','value':"M2"}]
             self.key_value_store={'0':"M1",'1':"M2"}
             self.term  = 0
+            self.prevLogIndex = 1
+            self.prevLogTerm = 0
             self.commit_index=-1
         elif self.node_id==2:
             # self.logs=[(0,"hello"),(1,"y")]
             self.logs = [{'term': 0, 'command': "SET",'key':'0','value':"M1"},{'term':0,'command':'SET','key':'1','value':"M2"}]
             self.key_value_store={'0':"M1",'1':"M2"}
             self.term = 1
+            self.prevLogIndex = 1
+            self.prevLogTerm = 0
             self.commit_index=-1
         self.cur_index={i:len(self.logs)-1 for i in self.peers}
 
@@ -296,6 +302,7 @@ class RaftNode:
             self.leader_id = -1
             self.vote_count = 0
             self.broadcast_leader(-1)
+            self.reset_election_timeout()
 
 
     def start_election(self):
@@ -317,17 +324,16 @@ class RaftNode:
         #TODO: Replicate Leader LOG to each Node
         #ReplicateLog(nodeId, follower )(From Pseudocode)
         self.dump_data(f"Node {leader} is the New Leader.\n")
-        if(self.state == 'leader'):
-            #TODO: append the record (msg : msg, term : currentTerm) to log (from Pseudocode)
-            for peer in self.peers:
-                if peer != self.node_id:
-                    request = {
-                        'type': 'leader_message',
-                        'term': self.term,
-                        'leader_id': leader,
-                        'No-response':False
-                    }
-                    self.send_recv_message(peer, request)
+        #TODO: append the record (msg : msg, term : currentTerm) to log (from Pseudocode)
+        for peer in self.peers:
+            if peer != self.node_id:
+                request = {
+                    'type': 'leader_message',
+                    'term': self.term,
+                    'leader_id': leader,
+                    'No-response':False
+                }
+                self.send_recv_message(peer, request)
 
 
     def handle_leader_message(self, client_socket,request):
@@ -367,6 +373,7 @@ class RaftNode:
                     return
                 else:
                     print(f"Vote Issue Fail from {res['Node_id']}")
+                    self.reset_election_timeout()
         print(f"Node {self.node_id}, vote_cnt {self.vote_count}")
         if(self.vote_count >= len(peers)//2 +1):
             # #TEMP COMMENT
