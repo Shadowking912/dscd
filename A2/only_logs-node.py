@@ -16,7 +16,7 @@ class RaftNode:
         self.address = address
         self.peers = peers
         self.state = 'follower'
-        self.leader_id = 0
+        self.leader_id = 1
         self.leader_address=f"tcp://127.0.0.1:555{self.leader_id}"
         self.term = 0
         self.vote_count = 0
@@ -46,71 +46,42 @@ class RaftNode:
         if self.node_id == 0:
             # self.state = 'leader'
             # self.leader_id = self.node_id
-            self.logs = [{'term': 0, 'command': "SET",'key':"0",'value':"hello"},{'term':0,'command':'SET','key':"1",'value':"world"},{'term':1,'command':'SET','key':"2",'value':"gg"}]
+            self.logs = [{'term': 0, 'command': "SET",'key':"0",'value':"M1"},{'term':0,'command':'SET','key':"1",'value':"M2"},{'term':1,'command':'SET','key':"2",'value':"M3"}]
             # self.logs=[(0,"hello"),(0,"world"),(1,"gg")]
-            self.key_value_store = {"0":"hello","1":"world","2":"gg"}
+            self.key_value_store = {"0":"M1","1":"M2","2":"M3"}
             self.commit_index=0
             self.term = 1
 
         elif self.node_id ==1:
-            self.logs = [{'term': 0, 'command': "SET",'key':'0','value':"hello"},{'term':0,'command':'SET','key':'1','value':"world"}]
-            self.key_value_store={'0':"hello",'1':"world"}
+            self.logs = [{'term': 0, 'command': "SET",'key':'0','value':"M1"},{'term':0,'command':'SET','key':'1','value':"M2"}]
+            self.key_value_store={'0':"M1",'1':"M2"}
             self.term  = 0
             self.commit_index=-1
-        elif self.node_id==2:
-            # self.logs=[(0,"hello"),(1,"y")]
-            self.logs=[{'term': 0, 'command': "SET",'key':'0','value':"hello"},{'term':1,'command':'SET','key':'1','value':"y"}]
-            self.key_value_store={'0':"hello",'1':"y"}
-            self.term = 1
-            self.commit_index=-1
         
-
-        # Creating a directory for the node if it does not already exist for the logs and dumps
-        if os.path.isdir(os.path.join(self.logs_path))==False:
-            os.makedirs(os.path.join(self.logs_path))
-            with open(self.logs_path+"/logs.json","w"):
-                pass
-            with open(self.logs_path+"/metadata.json","w"):
-                pass
-            with open(self.logs_path+"/dump.txt","w"):
-                pass
-        else:
-        #   Write the functionality for loading the logs list from the text file (TO BE COMPLETED)
-            # Reading the logs
-            with open(self.logs_path+"/logs.json","r") as f:
-                self.logs = json.load(f)
-            
-            # Reading the metadata
-            with open(self.logs_path+"/metadata.json","r") as f:
-                metadata  = json.load(f)    
-                self.commit_index=metadata["Commit-Length"]-1
-                self.term = metadata["Term"]
-                self.voted_for=metadata["Voted For"]
-
-                print("Commit index = ",self.commit_index)
-                print("Term = ",self.term)
-                print("Voted For = ",self.voted_for)
         self.cur_index={i:len(self.logs)-1 for i in self.peers}
 
     def dump_data(self,data):
-        with open(f"{self.logs_path}/dump.txt","w") as f:
-            f.write(data)
+        # with open(f"{self.logs_path}/dump.txt","w") as f:
+        #     f.write(data)
+        pass#TEMP
 
     def write_metadata(self):
-        with open(self.logs_path+"/metadata.json","w") as f:
-            metadata={
-                'Commit-Length':self.commit_index+1,
-                'Term':self.term,
-                'Voted For':self.voted_for
-            }
-            json_object = json.dumps(metadata,indent=4)
-            f.write(json_object)
+        # with open(self.logs_path+"/metadata.json","w") as f:
+        #     metadata={
+        #         'Commit-Length':self.commit_index+1,
+        #         'Term':self.term,
+        #         'Voted For':self.voted_for
+        #     }
+        #     json_object = json.dumps(metadata,indent=4)
+        #     f.write(json_object)
+        pass#TEMP
 
     def write_logs(self):
-        with open(self.logs_path+"/logs.json","w") as f:
-            json_object = json.dumps(self.logs,indent=4)
-            f.write(json_object)
+        # with open(self.logs_path+"/logs.json","w") as f:
+        #     json_object = json.dumps(self.logs,indent=4)
+        #     f.write(json_object)
         # Function for handling the commiting entries at each heartbeat
+        pass#Temp
     def handle_commit_requests(self,leader_commit_index):
         # leaderIndex = message["LeaderCommit"]
         print("Logs = ",self.logs)
@@ -142,43 +113,6 @@ class RaftNode:
             print(f"Leader {self.leader_id} with commit index : {self.commit_index}")
             self.write_metadata()
 
-
-    def handle_heartbeat(self, message):
-        print(f"Received heartbeat from leader {message['leader_id']}",self.leader_id)
-        # self.commit_entries()
-        #TEMP COMMENT
-        self.handle_commit_requests(message['LeaderCommit'])
-        #TEMP COMMENT
-        if self.state == 'follower': 
-            self.reset_election_timeout()
-
-    def handle_vote_request(self, socket,message):
-        print(f"Received vote request from candidate {message['candidate_id']}")
-        if self.state == 'follower':
-            if self.voted_for is None or self.voted_for == message['candidate_id']:
-                self.voted_for = message['candidate_id']
-
-                #TEMP COMMENT
-                # Dump Point-12
-                self.dump_data(f"Vote granted for Node {self.voted_for} in term {message['term']}")
-                #TEMP COMMENT
-                
-                self.reset_election_timeout()
-
-                socket.send_json({"Vote":"True",'No-response':False})
-            else:
-                #TEMP COMMENT
-                # Dump Point-13
-                self.dump_data(f"Vote denied for Node {message['candidate_id']} in term {message['term']}")
-                #TEMP COMMENT
-                socket.send_json({"Vote":"False",'No-response':False})
-        else:
-            #TEMP COMMENT
-            # Dump Point-13
-            self.dump_data(f"Vote denied for Node {message['candidate_od']} in term {message['term']}")
-            #TEMP COMMENT
-            socket.send_json({"Vote":"False",'No-response':False})
-
     def handle_client_request(self, client_socket,request):
         if self.state != 'leader':
             response={
@@ -206,9 +140,9 @@ class RaftNode:
                 
                 self.logs.append({'term': self.term, 'command': 'SET','key': key, 'value': f'{value}'})
                 replicate_majority = self.replicate_log_entries()
-                print("SET REQ",replicate_majority)
+                # print("SET REQ",replicate_majority)
                 if replicate_majority>=((len(self.peers)-1)//2+1):
-                    print("DEB","sucess set value")
+                    # print("DEB","sucess set value")
                     self.commit_log_entries()
                     response = {
                         'status': 'success',
@@ -217,7 +151,7 @@ class RaftNode:
                     }
                     self.socket.send_json(response)
                 else:
-                    print("DEB","failure set value")
+                    # print("DEB","failure set value")
                     response = {
                         'type':'client_response',
                         'status':'failure',
@@ -247,12 +181,12 @@ class RaftNode:
                     }
                     self.socket.send_json(response)
 
-    def reset_election_timeout(self):
-        self.election_timer.cancel()
-        self.vote_count=0
-        self.voted_for = None
-        self.election_timer = threading.Timer(self.election_timeout, self.start_election)
-        self.election_timer.start()
+    # def reset_election_timeout(self):
+    #     self.election_timer.cancel()
+    #     self.vote_count=0
+    #     self.voted_for = None
+    #     self.election_timer = threading.Timer(self.election_timeout, self.start_election)
+    #     self.election_timer.start()
 
     # def reset_lease(self):
     #     self.lease_timer.cancel()
@@ -260,35 +194,6 @@ class RaftNode:
     #     self.lease_timer = threading.Timer(self.lease, self.end_lease)
     #     self.lease_timer.start()
     
-    def end_lease(self):
-        if(self.state == 'leader'):
-             #  Point 2 of the dump
-            self.dump_data(f"Leader {self.node_id} lease renewal failed. Stepping Down.")
-            # Point 14 of the sump
-            self.dump_data(f"Leader {self.node_id} stepping down")
-            print(f"Ended Lease for Leader {self.node_id}")
-            self.state = 'follower'
-            self.voted_for = None
-            self.leader_id = -1
-            self.vote_count = 0
-            self.broadcast_leader(-1)
-
-
-    def start_election(self):
-        print("DEG:",f"Leader id: {self.leader_id}")
-        if self.leader_id!=-1:
-            self.reset_election_timeout()
-        elif self.state != 'leader':
-            # Dump Point 4
-            self.dump_data(f"Node {self.node_id} election timer timed out, Starting election.")
-            print(f"Node:{self.node_id} started election")
-            self.state = 'candidate'
-            self.term += 1
-            self.voted_for = self.node_id
-            self.vote_count += 1  # Vote for self
-            # self.reset_election_timeout()
-            self.send_vote_requests()
-
     def broadcast_leader(self,leader):
         for peer in self.peers:
             if peer != self.node_id:
@@ -309,114 +214,7 @@ class RaftNode:
         print(f"Node {self.node_id} got leader id:{self.leader_id}")
         client_socket.send_json({"response": "Leader Broadcast ACK", "address": self.address})
         #implement term handling from leader
-
-    def send_vote_requests(self):
-        print(f"Node:{self.node_id} sent vote req")
-        for peer in self.peers:
-            if peer != self.node_id:
-                request = {
-                    'type': 'request_vote',
-                    'term': self.term,
-                    'candidate_id': self.node_id
-                }
-                res = self.send_recv_message(peer, request)
-                print("DEB",res)
-                if(res['No-response']==True):
-                    print(f"No Response from {peer} in voting")
-                elif(res['Vote']=='True'):
-                    self.vote_count+=1
-        print(f"Node {self.node_id}, vote_cnt {self.vote_count}")
-        if(self.vote_count >= len(peers)//2 +1):
-            #TEMP COMMENT
-            # Dump Point-5
-            self.dump_data(f"Node {self.node_id} became the leader for term {self.term}")
-            #TEMP COMMENT
-
-            self.state = 'leader'
-            self.leader_id = self.node_id
-            print(f"New Leader is {self.node_id}")
-            self.broadcast_leader(self.node_id)
-
-            self.lease_timer = threading.Timer(self.leasetime,self.end_lease)
-            self.lease_timer.start()
-
-            #sending NO_OP
-
-            #TEMP COMMENT
-            self.logs.append({'term': self.term, 'command': "NO-OP",'key':None,'value':None})
-            # Dump Point-1
-            self.dump_data(f"Leader {self.node_id} sending heartbeat and Renewing Lease")
-            #TEMP COMMENT
-
-            heartbeat_thread = threading.Thread(target=self.send_heartbeat)
-            heartbeat_thread.start()
-
-            
-
-
-    def send_heartbeat(self):
-        dealers=[]
-        context = zmq.Context()
-        context.setsockopt(zmq.LINGER, 0)
-        while True:
-            if self.state == 'leader':
-                for peer in self.peers:
-                    if peer != self.node_id:
-                        # request = {
-                        #     'type': 'heartbeat',
-                        #     'term': self.term,
-                        #     'leader_id': self.node_id,
-                        #     'No-response':False
-                        # }
-                        if len(self.logs)>0:
-                            request = {
-                                'type': 'heartbeat',
-                                'term': self.term,
-                                'leader_id': self.node_id,
-                                'entries': [],
-                                'prevLogIndex':self.cur_index[peer],
-                                'prevLogTerm':self.logs[self.cur_index[peer]]['term'],
-                                'LeaderCommit':self.commit_index
-                            }
-                        else:
-                            request = {
-                                'type': 'heartbeat',
-                                'term': self.term,
-                                'leader_id': self.node_id,
-                                'entries': [],
-                                'prevLogIndex':-1,
-                                'prevLogTerm':-1,
-                                'LeaderCommit':self.commit_index
-                        }
-                        # self.send_message(peer, request)
-                        dealer_socket = context.socket(zmq.DEALER)
-                        dealer_socket.connect(f"tcp://localhost:555{peer}")
-                        dealer_socket.send(b"", zmq.SNDMORE)
-                        # dealer_socket.send_multipart([b"", zmq.SNDMORE])
-                        dealer_socket.send_json(request)
-                        dealers.append(dealer_socket)
-            timeout = 2
-            poller = zmq.Poller()
-            for i in dealers:
-                poller.register(i, zmq.POLLIN)
-            socks = dict(poller.poll(timeout* 1000*1000))  # Convert timeout to seconds
-            response = {"No-response":True}
-
-            for socket in dealers:
-                if socket in socks:
-                    x = socket.recv(zmq.DONTWAIT)
-                    if(x==b""):
-                        response = socket.recv_json(zmq.DONTWAIT)
-                        print(f"Response from {peer}: {response}")
-                # else:
-                    # print(f"No response received from {peer} within {timeout} seconds.")
-
-                # print(f"Response from {peer}: {response}")
-                socket.close()
-
-            time.sleep(self.heartbeat_interval)
-
-
+  
     def send_recv_message(self, peer, message): # send message and w8 2s for response
         context = zmq.Context()
         context.setsockopt(zmq.LINGER, 0)
@@ -452,7 +250,7 @@ class RaftNode:
         leader_commit_index = request['LeaderCommit']
         
         if self.term>leader_term:
-            print("found error")
+            print("Leader Term Issue")
             logresults = {
                 'type':'append_entries',
                 'node_id':self.node_id,
@@ -566,7 +364,7 @@ class RaftNode:
                             if node_term>self.term:
                                 self.status="follower"
                                 self.voted_for=None#Chk Voted for in current term for logs
-                                self.reset_election_timeout()
+                                # self.reset_election_timeout()
                                 self.broadcast_leader(node_id)
                                 self.term = node_term
                                 # Dump Point-14
@@ -594,6 +392,12 @@ class RaftNode:
         # if self.state=='leader' and self.term==
         print("logs updated")
         return majority
+    def print_node_logs(self):
+        print("Current Logs:")
+        i=1
+        for log in self.logs:
+            print(i,log)
+            i+=1
        
                 
     def run(self):
@@ -601,23 +405,14 @@ class RaftNode:
         context.setsockopt(zmq.LINGER, 0)
         self.socket = context.socket(zmq.REP)
         self.socket.bind(self.address)
-        print(self.logs)
-
-        # self.election_timer = threading.Timer(self.election_timeout, self.start_election)
-        # self.election_timer.start()
-
-        
         
        
-        if(self.node_id == 0): #TEMp
+        if(self.node_id == 1): #TEMp
             self.state = 'leader'
-            # heartbeat_thread = threading.Thread(target=self.send_heartbeat)
-            # heartbeat_thread.start()
-
-        
-
+           
         while True:
             print("DEB:","Listening State")
+            self.print_node_logs()
             message = self.socket.recv_json()
             print(message)
             try:
@@ -639,6 +434,7 @@ class RaftNode:
                         self.listen_replication_requests(message)   
             except zmq.ZMQError as e:
                 print(e,message['type'])
+    
                
 
 if __name__ == "__main__":

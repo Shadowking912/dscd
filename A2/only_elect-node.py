@@ -49,21 +49,21 @@ class RaftNode:
         if self.node_id == 0:
             # self.state = 'leader'
             # self.leader_id = self.node_id
-            self.logs = [{'term': 0, 'command': "SET",'key':"0",'value':"hello"},{'term':0,'command':'SET','key':"1",'value':"world"},{'term':1,'command':'SET','key':"2",'value':"gg"}]
+            self.logs = [{'term': 0, 'command': "SET",'key':"0",'value':"M1"},{'term':0,'command':'SET','key':"1",'value':"M2"},{'term':1,'command':'SET','key':"2",'value':"M3"}]
             # self.logs=[(0,"hello"),(0,"world"),(1,"gg")]
-            self.key_value_store = {"0":"hello","1":"world","2":"gg"}
+            self.key_value_store = {"0":"M1","1":"M2","2":"M3"}
             self.commit_index=0
             self.term = 1
 
         elif self.node_id ==1:
-            self.logs = [{'term': 0, 'command': "SET",'key':'0','value':"hello"},{'term':0,'command':'SET','key':'1','value':"world"}]
-            self.key_value_store={'0':"hello",'1':"world"}
+            self.logs = [{'term': 0, 'command': "SET",'key':'0','value':"M1"},{'term':0,'command':'SET','key':'1','value':"M2"}]
+            self.key_value_store={'0':"M1",'1':"M2"}
             self.term  = 0
             self.commit_index=-1
         elif self.node_id==2:
             # self.logs=[(0,"hello"),(1,"y")]
-            self.logs=[{'term': 0, 'command': "SET",'key':'0','value':"hello"},{'term':1,'command':'SET','key':'1','value':"y"}]
-            self.key_value_store={'0':"hello",'1':"y"}
+            self.logs = [{'term': 0, 'command': "SET",'key':'0','value':"M1"},{'term':0,'command':'SET','key':'1','value':"M2"}]
+            self.key_value_store={'0':"M1",'1':"M2"}
             self.term = 1
             self.commit_index=-1
         self.cur_index={i:len(self.logs)-1 for i in self.peers}
@@ -96,11 +96,11 @@ class RaftNode:
             
 
     def dump_data(self,data):
-        with open(f"{self.logs_path}/dump.txt","w") as f:
+        with open(f"{self.logs_path}/dump.txt","a") as f:
             f.write(data)
 
     def write_metadata(self):
-        with open(self.logs_path+"/metadata.json","w") as f:
+        with open(self.logs_path+"/metadata.json","a") as f:
             metadata={
                 'Commit-Length':self.commit_index+1,
                 'Term':self.term,
@@ -110,7 +110,7 @@ class RaftNode:
             f.write(json_object)
 
     def write_logs(self):
-        with open(self.logs_path+"/logs.json","w") as f:
+        with open(self.logs_path+"/logs.json","a") as f:
             json_object = json.dumps(self.logs,indent=4)
             f.write(json_object)
         # Function for handling the commiting entries at each heartbeat
@@ -122,7 +122,7 @@ class RaftNode:
                 print("Value of i  = ",i)
                 self.key_value_store[self.logs[i]['key']] = self.logs[i]['value']
                 # Dump Point-7 
-                self.dump_data(f"Node {self.node_id} (follower) commited the entry {self.logs[i]['command']} {self.logs[i]['key']}  : {self.logs[i]['value']} to the state machine.")
+                self.dump_data(f"Node {self.node_id} (follower) commited the entry {self.logs[i]['command']} {self.logs[i]['key']}  : {self.logs[i]['value']} to the state machine.\n")
     
             self.write_logs()
             self.commit_index = leader_commit_index
@@ -207,8 +207,8 @@ class RaftNode:
                 # self.key_value_store[key] = value
                 
                 self.logs.append({'term': self.term, 'command': 'SET','key': key, 'value': f'{value}'})
-
-                if self.replicate_log_entries()>=((len(self.peers)-1)//2+1):
+                replicate_majority = self.replicate_log_entries()
+                if replicate_majority>=((len(self.peers)-1)//2+1):
                     self.commit_log_entries()
                     response = {
                         'status': 'success',
@@ -262,9 +262,9 @@ class RaftNode:
     def end_lease(self):
         if(self.state == 'leader'):
              #  Point 2 of the dump
-            self.dump_data(f"Leader {self.node_id} lease renewal failed. Stepping Down.")
+            self.dump_data(f"Leader {self.node_id} lease renewal failed. Stepping Down.\n")
             # Point 14 of the sump
-            self.dump_data(f"Leader {self.node_id} stepping down")
+            self.dump_data(f"Leader {self.node_id} stepping down\n")
             print(f"Ended Lease for Leader {self.node_id}")
             self.state = 'follower'
             self.voted_for = None
@@ -279,7 +279,7 @@ class RaftNode:
             self.reset_election_timeout()
         elif self.state != 'leader':
             # Dump Point 4
-            self.dump_data(f"Node {self.node_id} election timer timed out, Starting election.")
+            self.dump_data(f"Node {self.node_id} election timer timed out, Starting election.\n")
             print(f"Node:{self.node_id} started election")
             self.state = 'candidate'
             self.term += 1
@@ -289,6 +289,7 @@ class RaftNode:
             self.send_vote_requests()
 
     def broadcast_leader(self,leader):
+        self.dump_data(f"Node {leader} is the New Leader.\n")
         for peer in self.peers:
             if peer != self.node_id:
                 request = {
@@ -306,6 +307,7 @@ class RaftNode:
         if(self.state == 'candidate'):
             self.state = 'follower'
         print(f"Node {self.node_id} got leader id:{self.leader_id}")
+        self.dump_data(f"Node {self.node_id} got leader id:{self.leader_id} \n")
         client_socket.send_json({"response": "Leader Broadcast ACK", "address": self.address})
         #implement term handling from leader
 
@@ -442,155 +444,155 @@ class RaftNode:
         return response
 
     
-    def listen_replication_requests(self,request):
-        leader_log_index = request['prevLogIndex']
-        leader_log_term = request['prevLogTerm']
-        # Getting the leader's term for checking the condition of denial of log replication
-        leader_term = request['term']
-        # Leader commit index, received as part of communication from the leader
-        leader_commit_index = request['LeaderCommit']
+    # def listen_replication_requests(self,request):
+    #     leader_log_index = request['prevLogIndex']
+    #     leader_log_term = request['prevLogTerm']
+    #     # Getting the leader's term for checking the condition of denial of log replication
+    #     leader_term = request['term']
+    #     # Leader commit index, received as part of communication from the leader
+    #     leader_commit_index = request['LeaderCommit']
         
-        if self.term>leader_term:
-            print("found error")
-            logresults = {
-                'type':'append_entries',
-                'node_id':self.node_id,
-                'term':self.term,
-                'success':False
-            }
-        else:
-            curr_log_term=-1
-            matching_index=-1
+    #     if self.term>leader_term:
+    #         print("found error")
+    #         logresults = {
+    #             'type':'append_entries',
+    #             'node_id':self.node_id,
+    #             'term':self.term,
+    #             'success':False
+    #         }
+    #     else:
+    #         curr_log_term=-1
+    #         matching_index=-1
 
-            for i in range(len(self.logs)-1,-1,-1):
-                if self.logs[i]['term']==leader_log_term:
-                    # {'term': 0, 'command': 'SET', 'key': 0, 'value': 'hello'}
-                    curr_log_term=self.logs[i]['term']
-                    if i==leader_log_index:
-                        matching_index=i
-                        break
-                    else:
-                        matching_index=i-1
-                        break
+    #         for i in range(len(self.logs)-1,-1,-1):
+    #             if self.logs[i]['term']==leader_log_term:
+    #                 # {'term': 0, 'command': 'SET', 'key': 0, 'value': 'hello'}
+    #                 curr_log_term=self.logs[i]['term']
+    #                 if i==leader_log_index:
+    #                     matching_index=i
+    #                     break
+    #                 else:
+    #                     matching_index=i-1
+    #                     break
 
-            if matching_index==leader_log_index:
-                logresults={
-                    'type':'append_entries',
-                    'node_id':self.node_id,
-                    'term':self.term,
-                    'success':True
-                }
-                if matching_index!=-1:
-                    self.logs=self.logs[:matching_index]
-                else:
-                    self.logs=[]
-                for i in request['entries']:
-                    self.logs.append(i)
+    #         if matching_index==leader_log_index:
+    #             logresults={
+    #                 'type':'append_entries',
+    #                 'node_id':self.node_id,
+    #                 'term':self.term,
+    #                 'success':True
+    #             }
+    #             if matching_index!=-1:
+    #                 self.logs=self.logs[:matching_index]
+    #             else:
+    #                 self.logs=[]
+    #             for i in request['entries']:
+    #                 self.logs.append(i)
 
-                # Dump Point-10
-                self.dump_data(f"Node {self.node_id} accepted AppendEntries RPC from {self.leader_id}")
-                print(self.logs)
-            else:
-                logresults = {
-                    'type':'append_entries',
-                    'node_id':self.node_id,
-                    'term':self.term,
-                    'success':False
-                }
-                # Dump Point-11
-                self.dump_data(f"Node {self.node_id} rejected AppendEntries RPC from {self.leader_id}")
-        self.socket.send_json(logresults)
-        print("sent response to leader")
+    #             # Dump Point-10
+    #             self.dump_data(f"Node {self.node_id} accepted AppendEntries RPC from {self.leader_id}")
+    #             print(self.logs)
+    #         else:
+    #             logresults = {
+    #                 'type':'append_entries',
+    #                 'node_id':self.node_id,
+    #                 'term':self.term,
+    #                 'success':False
+    #             }
+    #             # Dump Point-11
+    #             self.dump_data(f"Node {self.node_id} rejected AppendEntries RPC from {self.leader_id}")
+    #     self.socket.send_json(logresults)
+    #     print("sent response to leader")
 
-    def replicate_log_entries(self):
-        dealers=[]
-        context = zmq.Context()
-        context.setsockopt(zmq.LINGER, 0)
-        majority=0
-        for i in range(len(self.peers)):
-                peer=self.peers[i]
-                if peer != self.node_id:
-                    # self.store_log_entries()
-                    print("Current Index = ",self.cur_index)
-                    if len(self.logs)>0:
-                        request = {
-                            'type': 'append_entries',
-                            'term': self.term,
-                            'leader_id': self.node_id,
-                            'entries': self.logs[self.cur_index[peer]:],
-                            'prevLogIndex':self.cur_index[peer],
-                            'prevLogTerm':self.logs[self.cur_index[peer]]['term'],
-                            'LeaderCommit':self.commit_index
-                        }
-                    else:
-                        request = {
-                            'type': 'append_entries',
-                            'term': self.term,
-                            'leader_id': self.node_id,
-                            'entries': self.logs,
-                            'prevLogIndex':-1,
-                            'prevLogTerm':-1,
-                            'LeaderCommit':self.commit_index
-                        }
-                    dealer_socket = context.socket(zmq.DEALER)
-                    dealer_socket.connect(f"tcp://localhost:555{peer}")
-                    dealer_socket.send(b"", zmq.SNDMORE)
-                    # dealer_socket.send_multipart([b"", zmq.SNDMORE])
-                    dealer_socket.send_json(request)
-                    dealers.append(dealer_socket)
+    # def replicate_log_entries(self):
+    #     dealers=[]
+    #     context = zmq.Context()
+    #     context.setsockopt(zmq.LINGER, 0)
+    #     majority=0
+    #     for i in range(len(self.peers)):
+    #             peer=self.peers[i]
+    #             if peer != self.node_id:
+    #                 # self.store_log_entries()
+    #                 print("Current Index = ",self.cur_index)
+    #                 if len(self.logs)>0:
+    #                     request = {
+    #                         'type': 'append_entries',
+    #                         'term': self.term,
+    #                         'leader_id': self.node_id,
+    #                         'entries': self.logs[self.cur_index[peer]:],
+    #                         'prevLogIndex':self.cur_index[peer],
+    #                         'prevLogTerm':self.logs[self.cur_index[peer]]['term'],
+    #                         'LeaderCommit':self.commit_index
+    #                     }
+    #                 else:
+    #                     request = {
+    #                         'type': 'append_entries',
+    #                         'term': self.term,
+    #                         'leader_id': self.node_id,
+    #                         'entries': self.logs,
+    #                         'prevLogIndex':-1,
+    #                         'prevLogTerm':-1,
+    #                         'LeaderCommit':self.commit_index
+    #                     }
+    #                 dealer_socket = context.socket(zmq.DEALER)
+    #                 dealer_socket.connect(f"tcp://localhost:555{peer}")
+    #                 dealer_socket.send(b"", zmq.SNDMORE)
+    #                 # dealer_socket.send_multipart([b"", zmq.SNDMORE])
+    #                 dealer_socket.send_json(request)
+    #                 dealers.append(dealer_socket)
 
-        poller = zmq.Poller()
-        for i in dealers:
-            poller.register(i, zmq.POLLIN)
-        timeout=2
-        while(majority<((len(self.peers)-1)//2+1)):
-            socks = dict(poller.poll(timeout* 1000))
-            if not socks:
-                print("Timeout occurred, no incoming messages.")
-                for sock in dealers:
-                    sock.close()
-                break
-            for socket in dealers:
-                if socket in socks and socks[socket] == zmq.POLLIN:
-                    message1 = socket.recv(zmq.DONTWAIT)
-                    if message1 == b"":
-                        message2=socket.recv_json(zmq.DONTWAIT)
-                        print("Received message from:", message2)
-                        print("Message content:", message2)
-                        if message2['success']==False:
-                            # Added the condition of term of the node being greater than the term of the leader
-                            node_term = message2['term']
-                            # term of the node is greater than the term of the leader
-                            if node_term>self.term:
-                                self.status="folllower"
-                                self.voted_for=None
-                                self.reset_election_timeout()
-                                self.term = node_term
-                                # Dump Point-14
-                                self.dump_data(f"{self.node_id} Stepping down")
-                                break
-                            else:
-                                self.cur_index[message2['node_id']]-=1
-                                socket.send(b"", zmq.SNDMORE)
-                                request = {
-                                        'type': 'append_entries',
-                                        'term': self.term,
-                                        'leader_id': self.node_id,
-                                        'entries': self.logs[self.cur_index[peer]:],
-                                        'prevLogIndex':self.cur_index[peer],
-                                        'prevLogTerm':self.logs[self.cur_index[peer]]['term'],
-                                        'LeaderCommit':self.commit_index
-                                }
-                                socket.send_json(request)
-                        else: # If success was received
-                            # peer_index = message2['ack']  
-                            # self.cur_index[message2['node_id']] = peer_index
-                            majority+=1
-            print("Majority:",majority)
-        # Checking for the role and the term number
-        # if self.state=='leader' and self.term==
-        print("logs updated")
-        return majority
+    #     poller = zmq.Poller()
+    #     for i in dealers:
+    #         poller.register(i, zmq.POLLIN)
+    #     timeout=2
+    #     while(majority<((len(self.peers)-1)//2+1)):
+    #         socks = dict(poller.poll(timeout* 1000))
+    #         if not socks:
+    #             print("Timeout occurred, no incoming messages.")
+    #             for sock in dealers:
+    #                 sock.close()
+    #             break
+    #         for socket in dealers:
+    #             if socket in socks and socks[socket] == zmq.POLLIN:
+    #                 message1 = socket.recv(zmq.DONTWAIT)
+    #                 if message1 == b"":
+    #                     message2=socket.recv_json(zmq.DONTWAIT)
+    #                     print("Received message from:", message2)
+    #                     print("Message content:", message2)
+    #                     if message2['success']==False:
+    #                         # Added the condition of term of the node being greater than the term of the leader
+    #                         node_term = message2['term']
+    #                         # term of the node is greater than the term of the leader
+    #                         if node_term>self.term:
+    #                             self.status="folllower"
+    #                             self.voted_for=None
+    #                             self.reset_election_timeout()
+    #                             self.term = node_term
+    #                             # Dump Point-14
+    #                             self.dump_data(f"{self.node_id} Stepping down")
+    #                             break
+    #                         else:
+    #                             self.cur_index[message2['node_id']]-=1
+    #                             socket.send(b"", zmq.SNDMORE)
+    #                             request = {
+    #                                     'type': 'append_entries',
+    #                                     'term': self.term,
+    #                                     'leader_id': self.node_id,
+    #                                     'entries': self.logs[self.cur_index[peer]:],
+    #                                     'prevLogIndex':self.cur_index[peer],
+    #                                     'prevLogTerm':self.logs[self.cur_index[peer]]['term'],
+    #                                     'LeaderCommit':self.commit_index
+    #                             }
+    #                             socket.send_json(request)
+    #                     else: # If success was received
+    #                         # peer_index = message2['ack']  
+    #                         # self.cur_index[message2['node_id']] = peer_index
+    #                         majority+=1
+    #         print("Majority:",majority)
+    #     # Checking for the role and the term number
+    #     # if self.state=='leader' and self.term==
+    #     print("logs updated")
+    #     return majority
        
                 
     def run(self):
@@ -630,9 +632,9 @@ class RaftNode:
                 elif message['type'] == 'leader_message':
                     self.handle_leader_message(self.socket,message) 
                 
-                elif message['type'] == 'append_entries':
-                        print("got")
-                        self.listen_replication_requests(message)   
+                # elif message['type'] == 'append_entries':
+                #         print("got")
+                #         self.listen_replication_requests(message)   
             except zmq.ZMQError as e:
                 print(e,message['type'])
                
