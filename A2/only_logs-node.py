@@ -16,7 +16,7 @@ class RaftNode:
         self.address = address
         self.peers = peers
         self.state = 'follower'
-        self.leader_id = -1
+        self.leader_id = 0
         self.leader_address=f"tcp://127.0.0.1:555{self.leader_id}"
         self.term = 0
         self.vote_count = 0
@@ -205,8 +205,10 @@ class RaftNode:
                 # self.key_value_store[key] = value
                 
                 self.logs.append({'term': self.term, 'command': 'SET','key': key, 'value': f'{value}'})
-
-                if self.replicate_log_entries()>=((len(self.peers)-1)//2+1):
+                replicate_majority = self.replicate_log_entries()
+                print("SET REQ",replicate_majority)
+                if replicate_majority>=((len(self.peers)-1)//2+1):
+                    print("DEB","sucess set value")
                     self.commit_log_entries()
                     response = {
                         'status': 'success',
@@ -215,12 +217,13 @@ class RaftNode:
                     }
                     self.socket.send_json(response)
                 else:
-                        response = {
-                            'type':'client_response',
-                            'status':'failure',
-                            'No-response':False
-                        }
-                        self.socket.send_json(response)
+                    print("DEB","failure set value")
+                    response = {
+                        'type':'client_response',
+                        'status':'failure',
+                        'No-response':False
+                    }
+                    self.socket.send_json(response)
                
 
             elif request_type == 'GET':
@@ -558,11 +561,13 @@ class RaftNode:
                         if message2['success']==False:
                             # Added the condition of term of the node being greater than the term of the leader
                             node_term = message2['term']
+                            node_id = message2['node_id']
                             # term of the node is greater than the term of the leader
                             if node_term>self.term:
-                                self.status="folllower"
-                                self.voted_for=None
+                                self.status="follower"
+                                self.voted_for=None#Chk Voted for in current term for logs
                                 self.reset_election_timeout()
+                                self.broadcast_leader(node_id)
                                 self.term = node_term
                                 # Dump Point-14
                                 self.dump_data(f"{self.node_id} Stepping down")
@@ -596,17 +601,18 @@ class RaftNode:
         context.setsockopt(zmq.LINGER, 0)
         self.socket = context.socket(zmq.REP)
         self.socket.bind(self.address)
+        print(self.logs)
 
-        self.election_timer = threading.Timer(self.election_timeout, self.start_election)
-        self.election_timer.start()
+        # self.election_timer = threading.Timer(self.election_timeout, self.start_election)
+        # self.election_timer.start()
 
         
         
        
-        # if(self.node_id == 0): #TEMp
-        #     self.state = 'leader'
-        #     heartbeat_thread = threading.Thread(target=self.send_heartbeat)
-        #     heartbeat_thread.start()
+        if(self.node_id == 0): #TEMp
+            self.state = 'leader'
+            # heartbeat_thread = threading.Thread(target=self.send_heartbeat)
+            # heartbeat_thread.start()
 
         
 
@@ -639,6 +645,6 @@ if __name__ == "__main__":
     node_id = int(input("Enter Node ID: "))
     server_address = f"tcp://127.0.0.1:555{node_id}"
     print(f"Node Listening at {server_address}")
-    peers = [0, 1,2]  # Assuming 5 nodes
+    peers = [0, 1]  # Assuming 5 nodes
     node = RaftNode(node_id, server_address, peers)
     node.run()

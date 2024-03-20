@@ -7,6 +7,9 @@ import signal
 import os
 import json
 
+#Comit id: 8184630
+#Only Election and Leader Lease Correct
+#Commented Logs
 
 signal.signal(signal.SIGINT, signal.SIG_DFL)
 
@@ -63,7 +66,7 @@ class RaftNode:
             self.key_value_store={'0':"hello",'1':"y"}
             self.term = 1
             self.commit_index=-1
-        
+        self.cur_index={i:len(self.logs)-1 for i in self.peers}
 
         # Creating a directory for the node if it does not already exist for the logs and dumps
         if os.path.isdir(os.path.join(self.logs_path))==False:
@@ -90,7 +93,7 @@ class RaftNode:
                 print("Commit index = ",self.commit_index)
                 print("Term = ",self.term)
                 print("Voted For = ",self.voted_for)
-        self.cur_index={i:len(self.logs)-1 for i in self.peers}
+            
 
     def dump_data(self,data):
         with open(f"{self.logs_path}/dump.txt","w") as f:
@@ -123,32 +126,31 @@ class RaftNode:
     
             self.write_logs()
             self.commit_index = leader_commit_index
-            print(f"Commit Index of the node {self.node_id} is:{self.commit_index}")
+            print(f"Commit Index of the node {self.node_id} {self.commit_index}")
             self.write_metadata()
         # Else clause just for the sake of debugging
         else:
             print("No change in commit index needed")
 
     def commit_log_entries(self):
-        if self.state == 'leader':
-            print("Commiting log entries in the leader")
-            for i in range(self.commit_index+1,len(self.logs)):
-                self.key_value_store[self.logs[i]['key']] = self.logs[i]['value']
-                # Dump Point-9
-                self.dump_data(f"Node {self.node_id} (leader) commited the entry {self.logs[i]['command']} {self.logs[i]['key']} {self.logs[i]['value']} to the state machine")
-            
-            self.write_logs()
-            self.commit_index=len(self.logs)-1
-            print(f"Leader {self.leader_id} with commit index : {self.commit_index}")
-            self.write_metadata()
+        print("Commiting log entries by the leader")
+        for i in range(self.commit_index+1,len(self.logs)):
+            self.key_value_store[self.logs[i]['key']] = self.logs[i]['value']
+            # Dump Point-9
+            self.dump_data(f"Node {self.node_id} (leader) commited the entry {self.logs[i]['command']} {self.logs[i]['key']} {self.logs[i]['value']} to the state machine")
+        
+        self.write_logs()
+        self.commit_index=len(self.logs)-1
+        print(f"Leader {self.leader_id} with commit index : {self.commit_index}")
+        self.write_metadata()
 
 
     def handle_heartbeat(self, message):
         print(f"Received heartbeat from leader {message['leader_id']}",self.leader_id)
         # self.commit_entries()
-        #TEMP COMMENT
-        self.handle_commit_requests(message['LeaderCommit'])
-        #TEMP COMMENT
+        # #TEMP COMMENT
+        # self.handle_commit_requests(message['LeaderCommit'])
+        # #TEMP COMMENT
         if self.state == 'follower': 
             self.reset_election_timeout()
 
@@ -158,25 +160,25 @@ class RaftNode:
             if self.voted_for is None or self.voted_for == message['candidate_id']:
                 self.voted_for = message['candidate_id']
 
-                #TEMP COMMENT
-                # Dump Point-12
-                self.dump_data(f"Vote granted for Node {self.voted_for} in term {message['term']}")
-                #TEMP COMMENT
+                # #TEMP COMMENT
+                # # Dump Point-12
+                # self.dump_data(f"Vote granted for Node {self.voted_for} in term {message['term']}")
+                # #TEMP COMMENT
                 
                 self.reset_election_timeout()
 
                 socket.send_json({"Vote":"True",'No-response':False})
             else:
-                #TEMP COMMENT
-                # Dump Point-13
-                self.dump_data(f"Vote denied for Node {message['candidate_id']} in term {message['term']}")
-                #TEMP COMMENT
+                # #TEMP COMMENT
+                # # Dump Point-13
+                # self.dump_data(f"Vote denied for Node {message['candidate_id']} in term {message['term']}")
+                # #TEMP COMMENT
                 socket.send_json({"Vote":"False",'No-response':False})
         else:
-            #TEMP COMMENT
-            # Dump Point-13
-            self.dump_data(f"Vote denied for Node {message['candidate_od']} in term {message['term']}")
-            #TEMP COMMENT
+            # #TEMP COMMENT
+            # # Dump Point-13
+            # self.dump_data(f"Vote denied for Node {message['candidate_od']} in term {message['term']}")
+            # #TEMP COMMENT
             socket.send_json({"Vote":"False",'No-response':False})
 
     def handle_client_request(self, client_socket,request):
@@ -195,10 +197,10 @@ class RaftNode:
 
             if request_type == 'SET':
                 print(f"Received SET request for key '{key}' with value '{value}'")
-                #TEMP COMMENT
-                # Dump Point-8
-                self.dump_data(f"Node {self.node_id}(leader) received an {request_type} {key} {value} request")
-                #TEMP COMMENT
+                # #TEMP COMMENT
+                # # Dump Point-8
+                # self.dump_data(f"Node {self.node_id}(leader) received an {request_type} {key} {value} request")
+                # #TEMP COMMENT
 
                 if self.state=='leader':     
                     self.key_value_store[key] = value
@@ -324,10 +326,10 @@ class RaftNode:
                     self.vote_count+=1
         print(f"Node {self.node_id}, vote_cnt {self.vote_count}")
         if(self.vote_count >= len(peers)//2 +1):
-            #TEMP COMMENT
-            # Dump Point-5
-            self.dump_data(f"Node {self.node_id} became the leader for term {self.term}")
-            #TEMP COMMENT
+            # #TEMP COMMENT
+            # # Dump Point-5
+            # self.dump_data(f"Node {self.node_id} became the leader for term {self.term}")
+            # #TEMP COMMENT
 
             self.state = 'leader'
             self.leader_id = self.node_id
@@ -339,11 +341,11 @@ class RaftNode:
 
             #sending NO_OP
 
-            #TEMP COMMENT
-            self.logs.append({'term': self.term, 'command': "NO-OP",'key':None,'value':None})
-            # Dump Point-1
-            self.dump_data(f"Leader {self.node_id} sending heartbeat and Renewing Lease")
-            #TEMP COMMENT
+            # #TEMP COMMENT
+            # self.logs.append({'term': self.term, 'command': "NO-OP",'key':None,'value':None})
+            # # Dump Point-1
+            # self.dump_data(f"Leader {self.node_id} sending heartbeat and Renewing Lease")
+            # #TEMP COMMENT
 
             heartbeat_thread = threading.Thread(target=self.send_heartbeat)
             heartbeat_thread.start()

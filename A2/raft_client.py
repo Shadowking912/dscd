@@ -32,7 +32,6 @@ class RaftClient:
         try:
             self.socket.send_json(request)
             response = self.socket.recv_json()
-
             status = response['status']
             while status!='success':
                 # Debugging statement
@@ -44,10 +43,11 @@ class RaftClient:
                 self.server_address = f"tcp://127.0.0.1:555{leader}"
                 self.change_socket_connection()
                 self.socket.send_json(request)
-                print(f"Response from server : {response}")
+                
                 response  = self.socket.recv_json()
+                # print(f"Response from server : {response}")
                 status = response['status']
-            
+            print(f"Response from server : {response}")
             
             
         except zmq.ZMQError as e:
