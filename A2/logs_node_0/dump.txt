@@ -1,1 +1,90 @@
 Node 0 election timer timed out, Starting election.
+Node 0 became the leader for term 1
+Leader 0 sending heartbeat and Renewing Lease
+Node 0(leader) received an SET 0.0 1 request
+Node 0 (leader) commited the entry NO-OP None None to the state machine
+Node 0 (leader) commited the entry SET 0.0 1 to the state machine
+Node 0(leader) received an SET 0.1 2 request
+Node 0 (leader) commited the entry SET 0.1 2 to the state machine
+Node 0(leader) received an SET 0.2 3 request
+Node 0 (leader) commited the entry SET 0.2 3 to the state machine
+Leader 0 lease renewal failed. Stepping Down.
+Leader 0 stepping down
+Vote granted for Node 1 in term 1
+Node 0 election timer timed out, Starting election.
+Node 0 became the leader for term 2
+Leader 0 sending heartbeat and Renewing Lease
+Leader 0 lease renewal failed. Stepping Down.
+Leader 0 stepping down
+Vote granted for Node 1 in term 2
+Node 0 election timer timed out, Starting election.
+Node 0 became the leader for term 3
+Leader 0 sending heartbeat and Renewing Lease
+Node 0(leader) received an SET 0.6 6 request
+Node 0 (leader) commited the entry NO-OP None None to the state machine
+Node 0 (leader) commited the entry NO-OP None None to the state machine
+Node 0 (leader) commited the entry SET 0.6 6 to the state machine
+Leader 0 lease renewal failed. Stepping Down.
+Leader 0 stepping down
+Vote granted for Node 1 in term 3
+Node 0 election timer timed out, Starting election.
+Node 0 became the leader for term 4
+Leader 0 sending heartbeat and Renewing Lease
+Node 0(leader) received an SET 0.8 9 request
+Node 0 (leader) commited the entry NO-OP None None to the state machine
+Node 0 (leader) commited the entry SET 0.8 9 to the state machine
+Leader 0 lease renewal failed. Stepping Down.
+Leader 0 stepping down
+Vote granted for Node 1 in term 4
+Node 0 election timer timed out, Starting election.
+Node 0 became the leader for term 5
+Leader 0 sending heartbeat and Renewing Lease
+Leader 0 lease renewal failed. Stepping Down.
+Leader 0 stepping down
+Vote granted for Node 1 in term 5
+Node 0 election timer timed out, Starting election.
+Node 0 became the leader for term 5
+Leader 0 sending heartbeat and Renewing Lease
+Node 0(leader) received an SET 0.9 12 request
+Node 0 (leader) commited the entry NO-OP None None to the state machine
+Node 0 (leader) commited the entry SET 0.9 12 to the state machine
+Node 0(leader) received an SET 0.10 12 request
+Node 0 (leader) commited the entry SET 0.10 12 to the state machine
+Node 0(leader) received an SET 0.11 13 request
+Node 0 (leader) commited the entry SET 0.11 13 to the state machine
+Leader 0 lease renewal failed. Stepping Down.
+Leader 0 stepping down
+Vote granted for Node 1 in term 4
+Node 0 election timer timed out, Starting election.
+Node 0 became the leader for term 6
+Leader 0 sending heartbeat and Renewing Lease
+Leader 0 lease renewal failed. Stepping Down.
+Leader 0 stepping down
+Vote granted for Node 1 in term 5
+Node 0 election timer timed out, Starting election.
+Node 0 became the leader for term 7
+Leader 0 sending heartbeat and Renewing Lease
+Leader 0 lease renewal failed. Stepping Down.
+Leader 0 stepping down
+Vote granted for Node 1 in term 6
+Node 0 election timer timed out, Starting election.
+Node 0 became the leader for term 8
+Leader 0 sending heartbeat and Renewing Lease
+Leader 0 lease renewal failed. Stepping Down.
+Leader 0 stepping down
+Vote granted for Node 1 in term 7
+Node 0 election timer timed out, Starting election.
+Node 0 became the leader for term 9
+Leader 0 sending heartbeat and Renewing Lease
+Node 0 election timer timed out, Starting election.
+Node 0 became the leader for term 6
+Leader 0 sending heartbeat and Renewing Lease
+Node 0(leader) received an SET 0.15 15 request
+Node 0 (leader) commited the entry NO-OP None None to the state machine
+Node 0 (leader) commited the entry SET 0.15 15 to the state machine
+Leader 0 lease renewal failed. Stepping Down.
+Leader 0 stepping down
+Vote granted for Node 1 in term 4
+Node 0 election timer timed out, Starting election.
+Node 0 became the leader for term 7
+Leader 0 sending heartbeat and Renewing Lease
