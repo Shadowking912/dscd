@@ -39,7 +39,7 @@ class RaftNode:
         self.key_value_store = {}
         self.prevLogIndex=0
         self.prevLogTerm=0
-        self.leasetime = 40 #Lease time in sec
+        self.leasetime = 20 #Lease time in sec
         self.logs_path = os.path.join(os.getcwd(),f'logs_node_{self.node_id}')
         self.cur_index={i:len(self.logs)-1 for i in self.peers}
 
@@ -157,7 +157,8 @@ class RaftNode:
     def handle_vote_request(self, socket,message):
         print(f"Received vote request from candidate {message['candidate_id']}")
         if self.state == 'follower':
-            if self.voted_for is None or self.voted_for == message['candidate_id']:
+            candidate_term = message['term']
+            if self.voted_for is None or self.voted_for == message['candidate_id'] and candidate_term>self.term:
                 self.voted_for = message['candidate_id']
 
                 #TEMP COMMENT
@@ -271,10 +272,11 @@ class RaftNode:
             self.leader_id = -1
             self.vote_count = 0
             self.broadcast_leader(-1)
+            self.reset_election_timeout()
 
 
     def start_election(self):
-        print("DEG:",f"Leader id: {self.leader_id}")
+        print("DEG:",f"Current Leader id: {self.leader_id}")
         if self.leader_id!=-1:
             self.reset_election_timeout()
         elif self.state != 'leader':
@@ -289,6 +291,10 @@ class RaftNode:
             self.send_vote_requests()
 
     def broadcast_leader(self,leader):
+        #TODO: Replicate Leader LOG to each Node
+        #ReplicateLog(nodeId, follower )(From Pseudocode)
+        self.dump_data(f"Node {leader} is the New Leader.")
+        #TODO: append the record (msg : msg, term : currentTerm) to log (from Pseudocode)
         for peer in self.peers:
             if peer != self.node_id:
                 request = {
@@ -313,10 +319,15 @@ class RaftNode:
         print(f"Node:{self.node_id} sent vote req")
         for peer in self.peers:
             if peer != self.node_id:
+                lastTerm =0
+                if(len(self.logs)>0):
+                    lastTerm = self.logs[-1]['term']
                 request = {
                     'type': 'request_vote',
-                    'term': self.term,
-                    'candidate_id': self.node_id
+                    'term': lastTerm,
+                    'candidate_id': self.node_id,
+                    'last_log_index':self.prevLogIndex,
+                    'last_log_term':self.prevLogTerm
                 }
                 res = self.send_recv_message(peer, request)
                 print("DEB",res)
@@ -349,6 +360,14 @@ class RaftNode:
 
             heartbeat_thread = threading.Thread(target=self.send_heartbeat)
             heartbeat_thread.start()
+        else:
+            #If not elected Leader due to less votes
+            print(f"Node {self.node_id} lost election")
+            self.vote_count=0
+            self.voted_for=None
+            self.state = 'follower'
+            self.term-=1
+            self.reset_election_timeout()
 
             
 
