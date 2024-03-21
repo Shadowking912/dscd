@@ -39,15 +39,16 @@ class RaftNode:
         self.key_value_store = {}
         self.prevLogIndex=0
         self.prevLogTerm=0
-        self.leasetime = 20 #Lease time in sec
+        self.leasetime = 2 #Lease time in sec
         self.logs_path = os.path.join(os.getcwd(),f'logs_node_{self.node_id}')
         self.cur_index={i:len(self.logs)-1 for i in self.peers}
+        self.lease_timer= -1
 
         # self.cur_index={}
         
         # if self.node_id == 0:
-        #     # self.state = 'leader'
-        #     # self.leader_id = self.node_id
+        #     self.state = 'leader'
+        #     self.leader_id = self.node_id
         #     self.logs = [{'term': 0, 'command': "SET",'key':"0",'value':"hello"},{'term':0,'command':'SET','key':"1",'value':"world"},{'term':1,'command':'SET','key':"2",'value':"gg"}]
         #     # self.logs=[(0,"hello"),(0,"world"),(1,"gg")]
         #     self.key_value_store = {"0":"hello","1":"world","2":"gg"}
@@ -178,7 +179,7 @@ class RaftNode:
         else:
             #TEMP COMMENT
             # Dump Point-13
-            self.dump_data(f"Vote denied for Node {message['candidate_od']} in term {message['term']}")
+            self.dump_data(f"Vote denied for Node {message['candidate_id']} in term {message['term']}")
             #TEMP COMMENT
             socket.send_json({"Vote":"False",'No-response':False})
 
@@ -271,7 +272,7 @@ class RaftNode:
             self.voted_for = None
             self.leader_id = -1
             self.vote_count = 0
-            self.broadcast_leader(-1)
+            self.broadcast()
             self.reset_election_timeout()
 
 
@@ -290,33 +291,59 @@ class RaftNode:
             # self.reset_election_timeout()
             self.send_vote_requests()
 
-    def broadcast_leader(self,leader):
-        #TODO: Replicate Leader LOG to each Node
-        #ReplicateLog(nodeId, follower )(From Pseudocode)
-        self.dump_data(f"Node {leader} is the New Leader.")
-        #TODO: append the record (msg : msg, term : currentTerm) to log (from Pseudocode)
+    def broadcast(self):
+        self.dump_data(f"Node {self.leader_id} is the New Leader.")
+        dealers=[]
+        context = zmq.Context()
+        context.setsockopt(zmq.LINGER,0)
+        self.lease_start_time=time.time()
+        # if self.state == 'leader':
         for peer in self.peers:
             if peer != self.node_id:
+                lastTerm =0
+                if(len(self.logs)>0):
+                    lastTerm = self.logs[-1]['term']
                 request = {
                     'type': 'leader_message',
                     'term': self.term,
-                    'leader_id': leader,
+                    'leader_id': self.leader_id,
                     'No-response':False
                 }
-                self.send_recv_message(peer, request)
-
-
-    def handle_leader_message(self, client_socket,request):
-        # print("GOT LEADER HEADER -- \n\n\n\n")
-        self.leader_id = request.get('leader_id')
-        if(self.state == 'candidate'):
-            self.state = 'follower'
-        print(f"Node {self.node_id} got leader id:{self.leader_id}")
-        client_socket.send_json({"response": "Leader Broadcast ACK", "address": self.address})
-        #implement term handling from leader
-
-    def send_vote_requests(self):
-        print(f"Node:{self.node_id} sent vote req")
+                # self.send_message(peer, request)
+                dealer_socket = context.socket(zmq.DEALER)
+                print("before")
+                try:
+                    # Attempt to connect to the remote endpoint
+                    dealer_socket.connect(f"tcp://localhost:555{peer}")
+                except zmq.error.ZMQError as e:
+                    # Connection attempt failed, handle the exception
+                    print("Connection failed:", e)
+                dealer_socket.send(b"", zmq.SNDMORE)
+                # dealer_socket.send_multipart([b"", zmq.SNDMORE])
+                dealer_socket.send_json(request)
+                dealers.append(dealer_socket)
+        for i in dealers:
+            i.close()
+    
+    def broadcast_leader(self):
+        #TODO: Replicate Leader LOG to each Node
+        #ReplicateLog(nodeId, follower )(From Pseudocode)
+        
+        # #TODO: append the record (msg : msg, term : currentTerm) to log (from Pseudocode)
+        # for peer in self.peers:
+        #     if peer != self.node_id:
+        #         request = {
+        #             'type': 'leader_message',
+        #             'term': self.term,
+        #             'leader_id': leader,
+        #             'No-response':False
+        #         }
+        #         self.send_recv_message(peer, request)
+        dealers=[]
+        context = zmq.Context()
+        context.setsockopt(zmq.LINGER, 0)
+        self.lease_start_time=time.time()
+        # if self.state == 'leader':
         for peer in self.peers:
             if peer != self.node_id:
                 lastTerm =0
@@ -329,14 +356,68 @@ class RaftNode:
                     'last_log_index':self.prevLogIndex,
                     'last_log_term':self.prevLogTerm
                 }
-                res = self.send_recv_message(peer, request)
-                print("DEB",res)
-                if(res['No-response']==True):
-                    print(f"No Response from {peer} in voting")
-                elif(res['Vote']=='True'):
-                    self.vote_count+=1
+                # self.send_message(peer, request)
+                dealer_socket = context.socket(zmq.DEALER)
+                dealer_socket.connect(f"tcp://localhost:555{peer}")
+                dealer_socket.send(b"", zmq.SNDMORE)
+                # dealer_socket.send_multipart([b"", zmq.SNDMORE])
+                dealer_socket.send_json(request)
+                dealers.append(dealer_socket)
+                
+        poller = zmq.Poller()
+        for i in dealers:
+            poller.register(i, zmq.POLLIN)
+
+        majority=0
+        while(majority<((len(self.peers)-1)//2+1)):
+            socks = dict(poller.poll(self.election_timeout* 1000))
+            if not socks:
+                print("Timeout occurred, no incoming messages.")
+                for sock in dealers:
+                    sock.close()
+                break
+            for socket in dealers:
+                if socket in socks and socks[socket] == zmq.POLLIN:
+                    message1 = socket.recv(zmq.DONTWAIT)
+                    if message1 == b"":
+                        message2=socket.recv_json(zmq.DONTWAIT)
+                        print("Received message from:", message2)
+                        print("Message content:", message2)
+                        majority+=1
+            print("Majority:",majority)
+        return majority
+
+    def handle_leader_message(self, client_socket,request):
+        # print("GOT LEADER HEADER -- \n\n\n\n")
+        self.leader_id = request.get('leader_id')
+        if(self.state == 'candidate'):
+            self.state = 'follower'
+        print(f"Node {self.node_id} got leader id:{self.leader_id}")
+        client_socket.send_json({"response": "Leader Broadcast ACK", "address": self.address})
+        #implement term handling from leader
+
+    def send_vote_requests(self):
+        print(f"Node:{self.node_id} sent vote req")
+        # for peer in self.peers:
+        #     if peer != self.node_id:
+        #         lastTerm =0
+        #         if(len(self.logs)>0):
+        #             lastTerm = self.logs[-1]['term']
+        #         request = {
+        #             'type': 'request_vote',
+        #             'term': lastTerm,
+        #             'candidate_id': self.node_id,
+        #             'last_log_index':self.prevLogIndex,
+        #             'last_log_term':self.prevLogTerm
+        #         }
+        self.vote_count = self.broadcast_leader()
+                # print("DEB",res)
+                # if(res['No-response']==True):
+                #     print(f"No Response from {peer} in voting")
+                # elif(res['Vote']=='True'):
+                #     self.vote_count+=1
         print(f"Node {self.node_id}, vote_cnt {self.vote_count}")
-        if(self.vote_count >= len(peers)//2 +1):
+        if(self.vote_count >= (len(peers)-1)//2 +1):
             #TEMP COMMENT
             # Dump Point-5
             self.dump_data(f"Node {self.node_id} became the leader for term {self.term}")
@@ -345,19 +426,19 @@ class RaftNode:
             self.state = 'leader'
             self.leader_id = self.node_id
             print(f"New Leader is {self.node_id}")
-            self.broadcast_leader(self.node_id)
+            self.broadcast()
 
-            self.lease_timer = threading.Timer(self.leasetime,self.end_lease)
-            self.lease_timer.start()
-
+            # self.lease_timer = threading.Timer(self.leasetime,self.end_lease)
+            # self.lease_timer.start()
+            
             #sending NO_OP
-
+            
             #TEMP COMMENT
             self.logs.append({'term': self.term, 'command': "NO-OP",'key':None,'value':None})
             # Dump Point-1
             self.dump_data(f"Leader {self.node_id} sending heartbeat and Renewing Lease")
-            #TEMP COMMENT
-
+            
+            
             heartbeat_thread = threading.Thread(target=self.send_heartbeat)
             heartbeat_thread.start()
         else:
@@ -373,9 +454,11 @@ class RaftNode:
 
 
     def send_heartbeat(self):
+        print("sending heartbeat")
         dealers=[]
         context = zmq.Context()
         context.setsockopt(zmq.LINGER, 0)
+        self.lease_start_time=time.time()
         while True:
             if self.state == 'leader':
                 for peer in self.peers:
@@ -413,52 +496,44 @@ class RaftNode:
                         # dealer_socket.send_multipart([b"", zmq.SNDMORE])
                         dealer_socket.send_json(request)
                         dealers.append(dealer_socket)
-            timeout = 2
+
+            
+            # Debugging Statement
+            # 
             poller = zmq.Poller()
             for i in dealers:
                 poller.register(i, zmq.POLLIN)
-            socks = dict(poller.poll(timeout* 1000*1000))  # Convert timeout to seconds
+             # Convert timeout to seconds
             response = {"No-response":True}
+            majority=0
+            while(majority<((len(self.peers)-1)//2+1)):
+                diff_time = time.time()-self.lease_start_time
+                # print('time remaining:',diff_time)
+                socks = dict(poller.poll(self.leasetime*1000)) 
+                if not socks:
+                    print("Timeout occurred, no incoming messages.")
+                    for sock in dealers:
+                        sock.close()
+                        print("close")
+                   
+                    print("Lease time over")
+                    self.end_lease()
+                    break
+                
+                for socket in dealers:
+                    if socket in socks:
+                        x = socket.recv(zmq.DONTWAIT)
+                        if(x==b""):
+                            response = socket.recv_json(zmq.DONTWAIT)
+                            print(f"Response from {peer}: {response}")
+                            majority+=1
+                    # else:
+                        # print(f"No response received from {peer} within {timeout} seconds.")
 
-            for socket in dealers:
-                if socket in socks:
-                    x = socket.recv(zmq.DONTWAIT)
-                    if(x==b""):
-                        response = socket.recv_json(zmq.DONTWAIT)
-                        print(f"Response from {peer}: {response}")
-                # else:
-                    # print(f"No response received from {peer} within {timeout} seconds.")
-
-                # print(f"Response from {peer}: {response}")
-                socket.close()
+                    # print(f"Response from {peer}: {response}")
+                    # socket.close()
 
             time.sleep(self.heartbeat_interval)
-
-
-    def send_recv_message(self, peer, message): # send message and w8 2s for response
-        context = zmq.Context()
-        context.setsockopt(zmq.LINGER, 0)
-        socket = context.socket(zmq.REQ)
-        socket.connect(f"tcp://127.0.0.1:555{peer}")
-        print("DEB:","Sending & Recv Message")
-        socket.send_json(message)
-            # response = socket.recv_json()
-        # Timer of 
-        timeout = 2 #seconds
-        poller = zmq.Poller()
-        poller.register(socket, zmq.POLLIN)
-        socks = dict(poller.poll(timeout* 1000))  # Convert timeout to milliseconds
-        response = {"No-response":True}
-        
-        if socket in socks:
-            response = socket.recv_json()
-            print(f"Response from {peer}: {response}")
-        else:
-            print(f"No response received from {peer} within {timeout} seconds.")
-
-        # print(f"Response from out {peer}: {response}")
-        socket.close()
-        return response
 
     
     def listen_replication_requests(self,request):
@@ -621,9 +696,6 @@ class RaftNode:
         self.election_timer = threading.Timer(self.election_timeout, self.start_election)
         self.election_timer.start()
 
-        
-        
-       
         # if(self.node_id == 0): #TEMp
         #     self.state = 'leader'
         #     heartbeat_thread = threading.Thread(target=self.send_heartbeat)
@@ -647,6 +719,7 @@ class RaftNode:
                     self.cur_index={i:len(self.logs)-1 for i in self.peers}
                     self.handle_client_request(self.socket,message)
                 elif message['type'] == 'leader_message':
+                    print("Message = ",message)
                     self.handle_leader_message(self.socket,message) 
                 
                 elif message['type'] == 'append_entries':

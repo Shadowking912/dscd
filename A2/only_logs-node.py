@@ -16,7 +16,7 @@ class RaftNode:
         self.address = address
         self.peers = peers
         self.state = 'follower'
-        self.leader_id = 1
+        self.leader_id = 0
         self.leader_address=f"tcp://127.0.0.1:555{self.leader_id}"
         self.term = 0
         self.vote_count = 0
@@ -44,7 +44,7 @@ class RaftNode:
         # self.cur_index={}
         
         if self.node_id == 0:
-            # self.state = 'leader'
+            self.state = 'leader'
             # self.leader_id = self.node_id
             self.logs = [{'term': 0, 'command': "SET",'key':"0",'value':"M1"},{'term':0,'command':'SET','key':"1",'value':"M2"},{'term':1,'command':'SET','key':"2",'value':"M3"}]
             # self.logs=[(0,"hello"),(0,"world"),(1,"gg")]
@@ -140,7 +140,7 @@ class RaftNode:
                 
                 self.logs.append({'term': self.term, 'command': 'SET','key': key, 'value': f'{value}'})
                 replicate_majority = self.replicate_log_entries()
-                # print("SET REQ",replicate_majority)
+                print("SET REQ",replicate_majority)
                 if replicate_majority>=((len(self.peers)-1)//2+1):
                     # print("DEB","sucess set value")
                     self.commit_log_entries()
