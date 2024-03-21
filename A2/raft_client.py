@@ -13,7 +13,6 @@ class RaftClient:
         self.socket = self.context.socket(zmq.REQ)
         self.socket.connect(self.server_address)
 
-
     def change_socket_connection(self):
         self.close_connection() 
         self.context = zmq.Context()
@@ -33,32 +32,24 @@ class RaftClient:
             self.socket.send_json(request)
             response = self.socket.recv_json()
             status = response['status']
-            print(f"Response =  {response}")
             while status!='success':
-                # Debugging Statement
-                if "leaderid" in request.keys():
-                    leader =  request['leaderid']
-                    print(f"GET Command failed, retrying and contacting {leader}....")
+                if "leaderid" in response.keys():
+                    leader =  response['leaderid']
                     if leader==-1:
-                        print("No leader found")
                         found = False 
                         break
                     else:
+                        print(f"SET Command failed, retrying and contacting the new leader with id : {leader}....")
                         self.server_address = f"tcp://127.0.0.1:555{leader}"
                         self.change_socket_connection()
-                        self.socket.send_json(request)
+                        
                 else:
-                    print(f"{response['message']}")
-            
-                print(f"SET Command failed, retrying and contacting the new {leader}....")
-                self.server_address=f"tcp://127.0.0.1:555{leader}"
-                self.change_socket_connection()
-                self.socket.send_json()
-                response = self.socket.recv_json()
+                    break
 
+                self.socket.send_json(request)
+                response = self.socket.recv_json()
                 status = response['status']
             
-            # print(f"Received response from the server : {response}")
             if found==True:
                 print(f"{response['message']}")
             else:
@@ -80,22 +71,19 @@ class RaftClient:
             self.socket.send_json(request)
             response = self.socket.recv_json()
             status = response['status']
-            print("GOT Response for GET Request as  : ",response)
+
             while status!='success':
-                print(f"GOT MESSAGE FROM THE SERVER : {response}" )
-                if "leaderid" in request.keys():
-                    leader =  request['leaderid']
-                    print(f"GET Command failed, retrying and contacting {leader}....")
+                if "leaderid" in response.keys():
+                    leader = response['leaderid']
                     if leader==-1:
-                        print("No leader found")
                         found = False 
                         break
                     else:
+                        print(f"GET Command failed, retrying and contacting the new leader with id : {leader}....")
                         self.server_address = f"tcp://127.0.0.1:555{leader}"
                         self.change_socket_connection()
-                        
                 else:
-                    print(f"{response['message']}")
+                    break
             
                 self.socket.send_json(request)
                 response = self.socket.recv_json()
@@ -140,9 +128,6 @@ class RaftClient:
 
 if __name__ == "__main__":
     client_id = int(input("Enter Client ID: "))
-    # server_address = input("Enter Server Address (e.g., tcp://127.0.0.1:5555): ")
     server_address = "tcp://127.0.0.1:5550"
     client = RaftClient(client_id, server_address)
-
     client.run()
-        # message = self.socket.recv_json()

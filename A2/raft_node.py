@@ -41,6 +41,8 @@ class RaftNode:
         self.prevLogTerm=0
         self.leasetime = 40 #Lease time in sec
         self.logs_path = os.path.join(os.getcwd(),f'logs_node_{self.node_id}')
+        self.cur_index={i:len(self.logs)-1 for i in self.peers}
+
         # self.cur_index={}
         
         # if self.node_id == 0:
@@ -90,8 +92,7 @@ class RaftNode:
                 print("Commit index = ",self.commit_index)
                 print("Term = ",self.term)
                 print("Voted For = ",self.voted_for)
-        self.cur_index={i:len(self.logs)-1 for i in self.peers}
-
+     
     def dump_data(self,data):
         with open(f"{self.logs_path}/dump.txt","a") as f:
             f.write(data)
