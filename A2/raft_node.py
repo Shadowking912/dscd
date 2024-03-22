@@ -87,12 +87,12 @@ class RaftNode:
             with open(self.logs_path+"/metadata.json","r") as f:
                 metadata  = json.load(f)    
                 self.commit_index=metadata["Commit-Length"]-1
-                self.term = metadata["Term"]
-                self.voted_for=metadata["Voted For"]
+                # self.term = metadata["Term"]
+                # self.voted_for=metadata["Voted For"]
 
                 print("Commit index = ",self.commit_index)
-                print("Term = ",self.term)
-                print("Voted For = ",self.voted_for)
+                # print("Term = ",self.term)
+                # print("Voted For = ",self.voted_for)
      
     def dump_data(self,data):
         with open(f"{self.logs_path}/dump.txt","a") as f:
@@ -159,6 +159,7 @@ class RaftNode:
         print(f"Received vote request from candidate {message['candidate_id']}")
         if self.state == 'follower':
             candidate_term = message['term']
+            print(self.term,candidate_term)
             if self.voted_for is None or self.voted_for == message['candidate_id'] and candidate_term>self.term:
                 self.voted_for = message['candidate_id']
 
@@ -169,7 +170,7 @@ class RaftNode:
                 
                 self.reset_election_timeout()
 
-                socket.send_json({"Vote":"True",'No-response':False})
+                socket.send_json({"Vote":"True",'No-response':False,'node_id':self.node_id})
             else:
                 #TEMP COMMENT
                 # Dump Point-13
@@ -273,6 +274,7 @@ class RaftNode:
             self.leader_id = -1
             self.vote_count = 0
             self.broadcast()
+            print("found error")
             self.reset_election_timeout()
 
 
@@ -295,7 +297,6 @@ class RaftNode:
         self.dump_data(f"Node {self.leader_id} is the New Leader.")
         dealers=[]
         context = zmq.Context()
-        context.setsockopt(zmq.LINGER,0)
         self.lease_start_time=time.time()
         # if self.state == 'leader':
         for peer in self.peers:
@@ -315,12 +316,13 @@ class RaftNode:
                 try:
                     # Attempt to connect to the remote endpoint
                     dealer_socket.connect(f"tcp://localhost:555{peer}")
-                except zmq.error.ZMQError as e:
+                    dealer_socket.send(b"", zmq.SNDMORE|zmq.DONTWAIT)
+                    # dealer_socket.send_multipart([b"", zmq.SNDMORE])
+                    dealer_socket.send_json(request,zmq.DONTWAIT)
+                except zmq.Again as e:
                     # Connection attempt failed, handle the exception
                     print("Connection failed:", e)
-                dealer_socket.send(b"", zmq.SNDMORE)
-                # dealer_socket.send_multipart([b"", zmq.SNDMORE])
-                dealer_socket.send_json(request)
+                
                 dealers.append(dealer_socket)
         for i in dealers:
             i.close()
@@ -457,7 +459,7 @@ class RaftNode:
         print("sending heartbeat")
         dealers=[]
         context = zmq.Context()
-        context.setsockopt(zmq.LINGER, 0)
+        context.setsockopt(zmq.IMMEDIATE, 1)
         self.lease_start_time=time.time()
         while True:
             if self.state == 'leader':
@@ -492,9 +494,12 @@ class RaftNode:
                         # self.send_message(peer, request)
                         dealer_socket = context.socket(zmq.DEALER)
                         dealer_socket.connect(f"tcp://localhost:555{peer}")
-                        dealer_socket.send(b"", zmq.SNDMORE)
-                        # dealer_socket.send_multipart([b"", zmq.SNDMORE])
-                        dealer_socket.send_json(request)
+                        try:
+                            dealer_socket.send(b"", zmq.SNDMORE|zmq.DONTWAIT)
+                            # dealer_socket.send_multipart([b"", zmq.SNDMORE])
+                            dealer_socket.send_json(request|zmq.DONTWAIT)
+                        except zmq.Again as e:
+                            print("connection failed")
                         dealers.append(dealer_socket)
 
             
@@ -518,7 +523,7 @@ class RaftNode:
                    
                     print("Lease time over")
                     self.end_lease()
-                    break
+                    return
                 
                 for socket in dealers:
                     if socket in socks:
