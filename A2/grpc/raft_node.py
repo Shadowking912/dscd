@@ -13,10 +13,9 @@ class NodeCommunicationService(raft_pb2_grpc.NodeCommunicationServicer):
     # def serve_client():
     # def AppendEntr
     # def AppendEntries():
-
     def RequestVote(self,request,context):
         print(f"Received vote request from candidate {request.candidateAddress}")
-        node.leader_address=-1
+        node.leader_address="-1"
         # if self.leader
         vote_response = raft_pb2.VoteResponse()
         vote_response.nodeAddress = node.address
@@ -29,13 +28,99 @@ class NodeCommunicationService(raft_pb2_grpc.NodeCommunicationServicer):
         return vote_response
         
     def AppendEntries(self, request, context):
-        print(f"Received append entries request from candidate {request.leaderAddress}")
-        node.leader_address = request.leaderAddress
-        response = raft_pb2.AppendEntriesResponse()
-        response.term = node.term
-        response.success=True
-        response.nodeAddress = node.address
-        return response
+        if len(request.entries)==0:
+            print(f"Received heartbeat from leader {request.leaderAddress}")
+            node.leader_address = request.leaderAddress
+            node.term = request.term
+            response = raft_pb2.AppendEntriesResponse()
+            response.term = node.term
+            response.success=True
+            # if request.prevLogIndex==0:
+            #     response.success=True
+            response.nodeAddress = node.address
+            return response
+        else:
+            print("Received entries")
+            print("leaderlogindex",request.prevLogIndex)
+            print("leaderlogterm",request.prevLogTerm)
+            leader_log_index = request.prevLogIndex
+            leader_log_term = request.prevLogTerm
+            # Getting the leader's term for checking the condition of denial of log replication
+            leader_term = request.term
+            # Leader commit index, received as part of communication from the leader
+            leader_commit_index = request.leaderCommit
+            
+            if node.term>leader_term:
+                print("found error")
+                # logresults = {
+                #     'type':'append_entries',
+                #     'node_id':self.node_id,
+                #     'term':self.term,
+                #     'success':False
+                # }
+                response=raft_pb2.AppendEntriesResponse()
+                response.term = node.term
+                response.success=False
+                response.nodeAddress = node.address
+                return response
+                
+            else:
+                print("here")
+                curr_log_term=-1
+                matching_index=-1
+
+                for i in range(len(node.logs)-1,-1,-1):
+                    if node.logs[i]['term']==leader_log_term:
+                        # {'term': 0, 'command': 'SET', 'key': 0, 'value': 'hello'}
+                        curr_log_term=node.logs[i]['term']
+                        if i==leader_log_index:
+                            matching_index=i
+                            break
+                        else:
+                            matching_index=i-1
+                            break
+
+                if matching_index==leader_log_index:
+                    # print("matching")
+                    # logresults={
+                    #     'type':'append_entries',
+                    #     'node_id':node.node_id,
+                    #     'term':node.term,
+                    #     'success':True
+                    # }
+                    response=raft_pb2.AppendEntriesResponse()
+                    response.term = node.term
+                    response.success=True
+                    response.nodeAddress = node.address
+ 
+                    if matching_index!=-1:
+                        node.logs=node.logs[:matching_index]
+                    else:
+                        node.logs=[]
+                    # entries =request.entries
+                    for i in request.entries:
+                        node.logs.append({"term":i.term,"command":i.operation,"key":i.key,"value":i.value})
+                    print(node.logs)
+                    # Dump Point-10
+                    # self.dump_data(f"Node {node.node_id} accepted AppendEntries RPC from {node.leader_id}")
+                    # print("Logs after appending = ",self.logs)
+                else:
+                    #logresults = {
+                    # 'type':'append_entries',
+                    # 'node_id':self.node_id,
+                    # 'term':self.term,
+                    # 'success':False
+                        
+                    response=raft_pb2.AppendEntriesResponse()
+                    response.term = node.term
+                    response.success=False
+                    response.nodeAddress = node.address
+
+                    # Dump Point-11
+                    # self.dump_data(f"Node {node.node_id} rejected AppendEntries RPC from {node.leader_id}")
+            
+            print("sent response to leader")
+            return response
 
         # await 
         
@@ -110,18 +195,87 @@ class NodeCommunicationService(raft_pb2_grpc.NodeCommunicationServicer):
         
     
 class ClientCommunicationService(raft_pb2_grpc.ClientCommunicationServicer):
-    def __init__(self):
-        pass
-        # self.client_socket = zmq.Context().socket(zmq.REP)
+    def ServeClient(self,request,context):
+        if node.state != 'leader':
+            print("error",node.leader_address)
+            response=raft_pb2.ServeClientReply()
+            response.Data=""
+            response.leaderAddress=node.leader_address
+            response.Success=False
+            print(f"In the leader area with id = ")
+            return response
+        
+        else:
+            request=json.loads(request.Request)
+            request_type = request.get('sub-type')
+            key = request.get('key')
+            value = request.get('value')
+            print(node.logs)
+            print("after")
+            if request_type == 'SET':
+                # print(f"Received SET request for key '{key}' with value '{value}'")
+                #TEMP COMMENT
+                # Dump Point-8
+                # .dump_data(f"Node {self.node_id}(leader) received an {request_type} {key} {value} request")
+                #TEMP COMMENT
 
+                # if node.state=='leader':     
+                #     node.key_value_store[key] = value
+                # self.key_value_store[key] = value
+                
+                node.logs.append({'term': node.term, 'command': 'SET','key': key, 'value': f'{value}'})
+                x=threading.Thread(target=node.replicate_log_entries)
+                x.start()
+                x.join()
+                print("hello")
+                if node.majority>=((len(node.peers)-1)//2+1):
+                    print("append1")
+                    response=raft_pb2.ServeClientReply()
+                    response.Data=""
+                    response.leaderAddress=node.leader_address
+                    response.Success=True
+                
+                else:
+                    print("append2")
+                    response=raft_pb2.ServeClientReply()
+                    
+                    response.Data=""
+                    response.leaderAddress=node.leader_address
+                    response.Success=False
+                print("response returned to client")
+                return response
+    
+            elif request_type == 'GET':
+                # print(f"Received GET request for key '{key}'")
+                # print(key,self.key_value_store.keys(),key in self.key_value_store.keys())
+                if key in self.key_value_store.keys():
+                    value = self.key_value_store[key]
+                    data={
+                        'key':key,
+                        'value':value,
+                    
+                    }
+                    response=raft_pb2.ServeClientReply()
+                    response.Data=json.loads(data)
+                    response.leaderAddress=node.leader_address
+                    response.Success=True
+
+                else:
+                    response=raft_pb2.ServeClientReply()
+                    response.Data=""
+                    response.leaderAddress=node.leader_address
+                    response.Success=False
+                return response
+                
 class RaftNode:
     def __init__(self, node_id, address, peers):
+        self.majority=0
         self.node_id = node_id
         self.address = address
         self.peers = peers
         self.state = 'follower'
         self.leader_id = -1
-        self.leader_address=-1
+        self.leader_address="-1"
         self.term = 0
         self.vote_count = 0
         self.voted_for = None
@@ -148,96 +302,41 @@ class RaftNode:
         self.cur_index={i:len(self.logs)-1 for i in self.peers}
         self.lease_timer= -1
         self.node_address=address
-        # self.cur_index={}
-        
-        # if self.node_id == 0:
-        #     self.state = 'leader'
-        #     self.leader_id = self.node_id
-        #     self.logs = [{'term': 0, 'command': "SET",'key':"0",'value':"hello"},{'term':0,'command':'SET','key':"1",'value':"world"},{'term':1,'command':'SET','key':"2",'value':"gg"}]
-        #     # self.logs=[(0,"hello"),(0,"world"),(1,"gg")]
-        #     self.key_value_store = {"0":"hello","1":"world","2":"gg"}
-        #     self.commit_index=0
-        #     self.term = 1
-
-        # elif self.node_id ==1:
-        #     self.logs = [{'term': 0, 'command': "SET",'key':'0','value':"hello"},{'term':0,'command':'SET','key':'1','value':"world"}]
-        #     self.key_value_store={'0':"hello",'1':"world"}
-        #     self.term  = 0
-        #     self.commit_index=-1
-        # elif self.node_id==2:
-        #     # self.logs=[(0,"hello"),(1,"y")]
-        #     self.logs=[{'term': 0, 'command': "SET",'key':'0','value':"hello"},{'term':1,'command':'SET','key':'1','value':"y"}]
-        #     self.key_value_store={'0':"hello",'1':"y"}
-        #     self.term = 1
-        #     self.commit_index=-1
-        
-        
-        # Creating a directory for the node if it does not already exist for the logs and dumps
-        # if os.path.isdir(os.path.join(self.logs_path))==False:
-        #     os.makedirs(os.path.join(self.logs_path))
-        #     with open(self.logs_path+"/logs.json","w"):
-        #         pass
-        #     with open(self.logs_path+"/metadata.json","w"):
-        #         pass
-        #     with open(self.logs_path+"/dump.txt","w"):
-        #         pass
-        # else:
-        # #   Write the functionality for loading the logs list from the text file (TO BE COMPLETED)
-        #     # Reading the logs
-        #     with open(self.logs_path+"/logs.json","r") as f:
-        #         self.logs = json.load(f)
-            
-        #     # Reading the metadata
-        #     with open(self.logs_path+"/metadata.json","r") as f:
-        #         metadata  = json.load(f)    
-        #         self.commit_index=metadata["Commit-Length"]-1
-        #         # self.term = metadata["Term"]
-        #         # self.voted_for=metadata["Voted For"]
-
-        #         print("Commit index = ",self.commit_index)
-        #         # print("Term = ",self.term)
-        #         # print("Voted For = ",self.voted_for)
 
     def start_election(self):
         print("DEG:",f"Current Leader id: {self.leader_address}")
-        if self.leader_address!=-1:
+        
+        if self.leader_address!="-1":#reset election timer
             time.sleep(self.election_timeout)
             self.start_election()
-        elif self.state != 'leader':
+
+        elif self.state != 'leader':#start election
             # Dump Point 4
             # self.dump_data(f"Node {self.node_id} election timer timed out, Starting election.")
             print(f"Node:{self.node_id} started election")
             self.state = 'candidate'
             self.term += 1
             self.voted_for = self.node_id
-            self.vote_count += 1  # Vote for self
-                # self.reset_election_timeout()    
+            self.vote_count += 1  # Vote for self  
             self.send_vote_requests()    
              
     def send_heartbeat(self):
-        #TODO: Replicate Leader LOG to each Node
-        #ReplicateLog(nodeId, follower )(From Pseudocode)
-        # self.dump_data(f"Node {leader} is the New Leader.")
-        #TODO: append the record (msg : msg, term : currentTerm) to log (from Pseudocode)
         majority=0
         timeout=self.heartbeat_interval
+        cur_index2={i:len(self.logs)-1 for i in self.peers}
         def callback_function(response):
             nonlocal majority,timeout
-            try:
+            try:#detect hearbeat ack
                 response_received = response.result(timeout=timeout)
                 print(f"Heartbeat ACK received from {response_received.nodeAddress} with term {response_received.term}")
                 if response_received.success==True:
                     majority+=1          
-                    print(f"Node {self.node_id} got votes {majority} till now")
+                    
             except grpc.FutureTimeoutError:
                 print("Timeout occured received no response ")
-            except grpc.RpcError as e:
+            except grpc.RpcError as e:#detect node failure
                 print("Node Crashed")
 
-        #TODO: Replicate Leader LOG to each Node
-        #ReplicateLog(nodeId, follower )(From Pseudocode)
-        # self.dump_data(f"Node {leader} is the New Leader.")
-        #TODO: append the record (msg : msg, term : currentTerm) to log (from Pseudocode)
         for peer in self.peers:
             if peer!=self.address:
                 node_channel=grpc.insecure_channel(peer)
@@ -247,42 +346,47 @@ class RaftNode:
                 request.leaderAddress=self.node_address
 
                 logentries=raft_pb2.entry()
-                for log in self.logs:
-                    logentries.term=log['term']
-                    logentries.command=log['command']
-                    logentries.key=log['key']
-                    logentries.value=log['value']
-                    request.entries.append(logentries)
-
-                request.prevLogIndex=(self.cur_index[peer] if len(self.logs)>0 else -1)
-                request.prevLogTerm= (self.logs[self.cur_index[peer]['term']] if len(self.logs)>0 else -1)
+                # for log in self.logs:
+                #     logentries.term=log['term']
+                #     logentries.command=log['command']
+                #     logentries.key=log['key']
+                #     logentries.value=log['value']
+                    # request.entries.append(logentries)
+                # request.entries=None
+                request.prevLogIndex=(cur_index2[peer] if len(self.logs)>0 else -1)
+                request.prevLogTerm= (self.logs[cur_index2[peer]]['term'] if len(self.logs)>0 else -1)
                 request.leaderCommit=self.commit_index
                 response=stub.AppendEntries.future(request)
                 response.add_done_callback(callback_function)
         
         start_time = time.time()
-        while time.time() - start_time < timeout:  # Poll for a maximum of 5 seconds
-            if(majority>= (len(peers)-1)//2 +1):
-
+        while time.time() - start_time < timeout:  # Poll for timeout seconds
+            if(majority>= (len(peers)-1)//2 +1):#majority acks in heartbeat
                 # self.dump_data(f"Node {self.node_id} became the leader for term {self.term}")
-
                 self.state = 'leader'
                 self.leader_id = self.node_id
                 print(f"New Leader is {self.node_id}")
-                self.broadcast()
+                # self.broadcast()
                 break
+
             time.sleep(1) # Poll every 0.1 second
 
-        if majority>= (len(peers)-1)//2 +1:
+        if majority>= (len(peers)-1)//2 +1:#leader remains
+            print(f"Node {self.node_id} got heartbeats {majority} till now")
             time.sleep(timeout) 
             self.send_heartbeat()
 
-        else:#lease
+        else:#lease leader steps down
+            print(f"Node {self.node_id} got heartbeats {majority} till now")
+            print("stepping down")
+            self.leader_address="-1"
+            self.state='candidate'
+            self.leader_id=-1
             return False
 
     def send_vote_requests(self):
         self.vote_count=0
-        responses=[]
+
         def callback_function(response):
             try:
                 response_received = response.result(timeout=self.election_timeout)
@@ -308,28 +412,127 @@ class RaftNode:
                 response.add_done_callback(callback_function)
         
         start_time = time.time()
-        while time.time() - start_time < self.election_timeout:  # Poll for a maximum of 5 seconds
+        while time.time() - start_time < self.election_timeout:  # Poll for a maximum of timeout seconds
             if(self.vote_count >= (len(peers)-1)//2 +1):
-            #TEMP COMMENT
             # Dump Point-5
-                # self.dump_data(f"Node {self.node_id} became the leader for term {self.term}")
-                #TEMP COMMENT
+                # self.dump_data(f"Node {self.node_id} became the leader for term {self.term}") 
                 self.state = 'leader'
                 self.leader_id = self.node_id
+                self.leader_address=self.node_address
                 print(f"New Leader is {self.node_id}")
                 if not self.send_heartbeat():
                     self.state='follower'
                     break
 
             time.sleep(1) # Poll every 0.1 second
+
         if self.state != 'leader':
             print("election failure")
             self.vote_count=0
             self.voted_for = None
-            # self.term+=1
-            # time.sleep(self.election_timeout)
+            self.term+=1
+            time.sleep(self.election_timeout)
             self.start_election()
+
+    def send_node(self,peer):
+        print(peer)
+        timeout=self.heartbeat_interval
+        appended=0
+        def callback_function(response):
+            nonlocal appended
+            try:#detect hearbeat ack
+                response_received = response.result(timeout=timeout)
+                print(response_received)
+                print(f"append entries ACK received from {response_received.nodeAddress} with term {response_received.term}")
+                if response_received.success==True:
+                    appended=1         
+                    return 1
+                
+                else:
+                    self.cur_index[peer]-=1
+                    status=self.send_node(peer)
+                    if status==True:
+                        appended=1
+                        return 1
+
+                    else:
+                        appended=2
+                        return 2
+                
+            except grpc.FutureTimeoutError:
+                print("Timeout occured received no response ")
+                return self.send_node(peer)
+
+            except grpc.RpcError as e:#detect node failure
+                print("Node Crashed",e)
+                appended=2
+                return 2
+            
+        node_channel=grpc.insecure_channel(peer)
+        stub=raft_pb2_grpc.NodeCommunicationStub(node_channel)
+        request = raft_pb2.AppendEntriesRequest()
+        request.term=self.term
+        request.leaderAddress=self.node_address
+
+        logentries=raft_pb2.entry()
+        if self.cur_index[peer]==-1:
+            for i in range(0,len(self.logs)):
+                log=self.logs[i]
+                logentries.term=log['term']
+                logentries.operation=log['command']
+                logentries.key=log['key']
+                logentries.value=log['value']
+                request.entries.append(logentries)
+        else:
+            for i in range(self.cur_index[peer],len(self.logs)):
+                log=self.logs[i]
+                logentries.term=log['term']
+                logentries.operation=log['command']
+                logentries.key=log['key']
+                logentries.value=log['value']
+                request.entries.append(logentries)
         
+        request.prevLogIndex=(self.cur_index[peer] if len(self.logs)>0 else -1)
+        request.prevLogTerm= (self.logs[self.cur_index[peer]]['term'] if request.prevLogIndex>=0 else -1)
+        print("error her",request.prevLogIndex,request.prevLogTerm)
+        request.leaderCommit=self.commit_index
+        response=stub.AppendEntries.future(request)
+        response.add_done_callback(callback_function)
+        while(appended==0):
+            pass
+        if (appended==2):
+            return False
+        elif (appended==1):
+            self.majority+=1#need lock
+            print("node appended")
+            return True
+
+    def replicate_log_entries(self):
+        self.majority=0
+        timeout=self.heartbeat_interval
+        print(self.logs)
+        for peer in self.peers:
+            if peer!=self.address:
+                thread=threading.Thread(target=self.send_node,args=(peer,))
+                # thread.daemon=True
+                thread.start()
+                print("started")       
+        
+        start_time = time.time()
+        while time.time() - start_time < timeout:  # Poll for timeout seconds
+            if(self.majority>= (len(peers)-1)//2 +1):#majority acks in heartbeat
+                # self.dump_data(f"Node {self.node_id} became the leader for term {self.term}")
+                # self.state = 'leader'
+                # self.leader_id = self.node_id
+                # print(f"New Leader is {self.node_id}")
+                break
+            time.sleep(1) # Poll every 0.1 second
+        if self.majority>= (len(peers)-1)//2 +1:#leader remains
+            print("Majority logs replicated")
+            return True
+
+        else:#lease leader steps down
+            return False
         
 node = None
 def serve():
