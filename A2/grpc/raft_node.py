@@ -268,15 +268,16 @@ class ClientCommunicationService(raft_pb2_grpc.ClientCommunicationServicer):
             elif request_type == 'GET':
                 # print(f"Received GET request for key '{key}'")
                 # print(key,self.key_value_store.keys(),key in self.key_value_store.keys())
-                if key in self.key_value_store.keys():
-                    value = self.key_value_store[key]
+                if key in node.key_value_store.keys():
+                    value = node.key_value_store[key]
                     data={
                         'key':key,
                         'value':value,
                     
                     }
                     response=raft_pb2.ServeClientReply()
-                    response.Data=json.loads(data)
+                    response.Data=json.dumps(data)
+                    print("HERE HELLo")
                     response.leaderAddress=node.leader_address
                     response.Success=True
 
@@ -328,7 +329,8 @@ class RaftNode:
         print("Logs = ",self.logs)
         commit_index = self.commit_index
         if leader_commit_index>self.commit_index:
-            for i in range(commit_index+1,leader_commit_index):
+            for i in range(commit_index+1,leader_commit_index+1):
+                print("Value of i = ",i)
                 self.commit_index+=1
                 self.key_value_store[self.logs[i]['key']] = self.logs[i]['value']
                 self.last_applied+=1

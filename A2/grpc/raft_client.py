@@ -84,7 +84,8 @@ class RaftClient:
                     status = response.Success
             if found==True:
                 response = json.loads(response.Data)
-                print(f"Value for {response.key} = {response.value}")
+                print("Response = ",response)
+                print(f"Value for key {response['key']} = value {response['value']}")
             else:
                 print(f"There is no leader elected in the database and hence the operation failed")
     
