@@ -806,3 +806,6 @@ Leader 0 sending heartbeat and Renewing Lease
 Leader 0 lease renewal failed. Stepping Down.
 Leader 0 stepping down
 Node -1 is the New Leader.
+Node 0 election timer timed out, Starting election.
+Vote granted for Node 1 in term 4
+Node 0 election timer timed out, Starting election.

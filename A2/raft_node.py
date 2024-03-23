@@ -148,6 +148,7 @@ class RaftNode:
 
     def handle_heartbeat(self, message):
         print(f"Received heartbeat from leader {message['leader_id']}",self.leader_id)
+        self.voted_for=None
         # self.commit_entries()
         #TEMP COMMENT
         self.handle_commit_requests(message['LeaderCommit'])

@@ -20,18 +20,23 @@ class NodeCommunicationService(raft_pb2_grpc.NodeCommunicationServicer):
         vote_response = raft_pb2.VoteResponse()
         vote_response.nodeAddress = node.address
         vote_response.term = node.term
-
-        if node.state=='leader':
+        if request.term>node.term:
+            node.term=request.term
+            node.voted_for=None
+        if node.state=='leader' or node.voted_for!=None:
             vote_response.voteGranted = False
         else:
             vote_response.voteGranted=True
+            node.voted_for=request.candidateAddress
         return vote_response
         
     def AppendEntries(self, request, context):
         if len(request.entries)==0:
             print(f"Received heartbeat from leader {request.leaderAddress}")
+            node.voted_for=None
             node.leader_address = request.leaderAddress
             node.term = request.term
+            node.election_time=1
             response = raft_pb2.AppendEntriesResponse()
             response.term = node.term
             response.success=True
@@ -269,7 +274,7 @@ class ClientCommunicationService(raft_pb2_grpc.ClientCommunicationServicer):
                 
 class RaftNode:
     def __init__(self, node_id, address, peers):
-        self.majority=0
+        self.majority=1
         self.node_id = node_id
         self.address = address
         self.peers = peers
@@ -280,6 +285,7 @@ class RaftNode:
         self.vote_count = 0
         self.voted_for = None
         self.socket = None
+        self.election_time=0
         self.election_timeout = 5  # Election timeout in seconds
         #TEMP
         if(self.node_id==0):
@@ -306,11 +312,12 @@ class RaftNode:
     def start_election(self):
         print("DEG:",f"Current Leader id: {self.leader_address}")
         
-        if self.leader_address!="-1":#reset election timer
+        if self.election_time==1:#reset election timer
+            self.election_time=0
             time.sleep(self.election_timeout)
             self.start_election()
 
-        elif self.state != 'leader':#start election
+        else:#start election
             # Dump Point 4
             # self.dump_data(f"Node {self.node_id} election timer timed out, Starting election.")
             print(f"Node:{self.node_id} started election")
@@ -321,7 +328,7 @@ class RaftNode:
             self.send_vote_requests()    
              
     def send_heartbeat(self):
-        majority=0
+        majority=1
         timeout=self.heartbeat_interval
         cur_index2={i:len(self.logs)-1 for i in self.peers}
         def callback_function(response):
@@ -361,7 +368,7 @@ class RaftNode:
         
         start_time = time.time()
         while time.time() - start_time < timeout:  # Poll for timeout seconds
-            if(majority>= (len(peers)-1)//2 +1):#majority acks in heartbeat
+            if(majority>= (len(peers))//2+1):#majority acks in heartbeat
                 # self.dump_data(f"Node {self.node_id} became the leader for term {self.term}")
                 self.state = 'leader'
                 self.leader_id = self.node_id
@@ -371,7 +378,7 @@ class RaftNode:
 
             time.sleep(1) # Poll every 0.1 second
 
-        if majority>= (len(peers)-1)//2 +1:#leader remains
+        if majority>= (len(peers))//2 +1:#leader remains
             print(f"Node {self.node_id} got heartbeats {majority} till now")
             time.sleep(timeout) 
             self.send_heartbeat()
@@ -382,10 +389,10 @@ class RaftNode:
             self.leader_address="-1"
             self.state='candidate'
             self.leader_id=-1
+            self.election_time=1
             return False
 
     def send_vote_requests(self):
-        self.vote_count=0
 
         def callback_function(response):
             try:
@@ -413,7 +420,7 @@ class RaftNode:
         
         start_time = time.time()
         while time.time() - start_time < self.election_timeout:  # Poll for a maximum of timeout seconds
-            if(self.vote_count >= (len(peers)-1)//2 +1):
+            if(self.vote_count >= (len(peers))//2 +1):
             # Dump Point-5
                 # self.dump_data(f"Node {self.node_id} became the leader for term {self.term}") 
                 self.state = 'leader'
@@ -508,7 +515,7 @@ class RaftNode:
             return True
 
     def replicate_log_entries(self):
-        self.majority=0
+        self.majority=1
         timeout=self.heartbeat_interval
         print(self.logs)
         for peer in self.peers:
@@ -520,14 +527,14 @@ class RaftNode:
         
         start_time = time.time()
         while time.time() - start_time < timeout:  # Poll for timeout seconds
-            if(self.majority>= (len(peers)-1)//2 +1):#majority acks in heartbeat
+            if(self.majority>= (len(peers))//2 +1):#majority acks in heartbeat
                 # self.dump_data(f"Node {self.node_id} became the leader for term {self.term}")
                 # self.state = 'leader'
                 # self.leader_id = self.node_id
                 # print(f"New Leader is {self.node_id}")
                 break
             time.sleep(1) # Poll every 0.1 second
-        if self.majority>= (len(peers)-1)//2 +1:#leader remains
+        if self.majority>= (len(peers))//2 +1:#leader remains
             print("Majority logs replicated")
             return True
 

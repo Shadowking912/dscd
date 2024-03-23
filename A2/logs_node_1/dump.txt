@@ -572,3 +572,5 @@ Vote granted for Node 0 in term 2
 Vote granted for Node 0 in term 3
 Vote granted for Node 0 in term 4
 Vote granted for Node 0 in term 5
+Vote granted for Node 0 in term 4
+Node 1 election timer timed out, Starting election.
