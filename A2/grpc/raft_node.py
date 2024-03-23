@@ -20,19 +20,36 @@ class NodeCommunicationService(raft_pb2_grpc.NodeCommunicationServicer):
         vote_response = raft_pb2.VoteResponse()
         vote_response.nodeAddress = node.address
         vote_response.term = node.term
+        
         if request.term>node.term:
             node.term=request.term
             node.voted_for=None
-        if node.state=='leader' or node.voted_for!=None:
-            vote_response.voteGranted = False
+
+        elif request.term==node.term:
+            if node.prevLogIndex<=request.lastLogIndex:
+                node.voted_for=request.candidateAddress
+                vote_response.voteGranted=True
+            else:
+                vote_response.voteGranted=False
+                return vote_response
         else:
-            vote_response.voteGranted=True
+            vote_response.voteGranted=False
+            return vote_response
+
+        if node.voted_for==request.candidateAddress or node.voted_for==None :
+            vote_response.voteGranted = True
             node.voted_for=request.candidateAddress
+        
+        else:
+            vote_response.voteGranted=False
+            
         return vote_response
         
     def AppendEntries(self, request, context):
+        
         if len(request.entries)==0:
             print(f"Received heartbeat from leader {request.leaderAddress}")
+            node.handle_commit_requests(request.leaderCommit)
             node.voted_for=None
             node.leader_address = request.leaderAddress
             node.term = request.term
@@ -197,8 +214,6 @@ class NodeCommunicationService(raft_pb2_grpc.NodeCommunicationServicer):
         #     self.term-=1
         #     self.reset_election_timeout()
        
-        
-    
 class ClientCommunicationService(raft_pb2_grpc.ClientCommunicationServicer):
     def ServeClient(self,request,context):
         if node.state != 'leader':
@@ -309,6 +324,30 @@ class RaftNode:
         self.lease_timer= -1
         self.node_address=address
 
+    def handle_commit_requests(self,leader_commit_index):
+        print("Logs = ",self.logs)
+        commit_index = self.commit_index
+        if leader_commit_index>self.commit_index:
+            for i in range(commit_index+1,leader_commit_index):
+                self.commit_index+=1
+                self.key_value_store[self.logs[i]['key']] = self.logs[i]['value']
+                self.last_applied+=1
+            print(f"Commit Index of the node {self.node_id} {self.commit_index}")
+        else:
+            print("No change in commit index needed")
+        print(self.key_value_store)
+
+    def commit_log_entries(self):
+        commit_index = self.commit_index
+        for i in range(commit_index+1,len(self.logs)):
+            self.commit_index+=1
+            self.key_value_store[self.logs[i]['key']] = self.logs[i]['value']
+            self.last_applied+=1
+
+        # self.write_logs()   
+        print(f"Commit index of the leader with id {self.leader_id} {self.commit_index}")
+        # self.write_metadata(
+        print(self.key_value_store)
     def start_election(self):
         print("DEG:",f"Current Leader id: {self.leader_address}")
         
@@ -331,6 +370,7 @@ class RaftNode:
         majority=1
         timeout=self.heartbeat_interval
         cur_index2={i:len(self.logs)-1 for i in self.peers}
+        
         def callback_function(response):
             nonlocal majority,timeout
             try:#detect hearbeat ack
@@ -404,7 +444,7 @@ class RaftNode:
             except grpc.FutureTimeoutError:
                 print("Timeout occured received no response ")
             except grpc.RpcError as e:
-                print("Node Crashed")
+                print("Node Crashed",e)
                 
         for peer in self.peers:
             if peer!=self.address:
@@ -536,9 +576,10 @@ class RaftNode:
             time.sleep(1) # Poll every 0.1 second
         if self.majority>= (len(peers))//2 +1:#leader remains
             print("Majority logs replicated")
+            self.commit_log_entries()
             return True
 
-        else:#lease leader steps down
+        else:
             return False
         
 node = None
