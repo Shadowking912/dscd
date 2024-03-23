@@ -46,7 +46,6 @@ class NodeCommunicationService(raft_pb2_grpc.NodeCommunicationServicer):
         return vote_response
         
     def AppendEntries(self, request, context):
-        
         if len(request.entries)==0:
             print(f"Received heartbeat from leader {request.leaderAddress}")
             node.handle_commit_requests(request.leaderCommit)
@@ -60,6 +59,9 @@ class NodeCommunicationService(raft_pb2_grpc.NodeCommunicationServicer):
             # if request.prevLogIndex==0:
             #     response.success=True
             response.nodeAddress = node.address
+
+            if node.prevLogTerm!=request.prevLogTerm or node.prevLogIndex!=request.prevLogIndex:
+                response.success=False
             return response
         else:
             print("Received entries")
@@ -123,6 +125,9 @@ class NodeCommunicationService(raft_pb2_grpc.NodeCommunicationServicer):
                     for i in request.entries:
                         node.logs.append({"term":i.term,"command":i.operation,"key":i.key,"value":i.value})
                     print(node.logs)
+                    if len(node.logs)>0:
+                        node.prevLogIndex = len(node.logs)-1
+                        node.prevLogTerm = node.logs[-1]['term']
                     # Dump Point-10
                     # self.dump_data(f"Node {node.node_id} accepted AppendEntries RPC from {node.leader_id}")
                     # print("Logs after appending = ",self.logs)
@@ -143,77 +148,7 @@ class NodeCommunicationService(raft_pb2_grpc.NodeCommunicationServicer):
             
             print("sent response to leader")
             return response
-
-        # await 
         
-        # if self.state == 'follower':
-        #     candidate_term = message['term']
-        #     print(self.term,candidate_term)
-        #     if self.voted_for is None or self.voted_for == message['candidate_id'] and candidate_term>self.term:
-        #         self.voted_for = message['candidate_id']
-
-        #         #TEMP COMMENT
-        #         # Dump Point-12
-        #         self.dump_data(f"Vote granted for Node {self.voted_for} in term {message['term']}")
-        #         #TEMP COMMENT
-                
-        #         self.reset_election_timeout()
-
-        #         socket.send_json({"Vote":"True",'No-response':False,'node_id':self.node_id})
-        #     else:
-        #         #TEMP COMMENT
-        #         # Dump Point-13
-        #         self.dump_data(f"Vote denied for Node {message['candidate_id']} in term {message['term']}")
-        #         #TEMP COMMENT
-        #         socket.send_json({"Vote":"False",'No-response':False})
-        # else:
-        #     #TEMP COMMENT
-        #     # Dump Point-13
-        #     self.dump_data(f"Vote denied for Node {message['candidate_id']} in term {message['term']}")
-        #     #TEMP COMMENT
-        #     socket.send_json({"Vote":"False",'No-response':False})
-            
-        
-        # self.vote_count = self.broadcast_leader()
-        #         # print("DEB",res)
-        #         # if(res['No-response']==True):
-        #         #     print(f"No Response from {peer} in voting")
-        #         # elif(res['Vote']=='True'):
-        #         #     self.vote_count+=1
-        # print(f"Node {self.node_id}, vote_cnt {self.vote_count}")
-        # if(self.vote_count >= (len(peers)-1)//2 +1):
-        #     #TEMP COMMENT
-        #     # Dump Point-5
-        #     self.dump_data(f"Node {self.node_id} became the leader for term {self.term}")
-        #     #TEMP COMMENT
-
-        #     self.state = 'leader'
-        #     self.leader_id = self.node_id
-        #     print(f"New Leader is {self.node_id}")
-        #     self.broadcast()
-
-        #     # self.lease_timer = threading.Timer(self.leasetime,self.end_lease)
-        #     # self.lease_timer.start()
-            
-        #     #sending NO_OP
-            
-        #     #TEMP COMMENT
-        #     self.logs.append({'term': self.term, 'command': "NO-OP",'key':None,'value':None})
-        #     # Dump Point-1
-        #     self.dump_data(f"Leader {self.node_id} sending heartbeat and Renewing Lease")
-            
-            
-        #     heartbeat_thread = threading.Thread(target=self.send_heartbeat)
-        #     heartbeat_thread.start()
-        # else:
-        #     #If not elected Leader due to less votes
-        #     print(f"Node {self.node_id} lost election")
-        #     self.vote_count=0
-        #     self.voted_for=None
-        #     self.state = 'follower'
-        #     self.term-=1
-        #     self.reset_election_timeout()
-       
 class ClientCommunicationService(raft_pb2_grpc.ClientCommunicationServicer):
     def ServeClient(self,request,context):
         if node.state != 'leader':
@@ -285,7 +220,7 @@ class ClientCommunicationService(raft_pb2_grpc.ClientCommunicationServicer):
                     response=raft_pb2.ServeClientReply()
                     response.Data=""
                     response.leaderAddress=node.leader_address
-                    response.Success=False
+                    response.Success=True
                 return response
                 
 class RaftNode:
@@ -378,8 +313,10 @@ class RaftNode:
             try:#detect hearbeat ack
                 response_received = response.result(timeout=timeout)
                 print(f"Heartbeat ACK received from {response_received.nodeAddress} with term {response_received.term}")
-                if response_received.success==True:
-                    majority+=1          
+                majority+=1          
+                if response_received.success==False:
+                    # self.send_node(response_received.nodeAddress,cur_index2)
+                    pass
                     
             except grpc.FutureTimeoutError:
                 print("Timeout occured received no response ")
@@ -480,6 +417,7 @@ class RaftNode:
             self.vote_count=0
             self.voted_for = None
             self.term+=1
+            self.leader_address="-1"
             time.sleep(self.election_timeout)
             self.start_election()
 
@@ -557,6 +495,7 @@ class RaftNode:
             return True
 
     def replicate_log_entries(self):
+        self.cur_index = {i:len(self.logs)-1 for i in self.peers}
         self.majority=1
         timeout=self.heartbeat_interval
         print(self.logs)
