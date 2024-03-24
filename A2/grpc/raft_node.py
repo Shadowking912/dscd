@@ -20,7 +20,12 @@ class NodeCommunicationService(raft_pb2_grpc.NodeCommunicationServicer):
         vote_response = raft_pb2.VoteResponse()
         vote_response.nodeAddress = node.address
         vote_response.term = node.term
-        
+        # Calculating the longestRemainingDuration of the lease known to the node
+        if node.longestRemainingLease>0:
+            vote_response.longestRemainingDuration = node.longestRemainingLease - (time.time()-node.followerleasestart)
+        else:
+            vote_response.longestRemainingDuration = 0
+
         if node.term>request.term:
             vote_response.voteGranted=False
             return vote_response
@@ -51,9 +56,10 @@ class NodeCommunicationService(raft_pb2_grpc.NodeCommunicationServicer):
         # if len(request.entries)==0:
             node.voted_for=None#handle this
             node.leader_address = request.leaderAddress
-
             print(f"Received heartbeat from leader {request.leaderAddress}")
-            
+            node.longestRemainingLease=request.leaseTimer
+            node.followerleasestart = time.time()
+            # node.longestRemainingLease - node.followerleasestart-time.time()
             node.election_time=1
 
         # else:
@@ -228,14 +234,16 @@ class RaftNode:
         self.election_time=0
         self.election_timeout = 5  # Election timeout in seconds
         #TEMP
+        self.lease_timer= -1
         self.heartbeat_pause=0
         if(self.node_id==0):
-            self.election_timeout = 5
+            self.election_timeout = 3
         elif(self.node_id==1):
-            self.election_timeout = 9
+            self.election_timeout = 5
         elif(self.node_id==2):
-            self.election_timeout = 10
+            self.election_timeout = 6
         #TEMP
+        self.leasetime = 7
         self.heartbeat_interval = 1  # Heartbeat interval in seconds
         self.logs = []#List of (logterm,value)    
         # Denotes the index of the entry of the log last commited succesfully  
@@ -244,12 +252,30 @@ class RaftNode:
         self.key_value_store = {}
         self.prevLogIndex=-1
         self.prevLogTerm=-1
-        self.leasetime = 2 #Lease time in sec
+         #Lease time in sec
         self.logs_path = os.path.join(os.getcwd(),f'logs_node_{self.node_id}')
         self.cur_index={i:len(self.logs) for i in self.peers}
         self.lease_timer= -1
         self.node_address=address
+        self.isLeaseCancel=0
+        self.leasestart=0
+        self.followerleasestart=0
+        self.longestRemainingLease = 0
 
+    
+    def end_lease(self):
+        if(self.state == 'leader'):
+            time.sleep(self.leasetime)
+            if(self.isLeaseCancel==1):
+                print(f"Ended Lease for Leader {self.node_id}")
+                self.state = 'follower'
+                self.voted_for = None
+                self.leader_address = "-1"
+                self.vote_count = 0
+                self.election_time = 1
+            else:
+                self.end_lease()
+        # else:
     def handle_commit_requests(self,leader_commit_index):
         print("Logs = ",self.logs)
         commit_index = self.commit_index
@@ -287,6 +313,7 @@ class RaftNode:
         else:#start election
             # Dump Point 4
             # self.dump_data(f"Node {self.node_id} election timer timed out, Starting election.")
+            self.longestRemainingLease-=(time.time()-self.leasestart)
             print(f"Node:{self.node_id} started election")
             self.leader_address="-1"
             self.vote_count=0
@@ -299,9 +326,19 @@ class RaftNode:
                 self.state = 'leader'
                 self.leader_id = self.node_id
                 self.leader_address=self.node_address
-                self.appendthread=threading.Thread(target=self.append_entries())
+                self.election_time=1
+                print("vote lease time received: ",self.longestRemainingLease)
+                time.sleep(self.longestRemainingLease)
+                self.lease_timer = threading.Timer(self.leasetime,self.end_lease)
+                self.lease_timer.daemon = True
+                self.lease_timer.start()
+                self.leasestart=time.time()
+
+                self.appendthread=threading.Thread(target=self.append_entries)
                 self.appendthread.daemon=True
-                self.appendthread.start()   
+                self.appendthread.start()
+                
+                self.start_election()   
             else:
                 self.state=='follower'
                 time.sleep(self.election_timeout)
@@ -315,6 +352,9 @@ class RaftNode:
                 print(response_received.nodeAddress,response_received.voteGranted)
                 if response_received.voteGranted==True:
                     self.vote_count+=1           
+                    print("received leasetime: ",response_received.longestRemainingDuration)
+                    # Calculating the longestRemaining Lease received as response to the response of the vote
+                    self.longestRemainingLease = max(self.longestRemainingLease,response_received.longestRemainingDuration)
                     print(f"Node {self.node_id} got votes {self.vote_count} till now")
             except grpc.FutureTimeoutError:
                 print("Timeout occured received no response ")
@@ -332,6 +372,7 @@ class RaftNode:
                 vote_request.lastLogTerm = self.prevLogTerm
                 response=stub.RequestVote.future(vote_request)
                 response.add_done_callback(callback_function)
+
         
         start_time = time.time()
         while time.time() - start_time < self.election_timeout:  # Poll for a maximum of timeout seconds
@@ -398,11 +439,14 @@ class RaftNode:
                     logentries.value=log['value']
                     request.entries.append(logentries)
 
+                
                 print("sending ",request.entries,"to",peer)
                 request.prevLogIndex=(self.cur_index[peer]-1)
                 request.prevLogTerm= (self.logs[self.cur_index[peer]-1]['term'] if request.prevLogIndex>=0 else -1)
                 print("error her",request.prevLogIndex,request.prevLogTerm)
                 request.leaderCommit=self.commit_index
+                request.leaseTimer=self.leasetime-(time.time()-self.leasestart)
+                print("sent lease timer: ",request.leaseTimer)
                 response=stub.AppendEntries.future(request)
                 response.add_done_callback(callback)
                 
@@ -410,10 +454,17 @@ class RaftNode:
         start_time = time.time()
         while time.time() - start_time < timeout:  # Poll for timeout seconds
             time.sleep(0.1) # Poll every 0.1 second
-
+        
+        print("majority",self.majority)
         if self.majority>= (len(peers))//2 +1:#leader remains
             print(f"Node {self.node_id} got heartbeats {self.majority} till now")
-
+            self.election_time=1
+            self.isLeaseCancel=0
+            self.leasestart=time.time()
+        else:
+            print("node didnt get majority")
+            self.isLeaseCancel=1
+            self.election_time=0
         self.append_entries()    
 
         
@@ -431,7 +482,6 @@ def serve():
     node.election_timer = threading.Timer(node.election_timeout,node.start_election)
     node.election_timer.daemon = True
     node.election_timer.start()
-    
     
     server.wait_for_termination()
 

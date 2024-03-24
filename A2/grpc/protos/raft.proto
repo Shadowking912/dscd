@@ -25,6 +25,7 @@ message AppendEntriesRequest
     int32 prevLogTerm = 4;
     repeated entry entries = 5;
     int32 leaderCommit=6;
+    float leaseTimer = 7;
 }
 message AppendEntriesResponse
 {
@@ -44,9 +45,11 @@ message VoteResponse
     string nodeAddress=1;
     int32 term=2;
     bool voteGranted=3;
+    float longestRemainingDuration = 4;
 }
 //Node-Client Communication 
-message ServeClientArgs {
+message ServeClientArgs 
+{
   string Request = 1;
 }
 message ServeClientReply {
