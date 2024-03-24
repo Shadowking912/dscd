@@ -55,7 +55,7 @@ class NodeCommunicationService(raft_pb2_grpc.NodeCommunicationServicer):
             print(f"Received heartbeat from leader {request.leaderAddress}")
             
             node.election_time=1
-
+            node.isLeaseCancel =0
         # else:
             print("Received entries")
             print("leaderlogindex",request.prevLogIndex)
@@ -235,6 +235,8 @@ class RaftNode:
             self.election_timeout = 9
         elif(self.node_id==2):
             self.election_timeout = 10
+        elif(self.node_id==3):
+            self.election_timeout = 7
         #TEMP
         self.heartbeat_interval = 1  # Heartbeat interval in seconds
         self.logs = []#List of (logterm,value)    
@@ -244,10 +246,11 @@ class RaftNode:
         self.key_value_store = {}
         self.prevLogIndex=-1
         self.prevLogTerm=-1
-        self.leasetime = 2 #Lease time in sec
+        self.leasetime = 4 #Lease time in sec
         self.logs_path = os.path.join(os.getcwd(),f'logs_node_{self.node_id}')
         self.cur_index={i:len(self.logs) for i in self.peers}
         self.lease_timer= -1
+        self.isLeaseCancel = 0
         self.node_address=address
 
     def handle_commit_requests(self,leader_commit_index):
@@ -263,6 +266,25 @@ class RaftNode:
         else:
             print("No change in commit index needed")
         print(self.key_value_store)
+
+    def end_lease(self):
+        if(self.state == 'leader'):
+            time.sleep(self.leasetime)
+            if(self.isLeaseCancel==1):
+                print(f"Ended Lease for Leader {self.node_id}")
+                self.state = 'follower'
+                self.voted_for = None
+                self.leader_address = "-1"
+                self.vote_count = 0
+                self.election_time = 1
+            else:
+                self.end_lease()
+        # else:
+        #     time.sleep(self.leasetime)
+        #     if(self.isLeaseCancel==1):
+        #         self.election_time=0
+        #     else:
+        #         time.sleep(self.leasetime)
 
     def commit_log_entries(self):
         commit_index = self.commit_index
@@ -299,9 +321,17 @@ class RaftNode:
                 self.state = 'leader'
                 self.leader_id = self.node_id
                 self.leader_address=self.node_address
+                print("DEB","In st ele Leader if")
+
+                self.lease_timer = threading.Thread(target=self.end_lease())
+                self.lease_timer.start()
+
                 self.appendthread=threading.Thread(target=self.append_entries())
                 self.appendthread.daemon=True
                 self.appendthread.start()   
+
+                
+
             else:
                 self.state=='follower'
                 time.sleep(self.election_timeout)
@@ -342,6 +372,7 @@ class RaftNode:
                 self.leader_id = self.node_id
                 self.leader_address=self.node_address
                 print(f"New Leader is {self.node_id}")
+
                 break
 
             time.sleep(0.1) # Poll every 0.1 second
@@ -413,6 +444,10 @@ class RaftNode:
 
         if self.majority>= (len(peers))//2 +1:#leader remains
             print(f"Node {self.node_id} got heartbeats {self.majority} till now")
+            self.isLeaseCancel=1
+            self.election_time=1
+        else:
+            self.election_time=0
 
         self.append_entries()    
 
@@ -439,7 +474,7 @@ if __name__ == "__main__":
     node_id = int(input("Enter Node ID: "))
     server_address = f"127.0.0.1:555{node_id}"
     print(f"Node Listening at {server_address}")
-    peers = ["127.0.0.1:5550", "127.0.0.1:5551","127.0.0.1:5552"]  # Assuming 5 nodes
+    peers = ["127.0.0.1:5550", "127.0.0.1:5551","127.0.0.1:5552","127.0.0.1:5553"]  # Assuming 5 nodes
     serve()
 
 
