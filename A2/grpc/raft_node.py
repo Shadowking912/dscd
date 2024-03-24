@@ -74,7 +74,7 @@ class NodeCommunicationService(raft_pb2_grpc.NodeCommunicationServicer):
             leader_commit_index = request.leaderCommit
             
             if node.term>leader_term:
-                print("found error")
+                # print("found error")
                 # logresults = {
                 #     'type':'append_entries',
                 #     'node_id':self.node_id,
@@ -88,7 +88,7 @@ class NodeCommunicationService(raft_pb2_grpc.NodeCommunicationServicer):
                 return response
                 
             else:
-                print("here")
+                # print("here")
                 curr_log_term=node.prevLogTerm
                 matching_index=node.prevLogIndex
                 if len(node.logs)>0:
@@ -105,62 +105,39 @@ class NodeCommunicationService(raft_pb2_grpc.NodeCommunicationServicer):
                             break
 
                 if matching_index==leader_log_index:
-                    # print("matching")
-                    # logresults={
-                    #     'type':'append_entries',
-                    #     'node_id':node.node_id,
-                    #     'term':node.term,
-                    #     'success':True
-                    # }
                     response=raft_pb2.AppendEntriesResponse()
                     response.term = node.term
                     response.success=True
                     response.nodeAddress = node.address
- 
                     if matching_index!=-1:
                         node.logs=node.logs[:matching_index+1]
                     else:
                         node.logs=[]
-                    # entries =request.entries
                     for i in request.entries:
                         node.logs.append({"term":i.term,"command":i.operation,"key":i.key,"value":i.value})
-                    print("appended: ",node.logs)
+                    # print("appended: ",node.logs)
                     if len(node.logs)>0:
                         node.prevLogIndex = len(node.logs)-1
                         node.prevLogTerm = node.logs[-1]['term']
-                    
                     if len(request.entries)==0:
+                        print("In this if condition") # Debugging statement - 1
                         node.handle_commit_requests(leader_commit_index)
-                    # Dump Point-10
-                    # self.dump_data(f"Node {node.node_id} accepted AppendEntries RPC from {node.leader_id}")
-                    # print("Logs after appending = ",self.logs)
                 else:
-                    #logresults = {
-                    # 'type':'append_entries',
-                    # 'node_id':self.node_id,
-                    # 'term':self.term,
-                    # 'success':False
-                        
                     response=raft_pb2.AppendEntriesResponse()
                     response.term = node.term
                     response.success=False
                     response.nodeAddress = node.address
-
-                    # Dump Point-11
-                    # self.dump_data(f"Node {node.node_id} rejected AppendEntries RPC from {node.leader_id}")
-            
             print("sent response to leader")
             return response
         
 class ClientCommunicationService(raft_pb2_grpc.ClientCommunicationServicer):
     def ServeClient(self,request,context):
         if node.state != 'leader':
-            print("error",node.leader_address)
+            # print("error",node.leader_address)
             response=raft_pb2.ServeClientReply()
             response.Data=""
             response.leaderAddress=node.leader_address
             response.Success=False
-            print(f"In the leader area with id = ")
             return response
         
         else:
@@ -168,8 +145,8 @@ class ClientCommunicationService(raft_pb2_grpc.ClientCommunicationServicer):
             request_type = request.get('sub-type')
             key = request.get('key')
             value = request.get('value')
-            print(node.logs)
-            print("after")
+            # print(node.logs)
+            # print("after")
             if request_type == 'SET':
                 node.logs.append({'term': node.term, 'command': 'SET','key': key, 'value': f'{value}'})
                 print(node.logs)
@@ -178,25 +155,17 @@ class ClientCommunicationService(raft_pb2_grpc.ClientCommunicationServicer):
                 time.sleep(node.heartbeat_interval)
                 while node.majority<((len(node.peers)-1)//2+1):
                     time.sleep(node.heartbeat_interval)
-                print("append1")
+                # print("append1")
                 response=raft_pb2.ServeClientReply()
                 response.Data=""
                 response.leaderAddress=node.leader_address
                 response.Success=True
-                
-                # else:
-                #     print("append2")
-                #     response=raft_pb2.ServeClientReply()
-                #     response.Data=""
-                #     response.leaderAddress=node.leader_address
-                #     response.Success=False
 
-                print("response returned to client")
+                # print("response returned to client")
                 return response
     
             elif request_type == 'GET':
-                # print(f"Received GET request for key '{key}'")
-                # print(key,self.key_value_store.keys(),key in self.key_value_store.keys())
+                print(f"Received GET request for key '{key}'")
                 if key in node.key_value_store.keys():
                     value = node.key_value_store[key]
                     data={
@@ -278,6 +247,8 @@ class RaftNode:
         # else:
     def handle_commit_requests(self,leader_commit_index):
         print("Logs = ",self.logs)
+        print("Commit Index of the node = ",self.commit_index)
+        print("Commit Index of the leader = ",leader_commit_index)
         commit_index = self.commit_index
         if leader_commit_index>self.commit_index:
             for i in range(commit_index+1,leader_commit_index+1):
@@ -291,6 +262,7 @@ class RaftNode:
         print(self.key_value_store)
 
     def commit_log_entries(self):
+        print("Inside the commit log entries function")
         commit_index = self.commit_index
         for i in range(commit_index+1,len(self.logs)):
             self.commit_index+=1
@@ -311,8 +283,6 @@ class RaftNode:
             self.start_election()
 
         else:#start election
-            # Dump Point 4
-            # self.dump_data(f"Node {self.node_id} election timer timed out, Starting election.")
             self.longestRemainingLease-=(time.time()-self.leasestart)
             print(f"Node:{self.node_id} started election")
             self.leader_address="-1"
@@ -377,8 +347,6 @@ class RaftNode:
         start_time = time.time()
         while time.time() - start_time < self.election_timeout:  # Poll for a maximum of timeout seconds
             if(self.vote_count >= (len(peers))//2 +1):
-            # Dump Point-5
-                # self.dump_data(f"Node {self.node_id} became the leader for term {self.term}") 
                 self.state = 'leader'
                 self.leader_id = self.node_id
                 self.leader_address=self.node_address
@@ -399,7 +367,7 @@ class RaftNode:
             nonlocal nodecheck
             try:#detect hearbeat ack
                 response_received = response.result(timeout=timeout)
-                print(response_received)
+                # print(response_received)
                 print(f"append entries ACK received from {response_received.nodeAddress} with term {response_received.term}")
                 if response_received.success==True:
                     self.cur_index[response_received.nodeAddress]=len(self.logs)
@@ -461,10 +429,11 @@ class RaftNode:
             self.election_time=1
             self.isLeaseCancel=0
             self.leasestart=time.time()
+            self.commit_log_entries()
         else:
             print("node didnt get majority")
             self.isLeaseCancel=1
-            self.election_time=0
+            self.election_time=0  
         self.append_entries()    
 
         
