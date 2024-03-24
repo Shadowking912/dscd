@@ -39,6 +39,7 @@ class RaftClient:
             while i<len(self.nodes):
                 try:
                     print(f"Contacting the node with address : {self.nodes[i]}")
+                    self.change_socket_connection(self.nodes[i])
                     response = self.stub.ServeClient(request)
                     status = response.Success
                     if status==True:
@@ -53,11 +54,9 @@ class RaftClient:
                             self.leaderAddress=response.leaderAddress
                             self.send_set_request(key,value)
                             return True
-                except grpc.RpcError as e:
-                    print(f"The node {self.nodes[i]} is down hence contacting the next node")
+                except grpc.RpcError as e :
+                    print(f"The node {self.nodes[i]} is down hence contacting the next node",e)
                     i+=1
-                    if i<len(self.nodes):
-                        self.change_socket_connection(self.nodes[i])
             return False
     
         else:
@@ -134,7 +133,7 @@ class RaftClient:
                  print(f"{response.Data}")
             else:
                 print(f"There is no leader elected in the database and hence the operation failed")
-            
+
         except grpc.RpcError as e:
             print(f"Error occured : {str(e)}")
             return False
@@ -216,6 +215,6 @@ class RaftClient:
         
 if __name__ == "__main__":
     client_id = int(input("Enter Client ID: "))
-    server_address = "127.0.0.1:5550"
+    server_address = "127.0.0.1:5551"
     client = RaftClient(client_id, server_address)
     client.run()
