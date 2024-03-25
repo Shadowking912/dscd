@@ -8,6 +8,8 @@ import concurrent
 import grpc
 import raft_pb2
 import raft_pb2_grpc
+from functools import partial
+
 
 class NodeCommunicationService(raft_pb2_grpc.NodeCommunicationServicer):
     # def serve_client():
@@ -16,6 +18,7 @@ class NodeCommunicationService(raft_pb2_grpc.NodeCommunicationServicer):
     def RequestVote(self,request,context):
         print(f"Received vote request from candidate {request.candidateAddress}")
         node.leader_address="-1"
+        node.leader_id = -1
         # if self.leader
         vote_response = raft_pb2.VoteResponse()
         vote_response.nodeAddress = node.address
@@ -27,6 +30,10 @@ class NodeCommunicationService(raft_pb2_grpc.NodeCommunicationServicer):
             vote_response.longestRemainingDuration = 0
 
         if node.term>request.term:
+            
+            # Dump POINT-13
+            node.dump_data(f"Vote denied for Node {peer_dict[request.candidateAddress]} in term {request.term}")
+
             vote_response.voteGranted=False
             return vote_response
 
@@ -34,17 +41,31 @@ class NodeCommunicationService(raft_pb2_grpc.NodeCommunicationServicer):
             if node.prevLogIndex<=request.lastLogIndex:
                 if node.voted_for==request.candidateAddress or node.voted_for==None :
                     node.voted_for=request.candidateAddress
+                    
+                    # Dump POINT-12
+                    node.dump_data(f"Vote granted for Node {peer_dict[request.candidateAddress]} in term {request.term}")
+                    
                     vote_response.voteGranted = True
                     
                 else:
+                    # Dump POINT-13
+                    node.dump_data(f"Vote denied for Node {peer_dict[request.candidateAddress]} in term {request.term}")
+
                     vote_response.voteGranted=False
                 return vote_response
             else:
+                # Dump POINT-13
+                node.dump_data(f"Vote denied for Node {peer_dict[request.candidateAddress]} in term {request.term}")
+                
                 vote_response.voteGranted=False
                 return vote_response
         else:
             node.term=request.term
             node.voted_for=request.candidateAddress
+            
+            # Dump POINT-12
+            node.dump_data(f"Vote granted for Node {peer_dict[request.candidateAddress]} in term {request.term}")
+
             vote_response.voteGranted=True
             return vote_response
 
@@ -56,6 +77,7 @@ class NodeCommunicationService(raft_pb2_grpc.NodeCommunicationServicer):
         # if len(request.entries)==0:
             node.voted_for=None#handle this
             node.leader_address = request.leaderAddress
+            node.leader_id = peer_dict[node.leader_address]
             print(f"Received heartbeat from leader {request.leaderAddress}")
             node.longestRemainingLease=request.leaseTimer
             node.followerleasestart = time.time()
@@ -114,15 +136,23 @@ class NodeCommunicationService(raft_pb2_grpc.NodeCommunicationServicer):
                     else:
                         node.logs=[]
                     for i in request.entries:
-                        node.logs.append({"term":i.term,"command":i.operation,"key":i.key,"value":i.value})
+                        log ={"term":i.term,"command":i.operation,"key":i.key,"value":i.value}
+                        node.logs.append(log)
+
+                        # Adding log to the log file
+                        node.write_logs()
+                
                     # print("appended: ",node.logs)
                     if len(node.logs)>0:
                         node.prevLogIndex = len(node.logs)-1
                         node.prevLogTerm = node.logs[-1]['term']
                     if len(request.entries)==0:
-                        print("In this if condition") # Debugging statement - 1
+                        print("In this if condition") 
                         node.handle_commit_requests(leader_commit_index)
                 else:
+                    # Dump POINT-11
+                    node.dump_data(f"Node {node.node_id} rejected AppendEntries RPC from {node.leader_id}")
+
                     response=raft_pb2.AppendEntriesResponse()
                     response.term = node.term
                     response.success=False
@@ -148,7 +178,17 @@ class ClientCommunicationService(raft_pb2_grpc.ClientCommunicationServicer):
             # print(node.logs)
             # print("after")
             if request_type == 'SET':
-                node.logs.append({'term': node.term, 'command': 'SET','key': key, 'value': f'{value}'})
+
+                # Dump POINT-8
+                node.dump_data(f"Node {node.node_id} (leader) received an {request_type} for {key} : {value} request")
+
+                log = {'term': node.term, 'command': 'SET','key': key, 'value': f'{value}'}
+
+                node.logs.append(log)
+               
+                # Writing the logs to the logs file
+                node.write_logs()
+               
                 print(node.logs)
                 node.heartbeat_pause==1
                 node.cur_index={i:len(node.logs)-1 for i in node.peers}
@@ -165,6 +205,10 @@ class ClientCommunicationService(raft_pb2_grpc.ClientCommunicationServicer):
                 return response
     
             elif request_type == 'GET':
+
+                 # Dump POINT-8
+                node.dump_data(f"Node {node.node_id} (leader) received a {request_type} for {key} request")
+               
                 print(f"Received GET request for key '{key}'")
                 if key in node.key_value_store.keys():
                     value = node.key_value_store[key]
@@ -231,31 +275,93 @@ class RaftNode:
         self.followerleasestart=0
         self.longestRemainingLease = 0
 
-    
+        # Creating files for storing metadata and the logs
+        if os.path.isdir(os.path.join(self.logs_path))==False:
+            os.makedirs(os.path.join(self.logs_path))
+            with open(self.logs_path + "/logs.json","w"):
+                pass
+            with open(self.logs_path+"/metadata.json","w"):
+                pass
+            with open(self.logs_path+"/dump.txt","w"):
+                pass
+
+        else:
+        # Write functionlaity for loading the logs list from the text file
+            # with open(self.logs_path+"/logs.json","r") as f:
+            #     self.logs = json.load(f)
+
+            # with open(self.logs_path+"/metadata.json","r") as f:
+            #     metadata = json.load(f)
+            #     self.commit_index = metadata['Commit-Length']-1
+            #     self.term = metadata["Term"]
+        
+            pass
+
+
+    def dump_data(self,data):
+        with open(f"{self.logs_path}/dump.txt","a") as f:
+            f.write(data)
+            f.write("\n")
+
+    def write_metadata(self):
+        with open(f"{self.logs_path}/logs.json","w") as f:
+            metadata={
+                'Commit-Length':self.commit_index+1,
+                'Term':self.term,
+                'Voted-For':self.voted_for
+            }
+            json_object = json.dumps(metadata,indent=4)
+            f.write(json_object)
+
+    def write_logs(self):
+        with open(self.logs_path+"/logs.json","w") as f:
+            json_object = json.dumps(self.logs,indent=4)
+            f.write(json_object)
+        
+
+
     def end_lease(self):
         if(self.state == 'leader'):
             time.sleep(self.leasetime)
             if(self.isLeaseCancel==1):
                 print(f"Ended Lease for Leader {self.node_id}")
+
+                # DUMP Point-14
+                self.dump_data(f"{self.node_id} Stepping down")
+                
                 self.state = 'follower'
                 self.voted_for = None
                 self.leader_address = "-1"
+                self.leader_id=-1
                 self.vote_count = 0
                 self.election_time = 1
             else:
                 self.end_lease()
-        # else:
+    
+    
+
+
     def handle_commit_requests(self,leader_commit_index):
+        # Dump POINT-10
+        self.dump_data(f"Node {self.node_id} accepted AppendEntries RPC from {self.leader_id}")
+
         print("Logs = ",self.logs)
         print("Commit Index of the node = ",self.commit_index)
         print("Commit Index of the leader = ",leader_commit_index)
         commit_index = self.commit_index
         if leader_commit_index>self.commit_index:
             for i in range(commit_index+1,leader_commit_index+1):
-                print("Value of i = ",i)
-                self.commit_index+=1
-                self.key_value_store[self.logs[i]['key']] = self.logs[i]['value']
                 self.last_applied+=1
+                self.commit_index+=1
+                if self.logs[i]['key']!='None':
+                    self.key_value_store[self.logs[i]['key']] = self.logs[i]['value']
+
+                    # Dump POINT-7
+                    self.dump_data(f"Node {self.node_id} (follower) committed the entry {self.logs[i]['command']} {self.logs[i]['key']} : {self.logs[i]['value']} with term {self.logs[i]['term']} to the state machine")
+                else:
+                    # Dump POINT-7
+                    self.dump_data(f"Node {self.node_id} (follower) committed the entry {self.logs[i]['command']} with term {self.logs[i]['term']} to the state machine.")
+
             print(f"Commit Index of the node {self.node_id} {self.commit_index}")
         else:
             print("No change in commit index needed")
@@ -265,13 +371,20 @@ class RaftNode:
         print("Inside the commit log entries function")
         commit_index = self.commit_index
         for i in range(commit_index+1,len(self.logs)):
-            self.commit_index+=1
-            self.key_value_store[self.logs[i]['key']] = self.logs[i]['value']
             self.last_applied+=1
+            self.commit_index+=1
 
-        # self.write_logs()   
+            if self.logs[i]['key']!='None':
+                self.key_value_store[self.logs[i]['key']] = self.logs[i]['value']
+                
+                # Dump POINT-9
+                self.dump_data(f"Node {self.node_id} (follower) committed the entry {self.logs[i]['command']} {self.logs[i]['key']} : {self.logs[i]['value']} with term {self.logs[i]['term']} to the state machine")
+
+            else:
+                # Dump POINT-9
+                self.dump_data(f"Node {self.node_id} (follower) committed the entry {self.logs[i]['command']} with term {self.logs[i]['term']} to the state machine.")
+
         print(f"Commit index of the leader with id {self.leader_id} {self.commit_index}")
-        # self.write_metadata(
         print(self.key_value_store)
     
     def start_election(self):
@@ -280,12 +393,17 @@ class RaftNode:
         if self.election_time==1:#reset election timer
             self.election_time=0
             time.sleep(self.election_timeout)
+           
+            # Dump POINT-4
+            self.dump_data(f"Node {self.node_id} election timer timed out, Starting election.")
+           
             self.start_election()
 
         else:#start election
             self.longestRemainingLease-=(time.time()-self.leasestart)
             print(f"Node:{self.node_id} started election")
             self.leader_address="-1"
+            self.leader_id = -1
             self.vote_count=0
             self.state = 'candidate'
             self.term += 1
@@ -293,14 +411,33 @@ class RaftNode:
             self.vote_count += 1  # Vote for self  
             self.send_vote_requests()
             if self.vote_count>= (len(peers))//2 +1:
+
+                # Dump POINT-5
+                self.dump_data(f"Node {self.node_id} became the leader for term {self.term}.")
+
                 self.state = 'leader'
                 self.leader_id = self.node_id
                 self.leader_address=self.node_address
                 self.election_time=1
                 print("vote lease time received: ",self.longestRemainingLease)
                 time.sleep(self.longestRemainingLease)
+
+                # DUMP Point-3
+                self.dump_data(f"New Leader waiting for Old Leader lease to timeout.")
+
                 self.lease_timer = threading.Timer(self.leasetime,self.end_lease)
                 self.lease_timer.daemon = True
+
+                
+                # Appending NO-OP entry to the log
+                log = {'term': self.term, 'command': 'NO-OP','key':"None",'value':"None"}
+                self.logs.append(log)
+                print("Logs of leader = ",self.logs)
+                self.write_logs()
+                
+                # DUMP POINT-1
+                self.dump_data(f"Leader {self.leader_id} sending heartbeat & Renewing Lease.")
+
                 self.lease_timer.start()
                 self.leasestart=time.time()
 
@@ -308,9 +445,9 @@ class RaftNode:
                 self.appendthread.daemon=True
                 self.appendthread.start()
                 
-                self.start_election()   
+                self.start_election()   #-----------> WHY?
             else:
-                self.state=='follower'
+                self.state=='follower' # ----------------> Issue, == instead of = and also not checking if a leader has been created directly starting election
                 time.sleep(self.election_timeout)
                 self.start_election()
                                 
@@ -329,6 +466,9 @@ class RaftNode:
             except grpc.FutureTimeoutError:
                 print("Timeout occured received no response ")
             except grpc.RpcError as e:
+                # DUMP Point-6
+                self.dump_data(f"Error occurred while sending RPC to Node {self.peer}")
+
                 print("Node Crashed",e)
                 
         for peer in self.peers:
@@ -341,6 +481,10 @@ class RaftNode:
                 vote_request.lastLogIndex = self.prevLogIndex
                 vote_request.lastLogTerm = self.prevLogTerm
                 response=stub.RequestVote.future(vote_request)
+
+                # creating a partial function with arguments
+                # callback_function = partial(callback_function,peer_dict[peer])
+
                 response.add_done_callback(callback_function)
 
         
@@ -407,6 +551,9 @@ class RaftNode:
                     logentries.value=log['value']
                     request.entries.append(logentries)
 
+
+                # if len(logentries)==0:
+
                 
                 print("sending ",request.entries,"to",peer)
                 request.prevLogIndex=(self.cur_index[peer]-1)
@@ -434,6 +581,7 @@ class RaftNode:
             print("node didnt get majority")
             self.isLeaseCancel=1
             self.election_time=0  
+
         self.append_entries()    
 
         
@@ -459,6 +607,7 @@ if __name__ == "__main__":
     server_address = f"127.0.0.1:555{node_id}"
     print(f"Node Listening at {server_address}")
     peers = ["127.0.0.1:5550", "127.0.0.1:5551","127.0.0.1:5552"]  # Assuming 5 nodes
+    peer_dict = {"127.0.0.1:5550":0,"127.0.0.1:5551":1,"127.0.0.1:5552":2}
     serve()
 
 

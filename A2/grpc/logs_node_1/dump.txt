@@ -1,0 +1,136 @@
+Vote granted for Node 0 in term 1
+Node 1 accepted AppendEntries RPC from 0
+Node 1 (follower) committed the entry NO-OP with term 1 to the state machine.
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 election timer timed out, Starting election.
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 election timer timed out, Starting election.
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 election timer timed out, Starting election.
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 election timer timed out, Starting election.
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 election timer timed out, Starting election.
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 election timer timed out, Starting election.
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 election timer timed out, Starting election.
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 election timer timed out, Starting election.
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 election timer timed out, Starting election.
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 election timer timed out, Starting election.
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 election timer timed out, Starting election.
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 election timer timed out, Starting election.
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 election timer timed out, Starting election.
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 election timer timed out, Starting election.
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 election timer timed out, Starting election.
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 election timer timed out, Starting election.
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 election timer timed out, Starting election.
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 election timer timed out, Starting election.
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 election timer timed out, Starting election.
+Node 1 election timer timed out, Starting election.
+Node 1 became the leader for term 2.
+New Leader waiting for Old Leader lease to timeout.
+Leader 1 sending heartbeat & Renewing Lease.
+Node 1 (follower) committed the entry NO-OP with term 2 to the state machine.
+Node 1 election timer timed out, Starting election.
+Node 1 election timer timed out, Starting election.
+Node 1 election timer timed out, Starting election.
+Node 1 election timer timed out, Starting election.
+Node 1 election timer timed out, Starting election.
+Node 1 election timer timed out, Starting election.
+Node 1 election timer timed out, Starting election.
+Node 1 election timer timed out, Starting election.
+Node 1 election timer timed out, Starting election.
+Node 1 election timer timed out, Starting election.
+Node 1 election timer timed out, Starting election.
+Node 1 (leader) received an SET for 1 : 1 request
+Node 1 (follower) committed the entry SET 1 : 1 with term 2 to the state machine
+Node 1 election timer timed out, Starting election.
+Node 1 election timer timed out, Starting election.
+Node 1 election timer timed out, Starting election.
+Node 1 election timer timed out, Starting election.
+Node 1 election timer timed out, Starting election.
+Node 1 election timer timed out, Starting election.
+Node 1 election timer timed out, Starting election.
+Node 1 election timer timed out, Starting election.
+Node 1 election timer timed out, Starting election.

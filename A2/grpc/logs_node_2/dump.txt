@@ -1,0 +1,219 @@
+Vote granted for Node 0 in term 1
+Node 2 accepted AppendEntries RPC from 0
+Node 2 (follower) committed the entry NO-OP with term 1 to the state machine.
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 election timer timed out, Starting election.
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 election timer timed out, Starting election.
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 election timer timed out, Starting election.
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 election timer timed out, Starting election.
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 election timer timed out, Starting election.
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 election timer timed out, Starting election.
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 election timer timed out, Starting election.
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 election timer timed out, Starting election.
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 election timer timed out, Starting election.
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 election timer timed out, Starting election.
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 election timer timed out, Starting election.
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 election timer timed out, Starting election.
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 election timer timed out, Starting election.
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 election timer timed out, Starting election.
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 election timer timed out, Starting election.
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 election timer timed out, Starting election.
+Vote granted for Node 1 in term 2
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 election timer timed out, Starting election.
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 election timer timed out, Starting election.
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 election timer timed out, Starting election.
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 election timer timed out, Starting election.
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 election timer timed out, Starting election.
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 election timer timed out, Starting election.
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 election timer timed out, Starting election.
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 election timer timed out, Starting election.
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 election timer timed out, Starting election.
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 election timer timed out, Starting election.
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 accepted AppendEntries RPC from 1
+Node 2 (follower) committed the entry NO-OP with term 2 to the state machine.
+Node 2 (follower) committed the entry SET 1 : 1 with term 2 to the state machine
+Node 2 election timer timed out, Starting election.
+Node 2 accepted AppendEntries RPC from 1
+Node 2 accepted AppendEntries RPC from 1
+Node 2 accepted AppendEntries RPC from 1
+Node 2 accepted AppendEntries RPC from 1
+Node 2 accepted AppendEntries RPC from 1
+Node 2 accepted AppendEntries RPC from 1
+Node 2 election timer timed out, Starting election.
+Node 2 accepted AppendEntries RPC from 1
+Node 2 accepted AppendEntries RPC from 1
+Node 2 accepted AppendEntries RPC from 1
+Node 2 accepted AppendEntries RPC from 1
+Node 2 accepted AppendEntries RPC from 1
+Node 2 election timer timed out, Starting election.
+Node 2 accepted AppendEntries RPC from 1
+Node 2 accepted AppendEntries RPC from 1
+Node 2 accepted AppendEntries RPC from 1
+Node 2 accepted AppendEntries RPC from 1
+Node 2 accepted AppendEntries RPC from 1
+Node 2 accepted AppendEntries RPC from 1
+Node 2 election timer timed out, Starting election.
+Node 2 accepted AppendEntries RPC from 1
+Node 2 accepted AppendEntries RPC from 1
+Node 2 accepted AppendEntries RPC from 1
+Node 2 accepted AppendEntries RPC from 1
+Node 2 accepted AppendEntries RPC from 1
+Node 2 election timer timed out, Starting election.
+Node 2 accepted AppendEntries RPC from 1
+Node 2 accepted AppendEntries RPC from 1
+Node 2 accepted AppendEntries RPC from 1
+Node 2 accepted AppendEntries RPC from 1
+Node 2 accepted AppendEntries RPC from 1
+Node 2 accepted AppendEntries RPC from 1
+Node 2 election timer timed out, Starting election.
+Node 2 accepted AppendEntries RPC from 1
+Node 2 accepted AppendEntries RPC from 1
+Node 2 accepted AppendEntries RPC from 1
+Node 2 accepted AppendEntries RPC from 1
+Node 2 accepted AppendEntries RPC from 1
+Node 2 election timer timed out, Starting election.
+Node 2 accepted AppendEntries RPC from 1
+Node 2 accepted AppendEntries RPC from 1
+Node 2 accepted AppendEntries RPC from 1
+Node 2 accepted AppendEntries RPC from 1
+Node 2 election timer timed out, Starting election.

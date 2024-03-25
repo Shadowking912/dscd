@@ -883,3 +883,4 @@ Node 0 election timer timed out, Starting election.
 Node 0 became the leader for term 1
 Node 0 is the New Leader.
 Leader 0 sending heartbeat and Renewing Lease
+Node 0 election timer timed out, Starting election.
