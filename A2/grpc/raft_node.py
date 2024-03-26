@@ -25,7 +25,7 @@ class NodeCommunicationService(raft_pb2_grpc.NodeCommunicationServicer):
         vote_response.term = node.term
         # Calculating the longestRemainingDuration of the lease known to the node
         if node.longestRemainingLease>0:
-            vote_response.longestRemainingDuration = node.longestRemainingLease - (time.time()-node.followerleasestart)
+            vote_response.longestRemainingDuration = node.longestRemainingLease - (time.monotonic()-node.followerleasestart)
         else:
             vote_response.longestRemainingDuration = 0
 
@@ -80,7 +80,7 @@ class NodeCommunicationService(raft_pb2_grpc.NodeCommunicationServicer):
             node.leader_id = peer_dict[node.leader_address]
             print(f"Received heartbeat from leader {request.leaderAddress}")
             node.longestRemainingLease=request.leaseTimer
-            node.followerleasestart = time.time()
+            node.followerleasestart = time.monotonic()
             # node.longestRemainingLease - node.followerleasestart-time.time()
             node.election_time=1
 
@@ -397,78 +397,72 @@ class RaftNode:
     def start_election(self):
         print("DEG:",f"Current Leader id: {self.leader_address}")
         
-        if self.election_time==1:#reset election timer
-            self.election_time=0
-            time.sleep(self.election_timeout)
-           
-         
-           
-            self.start_election()
+        self.voting_thread=threading.Timer(self.election_timeout,self.send_vote_requests)
+        self.voting_thread.daemon=True
+        self.voting_thread.start()
+        self.voting_thread.join()
+        if self.vote_count>= (len(peers))//2 +1:
 
-        else:#start election
-            self.longestRemainingLease-=(time.time()-self.leasestart)
+            # Dump POINT-5
+            self.dump_data(f"Node {self.node_id} became the leader for term {self.term}.")
+
+            self.state = 'leader'
+            self.leader_id = self.node_id
+            self.leader_address=self.node_address
+            self.election_time=1
+            print("vote lease time received: ",self.longestRemainingLease)
+            # time.sleep(self.longestRemainingLease)
+
+            # DUMP Point-3
+            self.dump_data(f"New Leader waiting for Old Leader lease to timeout.")
+
+            self.lease_timer = threading.Timer(self.leasetime,self.end_lease)
+            self.lease_timer.daemon = True
+
             
-            # Dump POINT-4
-            self.dump_data(f"Node {self.node_id} election timer timed out, Starting election.")
+            # Appending NO-OP entry to the log
+            log = {'term': self.term, 'command': 'NO-OP','key':"None",'value':"None"}
+            self.logs.append(log)
+            print("Logs of leader = ",self.logs)
+            self.write_logs()
+            
+            
 
-            print(f"Node:{self.node_id} started election")
-            self.leader_address="-1"
-            self.leader_id = -1
-            self.vote_count=0
-            self.state = 'candidate'
-            self.term += 1
-            self.voted_for = self.node_id
-            self.vote_count += 1  # Vote for self  
+            self.lease_timer.start()
+            self.leasestart=time.monotonic()
 
-            # Writing the metadata
-            self.write_metadata()
+            self.appendthread=threading.Thread(target=self.append_entries)
+            self.appendthread.daemon=True
+            self.appendthread.start()
+            
+            self.voting_thread=threading.Timer(self.election_timeout,self.send_vote_requests)
+            self.voting_thread.daemon=True
+            self.voting_thread.start() 
+        else:
+            # DUMP point-2
+            self.dump_data(f"Leader {self.node_id} lease renewal failed. Stepping Down.")
 
-            self.send_vote_requests()
-            if self.vote_count>= (len(peers))//2 +1:
-
-                # Dump POINT-5
-                self.dump_data(f"Node {self.node_id} became the leader for term {self.term}.")
-
-                self.state = 'leader'
-                self.leader_id = self.node_id
-                self.leader_address=self.node_address
-                self.election_time=1
-                print("vote lease time received: ",self.longestRemainingLease)
-                time.sleep(self.longestRemainingLease)
-
-                # DUMP Point-3
-                self.dump_data(f"New Leader waiting for Old Leader lease to timeout.")
-
-                self.lease_timer = threading.Timer(self.leasetime,self.end_lease)
-                self.lease_timer.daemon = True
-
-                
-                # Appending NO-OP entry to the log
-                log = {'term': self.term, 'command': 'NO-OP','key':"None",'value':"None"}
-                self.logs.append(log)
-                print("Logs of leader = ",self.logs)
-                self.write_logs()
-                
-               
-
-                self.lease_timer.start()
-                self.leasestart=time.time()
-
-                self.appendthread=threading.Thread(target=self.append_entries)
-                self.appendthread.daemon=True
-                self.appendthread.start()
-                
-                self.start_election()  
-            else:
-                # DUMP point-2
-                self.dump_data(f"Leader {self.node_id} lease renewal failed. Stepping Down.")
-
-                self.state='follower' # ----------------> Issue, == instead of = and also not checking if a leader has been created directly starting election
-                time.sleep(self.election_timeout)
-                self.start_election()
+            self.state='follower' # ----------------> Issue, == instead of = and also not checking if a leader has been created directly starting election
+            self.voting_thread=threading.Timer(self.election_timeout,self.send_vote_requests)
+            self.voting_thread.daemon=True
+            self.voting_thread.start() 
                                 
     def send_vote_requests(self):
-        
+        self.longestRemainingLease-=(time.monotonic()-self.leasestart)
+        # Dump POINT-4
+        self.dump_data(f"Node {self.node_id} election timer timed out, Starting election.")
+
+        print(f"Node:{self.node_id} started election")
+        self.leader_address="-1"
+        self.leader_id = -1
+        self.vote_count=0
+        self.state = 'candidate'
+        self.term += 1
+        self.voted_for = self.node_id
+        self.vote_count += 1  # Vote for self  
+
+        # Writing the metadata
+        self.write_metadata()
         def callback_function(peer_id,response):
             try:
                 response_received = response.result(timeout=self.election_timeout)
@@ -576,7 +570,7 @@ class RaftNode:
                 request.prevLogTerm= (self.logs[self.cur_index[peer]-1]['term'] if request.prevLogIndex>=0 else -1)
                 print("error her",request.prevLogIndex,request.prevLogTerm)
                 request.leaderCommit=self.commit_index
-                request.leaseTimer=self.leasetime-(time.time()-self.leasestart)
+                request.leaseTimer=self.leasetime-(time.monotonic()-self.leasestart)
                 print("sent lease timer: ",request.leaseTimer)
                 response=stub.AppendEntries.future(request)
                 response.add_done_callback(callback)
@@ -591,7 +585,7 @@ class RaftNode:
             print(f"Node {self.node_id} got heartbeats {self.majority} till now")
             self.election_time=1
             self.isLeaseCancel=0
-            self.leasestart=time.time()
+            self.leasestart=time.monotonic()
             self.commit_log_entries()
         else:
             print("node didnt get majority")
@@ -612,9 +606,11 @@ def serve():
     raft_pb2_grpc.add_ClientCommunicationServicer_to_server(client_communication_server,server)
     server.add_insecure_port(node.address)
     server.start()
-    node.election_timer = threading.Timer(node.election_timeout,node.start_election)
+    node.election_timer = threading.Thread(target=node.start_election)
     node.election_timer.daemon = True
     node.election_timer.start()
+
+
     
     server.wait_for_termination()
 
