@@ -91,7 +91,7 @@ class RaftClient:
                         else:
                             print(f"GET Command failed, retrying and contacting the new leader with id : {response.leaderAddress}....")
                             self.leaderAddress=response.leaderAddress
-                            self.send_get_request(key,value)
+                            self.send_get_request(key)
                             return True
                 except grpc.RpcError as e:
                     print(f"The node {self.nodes[i]} is down hence contacting the next node")

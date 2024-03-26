@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\nraft.proto\x12\x12\x63ommunication_raft\"D\n\x05\x65ntry\x12\x11\n\toperation\x18\x01 \x01(\t\x12\x0b\n\x03key\x18\x02 \x01(\t\x12\r\n\x05value\x18\x03 \x01(\t\x12\x0c\n\x04term\x18\x04 \x01(\x05\"\xa8\x01\n\x14\x41ppendEntriesRequest\x12\x0c\n\x04term\x18\x01 \x01(\x05\x12\x15\n\rleaderAddress\x18\x02 \x01(\t\x12\x14\n\x0cprevLogIndex\x18\x03 \x01(\x05\x12\x13\n\x0bprevLogTerm\x18\x04 \x01(\x05\x12*\n\x07\x65ntries\x18\x05 \x03(\x0b\x32\x19.communication_raft.entry\x12\x14\n\x0cleaderCommit\x18\x06 \x01(\x05\"K\n\x15\x41ppendEntriesResponse\x12\x0c\n\x04term\x18\x01 \x01(\x05\x12\x0f\n\x07success\x18\x02 \x01(\x08\x12\x13\n\x0bnodeAddress\x18\x03 \x01(\t\"`\n\x0bVoteRequest\x12\x0c\n\x04term\x18\x01 \x01(\x05\x12\x18\n\x10\x63\x61ndidateAddress\x18\x02 \x01(\t\x12\x14\n\x0clastLogIndex\x18\x03 \x01(\x05\x12\x13\n\x0blastLogTerm\x18\x04 \x01(\x05\"F\n\x0cVoteResponse\x12\x13\n\x0bnodeAddress\x18\x01 \x01(\t\x12\x0c\n\x04term\x18\x02 \x01(\x05\x12\x13\n\x0bvoteGranted\x18\x03 \x01(\x08\"\"\n\x0fServeClientArgs\x12\x0f\n\x07Request\x18\x01 \x01(\t\"H\n\x10ServeClientReply\x12\x0c\n\x04\x44\x61ta\x18\x01 \x01(\t\x12\x15\n\rleaderAddress\x18\x02 \x01(\t\x12\x0f\n\x07Success\x18\x03 \x01(\x08\x32\xcb\x01\n\x11NodeCommunication\x12\x64\n\rAppendEntries\x12(.communication_raft.AppendEntriesRequest\x1a).communication_raft.AppendEntriesResponse\x12P\n\x0bRequestVote\x12\x1f.communication_raft.VoteRequest\x1a .communication_raft.VoteResponse2o\n\x13\x43lientCommunication\x12X\n\x0bServeClient\x12#.communication_raft.ServeClientArgs\x1a$.communication_raft.ServeClientReplyb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\nraft.proto\x12\x12\x63ommunication_raft\"D\n\x05\x65ntry\x12\x11\n\toperation\x18\x01 \x01(\t\x12\x0b\n\x03key\x18\x02 \x01(\t\x12\r\n\x05value\x18\x03 \x01(\t\x12\x0c\n\x04term\x18\x04 \x01(\x05\"\xbc\x01\n\x14\x41ppendEntriesRequest\x12\x0c\n\x04term\x18\x01 \x01(\x05\x12\x15\n\rleaderAddress\x18\x02 \x01(\t\x12\x14\n\x0cprevLogIndex\x18\x03 \x01(\x05\x12\x13\n\x0bprevLogTerm\x18\x04 \x01(\x05\x12*\n\x07\x65ntries\x18\x05 \x03(\x0b\x32\x19.communication_raft.entry\x12\x14\n\x0cleaderCommit\x18\x06 \x01(\x05\x12\x12\n\nleaseTimer\x18\x07 \x01(\x02\"K\n\x15\x41ppendEntriesResponse\x12\x0c\n\x04term\x18\x01 \x01(\x05\x12\x0f\n\x07success\x18\x02 \x01(\x08\x12\x13\n\x0bnodeAddress\x18\x03 \x01(\t\"`\n\x0bVoteRequest\x12\x0c\n\x04term\x18\x01 \x01(\x05\x12\x18\n\x10\x63\x61ndidateAddress\x18\x02 \x01(\t\x12\x14\n\x0clastLogIndex\x18\x03 \x01(\x05\x12\x13\n\x0blastLogTerm\x18\x04 \x01(\x05\"h\n\x0cVoteResponse\x12\x13\n\x0bnodeAddress\x18\x01 \x01(\t\x12\x0c\n\x04term\x18\x02 \x01(\x05\x12\x13\n\x0bvoteGranted\x18\x03 \x01(\x08\x12 \n\x18longestRemainingDuration\x18\x04 \x01(\x02\"\"\n\x0fServeClientArgs\x12\x0f\n\x07Request\x18\x01 \x01(\t\"H\n\x10ServeClientReply\x12\x0c\n\x04\x44\x61ta\x18\x01 \x01(\t\x12\x15\n\rleaderAddress\x18\x02 \x01(\t\x12\x0f\n\x07Success\x18\x03 \x01(\x08\x32\xcb\x01\n\x11NodeCommunication\x12\x64\n\rAppendEntries\x12(.communication_raft.AppendEntriesRequest\x1a).communication_raft.AppendEntriesResponse\x12P\n\x0bRequestVote\x12\x1f.communication_raft.VoteRequest\x1a .communication_raft.VoteResponse2o\n\x13\x43lientCommunication\x12X\n\x0bServeClient\x12#.communication_raft.ServeClientArgs\x1a$.communication_raft.ServeClientReplyb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -24,19 +24,19 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _globals['_ENTRY']._serialized_start=34
   _globals['_ENTRY']._serialized_end=102
   _globals['_APPENDENTRIESREQUEST']._serialized_start=105
-  _globals['_APPENDENTRIESREQUEST']._serialized_end=273
-  _globals['_APPENDENTRIESRESPONSE']._serialized_start=275
-  _globals['_APPENDENTRIESRESPONSE']._serialized_end=350
-  _globals['_VOTEREQUEST']._serialized_start=352
-  _globals['_VOTEREQUEST']._serialized_end=448
-  _globals['_VOTERESPONSE']._serialized_start=450
-  _globals['_VOTERESPONSE']._serialized_end=520
-  _globals['_SERVECLIENTARGS']._serialized_start=522
-  _globals['_SERVECLIENTARGS']._serialized_end=556
-  _globals['_SERVECLIENTREPLY']._serialized_start=558
-  _globals['_SERVECLIENTREPLY']._serialized_end=630
-  _globals['_NODECOMMUNICATION']._serialized_start=633
-  _globals['_NODECOMMUNICATION']._serialized_end=836
-  _globals['_CLIENTCOMMUNICATION']._serialized_start=838
-  _globals['_CLIENTCOMMUNICATION']._serialized_end=949
+  _globals['_APPENDENTRIESREQUEST']._serialized_end=293
+  _globals['_APPENDENTRIESRESPONSE']._serialized_start=295
+  _globals['_APPENDENTRIESRESPONSE']._serialized_end=370
+  _globals['_VOTEREQUEST']._serialized_start=372
+  _globals['_VOTEREQUEST']._serialized_end=468
+  _globals['_VOTERESPONSE']._serialized_start=470
+  _globals['_VOTERESPONSE']._serialized_end=574
+  _globals['_SERVECLIENTARGS']._serialized_start=576
+  _globals['_SERVECLIENTARGS']._serialized_end=610
+  _globals['_SERVECLIENTREPLY']._serialized_start=612
+  _globals['_SERVECLIENTREPLY']._serialized_end=684
+  _globals['_NODECOMMUNICATION']._serialized_start=687
+  _globals['_NODECOMMUNICATION']._serialized_end=890
+  _globals['_CLIENTCOMMUNICATION']._serialized_start=892
+  _globals['_CLIENTCOMMUNICATION']._serialized_end=1003
 # @@protoc_insertion_point(module_scope)
