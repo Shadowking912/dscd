@@ -6,9 +6,21 @@
         "value": "None"
     },
     {
-        "term": 1,
+        "term": 2,
+        "command": "NO-OP",
+        "key": "None",
+        "value": "None"
+    },
+    {
+        "term": 2,
         "command": "SET",
         "key": "1",
-        "value": ""
+        "value": "1"
+    },
+    {
+        "term": 2,
+        "command": "SET",
+        "key": "8",
+        "value": "8"
     }
 ]

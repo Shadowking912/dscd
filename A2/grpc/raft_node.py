@@ -75,7 +75,7 @@ class NodeCommunicationService(raft_pb2_grpc.NodeCommunicationServicer):
         
     def AppendEntries(self, request, context):
         # if len(request.entries)==0:
-            node.voted_for=None#handle this
+            # node.voted_for=None #handle this
             node.leader_address = request.leaderAddress
             node.leader_id = peer_dict[node.leader_address]
             print(f"Received heartbeat from leader {request.leaderAddress}")
@@ -401,13 +401,16 @@ class RaftNode:
             self.election_time=0
             time.sleep(self.election_timeout)
            
-            # Dump POINT-4
-            self.dump_data(f"Node {self.node_id} election timer timed out, Starting election.")
+         
            
             self.start_election()
 
         else:#start election
             self.longestRemainingLease-=(time.time()-self.leasestart)
+            
+            # Dump POINT-4
+            self.dump_data(f"Node {self.node_id} election timer timed out, Starting election.")
+
             print(f"Node:{self.node_id} started election")
             self.leader_address="-1"
             self.leader_id = -1
@@ -446,8 +449,7 @@ class RaftNode:
                 print("Logs of leader = ",self.logs)
                 self.write_logs()
                 
-                # DUMP POINT-1
-                self.dump_data(f"Leader {self.leader_id} sending heartbeat & Renewing Lease.")
+               
 
                 self.lease_timer.start()
                 self.leasestart=time.time()
@@ -456,8 +458,11 @@ class RaftNode:
                 self.appendthread.daemon=True
                 self.appendthread.start()
                 
-                #self.start_election()   #-----------> WHY?
+                self.start_election()  
             else:
+                # DUMP point-2
+                self.dump_data(f"Leader {self.node_id} lease renewal failed. Stepping Down.")
+
                 self.state='follower' # ----------------> Issue, == instead of = and also not checking if a leader has been created directly starting election
                 time.sleep(self.election_timeout)
                 self.start_election()
@@ -551,9 +556,10 @@ class RaftNode:
                 request = raft_pb2.AppendEntriesRequest()
                 request.term=self.term
                 request.leaderAddress=self.node_address
+                
+
 
                 logentries=raft_pb2.entry()
-
                 for i in range(self.cur_index[peer],len(self.logs)):
                     log=self.logs[i]
                     logentries.term=log['term']
@@ -562,10 +568,9 @@ class RaftNode:
                     logentries.value=log['value']
                     request.entries.append(logentries)
 
+                # DUMP POINT-1
+                self.dump_data(f"Leader {self.leader_id} sending heartbeat & Renewing Lease.")
 
-                # if len(logentries)==0:
-
-                
                 print("sending ",request.entries,"to",peer)
                 request.prevLogIndex=(self.cur_index[peer]-1)
                 request.prevLogTerm= (self.logs[self.cur_index[peer]-1]['term'] if request.prevLogIndex>=0 else -1)
