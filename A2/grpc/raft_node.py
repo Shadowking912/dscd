@@ -259,6 +259,7 @@ class RaftNode:
             self.election_timeout = 5
         elif(self.node_id==2):
             self.election_timeout = 6
+
         #TEMP
         self.leasetime = 7
         self.heartbeat_interval = 1  # Heartbeat interval in seconds
@@ -270,9 +271,11 @@ class RaftNode:
         self.prevLogIndex=-1
         self.prevLogTerm=-1
          #Lease time in sec
+
         self.logs_path = os.path.join(os.getcwd(),f'logs_node_{self.node_id}')
         self.cur_index={i:len(self.logs) for i in self.peers}
         self.lease_timer= -1
+        self.isLeaseCancel = 0
         self.node_address=address
         self.isLeaseCancel=0
         self.leasestart=0
@@ -366,6 +369,25 @@ class RaftNode:
         else:
             print("No change in commit index needed")
         print(self.key_value_store)
+
+    def end_lease(self):
+        if(self.state == 'leader'):
+            time.sleep(self.leasetime)
+            if(self.isLeaseCancel==1):
+                print(f"Ended Lease for Leader {self.node_id}")
+                self.state = 'follower'
+                self.voted_for = None
+                self.leader_address = "-1"
+                self.vote_count = 0
+                self.election_time = 1
+            else:
+                self.end_lease()
+        # else:
+        #     time.sleep(self.leasetime)
+        #     if(self.isLeaseCancel==1):
+        #         self.election_time=0
+        #     else:
+        #         time.sleep(self.leasetime)
 
     def commit_log_entries(self):
         print("Inside the commit log entries function")
@@ -491,6 +513,7 @@ class RaftNode:
                 self.leader_id = self.node_id
                 self.leader_address=self.node_address
                 print(f"New Leader is {self.node_id}")
+
                 break
 
             time.sleep(0.1) # Poll every 0.1 second
