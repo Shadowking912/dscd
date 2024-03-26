@@ -287,15 +287,16 @@ class RaftNode:
 
         else:
         # Write functionlaity for loading the logs list from the text file
-            # with open(self.logs_path+"/logs.json","r") as f:
-            #     self.logs = json.load(f)
+            with open(self.logs_path+"/logs.json","r") as f:
+                self.logs = json.load(f)
 
-            # with open(self.logs_path+"/metadata.json","r") as f:
-            #     metadata = json.load(f)
-            #     self.commit_index = metadata['Commit-Length']-1
-            #     self.term = metadata["Term"]
-        
-            pass
+            with open(self.logs_path+"/metadata.json","r") as f:
+                try:
+                    metadata = json.load(f)
+                    self.commit_index = metadata['Commit-Length']-1
+                    self.term = metadata["Term"]
+                except json.JSONDecodeError as e:
+                    pass
 
 
     def dump_data(self,data):
@@ -304,7 +305,7 @@ class RaftNode:
             f.write("\n")
 
     def write_metadata(self):
-        with open(f"{self.logs_path}/logs.json","w") as f:
+        with open(f"{self.logs_path}/metadata.json","w") as f:
             metadata={
                 'Commit-Length':self.commit_index+1,
                 'Term':self.term,
@@ -363,6 +364,9 @@ class RaftNode:
                     self.dump_data(f"Node {self.node_id} (follower) committed the entry {self.logs[i]['command']} with term {self.logs[i]['term']} to the state machine.")
 
             print(f"Commit Index of the node {self.node_id} {self.commit_index}")
+
+            # Writing the metadata to the JSON file
+            self.write_metadata()
         else:
             print("No change in commit index needed")
         print(self.key_value_store)
@@ -378,12 +382,15 @@ class RaftNode:
                 self.key_value_store[self.logs[i]['key']] = self.logs[i]['value']
                 
                 # Dump POINT-9
-                self.dump_data(f"Node {self.node_id} (follower) committed the entry {self.logs[i]['command']} {self.logs[i]['key']} : {self.logs[i]['value']} with term {self.logs[i]['term']} to the state machine")
+                self.dump_data(f"Node {self.node_id} (leader) committed the entry {self.logs[i]['command']} {self.logs[i]['key']} : {self.logs[i]['value']} with term {self.logs[i]['term']} to the state machine")
 
             else:
                 # Dump POINT-9
-                self.dump_data(f"Node {self.node_id} (follower) committed the entry {self.logs[i]['command']} with term {self.logs[i]['term']} to the state machine.")
+                self.dump_data(f"Node {self.node_id} (leader) committed the entry {self.logs[i]['command']} with term {self.logs[i]['term']} to the state machine.")
 
+        # Writing the metadata to the JSON file
+        self.write_metadata()    
+            
         print(f"Commit index of the leader with id {self.leader_id} {self.commit_index}")
         print(self.key_value_store)
     
@@ -409,6 +416,10 @@ class RaftNode:
             self.term += 1
             self.voted_for = self.node_id
             self.vote_count += 1  # Vote for self  
+
+            # Writing the metadata
+            self.write_metadata()
+
             self.send_vote_requests()
             if self.vote_count>= (len(peers))//2 +1:
 
@@ -445,15 +456,15 @@ class RaftNode:
                 self.appendthread.daemon=True
                 self.appendthread.start()
                 
-                self.start_election()   #-----------> WHY?
+                #self.start_election()   #-----------> WHY?
             else:
-                self.state=='follower' # ----------------> Issue, == instead of = and also not checking if a leader has been created directly starting election
+                self.state='follower' # ----------------> Issue, == instead of = and also not checking if a leader has been created directly starting election
                 time.sleep(self.election_timeout)
                 self.start_election()
                                 
     def send_vote_requests(self):
         
-        def callback_function(response):
+        def callback_function(peer_id,response):
             try:
                 response_received = response.result(timeout=self.election_timeout)
                 print(response_received.nodeAddress,response_received.voteGranted)
@@ -467,7 +478,7 @@ class RaftNode:
                 print("Timeout occured received no response ")
             except grpc.RpcError as e:
                 # DUMP Point-6
-                self.dump_data(f"Error occurred while sending RPC to Node {self.peer}")
+                self.dump_data(f"Error occurred while sending RPC to Node {peer_id}")
 
                 print("Node Crashed",e)
                 
@@ -483,7 +494,7 @@ class RaftNode:
                 response=stub.RequestVote.future(vote_request)
 
                 # creating a partial function with arguments
-                # callback_function = partial(callback_function,peer_dict[peer])
+                callback_function = partial(callback_function,peer_dict[peer])
 
                 response.add_done_callback(callback_function)
 

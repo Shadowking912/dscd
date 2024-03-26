@@ -6,15 +6,9 @@
         "value": "None"
     },
     {
-        "term": 2,
-        "command": "NO-OP",
-        "key": "None",
-        "value": "None"
-    },
-    {
-        "term": 2,
+        "term": 1,
         "command": "SET",
         "key": "1",
-        "value": "1"
+        "value": ""
     }
 ]

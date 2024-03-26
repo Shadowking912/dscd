@@ -4,5 +4,11 @@
         "command": "NO-OP",
         "key": "None",
         "value": "None"
+    },
+    {
+        "term": 1,
+        "command": "SET",
+        "key": "1",
+        "value": ""
     }
 ]
