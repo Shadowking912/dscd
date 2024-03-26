@@ -1,0 +1,91 @@
+Vote granted for Node 0 in term 3
+Node 1 accepted AppendEntries RPC from 0
+Node 1 (follower) committed the entry NO-OP with term 3 to the state machine.
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Vote denied for Node 2 in term 1
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Vote denied for Node 2 in term 2
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 accepted AppendEntries RPC from 0
+Node 1 election timer timed out, Starting election.
+Node 1 became the leader for term 4.
+Vote granted for Node 2 in term 5
+New Leader waiting for Old Leader lease to timeout.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Node 1 (leader) committed the entry NO-OP with term 5 to the state machine.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.
+Leader -1 sending heartbeat & Renewing Lease.

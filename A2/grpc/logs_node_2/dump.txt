@@ -1,0 +1,53 @@
+Node 2 election timer timed out, Starting election.
+Node 2 accepted AppendEntries RPC from 0
+Node 2 (follower) committed the entry NO-OP with term 3 to the state machine.
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Leader 2 lease renewal failed. Stepping Down.
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 election timer timed out, Starting election.
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Node 2 accepted AppendEntries RPC from 0
+Leader 2 lease renewal failed. Stepping Down.
+Vote granted for Node 1 in term 4
+Node 2 election timer timed out, Starting election.
+Node 2 became the leader for term 5.
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 rejected AppendEntries RPC from 1
+Node 2 election timer timed out, Starting election.
+Leader 2 lease renewal failed. Stepping Down.
+Node 2 election timer timed out, Starting election.
+Leader 2 lease renewal failed. Stepping Down.
+Node 2 election timer timed out, Starting election.
+Leader 2 lease renewal failed. Stepping Down.

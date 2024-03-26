@@ -560,7 +560,7 @@ class RaftNode:
                 request.leaseTimer=self.leasetime-(time.monotonic()-self.leasestart)
                 print("sent lease timer: ",request.leaseTimer)
                 response=stub.AppendEntries.future(request)
-                response.add_done_callback(callback(response))
+                response.add_done_callback(callback)
                 
         
         start_time = time.time()
