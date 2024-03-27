@@ -21,65 +21,66 @@ class NodeCommunicationService(raft_pb2_grpc.NodeCommunicationServicer):
         vote_response = raft_pb2.VoteResponse()
         lock=threading.Lock()
         lock.acquire()
-        if node.leader_address!='-1':
-            vote_response.voteGranted = False
-            vote_response.term = node.term
-            vote_response.nodeAddress = node.address
-            node.voted_for = None
+        # if node.leader_address!='-1':
+        #     vote_response.voteGranted = False
+        #     node.term=vote_response.term
+        #     vote_response.term = node.term
+        #     vote_response.nodeAddress = node.address
+        #     node.voted_for = None
+        # else:
+        # Dump POINT-13
+        # node.dump_data(f"Vote denied for Node {request.candidateAddress} in term {request.term}")
+        # return vote_response
+        print("received leasee time:",time.monotonic()-node.followerleasestart)
+        # Calculating the longestRemainingDuration of the lease known to the node
+        if node.longestRemainingLease>0:
+            vote_response.longestRemainingDuration = node.longestRemainingLease - (time.monotonic()-node.followerleasestart)
         else:
+            vote_response.longestRemainingDuration = 0
+
+
+        print(f"Term of the node {node.address} is {node.term}")
+        print(f"Term of the candidate {request.candidateAddress} is {request.term}")
+        print(f"lastlogindex of candidate {request.lastLogIndex}, lastlogindex of node {node.prevLogIndex}, lastlogterm of candidate {request.lastLogTerm}, lastlogterm of node {node.prevLogTerm}")
+        if request.term>node.term:
+            
             # Dump POINT-13
             # node.dump_data(f"Vote denied for Node {request.candidateAddress} in term {request.term}")
+
+            node.term = request.term
+            node.voted_for = None
+            node.state="follower"
+            
+            # vote_response.voteGranted=False
             # return vote_response
-            print("received leasee time:",time.monotonic()-node.followerleasestart)
-            # Calculating the longestRemainingDuration of the lease known to the node
-            if node.longestRemainingLease>0:
-                vote_response.longestRemainingDuration = node.longestRemainingLease - (time.monotonic()-node.followerleasestart)
-            else:
-                vote_response.longestRemainingDuration = 0
+        lastTerm = -1
+        if len(node.logs)>0:
+            lastTerm = node.logs[-1]['term']
 
-
-            print(f"Term of the node {node.address} is {node.term}")
-            print(f"Term of the candidate {request.candidateAddress} is {request.term}")
-            print(f"lastlogindex of candidate {request.lastLogIndex}, lastlogindex of node {node.prevLogIndex}, lastlogterm of candidate {request.lastLogTerm}, lastlogterm of node {node.prevLogTerm}")
-            if request.term>node.term:
-                
-                # Dump POINT-13
-                # node.dump_data(f"Vote denied for Node {request.candidateAddress} in term {request.term}")
-
-                node.term = request.term
-                node.voted_for = None
-                node.state="follower"
-                
-                # vote_response.voteGranted=False
-                # return vote_response
-            lastTerm = -1
-            if len(node.logs)>0:
-                lastTerm = node.logs[-1]['term']
-
-            logOk = ((request.lastLogTerm>lastTerm) or ((request.lastLogTerm==lastTerm) and (request.lastLogIndex+1>=len(node.logs))))
-            print(f"LogOk : {logOk}, LastTerm : {lastTerm}, candidateTerm : {request.term}, nodeTerm : {node.term}, Length of logs : {len(node.logs)}, Voted For : {node.voted_for}")
-            if request.term==node.term and logOk and (node.voted_for==request.candidateAddress or node.voted_for==None):
-                node.voted_for = request.candidateAddress
+        logOk = ((request.lastLogTerm>lastTerm) or ((request.lastLogTerm==lastTerm) and (request.lastLogIndex+1>=len(node.logs))))
+        print(f"LogOk : {logOk}, LastTerm : {lastTerm}, candidateTerm : {request.term}, nodeTerm : {node.term}, Length of logs : {len(node.logs)}, Voted For : {node.voted_for}")
+        if request.term==node.term and logOk and (node.voted_for==request.candidateAddress or node.voted_for==None):
+            node.voted_for = request.candidateAddress
+    
+            # Dump POINT-12
+            node.dump_data(f"Vote granted for Node {request.candidateAddress} in term {request.term}")
+            vote_response.voteGranted = True
         
-                # Dump POINT-12
-                node.dump_data(f"Vote granted for Node {request.candidateAddress} in term {request.term}")
-                vote_response.voteGranted = True
-            
-            else:
-                # Dump POINT-13
-                node.dump_data(f"Vote denied for Node {request.candidateAddress} in term {request.term}")
+        else:
+            # Dump POINT-13
+            node.dump_data(f"Vote denied for Node {request.candidateAddress} in term {request.term}")
 
-                vote_response.voteGranted = False
+            vote_response.voteGranted = False
 
-            vote_response.nodeAddress = node.address
-            vote_response.term = node.term
-            
-            if vote_response.voteGranted==True:
-                print("election timer reseted")
-                node.election_timer.cancel()
-                node.election_timer=threading.Timer(node.election_timeout,node.start_election)
-                node.election_timer.daemon=True
-                node.election_timer.start()
+        vote_response.nodeAddress = node.address
+        vote_response.term = node.term
+        
+        if vote_response.voteGranted==True:
+            print("election timer reseted")
+            node.election_timer.cancel()
+            node.election_timer=threading.Timer(node.election_timeout,node.start_election)
+            node.election_timer.daemon=True
+            node.election_timer.start()
         lock.release()
         return vote_response
 
@@ -731,6 +732,7 @@ def serve():
     raft_pb2_grpc.add_NodeCommunicationServicer_to_server(node_communication_server,server)
     raft_pb2_grpc.add_ClientCommunicationServicer_to_server(client_communication_server,server)
     server.add_insecure_port(node.address)
+    time.sleep(3)
     server.start()
     node.election_timer = threading.Timer(node.election_timeout,node.start_election)
     node.election_timer.daemon = True
