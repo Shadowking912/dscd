@@ -14,7 +14,7 @@ class RaftClient:
         self.client_id = client_id
         self.server_address = server_address
         
-        self.nodes = ['127.0.0.1:5550','127.0.0.1:5551','127.0.0.1:5552']
+        self.nodes = ['127.0.0.1:55550','127.0.0.1:55551','127.0.0.1:55552','127.0.0.1:55553','127.0.0.1:55554']
 
 
         self.channel = grpc.insecure_channel(self.server_address)
@@ -215,6 +215,6 @@ class RaftClient:
         
 if __name__ == "__main__":
     client_id = int(input("Enter Client ID: "))
-    server_address = "127.0.0.1:5551"
+    server_address = "127.0.0.1:55551"
     client = RaftClient(client_id, server_address)
     client.run()
