@@ -1,217 +1,56 @@
-Vote granted for Node 127.0.0.1:55550 in term 3
-GOT Request Term : 3 prevLogIndex : 0 prevLogTerm : 1
+Vote granted for Node 127.0.0.1:55550 in term 1
+GOT Request Term : 1 prevLogIndex : -1 prevLogTerm : -1
 Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
+GOT Request Term : 1 prevLogIndex : 0 prevLogTerm : 1
 Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
 Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 (follower) committed the entry NO-OP with term 3 to the state machine.
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
+Node 127.0.0.1:55551 (follower) committed the entry NO-OP with term 1 to the state machine.
+GOT Request Term : 1 prevLogIndex : 0 prevLogTerm : 1
 Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
 Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
+GOT Request Term : 1 prevLogIndex : 0 prevLogTerm : 1
 Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
 Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
+GOT Request Term : 1 prevLogIndex : 0 prevLogTerm : 1
 Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
 Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
+GOT Request Term : 1 prevLogIndex : 0 prevLogTerm : 1
 Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
 Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
+GOT Request Term : 1 prevLogIndex : 0 prevLogTerm : 1
 Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
 Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
+GOT Request Term : 1 prevLogIndex : 0 prevLogTerm : 1
 Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
 Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
+GOT Request Term : 1 prevLogIndex : 0 prevLogTerm : 1
 Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
 Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
+GOT Request Term : 1 prevLogIndex : 0 prevLogTerm : 1
 Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
 Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
+GOT Request Term : 1 prevLogIndex : 0 prevLogTerm : 1
 Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
 Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
+GOT Request Term : 1 prevLogIndex : 0 prevLogTerm : 1
 Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
 Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-GOT Request Term : 3 prevLogIndex : 1 prevLogTerm : 3
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
-Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 election timer timed out, Starting election.
+Received Votes From : {'127.0.0.1:55552', '127.0.0.1:55551'}
+Node 127.0.0.1:55551 became the leader for term 2.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+New Leader waiting for Old Leader lease 3.0 to timeout.
+{"127.0.0.1:55550": 1, "127.0.0.1:55551": 1, "127.0.0.1:55552": 1}
+Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 1, '127.0.0.1:55552': 1}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Node 127.0.0.1:55551 (leader) committed the entry NO-OP with term 2 to the state machine.
+Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 1, '127.0.0.1:55552': 2}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 1, '127.0.0.1:55552': 2}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Error occurred while sending RPC to Node 127.0.0.1:55550

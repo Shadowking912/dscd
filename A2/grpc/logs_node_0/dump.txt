@@ -1,315 +1,44 @@
 Node 127.0.0.1:55550 election timer timed out, Starting election.
-Received Votes From : {'127.0.0.1:55551', '127.0.0.1:55550'}
+Received Votes From : {'127.0.0.1:55550', '127.0.0.1:55551'}
 Node 127.0.0.1:55550 became the leader for term 1.
 New Leader waiting for Old Leader lease 0.0 to timeout.
 {"127.0.0.1:55550": 0, "127.0.0.1:55551": 0, "127.0.0.1:55552": 0}
 Cur_Index : {'127.0.0.1:55550': 0, '127.0.0.1:55551': 0, '127.0.0.1:55552': 0}
 Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
 Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Error occurred while sending RPC to Node 127.0.0.1:55552
-Error occurred while sending RPC to Node 127.0.0.1:55552
 Node 127.0.0.1:55550 (leader) committed the entry NO-OP with term 1 to the state machine.
 Cur_Index : {'127.0.0.1:55550': 0, '127.0.0.1:55551': 1, '127.0.0.1:55552': 0}
 Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
 Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 0, '127.0.0.1:55551': 1, '127.0.0.1:55552': 0}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Error occurred while sending RPC to Node 127.0.0.1:55552
 Error occurred while sending RPC to Node 127.0.0.1:55552
 Cur_Index : {'127.0.0.1:55550': 0, '127.0.0.1:55551': 1, '127.0.0.1:55552': 0}
 Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
 Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 0, '127.0.0.1:55551': 1, '127.0.0.1:55552': 0}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
 Error occurred while sending RPC to Node 127.0.0.1:55552
-Error occurred while sending RPC to Node 127.0.0.1:55552
-Cur_Index : {'127.0.0.1:55550': 0, '127.0.0.1:55551': 1, '127.0.0.1:55552': 0}
+Cur_Index : {'127.0.0.1:55550': 0, '127.0.0.1:55551': 1, '127.0.0.1:55552': 1}
 Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
 Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 lease renewal failed.
-Cur_Index : {'127.0.0.1:55550': 0, '127.0.0.1:55551': 1, '127.0.0.1:55552': 0}
+Cur_Index : {'127.0.0.1:55550': 0, '127.0.0.1:55551': 1, '127.0.0.1:55552': 1}
 Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
 Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Error occurred while sending RPC to Node 127.0.0.1:55552
-Error occurred while sending RPC to Node 127.0.0.1:55551
-Error occurred while sending RPC to Node 127.0.0.1:55552
-Leader 127.0.0.1:55550 lease renewal failed.
-Cur_Index : {'127.0.0.1:55550': 0, '127.0.0.1:55551': 1, '127.0.0.1:55552': 0}
+Cur_Index : {'127.0.0.1:55550': 0, '127.0.0.1:55551': 1, '127.0.0.1:55552': 1}
 Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
 Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Error occurred while sending RPC to Node 127.0.0.1:55552
-Error occurred while sending RPC to Node 127.0.0.1:55551
-Error occurred while sending RPC to Node 127.0.0.1:55551
-Leader 127.0.0.1:55550 lease renewal failed.
-Cur_Index : {'127.0.0.1:55550': 0, '127.0.0.1:55551': 1, '127.0.0.1:55552': 0}
+Cur_Index : {'127.0.0.1:55550': 0, '127.0.0.1:55551': 1, '127.0.0.1:55552': 1}
 Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
 Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Error occurred while sending RPC to Node 127.0.0.1:55552
-Leader 127.0.0.1:55550 lease renewal failed.
-Cur_Index : {'127.0.0.1:55550': 0, '127.0.0.1:55551': 1, '127.0.0.1:55552': 0}
+Cur_Index : {'127.0.0.1:55550': 0, '127.0.0.1:55551': 1, '127.0.0.1:55552': 1}
 Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
 Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Error occurred while sending RPC to Node 127.0.0.1:55551
-Error occurred while sending RPC to Node 127.0.0.1:55552
-Node 127.0.0.1:55550 election timer timed out, Starting election.
-Leader 127.0.0.1:55550 lease renewal failed.
-Error occurred while sending RPC to Node 127.0.0.1:55551
-Error occurred while sending RPC to Node 127.0.0.1:55551
-Error occurred while sending RPC to Node 127.0.0.1:55552
-Received Votes From : {'127.0.0.1:55550'}
-===============ERROR===================================
-Node 127.0.0.1:55550 election timer timed out, Starting election.
-Received Votes From : {'127.0.0.1:55551', '127.0.0.1:55550'}
-Node 127.0.0.1:55550 became the leader for term 3.
-New Leader waiting for Old Leader lease 0.0 to timeout.
-{"127.0.0.1:55550": 1, "127.0.0.1:55551": 1, "127.0.0.1:55552": 1}
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 1, '127.0.0.1:55552': 1}
+Cur_Index : {'127.0.0.1:55550': 0, '127.0.0.1:55551': 1, '127.0.0.1:55552': 1}
 Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
 Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Node 127.0.0.1:55550 (leader) committed the entry NO-OP with term 3 to the state machine.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 1}
+Cur_Index : {'127.0.0.1:55550': 0, '127.0.0.1:55551': 1, '127.0.0.1:55552': 1}
 Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
 Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Error occurred while sending RPC to Node 127.0.0.1:55552
-Error occurred while sending RPC to Node 127.0.0.1:55552
-Error occurred while sending RPC to Node 127.0.0.1:55552
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 1}
+Cur_Index : {'127.0.0.1:55550': 0, '127.0.0.1:55551': 1, '127.0.0.1:55552': 1}
 Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
 Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 1}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Error occurred while sending RPC to Node 127.0.0.1:55552
-Error occurred while sending RPC to Node 127.0.0.1:55552
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 1}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 1}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Error occurred while sending RPC to Node 127.0.0.1:55552
-Error occurred while sending RPC to Node 127.0.0.1:55552
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 1}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 1}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Error occurred while sending RPC to Node 127.0.0.1:55552
-Error occurred while sending RPC to Node 127.0.0.1:55552
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 1}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Error occurred while sending RPC to Node 127.0.0.1:55552
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 1}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Error occurred while sending RPC to Node 127.0.0.1:55552
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 1}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Error occurred while sending RPC to Node 127.0.0.1:55552
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 1}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 1}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Error occurred while sending RPC to Node 127.0.0.1:55552
-Error occurred while sending RPC to Node 127.0.0.1:55552
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 1}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Error occurred while sending RPC to Node 127.0.0.1:55552
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 1}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Error occurred while sending RPC to Node 127.0.0.1:55552
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 1}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Error occurred while sending RPC to Node 127.0.0.1:55552
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 1}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 0}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Error occurred while sending RPC to Node 127.0.0.1:55552
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Error occurred while sending RPC to Node 127.0.0.1:55552
-Error occurred while sending RPC to Node 127.0.0.1:55552
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Error occurred while sending RPC to Node 127.0.0.1:55552
-Error occurred while sending RPC to Node 127.0.0.1:55552
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Error occurred while sending RPC to Node 127.0.0.1:55552
-Error occurred while sending RPC to Node 127.0.0.1:55552
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Error occurred while sending RPC to Node 127.0.0.1:55552
-Error occurred while sending RPC to Node 127.0.0.1:55552
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Error occurred while sending RPC to Node 127.0.0.1:55552
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Error occurred while sending RPC to Node 127.0.0.1:55552
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Error occurred while sending RPC to Node 127.0.0.1:55552
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Error occurred while sending RPC to Node 127.0.0.1:55552
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Error occurred while sending RPC to Node 127.0.0.1:55552
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 2, '127.0.0.1:55552': 2}
+Cur_Index : {'127.0.0.1:55550': 0, '127.0.0.1:55551': 1, '127.0.0.1:55552': 1}
 Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.
 Leader 127.0.0.1:55550 sending heartbeat & Renewing Lease.

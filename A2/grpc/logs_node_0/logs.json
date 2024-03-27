@@ -4,11 +4,5 @@
         "command": "NO-OP",
         "key": "None",
         "value": "None"
-    },
-    {
-        "term": 3,
-        "command": "NO-OP",
-        "key": "None",
-        "value": "None"
     }
 ]

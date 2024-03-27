@@ -473,7 +473,7 @@ class RaftNode:
     
     def start_election(self):
         print("DEG:",f"Current Leader id: {self.leader_address}")
-        self.longestRemainingLease-=(time.monotonic()-self.leasestart)
+        self.longestRemainingLease-=(time.monotonic()-self.followerleasestart)
         # Dump POINT-4
         self.dump_data(f"Node {self.node_address} election timer timed out, Starting election.")
 
