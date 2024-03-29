@@ -43,16 +43,12 @@ class NodeCommunicationService(raft_pb2_grpc.NodeCommunicationServicer):
         print(f"Term of the candidate {request.candidateAddress} is {request.term}")
         print(f"lastlogindex of candidate {request.lastLogIndex}, lastlogindex of node {node.prevLogIndex}, lastlogterm of candidate {request.lastLogTerm}, lastlogterm of node {node.prevLogTerm}")
         if request.term>node.term:
-            
-            # Dump POINT-13
-            # node.dump_data(f"Vote denied for Node {request.candidateAddress} in term {request.term}")
 
             node.term = request.term
             node.voted_for = None
             node.state="follower"
             
-            # vote_response.voteGranted=False
-            # return vote_response
+    
         lastTerm = -1
         if len(node.logs)>0:
             lastTerm = node.logs[-1]['term']
@@ -204,7 +200,8 @@ class NodeCommunicationService(raft_pb2_grpc.NodeCommunicationServicer):
                         node.logs.append(log)
                         # Adding log to the log file
                         node.write_logs()
-
+                    
+                    # DUMP Point-10
                     node.dump_data(f"Node {node.node_address} accepted AppendEntries RPC from {request.leaderAddress}")
                 
                     # print("appended: ",node.logs)
@@ -323,7 +320,7 @@ class RaftNode:
             self.election_timeout = 8
 
         elif(self.node_id)==4:
-            self.election_timeout = 9
+            self.election_timeout = 8.5
         #TEMP
         self.leasetime = 9
         self.heartbeat_interval = 1  # Heartbeat interval in seconds
@@ -420,9 +417,7 @@ class RaftNode:
 
 
     def handle_commit_requests(self,leader_commit_index):
-        # Dump POINT-10
-        self.dump_data(f"Node {self.node_address} accepted AppendEntries RPC from {self.leader_address}")
-
+        
         print("Logs = ",self.logs)
         print("Commit Index of the node = ",self.commit_index)
         print("Commit Index of the leader = ",leader_commit_index)
@@ -531,7 +526,7 @@ class RaftNode:
             self.prevLogTerm = self.logs[-1]['term']
 
             node.cur_index={i:len(node.logs)-1 for i in node.peers}
-            
+    
             time.sleep(self.heartbeat_interval)
             # ============================TEMPORARY DUMP===========================================================
             self.dump_data(f"{json.dumps(node.cur_index)}")
@@ -751,9 +746,9 @@ if __name__ == "__main__":
     node_id = int(input("Enter Node ID: "))
     server_address = f"127.0.0.1:5555{node_id}"
     print(f"Node Listening at {server_address}")
-    peers = ["127.0.0.1:55550", "127.0.0.1:55551","127.0.0.1:55552"]  # Assuming 5 nodes
+    # peers = ["127.0.0.1:55550", "127.0.0.1:55551","127.0.0.1:55552"]  # Assuming 5 nodes
     
-    # peers = ["127.0.0.1:55550", "127.0.0.1:55551","127.0.0.1:55552","127.0.0.1:55553","127.0.0.1:55554"]  # Assuming 5 nodes
+    peers = ["127.0.0.1:55550", "127.0.0.1:55551","127.0.0.1:55552","127.0.0.1:55553","127.0.0.1:55554"]  # Assuming 5 nodes
     # peer_dict = {"127.0.0.1:5550":0,"127.0.0.1:5551":1,"127.0.0.1:5552":2,"127.0.0.1:5553":3,"127.0.0.1:5554":4}
     # ,"127.0.0.1:5554":4,"127.0.0.1:5555":555}
     serve()

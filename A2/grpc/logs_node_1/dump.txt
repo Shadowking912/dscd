@@ -35,22 +35,1975 @@ Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
 GOT Request Term : 1 prevLogIndex : 0 prevLogTerm : 1
 Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
 Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 0 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 0 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 0 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 0 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 0 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 0 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 0 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 0 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 0 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 0 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 0 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 0 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 0 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 0 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 0 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 0 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 0 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 0 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 0 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 0 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 0 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 0 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 0 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 0 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 0 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 0 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 0 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 0 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 0 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 1 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 (follower) committed the entry SET 1 : 1 with term 1 to the state machine
+GOT Request Term : 1 prevLogIndex : 1 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 1 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 2 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 (follower) committed the entry SET 2 : 2 with term 1 to the state machine
+GOT Request Term : 1 prevLogIndex : 2 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 2 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 (follower) committed the entry SET 3 : 3 with term 1 to the state machine
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 3 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 4 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 (follower) committed the entry SET 4 : 4 with term 1 to the state machine
+GOT Request Term : 1 prevLogIndex : 4 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 5 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 (follower) committed the entry SET 5 : 5 with term 1 to the state machine
+GOT Request Term : 1 prevLogIndex : 5 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 5 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 (follower) committed the entry SET 6 : 6 with term 1 to the state machine
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+GOT Request Term : 1 prevLogIndex : 6 prevLogTerm : 1
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
+Node 127.0.0.1:55551 accepted AppendEntries RPC from 127.0.0.1:55550
 Node 127.0.0.1:55551 election timer timed out, Starting election.
-Received Votes From : {'127.0.0.1:55552', '127.0.0.1:55551'}
+Received Votes From : {'127.0.0.1:55553', '127.0.0.1:55551', '127.0.0.1:55552'}
 Node 127.0.0.1:55551 became the leader for term 2.
 Error occurred while sending RPC to Node 127.0.0.1:55550
 New Leader waiting for Old Leader lease 3.0 to timeout.
-{"127.0.0.1:55550": 1, "127.0.0.1:55551": 1, "127.0.0.1:55552": 1}
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 1, '127.0.0.1:55552': 1}
+{"127.0.0.1:55550": 7, "127.0.0.1:55551": 7, "127.0.0.1:55552": 7, "127.0.0.1:55553": 7, "127.0.0.1:55554": 7}
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 7, '127.0.0.1:55553': 7, '127.0.0.1:55554': 7}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
 Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
 Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
 Node 127.0.0.1:55551 (leader) committed the entry NO-OP with term 2 to the state machine.
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 1, '127.0.0.1:55552': 2}
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
 Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
 Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
 Error occurred while sending RPC to Node 127.0.0.1:55550
-Cur_Index : {'127.0.0.1:55550': 1, '127.0.0.1:55551': 1, '127.0.0.1:55552': 2}
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
 Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
 Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
 Error occurred while sending RPC to Node 127.0.0.1:55550
 Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 7, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Node 127.0.0.1:55551 (leader) received an SET for 7 : 7 request
+Node 127.0.0.1:55551 (leader) committed the entry SET 7 : 7 with term 2 to the state machine
+Cur_Index : {'127.0.0.1:55550': 8, '127.0.0.1:55551': 8, '127.0.0.1:55552': 8, '127.0.0.1:55553': 8, '127.0.0.1:55554': 8}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 8, '127.0.0.1:55551': 8, '127.0.0.1:55552': 9, '127.0.0.1:55553': 9, '127.0.0.1:55554': 9}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 8, '127.0.0.1:55551': 8, '127.0.0.1:55552': 9, '127.0.0.1:55553': 9, '127.0.0.1:55554': 9}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 8, '127.0.0.1:55551': 8, '127.0.0.1:55552': 9, '127.0.0.1:55553': 9, '127.0.0.1:55554': 9}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 8, '127.0.0.1:55551': 8, '127.0.0.1:55552': 9, '127.0.0.1:55553': 9, '127.0.0.1:55554': 9}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 8, '127.0.0.1:55551': 8, '127.0.0.1:55552': 9, '127.0.0.1:55553': 9, '127.0.0.1:55554': 9}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Node 127.0.0.1:55551 (leader) received an SET for 8 : 8 request
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Node 127.0.0.1:55551 (leader) committed the entry SET 8 : 8 with term 2 to the state machine
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 9, '127.0.0.1:55553': 9, '127.0.0.1:55554': 9}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 9, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55550
+Cur_Index : {'127.0.0.1:55550': 8, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 7, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55552
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55552
+Error occurred while sending RPC to Node 127.0.0.1:55553
+Error occurred while sending RPC to Node 127.0.0.1:55552
+Leader 127.0.0.1:55551 lease renewal failed.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55554
+Error occurred while sending RPC to Node 127.0.0.1:55553
+Leader 127.0.0.1:55551 lease renewal failed.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55552
+Error occurred while sending RPC to Node 127.0.0.1:55554
+Error occurred while sending RPC to Node 127.0.0.1:55553
+Error occurred while sending RPC to Node 127.0.0.1:55554
+Leader 127.0.0.1:55551 lease renewal failed.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55553
+Error occurred while sending RPC to Node 127.0.0.1:55552
+Error occurred while sending RPC to Node 127.0.0.1:55552
+Error occurred while sending RPC to Node 127.0.0.1:55553
+Leader 127.0.0.1:55551 lease renewal failed.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55554
+Error occurred while sending RPC to Node 127.0.0.1:55554
+Leader 127.0.0.1:55551 lease renewal failed.
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 9, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55553
+Error occurred while sending RPC to Node 127.0.0.1:55552
+Node 127.0.0.1:55551 (leader) received a GET for 7 request
+Node 127.0.0.1:55551 election timer timed out, Starting election.
+Error occurred while sending RPC to Node 127.0.0.1:55553
+Error occurred while sending RPC to Node 127.0.0.1:55552
+Error occurred while sending RPC to Node 127.0.0.1:55554
+Error occurred while sending RPC to Node 127.0.0.1:55554
+Leader 127.0.0.1:55551 lease renewal failed.
+Error occurred while sending RPC to Node 127.0.0.1:55552
+Error occurred while sending RPC to Node 127.0.0.1:55553
+Vote granted for Node 127.0.0.1:55550 in term 4
+Received Votes From : {'127.0.0.1:55551', '127.0.0.1:55550'}
+===============ERROR===================================
+Node 127.0.0.1:55551 election timer timed out, Starting election.
+Error occurred while sending RPC to Node 127.0.0.1:55553
+Error occurred while sending RPC to Node 127.0.0.1:55552
+Error occurred while sending RPC to Node 127.0.0.1:55554
+Vote granted for Node 127.0.0.1:55550 in term 6
+Received Votes From : {'127.0.0.1:55551', '127.0.0.1:55550'}
+===============ERROR===================================
+Node 127.0.0.1:55551 election timer timed out, Starting election.
+Error occurred while sending RPC to Node 127.0.0.1:55553
+Error occurred while sending RPC to Node 127.0.0.1:55552
+Error occurred while sending RPC to Node 127.0.0.1:55554
+Vote granted for Node 127.0.0.1:55550 in term 8
+Received Votes From : {'127.0.0.1:55551', '127.0.0.1:55550'}
+===============ERROR===================================
+Node 127.0.0.1:55551 election timer timed out, Starting election.
+Error occurred while sending RPC to Node 127.0.0.1:55554
+Error occurred while sending RPC to Node 127.0.0.1:55552
+Error occurred while sending RPC to Node 127.0.0.1:55553
+Vote granted for Node 127.0.0.1:55550 in term 10
+Received Votes From : {'127.0.0.1:55551', '127.0.0.1:55550'}
+===============ERROR===================================
+Node 127.0.0.1:55551 election timer timed out, Starting election.
+Error occurred while sending RPC to Node 127.0.0.1:55552
+Error occurred while sending RPC to Node 127.0.0.1:55553
+Error occurred while sending RPC to Node 127.0.0.1:55554
+Vote granted for Node 127.0.0.1:55550 in term 12
+Received Votes From : {'127.0.0.1:55551', '127.0.0.1:55550'}
+===============ERROR===================================
+Node 127.0.0.1:55551 election timer timed out, Starting election.
+Error occurred while sending RPC to Node 127.0.0.1:55554
+Error occurred while sending RPC to Node 127.0.0.1:55552
+Error occurred while sending RPC to Node 127.0.0.1:55553
+Vote granted for Node 127.0.0.1:55550 in term 14
+Received Votes From : {'127.0.0.1:55551', '127.0.0.1:55550'}
+===============ERROR===================================
+Node 127.0.0.1:55551 election timer timed out, Starting election.
+Error occurred while sending RPC to Node 127.0.0.1:55552
+Error occurred while sending RPC to Node 127.0.0.1:55554
+Error occurred while sending RPC to Node 127.0.0.1:55553
+Vote granted for Node 127.0.0.1:55550 in term 16
+Received Votes From : {'127.0.0.1:55551', '127.0.0.1:55550'}
+===============ERROR===================================
+Node 127.0.0.1:55551 election timer timed out, Starting election.
+Received Votes From : {'127.0.0.1:55551', '127.0.0.1:55552', '127.0.0.1:55550'}
+Node 127.0.0.1:55551 became the leader for term 17.
+New Leader waiting for Old Leader lease 0.0 to timeout.
+{"127.0.0.1:55550": 10, "127.0.0.1:55551": 10, "127.0.0.1:55552": 10, "127.0.0.1:55553": 10, "127.0.0.1:55554": 10}
+Cur_Index : {'127.0.0.1:55550': 10, '127.0.0.1:55551': 10, '127.0.0.1:55552': 10, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55554
+Error occurred while sending RPC to Node 127.0.0.1:55554
+Node 127.0.0.1:55551 (leader) committed the entry NO-OP with term 17 to the state machine.
+Cur_Index : {'127.0.0.1:55550': 11, '127.0.0.1:55551': 10, '127.0.0.1:55552': 11, '127.0.0.1:55553': 10, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55553
+Cur_Index : {'127.0.0.1:55550': 11, '127.0.0.1:55551': 10, '127.0.0.1:55552': 11, '127.0.0.1:55553': 11, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55554
+Error occurred while sending RPC to Node 127.0.0.1:55554
+Cur_Index : {'127.0.0.1:55550': 11, '127.0.0.1:55551': 10, '127.0.0.1:55552': 11, '127.0.0.1:55553': 11, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 11, '127.0.0.1:55551': 10, '127.0.0.1:55552': 11, '127.0.0.1:55553': 11, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55554
+Cur_Index : {'127.0.0.1:55550': 11, '127.0.0.1:55551': 10, '127.0.0.1:55552': 11, '127.0.0.1:55553': 11, '127.0.0.1:55554': 10}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Error occurred while sending RPC to Node 127.0.0.1:55554
+Cur_Index : {'127.0.0.1:55550': 11, '127.0.0.1:55551': 10, '127.0.0.1:55552': 11, '127.0.0.1:55553': 11, '127.0.0.1:55554': 11}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 11, '127.0.0.1:55551': 10, '127.0.0.1:55552': 11, '127.0.0.1:55553': 11, '127.0.0.1:55554': 11}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 11, '127.0.0.1:55551': 10, '127.0.0.1:55552': 11, '127.0.0.1:55553': 11, '127.0.0.1:55554': 11}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 11, '127.0.0.1:55551': 10, '127.0.0.1:55552': 11, '127.0.0.1:55553': 11, '127.0.0.1:55554': 11}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 11, '127.0.0.1:55551': 10, '127.0.0.1:55552': 11, '127.0.0.1:55553': 11, '127.0.0.1:55554': 11}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 11, '127.0.0.1:55551': 10, '127.0.0.1:55552': 11, '127.0.0.1:55553': 11, '127.0.0.1:55554': 11}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 11, '127.0.0.1:55551': 10, '127.0.0.1:55552': 11, '127.0.0.1:55553': 11, '127.0.0.1:55554': 11}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 11, '127.0.0.1:55551': 10, '127.0.0.1:55552': 11, '127.0.0.1:55553': 11, '127.0.0.1:55554': 11}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 11, '127.0.0.1:55551': 10, '127.0.0.1:55552': 11, '127.0.0.1:55553': 11, '127.0.0.1:55554': 11}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 11, '127.0.0.1:55551': 10, '127.0.0.1:55552': 11, '127.0.0.1:55553': 11, '127.0.0.1:55554': 11}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 11, '127.0.0.1:55551': 10, '127.0.0.1:55552': 11, '127.0.0.1:55553': 11, '127.0.0.1:55554': 11}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 11, '127.0.0.1:55551': 10, '127.0.0.1:55552': 11, '127.0.0.1:55553': 11, '127.0.0.1:55554': 11}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 11, '127.0.0.1:55551': 10, '127.0.0.1:55552': 11, '127.0.0.1:55553': 11, '127.0.0.1:55554': 11}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 11, '127.0.0.1:55551': 10, '127.0.0.1:55552': 11, '127.0.0.1:55553': 11, '127.0.0.1:55554': 11}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 11, '127.0.0.1:55551': 10, '127.0.0.1:55552': 11, '127.0.0.1:55553': 11, '127.0.0.1:55554': 11}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 11, '127.0.0.1:55551': 10, '127.0.0.1:55552': 11, '127.0.0.1:55553': 11, '127.0.0.1:55554': 11}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 11, '127.0.0.1:55551': 10, '127.0.0.1:55552': 11, '127.0.0.1:55553': 11, '127.0.0.1:55554': 11}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 11, '127.0.0.1:55551': 10, '127.0.0.1:55552': 11, '127.0.0.1:55553': 11, '127.0.0.1:55554': 11}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 11, '127.0.0.1:55551': 10, '127.0.0.1:55552': 11, '127.0.0.1:55553': 11, '127.0.0.1:55554': 11}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 11, '127.0.0.1:55551': 10, '127.0.0.1:55552': 11, '127.0.0.1:55553': 11, '127.0.0.1:55554': 11}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 11, '127.0.0.1:55551': 10, '127.0.0.1:55552': 11, '127.0.0.1:55553': 11, '127.0.0.1:55554': 11}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 11, '127.0.0.1:55551': 10, '127.0.0.1:55552': 11, '127.0.0.1:55553': 11, '127.0.0.1:55554': 11}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 11, '127.0.0.1:55551': 10, '127.0.0.1:55552': 11, '127.0.0.1:55553': 11, '127.0.0.1:55554': 11}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 11, '127.0.0.1:55551': 10, '127.0.0.1:55552': 11, '127.0.0.1:55553': 11, '127.0.0.1:55554': 11}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 11, '127.0.0.1:55551': 10, '127.0.0.1:55552': 11, '127.0.0.1:55553': 11, '127.0.0.1:55554': 11}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 11, '127.0.0.1:55551': 10, '127.0.0.1:55552': 11, '127.0.0.1:55553': 11, '127.0.0.1:55554': 11}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 11, '127.0.0.1:55551': 10, '127.0.0.1:55552': 11, '127.0.0.1:55553': 11, '127.0.0.1:55554': 11}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 11, '127.0.0.1:55551': 10, '127.0.0.1:55552': 11, '127.0.0.1:55553': 11, '127.0.0.1:55554': 11}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Cur_Index : {'127.0.0.1:55550': 11, '127.0.0.1:55551': 10, '127.0.0.1:55552': 11, '127.0.0.1:55553': 11, '127.0.0.1:55554': 11}
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
+Leader 127.0.0.1:55551 sending heartbeat & Renewing Lease.
