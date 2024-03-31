@@ -14,9 +14,7 @@ class RaftClient:
         self.client_id = client_id
         self.server_address = server_address
         
-        self.nodes = ['127.0.0.1:55550','127.0.0.1:55551','127.0.0.1:55552','127.0.0.1:55553','127.0.0.1:55554']
-
-
+        self.nodes = ["10.168.0.3:55550", "10.168.0.7:55551","10.168.0.8:55552","10.168.0.9:55553","10.169.0.4:55554"]
         self.channel = grpc.insecure_channel(self.server_address)
         self.stub = raft_pb2_grpc.ClientCommunicationStub(self.channel)
 
@@ -214,6 +212,6 @@ class RaftClient:
         
 if __name__ == "__main__":
     client_id = int(input("Enter Client ID: "))
-    server_address = "127.0.0.1:55551"
+    server_address = "10.168.0.3:55550"
     client = RaftClient(client_id, server_address)
     client.run()
