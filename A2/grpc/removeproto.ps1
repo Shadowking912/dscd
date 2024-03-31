@@ -1,12 +1,10 @@
-
-# Get the current working directory
-$directory = Get-Location
+directory=$(pwd)
 
 # Check if the directory exists
-if (-not (Test-Path -Path $directory -PathType Container)) {
-    Write-Host "Directory '$directory' does not exist."
+if [ ! -d "$directory" ]; then
+    echo "Directory '$directory' does not exist."
     exit 1
-}
+fi
 
 # Find and delete folders starting with "logs_node"
-Get-ChildItem -Path $directory -Directory -Filter "logs_node*" | Remove-Item -Recurse -Force
+find "$directory" -type d -name "logs_node*" -exec rm -rf {} +
