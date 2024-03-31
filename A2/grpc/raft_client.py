@@ -55,7 +55,7 @@ class RaftClient:
                             self.send_set_request(key,value)
                             return True
                 except grpc.RpcError as e :
-                    print(f"The node {self.nodes[i]} is down hence contacting the next node",e)
+                    print(f"The node {self.nodes[i]} is down hence contacting the next node")
                     i+=1
             return False
     
@@ -115,7 +115,6 @@ class RaftClient:
         found = True
         try:
             response = self.stub.ServeClient(request)
-            print("here")
             status = response.Success
             while status!=True:
                 leaderAddress = response.leaderAddress
@@ -135,7 +134,7 @@ class RaftClient:
                 print(f"There is no leader elected in the database and hence the operation failed")
 
         except grpc.RpcError as e:
-            print(f"Error occured : {str(e)}")
+            print(f"Error occured : ")
             return False
        
     # def send_set_request
@@ -174,7 +173,7 @@ class RaftClient:
                 print(f"There is no leader elected in the database and hence the operation failed")
               
         except grpc.RpcError as e:
-            print(f"Error occured : {str(e)}")
+            print(f"Error occured : ")
             return False
 
     def run(self):

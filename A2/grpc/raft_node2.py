@@ -118,8 +118,7 @@ class NodeCommunicationService(raft_pb2_grpc.NodeCommunicationServicer):
             
             lock=threading.Lock()
             lock.acquire()
-            #=========================TEMPRORAY DUMP=============================================
-            node.dump_data(f"GOT Request Term : {request.term} prevLogIndex : {request.prevLogIndex} prevLogTerm : {request.prevLogTerm}")
+  
             leader_log_index = request.prevLogIndex
             leader_log_term = request.prevLogTerm
             # Getting the leader's term for checking the condition of denial of log replication
@@ -209,7 +208,6 @@ class NodeCommunicationService(raft_pb2_grpc.NodeCommunicationServicer):
                         node.prevLogIndex = len(node.logs)-1
                         node.prevLogTerm = node.logs[-1]['term']
                     if len(request.entries)==0:
-                        print("In this if condition") 
                         node.handle_commit_requests(leader_commit_index)
                 else:
                     # Dump POINT-11
@@ -262,7 +260,7 @@ class ClientCommunicationService(raft_pb2_grpc.ClientCommunicationServicer):
                     time.sleep(node.heartbeat_interval)
                 # print("append1")
                 response=raft_pb2.ServeClientReply()
-                response.Data=""
+                response.Data="SET Request Successful"
                 response.leaderAddress=node.leader_address
                 response.Success=True
 
@@ -284,7 +282,6 @@ class ClientCommunicationService(raft_pb2_grpc.ClientCommunicationServicer):
                     }
                     response=raft_pb2.ServeClientReply()
                     response.Data=json.dumps(data)
-                    print("HERE HELLo")
                     response.leaderAddress=node.leader_address
                     response.Success=True
 
@@ -493,21 +490,22 @@ class RaftNode:
 
         self.send_vote_requests()
 
-        #===================TEMPORARY DUMP==================
-        self.dump_data(f"Received Votes From : {self.vote_receieved}")
+  
         if len(self.vote_receieved)>= (len(peers))//2 +1:
 
 
             self.state = 'leader'
             self.leader_id = self.node_id
             self.leader_address=self.node_address
-            print("vote lease time received: ",self.longestRemainingLease)
+            print("vote lease time received")
 
             # Dump POINT-5
             self.dump_data(f"Node {self.node_address} became the leader for term {self.term}.")
             
             if self.longestRemainingLease<self.election_timeout and self.longestRemainingLease>=0:
                 time.sleep(self.longestRemainingLease)
+            else:
+                self.longestRemainingLease=0
           
             # DUMP Point-3
             self.dump_data(f"New Leader waiting for Old Leader lease {self.longestRemainingLease} to timeout.")
@@ -528,10 +526,8 @@ class RaftNode:
             node.cur_index={i:len(node.logs)-1 for i in node.peers}
     
             time.sleep(self.heartbeat_interval)
-            # ============================TEMPORARY DUMP===========================================================
-            self.dump_data(f"{json.dumps(node.cur_index)}")
-            
-            print("Logs of leader = ",self.logs)
+
+           
             self.write_logs()
             
             self.appendthread=threading.Thread(target=self.append_entries)
@@ -544,9 +540,6 @@ class RaftNode:
             self.election_timer.start()
 
         else:
-            #=========================RANDOM DUMP===============================
-
-            self.dump_data(f"===============ERROR===================================")
 
             self.state='follower' # ----------------> Issue, == instead of = and also not checking if a leader has been created directly starting election
             self.election_timer.cancel()
@@ -624,7 +617,6 @@ class RaftNode:
                 self.cur_index[response_received.nodeAddress]=len(self.logs)
             else:
                 if response_received.term>self.term:
-                    print("somebodey else is leader")
                     self.term=response_received.term
                     self.state='follower'
                     self.voted_for=None
@@ -638,7 +630,8 @@ class RaftNode:
             return True
 
         except Exception as e:
-            print("ERROR2 = ",e)
+            # print("ERROR2 = ")
+            print(f"Error occurred while sending RPC to Node {peer_address}")
             # DUMP Point-6
             self.dump_data(f"Error occurred while sending RPC to Node {peer_address}")
             return False
@@ -655,8 +648,8 @@ class RaftNode:
         # cur_index2={i:len(self.logs)-1 for i in self.peers}
         print("curs: ",self.cur_index)
 
-        #===============================================================TEMPORARY DUMP=====================================
-        self.dump_data(f"Cur_Index : {self.cur_index}")
+        # #===============================================================TEMPORARY DUMP=====================================
+        # self.dump_data(f"Cur_Index : {self.cur_index}")
         
         for peer in self.peers:
             if peer!=self.address:
@@ -694,7 +687,6 @@ class RaftNode:
         time.sleep(self.heartbeat_interval)
         lock.release()         
 
-        print("majority",self.majority)
         if self.majority>= (len(self.peers))//2 +1:#leader remains
             print(f"Node {self.node_address} got heartbeats {self.majority} till now")
             self.isLeaseCancel=0
@@ -744,11 +736,11 @@ signal.signal(signal.SIGINT, signal_handler)
 
 if __name__ == "__main__":
     node_id = int(input("Enter Node ID: "))
-    server_address = f"127.0.0.1:5555{node_id}"
+    server_address = f"10.168.0.7:5555{node_id}"
     print(f"Node Listening at {server_address}")
     # peers = ["127.0.0.1:55550", "127.0.0.1:55551","127.0.0.1:55552"]  # Assuming 5 nodes
     
-    peers = ["127.0.0.1:55550", "127.0.0.1:55551","127.0.0.1:55552","127.0.0.1:55553","127.0.0.1:55554"]  # Assuming 5 nodes
+    peers = ["10.168.0.3:55550", "10.168.0.7:55551","10.168.0.8:55552","10.168.0.9:55553","10.169.0.4:55554"]  # Assuming 5 nodes
     # peer_dict = {"127.0.0.1:5550":0,"127.0.0.1:5551":1,"127.0.0.1:5552":2,"127.0.0.1:5553":3,"127.0.0.1:5554":4}
     # ,"127.0.0.1:5554":4,"127.0.0.1:5555":555}
     serve()
