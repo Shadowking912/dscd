@@ -1,0 +1,48 @@
+syntax="proto3";
+package communication_raft;
+service MasterMapperCommunication
+{
+    rpc MapperParameters(MapRequest) returns (MapResponse);
+}
+service MapperReducerCommunication
+{
+    rpc PartitionParameters(PartitionRequest) returns (PartitionResponse);
+}
+service MasterReducerCommunication
+{
+    rpc ReducerParameters(ReducerRequest) returns (ReducerResponse);
+}
+message DataPoint
+{
+    float x=1;
+    float y=2;
+}
+message MapRequest 
+{
+    int32 shardIndexStart =1;
+    int32 shardIndexEnd =2;
+    repeated DataPoint CentroidCoordinates=3;
+}
+message MapResponse
+{
+    DataPoint key=1;
+    DataPoint value=2;
+    bool success = 3;
+}
+message ReducerRequest
+{
+    bool start = 1;
+}
+message ReducerResponse
+{
+    bool success = 1;
+}
+message PartitionRequest
+{
+    int32 partitionNumber=1;
+
+}
+message PartitionResponse
+{
+    bool success=1;
+}
