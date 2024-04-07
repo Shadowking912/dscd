@@ -79,7 +79,7 @@ def main():
     for process in pidListReducers:
         process.join()
 
-    print("All reducers finished.")
+    print("All reducers are finished.")
 
 if __name__ == "__main__":
     main()
