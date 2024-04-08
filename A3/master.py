@@ -4,7 +4,9 @@ import master_pb2_grpc
 import os
 import sys
 import multiprocessing
-import signal 
+import signal
+ 
+eps=1e-8
 
 def exithandler():
     active = multiprocessing.active_children()
@@ -142,8 +144,8 @@ def main():
         centroids=master_pb2.DataPoint()
         
         for i in range(num_centroids):
-            centroids.x=0
-            centroids.y=0
+            centroids.x=0+eps
+            centroids.y=0+eps
             print(centroids)
             request.CentroidCoordinates.append(centroids)
         response = stub.MapperParameters(request)

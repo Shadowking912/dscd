@@ -2,4 +2,8 @@ Indices : [endIndex: 13
 , startIndex: 26
 endIndex: 31
 ]
-Centroids: [, ]
+Centroids: [x: 9.99999993922529e-09
+y: 9.99999993922529e-09
+, x: 9.99999993922529e-09
+y: 9.99999993922529e-09
+]
