@@ -17,11 +17,17 @@ message DataPoint
     float x=1;
     float y=2;
 }
+message index
+{
+    int32 startIndex=1;
+    int32 endIndex=2;
+}
 message MapRequest 
 {
-    int32 shardIndexStart =1;
-    int32 shardIndexEnd =2;
-    repeated DataPoint CentroidCoordinates=3;
+    // int32 shardIndexStart =1;
+    // int32 shardIndexEnd =2;
+    repeated index Indices = 1;
+    repeated DataPoint CentroidCoordinates=2;
 }
 message MapResponse
 {
