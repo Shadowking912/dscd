@@ -5,9 +5,9 @@ import os
 import sys
 import multiprocessing
 import signal
- 
+import threading
+import time
 eps=1e-8
-
 def exithandler():
     active = multiprocessing.active_children()
     for child in active:
@@ -15,6 +15,11 @@ def exithandler():
 
 signal.signal(signal.SIGINT, exithandler)
 
+def send_to_mapper(request,stub,mapper_id):
+    response = stub.MapperParameters(request)
+    print(f"Response from id = {mapper_id} {response.success}")
+    
+    # return response
 # class MapperReducerCommunication(master_pb2_grpc.MapperReducerCommunicationServicer):
     
 #     def PartitionParameters(self, request, context):
@@ -28,6 +33,9 @@ signal.signal(signal.SIGINT, exithandler)
 #     def ReducerParameters(self, request, context):
 #         return super().ReducerParameters(request, context)
     
+def get_response(response):
+    response = response.result()
+    print(response)
     
 def run_reducer(reducer_id):
     # Function to run reducer process
@@ -91,6 +99,8 @@ def create_partitions(points,shard_size,num_mappers):
 
 
 def main():
+
+
     if len(sys.argv) != 6:
         print("Usage: python master.py <shard_size> <number_of_mappers> <number_of_reducers> <number_of_centroids> <number_of_iterations>")
         sys.exit(1)
@@ -122,40 +132,48 @@ def main():
     print("Mappers started")
     pidListMappers = []
     
+    #start mappers
     for mapper_id in range(num_mappers):
         process = multiprocessing.Process(target=run_mapper, args=(mapper_id,))
         pidListMappers.append(process)
         process.start()
-        
+    time.sleep(3)
     channels=[]
+    responses = []
     for i in range(num_mappers):
         channel = grpc.insecure_channel(f'localhost:5555{i}')
         channels.append(channel)
         stub = master_pb2_grpc.MasterMapperCommunicationStub(channel)
         request=master_pb2.MapRequest()
-        indices=master_pb2.index()
+        lengths=master_pb2.length()
         
         for j in mapper_partitions[i]:
-            indices.startIndex=j[0]
-            indices.endIndex=j[1]
-            print(indices)
-            request.Indices.append(indices)
+            lengths.startLength=j[0]+1
+            lengths.endLength=j[1]
+            request.Lengths.append(lengths)
         
         centroids=master_pb2.DataPoint()
         
-        for i in range(num_centroids):
+        for j in range(num_centroids):
             centroids.x=0+eps
             centroids.y=0+eps
-            print(centroids)
             request.CentroidCoordinates.append(centroids)
-        response = stub.MapperParameters(request)
-        # response = response.result()
+
+        sentrequest=threading.Thread(target=send_to_mapper,args=(request,stub,i))
+        sentrequest.daemon=True
+        sentrequest.start()
+
 
     for process in pidListMappers:
         process.join()
 
+    # print("Responses = ",responses)
     print("All Mapper finished.")
 
+    # for response in responses:
+    #     print(response.result())
+    # for response in responses:
+    #     threading.Thread(target=get_response,args=(response,)).start()
     # Fork for the number of reducers
     # print("Reducers Started")
     # pidListReducers = []

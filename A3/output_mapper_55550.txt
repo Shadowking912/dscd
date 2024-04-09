@@ -1,9 +1,10 @@
-Indices : [endIndex: 13
-, startIndex: 26
-endIndex: 31
+Indices : [startLength: 1
+endLength: 8
+, startLength: 17
+endLength: 24
 ]
-Centroids: [x: 9.99999993922529e-09
-y: 9.99999993922529e-09
-, x: 9.99999993922529e-09
-y: 9.99999993922529e-09
+Centroids: [x: 1e-008
+y: 1e-008
+, x: 1e-008
+y: 1e-008
 ]

@@ -17,23 +17,21 @@ message DataPoint
     float x=1;
     float y=2;
 }
-message index
+message length
 {
-    int32 startIndex=1;
-    int32 endIndex=2;
+    int32 startLength=1;
+    int32 endLength=2;
 }
 message MapRequest 
 {
     // int32 shardIndexStart =1;
     // int32 shardIndexEnd =2;
-    repeated index Indices = 1;
+    repeated length Lengths = 1;
     repeated DataPoint CentroidCoordinates=2;
 }
 message MapResponse
 {
-    DataPoint key=1;
-    DataPoint value=2;
-    bool success = 3;
+    bool success = 1;
 }
 message ReducerRequest
 {
