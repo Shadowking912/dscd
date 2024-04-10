@@ -10,11 +10,10 @@ import time
 import random
 import shutil
 
-
-
 centroid_file=open("centroids_new.txt","w")
 folder=os.path.join(os.getcwd(),f"Data")
 eps=1e-8
+
 def exithandler():
     active = multiprocessing.active_children()
     for child in active:
@@ -31,25 +30,6 @@ def send_to_reducer(request,stub,reducer_id):
     print(f"Response from id = {reducer_id} {response.success}")
     # print(f"Response from id  = {reducer_id} {response.success}")
     
-# def delete_folders(prefix):
-#     # Iterate through all items in the directory
-#     for item in os.listdir(folder):
-#         # Construct the full path to the item
-#         item_path = os.path.join(folder, item)
-        
-#         # Check if the item is a directory
-#         if os.path.isdir(item_path):
-#             # If the directory starts with the specified prefix, delete it
-#             if item.startswith(prefix):
-#                 # Delete the directory and its contents recursively
-#                 try:
-#                     delete_folder_recursive(item_path)
-#                     os.rmdir(folder)
-#                     print(f"Deleted directory and its contents: {item_path}")
-#                 except OSError as e:
-#                     print(f"Error deleting directory and its contents {item_path}: {e}")
-
-
 def delete_folder_recursive(folder):
     # Recursively delete all files and subdirectories within the folder
     for item in os.listdir(folder):
@@ -58,9 +38,6 @@ def delete_folder_recursive(folder):
             shutil.rmtree(item_path)
         else:
             os.remove(item_path)
-    # Finally, remove the empty folder
-    # return response
-
 
 def get_response(response):
     response = response.result()
@@ -228,14 +205,12 @@ def main():
         for i in threadings:
             i.join()
 
-
         # print("Responses = ",responses)
         print("All Mapper finished.")
 
         # Fork for the number of reducers
         print("Reducers Started")
         
-
         time.sleep(2)
         channelsr=[]
 
