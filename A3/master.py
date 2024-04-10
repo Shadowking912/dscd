@@ -7,6 +7,9 @@ import multiprocessing
 import signal
 import threading
 import time
+import random
+
+
 eps=1e-8
 def exithandler():
     active = multiprocessing.active_children()
@@ -32,7 +35,7 @@ def send_to_mapper(request,stub,mapper_id):
 # class MasterReducerCommunication(master_pb2_grpc.MasterReducerCommunicationServicer):
 #     def ReducerParameters(self, request, context):
 #         return super().ReducerParameters(request, context)
-    
+
 def get_response(response):
     response = response.result()
     print(response)
@@ -63,11 +66,11 @@ def read_file():
     return final_points
 
 def create_partitions(points,shard_size,num_mappers):
-    # if os.path.isdir(os.path.join(os.getcwd(),f'Data/Splits'))==False:
-    #     os.makedirs(os.path.join(os.getcwd(),f'Data/Splits'))
-    # else:
-    #     os.rmdir(os.path.join(os.getcwd(),f'Data/Splits'))
-    #     os.makedirs(os.path.join(os.getcwd(),f'Data/Splits'))
+    if os.path.isdir(os.path.join(os.getcwd(),f'Data/Splits'))==False:
+        os.makedirs(os.path.join(os.getcwd(),f'Data/Splits'))
+    else:
+        os.rmdir(os.path.join(os.getcwd(),f'Data/Splits'))
+        os.makedirs(os.path.join(os.getcwd(),f'Data/Splits'))
 
     split_number = 0
     num_partitions = len(points)//shard_size
@@ -111,6 +114,10 @@ def main():
     num_centroids = int(sys.argv[4])
     num_iterations = int(sys.argv[5])
 
+    centroids_list=[]   
+    for i in range(num_centroids):
+        centroids_list.append(tuple([random.random(),random.random()]))
+
     print("Master started.")
     print(f"Number of mappers: {num_mappers}")
     print(f"Number of reducers: {num_reducers}")
@@ -152,17 +159,22 @@ def main():
             lengths.endLength=j[1]
             request.Lengths.append(lengths)
         
+        # centers = read_centroids()
+        # CENTROIDS DISCUSSION PENDING
         centroids=master_pb2.DataPoint()
         
         for j in range(num_centroids):
-            centroids.x=0+eps
-            centroids.y=0+eps
+            centroids.x=centroids_list[j][0]
+            centroids.y=centroids_list[j][1]
             request.CentroidCoordinates.append(centroids)
+
+        request.reducers = num_reducers
 
         sentrequest=threading.Thread(target=send_to_mapper,args=(request,stub,i))
         sentrequest.daemon=True
         sentrequest.start()
 
+    
 
     for process in pidListMappers:
         process.join()

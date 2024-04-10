@@ -28,6 +28,7 @@ message MapRequest
     // int32 shardIndexEnd =2;
     repeated length Lengths = 1;
     repeated DataPoint CentroidCoordinates=2;
+    int32 reducers=3;
 }
 message MapResponse
 {
