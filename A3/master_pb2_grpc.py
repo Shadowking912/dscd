@@ -77,8 +77,8 @@ class MapperReducerCommunicationStub(object):
         """
         self.PartitionParameters = channel.unary_unary(
                 '/communication_raft.MapperReducerCommunication/PartitionParameters',
-                request_serializer=master__pb2.PartitionRequest.SerializeToString,
-                response_deserializer=master__pb2.PartitionResponse.FromString,
+                request_serializer=master__pb2.PartionRequest.SerializeToString,
+                response_deserializer=master__pb2.PartionResponse.FromString,
                 )
 
 
@@ -96,8 +96,8 @@ def add_MapperReducerCommunicationServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'PartitionParameters': grpc.unary_unary_rpc_method_handler(
                     servicer.PartitionParameters,
-                    request_deserializer=master__pb2.PartitionRequest.FromString,
-                    response_serializer=master__pb2.PartitionResponse.SerializeToString,
+                    request_deserializer=master__pb2.PartionRequest.FromString,
+                    response_serializer=master__pb2.PartionResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -121,8 +121,8 @@ class MapperReducerCommunication(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/communication_raft.MapperReducerCommunication/PartitionParameters',
-            master__pb2.PartitionRequest.SerializeToString,
-            master__pb2.PartitionResponse.FromString,
+            master__pb2.PartionRequest.SerializeToString,
+            master__pb2.PartionResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
