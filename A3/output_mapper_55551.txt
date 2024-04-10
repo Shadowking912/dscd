@@ -1,7 +1,7 @@
-Indices : [startLength: 1
-endLength: 8
-, startLength: 17
-endLength: 24
+Indices : [startLength: 9
+endLength: 16
+, startLength: 25
+endLength: 31
 ]
 Centroids: [x: 0.6750896573066711
 y: 0.09982459247112274
