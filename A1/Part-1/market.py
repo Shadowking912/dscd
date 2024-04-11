@@ -97,7 +97,7 @@ class MarketPlaceService(market_seller_pb2_grpc.MarketPlaceServicer,market_buyer
             file=market_seller_pb2
 
         product=desired_product
-        market_product_request =file.ProductDisplayResponse()
+        market_product_request=file.ProductDisplayResponse()
         market_product_request.id=product.id
         market_product_request.price=product.price
         market_product_request.name=product.name

@@ -6,7 +6,7 @@ service MasterMapperCommunication
 }
 service MapperReducerCommunication
 {
-    rpc PartitionParameters(PartitionRequest) returns (PartitionResponse);
+    rpc PartitionParameters(PartionRequest) returns (PartionResponse);
 }
 service MasterReducerCommunication
 {
@@ -36,18 +36,23 @@ message MapResponse
 }
 message ReducerRequest
 {
-    bool start = 1;
+    repeated string mapperportnumbers=1;
 }
 message ReducerResponse
 {
     bool success = 1;
 }
-message PartitionRequest
+message mappartion
 {
-    int32 partitionNumber=1;
-
+    int32  key=1;
+    DataPoint point=2;
+    int32 freq=3;
 }
-message PartitionResponse
+message PartionResponse
 {
-    bool success=1;
+    repeated mappartion mappartion=1;
+}
+message PartionRequest
+{
+    int32 reducerid=1;
 }
