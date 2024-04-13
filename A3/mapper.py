@@ -72,26 +72,20 @@ class MasterMapperCommunication(master_pb2_grpc.MasterMapperCommunicationService
         
 
     def partition(self,keys,rno):
-        # print(keys)
-        # reducers = self.
-        # print()
-        # print(f"")
-        # print(keys)
-        reducers = {k:() for k in range(rno)}
 
-        for i in range(len(keys)):
-            index = keys[i][0]
-            print(f"Index = {index}",file=logfile,flush=True)
-            reducer_id = index%rno
-        
-            reducers[reducer_id] = [i for i in keys if i[0]%rno==reducer_id]
-        
-        print(reducers,file=logfile,flush=True)
+        reducers = {k:[] for k in range(rno)}
+
+        for key in keys:
+            reducer_idx = hash(key)%rno
+            reducers.get(reducer_idx).append(key)
+
+        print(f"Keys {keys} \n, redcuer {reducers}",file=logfile,flush=True)
+
         for reducer_id in reducers.keys():
             print(f"REDUCER ID = {reducer_id}",file=logfile,flush=True)
             with open(f"{folder}\partition_{reducer_id}.txt","w") as f:
                 for j in reducers[reducer_id]:
-                    print(f"VALUE WRITTEN = {j}",file=logfile,flush=True)
+                    print(f"VALUE WRITTEN = {j} to reducer {reducer_id}",file=logfile,flush=True)
                     f.write(f"{j}\n")
     
     def MapperParameters(self, request, context):

@@ -7,6 +7,7 @@ import multiprocessing
 import signal
 import threading
 import time
+import math
 import random
 import shutil
 
@@ -23,11 +24,11 @@ signal.signal(signal.SIGINT, exithandler)
 
 def send_to_mapper(request,stub,mapper_id):
     response = stub.MapperParameters(request)
-    print(f"Response from id = {mapper_id} {response.success}")
+    print(f"Response from id (in Master) = {mapper_id} {response.success}")
     
 def send_to_reducer(request,stub,reducer_id):
     response = stub.ReducerParameters(request)
-    print(f"Response from id = {reducer_id} {response.success}")
+    print(f"Response from id (in Master)= {reducer_id} {response.success}")
     # print(f"Response from id  = {reducer_id} {response.success}")
     
 def delete_folder_recursive(folder):
@@ -41,14 +42,14 @@ def delete_folder_recursive(folder):
 
 def get_response(response):
     response = response.result()
-    print(response)
+    print("Response in Master",response)
     
 def run_reducer(reducer_id):
     os.system(f"python reducer.py 6666{reducer_id}")
 
 
 def run_mapper(mapper_id):
-    print("mapper ",mapper_id)
+    print(f"mapper {mapper_id} run sent from master")
     os.system(f"python mapper.py 5555{mapper_id}")
 
 def read_file():
@@ -65,26 +66,13 @@ def read_file():
 
 def create_partitions(points,shard_size,num_mappers):
 
-    split_number = 0
-    num_partitions = len(points)//shard_size
-    if len(points)%shard_size!=0:
-        remaining_size = len(points)-num_partitions*shard_size
-        num_partitions+=1
+    num_partitions = math.ceil(len(points)/shard_size)
     print("Num Partitions = ",num_partitions)
-    
-    print("Remaining Size = ",remaining_size)
-    partition_id = 0
     start_index = 0
     partitions=[]
     for i in range(num_partitions):
-        if start_index+shard_size<=len(points):
-            partitions.append(tuple([start_index,start_index+shard_size]))
-            start_index+=shard_size
-        else:
-            print("Start Index = ",start_index)
-            print("Ending Index = ",start_index+remaining_size)
-            partitions.append(tuple([start_index,start_index+remaining_size]))
-            start_index+=remaining_size
+        partitions.append(tuple([start_index,min(start_index+shard_size,len(points))]))
+        start_index+=shard_size
 
     mapper_partitions={}
     for i in range(len(partitions)):
@@ -98,10 +86,10 @@ def update_centroids():
     for item in os.listdir(os.path.join(folder, "Reducers")):
         with open(os.path.join(folder, "Reducers",item), "r") as f:
             centroid = f.readline().strip().split(",")
-            print(centroid)
+            print("Centroid in master",centroid)
             new_centroids[int(centroid[0])]=(float(centroid[1]),float(centroid[2]))
     
-    print("New Centroids = ",new_centroids,file=centroid_file,flush=True)
+    print("(Master) New Centroids = ",new_centroids,file=centroid_file,flush=True)
     return list(new_centroids.values())
     
 
@@ -142,14 +130,11 @@ def main():
 
     # Read the points from the file
     points = read_file()
-    print(points)    
-    print(len(points))
+    print(f"Points{points}, len(points)={len(points)} ")    
 
     centroids_list = random.sample(points,num_centroids)
     
     mapper_partitions=create_partitions(points,shard_size,num_mappers)
-    print(f"Partitions = ")
-    print(mapper_partitions)
     print(f"Partitions = {mapper_partitions}")
 
     # Fork for the number of mappers
@@ -171,7 +156,7 @@ def main():
     time.sleep(2)
     for iter in range(num_iterations):
         print(f"Iteration {iter+1}")
-        print("centroids",centroids_list)
+        print("(Master) centroids",centroids_list)
         channels=[]
         responses = []
         mappers=[]
@@ -231,6 +216,7 @@ def main():
             i.join()
         print("All reducers are  finished.")
         new_centroids=update_centroids()
+        print(f"New Centroids after it {iter+1}, is ",new_centroids)
         if all(abs(centroids_list[i][0]-new_centroids[i][0])<eps and abs(centroids_list[i][1]-new_centroids[i][1])<eps for i in range(num_centroids)):
             break
         else:
