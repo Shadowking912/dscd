@@ -1,0 +1,20 @@
+Centroid 1: Point [(1.0, 1.0), 1]
+Centroid 1: Point [(1.5, 0.5), 1]
+New Centroid 1,1.25,0.75
+
+Centroid 1: Point [(1.0, 1.0), 1]
+Centroid 1: Point [(1.5, 0.5), 1]
+New Centroid 1,1.25,0.75
+
+Centroid 1: Point [(1.0, 1.0), 1]
+Centroid 1: Point [(1.5, 0.5), 1]
+New Centroid 1,1.25,0.75
+
+Centroid 1: Point [(1.0, 1.0), 1]
+Centroid 1: Point [(1.5, 0.5), 1]
+New Centroid 1,1.25,0.75
+
+Centroid 1: Point [(1.0, 1.0), 1]
+Centroid 1: Point [(1.5, 0.5), 1]
+New Centroid 1,1.25,0.75
+

@@ -1,0 +1,15 @@
+received request from master
+Points =  [(1.0, 1.0)]
+Keys =  [(1, (1.0, 1.0), 1)]
+received request from master
+Points =  [(1.0, 1.0)]
+Keys =  [(1, (1.0, 1.0), 1)]
+received request from master
+Points =  [(1.0, 1.0)]
+Keys =  [(1, (1.0, 1.0), 1)]
+received request from master
+Points =  [(1.0, 1.0)]
+Keys =  [(1, (1.0, 1.0), 1)]
+received request from master
+Points =  [(1.0, 1.0)]
+Keys =  [(1, (1.0, 1.0), 1)]

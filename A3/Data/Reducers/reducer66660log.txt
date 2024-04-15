@@ -1,0 +1,25 @@
+Centroid 0: Point [(2.0, 2.0), 1]
+Centroid 0: Point [(3.0, 2.0), 1]
+Centroid 0: Point [(3.0, 1.0), 1]
+New Centroid 0,2.6666666666666665,1.6666666666666667
+
+Centroid 0: Point [(2.0, 2.0), 1]
+Centroid 0: Point [(3.0, 2.0), 1]
+Centroid 0: Point [(3.0, 1.0), 1]
+New Centroid 0,2.6666666666666665,1.6666666666666667
+
+Centroid 0: Point [(2.0, 2.0), 1]
+Centroid 0: Point [(3.0, 2.0), 1]
+Centroid 0: Point [(3.0, 1.0), 1]
+New Centroid 0,2.6666666666666665,1.6666666666666667
+
+Centroid 0: Point [(2.0, 2.0), 1]
+Centroid 0: Point [(3.0, 2.0), 1]
+Centroid 0: Point [(3.0, 1.0), 1]
+New Centroid 0,2.6666666666666665,1.6666666666666667
+
+Centroid 0: Point [(2.0, 2.0), 1]
+Centroid 0: Point [(3.0, 2.0), 1]
+Centroid 0: Point [(3.0, 1.0), 1]
+New Centroid 0,2.6666666666666665,1.6666666666666667
+

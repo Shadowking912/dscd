@@ -40,7 +40,10 @@ message ReducerRequest
 }
 message ReducerResponse
 {
-    bool success = 1;
+    string centroids=1;
+    int32 success = 2;
+    int32 mapper_id = 3;
+
 }
 message mappartion
 {

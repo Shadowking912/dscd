@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0cmaster.proto\x12\x12\x63ommunication_raft\"!\n\tDataPoint\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02\"0\n\x06length\x12\x13\n\x0bstartLength\x18\x01 \x01(\x05\x12\x11\n\tendLength\x18\x02 \x01(\x05\"\x87\x01\n\nMapRequest\x12+\n\x07Lengths\x18\x01 \x03(\x0b\x32\x1a.communication_raft.length\x12:\n\x13\x43\x65ntroidCoordinates\x18\x02 \x03(\x0b\x32\x1d.communication_raft.DataPoint\x12\x10\n\x08reducers\x18\x03 \x01(\x05\"\x1e\n\x0bMapResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"+\n\x0eReducerRequest\x12\x19\n\x11mapperportnumbers\x18\x01 \x03(\t\"\"\n\x0fReducerResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"U\n\nmappartion\x12\x0b\n\x03key\x18\x01 \x01(\x05\x12,\n\x05point\x18\x02 \x01(\x0b\x32\x1d.communication_raft.DataPoint\x12\x0c\n\x04\x66req\x18\x03 \x01(\x05\"E\n\x0fPartionResponse\x12\x32\n\nmappartion\x18\x01 \x03(\x0b\x32\x1e.communication_raft.mappartion\"#\n\x0ePartionRequest\x12\x11\n\treducerid\x18\x01 \x01(\x05\x32p\n\x19MasterMapperCommunication\x12S\n\x10MapperParameters\x12\x1e.communication_raft.MapRequest\x1a\x1f.communication_raft.MapResponse2|\n\x1aMapperReducerCommunication\x12^\n\x13PartitionParameters\x12\".communication_raft.PartionRequest\x1a#.communication_raft.PartionResponse2z\n\x1aMasterReducerCommunication\x12\\\n\x11ReducerParameters\x12\".communication_raft.ReducerRequest\x1a#.communication_raft.ReducerResponseb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0cmaster.proto\x12\x12\x63ommunication_raft\"!\n\tDataPoint\x12\t\n\x01x\x18\x01 \x01(\x02\x12\t\n\x01y\x18\x02 \x01(\x02\"0\n\x06length\x12\x13\n\x0bstartLength\x18\x01 \x01(\x05\x12\x11\n\tendLength\x18\x02 \x01(\x05\"\x87\x01\n\nMapRequest\x12+\n\x07Lengths\x18\x01 \x03(\x0b\x32\x1a.communication_raft.length\x12:\n\x13\x43\x65ntroidCoordinates\x18\x02 \x03(\x0b\x32\x1d.communication_raft.DataPoint\x12\x10\n\x08reducers\x18\x03 \x01(\x05\"\x1e\n\x0bMapResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\"+\n\x0eReducerRequest\x12\x19\n\x11mapperportnumbers\x18\x01 \x03(\t\"H\n\x0fReducerResponse\x12\x11\n\tcentroids\x18\x01 \x01(\t\x12\x0f\n\x07success\x18\x02 \x01(\x05\x12\x11\n\tmapper_id\x18\x03 \x01(\x05\"U\n\nmappartion\x12\x0b\n\x03key\x18\x01 \x01(\x05\x12,\n\x05point\x18\x02 \x01(\x0b\x32\x1d.communication_raft.DataPoint\x12\x0c\n\x04\x66req\x18\x03 \x01(\x05\"E\n\x0fPartionResponse\x12\x32\n\nmappartion\x18\x01 \x03(\x0b\x32\x1e.communication_raft.mappartion\"#\n\x0ePartionRequest\x12\x11\n\treducerid\x18\x01 \x01(\x05\x32p\n\x19MasterMapperCommunication\x12S\n\x10MapperParameters\x12\x1e.communication_raft.MapRequest\x1a\x1f.communication_raft.MapResponse2|\n\x1aMapperReducerCommunication\x12^\n\x13PartitionParameters\x12\".communication_raft.PartionRequest\x1a#.communication_raft.PartionResponse2z\n\x1aMasterReducerCommunication\x12\\\n\x11ReducerParameters\x12\".communication_raft.ReducerRequest\x1a#.communication_raft.ReducerResponseb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -32,17 +32,17 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   _globals['_REDUCERREQUEST']._serialized_start=291
   _globals['_REDUCERREQUEST']._serialized_end=334
   _globals['_REDUCERRESPONSE']._serialized_start=336
-  _globals['_REDUCERRESPONSE']._serialized_end=370
-  _globals['_MAPPARTION']._serialized_start=372
-  _globals['_MAPPARTION']._serialized_end=457
-  _globals['_PARTIONRESPONSE']._serialized_start=459
-  _globals['_PARTIONRESPONSE']._serialized_end=528
-  _globals['_PARTIONREQUEST']._serialized_start=530
-  _globals['_PARTIONREQUEST']._serialized_end=565
-  _globals['_MASTERMAPPERCOMMUNICATION']._serialized_start=567
-  _globals['_MASTERMAPPERCOMMUNICATION']._serialized_end=679
-  _globals['_MAPPERREDUCERCOMMUNICATION']._serialized_start=681
-  _globals['_MAPPERREDUCERCOMMUNICATION']._serialized_end=805
-  _globals['_MASTERREDUCERCOMMUNICATION']._serialized_start=807
-  _globals['_MASTERREDUCERCOMMUNICATION']._serialized_end=929
+  _globals['_REDUCERRESPONSE']._serialized_end=408
+  _globals['_MAPPARTION']._serialized_start=410
+  _globals['_MAPPARTION']._serialized_end=495
+  _globals['_PARTIONRESPONSE']._serialized_start=497
+  _globals['_PARTIONRESPONSE']._serialized_end=566
+  _globals['_PARTIONREQUEST']._serialized_start=568
+  _globals['_PARTIONREQUEST']._serialized_end=603
+  _globals['_MASTERMAPPERCOMMUNICATION']._serialized_start=605
+  _globals['_MASTERMAPPERCOMMUNICATION']._serialized_end=717
+  _globals['_MAPPERREDUCERCOMMUNICATION']._serialized_start=719
+  _globals['_MAPPERREDUCERCOMMUNICATION']._serialized_end=843
+  _globals['_MASTERREDUCERCOMMUNICATION']._serialized_start=845
+  _globals['_MASTERREDUCERCOMMUNICATION']._serialized_end=967
 # @@protoc_insertion_point(module_scope)
