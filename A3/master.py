@@ -260,8 +260,8 @@ def main():
     points = read_file()
     print(f"Points{points}, len(points)={len(points)} ")    
 
-    # centroids_list = random.sample(points,num_centroids)
-    centroids_list=[(2,2),(1,1)]
+    centroids_list = random.sample(points,num_centroids)
+    # centroids_list=[(2,2),(1,1)]
     print("Centroids = ",centroids_list)
     mapper_partitions=create_partitions(points,shard_size,num_mappers)
     print(f"Partitions = {mapper_partitions}")
@@ -361,10 +361,10 @@ def main():
         new_centroids=update_centroids()
         # print(f"New Centroids after it {iter+1}, is ",new_centroids)
         
-        # if all(abs(centroids_list[i][0]-new_centroids[i][0])<eps and abs(centroids_list[i][1]-new_centroids[i][1])<eps for i in range(num_centroids)):
-        #     break
-        # else:
-        centroids_list=new_centroids
+        if all(abs(centroids_list[i][0]-new_centroids[i][0])<eps and abs(centroids_list[i][1]-new_centroids[i][1])<eps for i in range(num_centroids)):
+            break
+        else:
+            centroids_list=new_centroids
             # print("Deb",centroids_list)
         # if iter<num_iterations-1:
         #     break
