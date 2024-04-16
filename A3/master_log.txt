@@ -1,10 +1,15 @@
-Response from id (in Master) = 1 True
 Response from id (in Master) = 0 True
+Response from id (in Master) = 1 True
 All Mapper finished.
 Reducers Started
 All reducers are  finished.
 Response from id (in Master) = 0 True
 Response from id (in Master) = 1 True
+All Mapper finished.
+Reducers Started
+All reducers are  finished.
+Response from id (in Master) = 1 True
+Response from id (in Master) = 0 True
 All Mapper finished.
 Reducers Started
 All reducers are  finished.

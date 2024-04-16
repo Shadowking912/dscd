@@ -372,10 +372,12 @@ def main():
     
     for i in pidListMappers:
         i.terminate()
+        i.join()
         i.close()
     
     for i in pidListReducers:
         i.terminate()
+        i.join()
         i.close()
 
     # delete_folder_recursive(os.path.join(folder,"Reducers"))
