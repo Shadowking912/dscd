@@ -354,7 +354,7 @@ def main():
                 pidListMappers[i]=multiprocessing.Process(target=run_mapper, args=(f"5555{i}",))
                 pidListMappers[i].start()
             continue
-    
+        
         print("All reducers are  finished.",file=logfile,flush=True)
 
         
@@ -368,12 +368,12 @@ def main():
             # print("Deb",centroids_list)
         # if iter<num_iterations-1:
         #     break
-            
         iter+=1
-
+    
     for i in pidListMappers:
         i.terminate()
         i.close()
+    
     for i in pidListReducers:
         i.terminate()
         i.close()
