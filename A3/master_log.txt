@@ -1,139 +1,49 @@
-Response from Mapper id (in Master) = 3 False
-Response from Mapper id (in Master) = 0 False
-Response from Mapper id (in Master) = 8 False
-Response from Mapper id (in Master) = 1 False
 Response from Mapper id (in Master) = 2 False
-Response from Mapper id (in Master) = 4 False
-Response from Mapper id (in Master) = 3 False
-Response from Mapper id (in Master) = 5 False
-Response from Mapper id (in Master) = 9 False
-Response from Mapper id (in Master) = 5 False
-Response from Mapper id (in Master) = 5 False
-Response from Mapper id (in Master) = 5 False
-Response from Mapper id (in Master) = 8 True
-Response from Mapper id (in Master) = 6 True
-Response from Mapper id (in Master) = 9 True
-Response from Mapper id (in Master) = 7 True
+Response from Mapper id (in Master) = 1 False
 Response from Mapper id (in Master) = 0 True
-Response from Mapper id (in Master) = 1 True
-Response from Mapper id (in Master) = 2 True
-Response from Mapper id (in Master) = 4 True
-Response from Mapper id (in Master) = 3 True
-Response from Mapper id (in Master) = 5 True
-All Mapper finished
-Reducers Started
-Response from Reducer id (in Master)= 0 2
-Response from Reducer id (in Master)= 4 2
-Response from Reducer id (in Master)= 5 2
-Response from Reducer id (in Master)= 6 2
-Response from Reducer id (in Master)= 0 2
-Response from Reducer id (in Master)= 8 2
-Response from Reducer id (in Master)= 9 2
-Response from Reducer id (in Master)= 7 2
-Response from Reducer id (in Master)= 4 2
-Response from Reducer id (in Master)= 6 2
-Response from Reducer id (in Master)= 0 2
-Response from Reducer id (in Master)= 9 2
-Response from Reducer id (in Master)= 6 2
-Response from Reducer id (in Master)= 0 2
-Response from Reducer id (in Master)= 2 1
-Response from Reducer id (in Master)= 3 1
-Response from Reducer id (in Master)= 5 1
-Response from Reducer id (in Master)= 8 1
-Response from Reducer id (in Master)= 4 1
-Response from Reducer id (in Master)= 9 1
-Response from Reducer id (in Master)= 6 1
-Response from Reducer id (in Master)= 7 1
-Response from Reducer id (in Master)= 1 1
-Response from Reducer id (in Master)= 0 1
-All Reducers are  finished
-centroids_list [(8.6, 2.6), (8.3, 2.9)]
-Temp Centroids = [('0', [9.856250047683716, 0.7062499956227839]), ('1', [1.4400000472863514, 7.086666663487752])]
-New Centroids after it 1, is [(9.856250047683716, 0.7062499956227839), (1.4400000472863514, 7.086666663487752)]
-Response from Mapper id (in Master) = 3 False
-Response from Mapper id (in Master) = 5 False
-Response from Mapper id (in Master) = 6 False
-Response from Mapper id (in Master) = 5 False
-Response from Mapper id (in Master) = 6 False
-Response from Mapper id (in Master) = 0 True
-Response from Mapper id (in Master) = 1 True
-Response from Mapper id (in Master) = 9 True
 Response from Mapper id (in Master) = 4 True
 Response from Mapper id (in Master) = 2 True
-Response from Mapper id (in Master) = 8 True
-Response from Mapper id (in Master) = 7 True
 Response from Mapper id (in Master) = 3 True
-Response from Mapper id (in Master) = 6 True
-Response from Mapper id (in Master) = 5 True
-All Mapper finished
-Reducers Started
-Response from Reducer id (in Master)= 1 2
-Response from Reducer id (in Master)= 9 2
-Response from Reducer id (in Master)= 7 2
-Response from Reducer id (in Master)= 9 2
-Response from Reducer id (in Master)= 7 2
-Response from Reducer id (in Master)= 9 2
-Response from Reducer id (in Master)= 7 2
-Response from Reducer id (in Master)= 3 1
-Response from Reducer id (in Master)= 2 1
-Response from Reducer id (in Master)= 4 1
-Response from Reducer id (in Master)= 6 1
-Response from Reducer id (in Master)= 5 1
-Response from Reducer id (in Master)= 8 1
-Response from Reducer id (in Master)= 1 1
-Response from Reducer id (in Master)= 7 1
-Response from Reducer id (in Master)= 0 1
-Response from Reducer id (in Master)= 9 1
-All Reducers are  finished
-centroids_list [(9.856250047683716, 0.7062499956227839), (1.4400000472863514, 7.086666663487752)]
-Temp Centroids = [('0', [9.547368501362048, 1.0473684248955626]), ('1', [-0.17500000447034836, 8.141666650772095])]
-New Centroids after it 2, is [(9.547368501362048, 1.0473684248955626), (-0.17500000447034836, 8.141666650772095)]
-Response from Mapper id (in Master) = 0 False
-Response from Mapper id (in Master) = 6 False
-Response from Mapper id (in Master) = 3 False
-Response from Mapper id (in Master) = 7 False
-Response from Mapper id (in Master) = 0 False
-Response from Mapper id (in Master) = 9 False
-Response from Mapper id (in Master) = 8 False
-Response from Mapper id (in Master) = 3 False
-Response from Mapper id (in Master) = 7 False
-Response from Mapper id (in Master) = 9 False
-Response from Mapper id (in Master) = 7 False
 Response from Mapper id (in Master) = 1 True
-Response from Mapper id (in Master) = 4 True
-Response from Mapper id (in Master) = 2 True
-Response from Mapper id (in Master) = 8 True
-Response from Mapper id (in Master) = 5 True
-Response from Mapper id (in Master) = 9 True
-Response from Mapper id (in Master) = 6 True
-Response from Mapper id (in Master) = 0 True
-Response from Mapper id (in Master) = 3 True
-Response from Mapper id (in Master) = 7 True
 All Mapper finished
 Reducers Started
-Response from Reducer id (in Master)= 1 2
-Response from Reducer id (in Master)= 2 2
 Response from Reducer id (in Master)= 3 2
 Response from Reducer id (in Master)= 4 2
-Response from Reducer id (in Master)= 2 2
-Response from Reducer id (in Master)= 8 2
-Response from Reducer id (in Master)= 9 2
 Response from Reducer id (in Master)= 4 2
-Response from Reducer id (in Master)= 2 2
-Response from Reducer id (in Master)= 9 2
-Response from Reducer id (in Master)= 2 2
-Response from Reducer id (in Master)= 2 2
-Response from Reducer id (in Master)= 6 1
-Response from Reducer id (in Master)= 5 1
-Response from Reducer id (in Master)= 3 1
-Response from Reducer id (in Master)= 7 1
-Response from Reducer id (in Master)= 9 1
-Response from Reducer id (in Master)= 4 1
-Response from Reducer id (in Master)= 8 1
+Response from Reducer id (in Master)= 4 2
+Response from Reducer id (in Master)= 4 2
+Response from Reducer id (in Master)= 4 2
+Response from Reducer id (in Master)= 4 2
 Response from Reducer id (in Master)= 0 1
 Response from Reducer id (in Master)= 2 1
+Response from Reducer id (in Master)= 3 1
+Response from Reducer id (in Master)= 1 1
+Response from Reducer id (in Master)= 4 1
+All Reducers are  finished
+centroids_list [(0.871598034265715, -4.589740432734227), (-1.7313672499094945, 0.9715351567920971)]
+Temp Centroids = [('0', [1.0624753983691335, -4.188153982162476]), ('1', [-2.440219885110855, 0.6699799090623856])]
+New Centroids after it 1, is [(1.0624753983691335, -4.188153982162476), (-2.440219885110855, 0.6699799090623856)]
+Response from Mapper id (in Master) = 1 False
+Response from Mapper id (in Master) = 1 False
+Response from Mapper id (in Master) = 0 True
+Response from Mapper id (in Master) = 1 False
+Response from Mapper id (in Master) = 2 True
+Response from Mapper id (in Master) = 3 True
+Response from Mapper id (in Master) = 1 False
+Response from Mapper id (in Master) = 4 True
+Response from Mapper id (in Master) = 1 True
+All Mapper finished
+Reducers Started
+Response from Reducer id (in Master)= 1 2
+Response from Reducer id (in Master)= 2 2
+Response from Reducer id (in Master)= 1 2
+Response from Reducer id (in Master)= 1 2
+Response from Reducer id (in Master)= 3 1
+Response from Reducer id (in Master)= 2 1
+Response from Reducer id (in Master)= 4 1
+Response from Reducer id (in Master)= 0 1
 Response from Reducer id (in Master)= 1 1
 All Reducers are  finished
-centroids_list [(9.547368501362048, 1.0473684248955626), (-0.17500000447034836, 8.141666650772095)]
-Temp Centroids = [('0', [9.547368501362048, 1.0473684248955626]), ('1', [-0.17500000447034836, 8.141666650772095])]
-New Centroids after it 3, is [(9.547368501362048, 1.0473684248955626), (-0.17500000447034836, 8.141666650772095)]
+centroids_list [(1.0624753983691335, -4.188153982162476), (-2.440219885110855, 0.6699799090623856)]
+Temp Centroids = [('0', [1.0624753983691335, -4.188153982162476]), ('1', [-2.440219885110855, 0.6699799090623856])]
+New Centroids after it 2, is [(1.0624753983691335, -4.188153982162476), (-2.440219885110855, 0.6699799090623856)]

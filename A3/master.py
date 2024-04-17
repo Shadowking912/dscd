@@ -17,7 +17,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-points_file="Data/Input/points.txt"
+points_file="Data/Input/points4.txt"
 final_centroid_file="final_centroids.txt"
 logfile = "master_log.txt"
 centroid_file="centroids_new.txt"

@@ -1,3 +1,0 @@
-reduce responses {}
-reduce responses {}
-reduce responses {}
