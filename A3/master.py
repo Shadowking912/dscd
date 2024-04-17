@@ -17,7 +17,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-points_file="Data/Input/points4.txt"
+points_file="Data/Input/points2.txt"
 final_centroid_file="final_centroids.txt"
 logfile = "master_log.txt"
 centroid_file="centroids_new.txt"
@@ -39,6 +39,46 @@ class custom_exeception(Exception):
     def __init__(self,message):
         super().__init__(message)
         self.message = message
+def plotter():
+    points=[]
+    with open(points_file, "r") as f:
+        for i in f.readlines():
+            points.append(tuple(map(float,i.strip().split(','))))
+        # Sample data points
+    points = np.array(points)
+    # Sample centroids
+    centroids=[]
+    with open("final_centroids.txt", "r") as f:
+        for i in f.readlines():
+            centroids.append(tuple(map(float,i.strip().split(','))))
+    centroids = np.array(centroids)
+
+
+    cluster_points = [[] for _ in range(len(centroids))]  # Initialize an empty list for each cluster
+
+    for point in points:
+        distances = np.linalg.norm(point - centroids, axis=1)  # Calculate Euclidean distance to each centroid
+        closest_centroid_index = np.argmin(distances)  # Find the index of the closest centroid
+        cluster_points[closest_centroid_index].append(point)  # Assign the point to the closest cluster
+
+    # Plotting the data points with different colors for each cluster
+    for i, cluster in enumerate(cluster_points):
+        cluster = np.array(cluster)
+        plt.scatter(cluster[:,0], cluster[:,1], label=f'Cluster {i+1}')
+    
+    for i, centroid in enumerate(centroids):
+        plt.scatter(centroid[0], centroid[1], color='red', s=100, label='Centroids')
+        plt.text(round(centroid[0],6), round(centroid[1],6), f'({round(centroid[0],6)}, {round(centroid[1],6)})', fontsize=8, ha='center', va='bottom')
+    # Plotting the centroids
+
+    plt.xlabel('X')
+    plt.ylabel('Y')
+    plt.title('Cluster Visualization')
+    plt.legend()
+    plt.grid(True)
+    plt.show()
+
+
 
 
 def send_to_mapper(mapper_id,mapper_partitions,num_centroids,centroids_list,num_reducers):
@@ -135,44 +175,7 @@ def get_response(response):
     response = response.result()
     # print("Response in Master",response)
     
-def plotter():
-    points=[]
-    with open(points_file, "r") as f:
-        for i in f.readlines():
-            points.append(tuple(map(float,i.strip().split(','))))
-        # Sample data points
-    points = np.array(points)
-    # Sample centroids
-    centroids=[]
-    with open("final_centroids.txt", "r") as f:
-        for i in f.readlines():
-            centroids.append(tuple(map(float,i.strip().split(','))))
-    centroids = np.array(centroids)
 
-
-    cluster_points = [[] for _ in range(len(centroids))]  # Initialize an empty list for each cluster
-
-    for point in points:
-        distances = np.linalg.norm(point - centroids, axis=1)  # Calculate Euclidean distance to each centroid
-        closest_centroid_index = np.argmin(distances)  # Find the index of the closest centroid
-        cluster_points[closest_centroid_index].append(point)  # Assign the point to the closest cluster
-
-    # Plotting the data points with different colors for each cluster
-    for i, cluster in enumerate(cluster_points):
-        cluster = np.array(cluster)
-        plt.scatter(cluster[:,0], cluster[:,1], label=f'Cluster {i+1}')
-    
-    for i, centroid in enumerate(centroids):
-        plt.scatter(centroid[0], centroid[1], color='red', s=100, label='Centroids')
-        plt.text(round(centroid[0],6), round(centroid[1],6), f'({round(centroid[0],6)}, {round(centroid[1],6)})', fontsize=8, ha='center', va='bottom')
-    # Plotting the centroids
-
-    plt.xlabel('X')
-    plt.ylabel('Y')
-    plt.title('Cluster Visualization')
-    plt.legend()
-    plt.grid(True)
-    plt.show()
 
 def read_file():
     with open(os.path.join(os.getcwd(),points_file),"r") as f:
@@ -209,29 +212,6 @@ def create_partitions(points,shard_size,num_mappers):
         mapper_partitions[i%num_mappers].append(partitions[i])
     print("deb",mapper_partitions) 
     return mapper_partitions
-# split_number = 0
-    # shard_size = len(points) // num_mappers
-    # num_partitions = num_mappers
-    # if len(points)%shard_size!=0:
-    #     remaining_size = len(points)-num_partitions*shard_size
-    #     num_partitions+=1
-
-    # start_index = 0
-    # partitions=[]
-    # for i in range(num_partitions):
-    #     if start_index+shard_size<=len(points):
-    #         partitions.append(tuple([start_index,start_index+shard_size]))
-    #         start_index+=shard_size
-    #     else:
-    #         partitions.append(tuple([start_index,start_index+remaining_size]))
-    #         start_index+=remaining_size
-
-    # mapper_partitions={}
-    # for i in range(len(partitions)):
-    #     if i%num_mappers not in mapper_partitions.keys():
-    #         mapper_partitions[i%num_mappers]=[]
-    #     mapper_partitions[i%num_mappers].append(partitions[i]) 
-    # return mapper_partitions
 
 def killers_of_doom(stop_event,mapperpids, reducerpids):
     print("Killers of doom started")
@@ -248,7 +228,7 @@ def killers_of_doom(stop_event,mapperpids, reducerpids):
             reducerpids[int(x[1])].close()
         
         elif x[0]=='e':
-            break
+            return
 
 def update_centroids(centroids_list):
     global temp_centroids
@@ -327,12 +307,14 @@ def main():
     #start mappers
     for mapper_id in range(num_mappers):
         process = multiprocessing.Process(target=run_mapper, args=(f"5555{mapper_id}",points_file))
+        process.daemon=True
         pidListMappers.append(process)
         process.start()
 
     pidListReducers = []
     for reducer_id in range(num_reducers):
         process = multiprocessing.Process(target=run_reducer, args=(f"6666{reducer_id}",))
+        process.daemon=True
         pidListReducers.append(process)
         process.start()
         
@@ -367,9 +349,11 @@ def main():
             
             for i in range(num_mappers):
                 if i not in succesmappers:
-                    pidListMappers[i]=multiprocessing.Process(target=run_mapper, args=(f"5555{i}",))
+                    pidListMappers[i]=multiprocessing.Process(target=run_mapper, args=(f"5555{i}",points_file))
+                    pidListMappers[i].daemon=True
                     pidListMappers[i].start()
                     threadings[i]=threading.Thread(target=send_to_mapper,args=(i,mapper_partitions,num_centroids,centroids_list,num_reducers))
+                    threadings[i].daemon=True
                     threadings[i].start()
 
         # print("Responses = ",responses)
@@ -399,8 +383,10 @@ def main():
                 if i not in succesreducers:
                     try:
                         pidListReducers[i]=multiprocessing.Process(target=run_reducer, args=(f"6666{i}",))
+                        pidListReducers[i].daemon=True
                         pidListReducers[i].start()
                         threadings[i]=threading.Thread(target=send_to_reducer,args=(i,num_mappers))
+                        threadings[i].daemon=True
                         threadings[i].start()
                     except Exception as e:
                         print("here",e)
@@ -414,6 +400,7 @@ def main():
                 with open(logfile,"a") as f:
                     f.write(f"Restarting Mapper {i}\n")
                 pidListMappers[i]=multiprocessing.Process(target=run_mapper, args=(f"5555{i}",))
+                pidListMappers[i].daemon=True
                 pidListMappers[i].start()
             restartmappers=set()
             continue
@@ -452,9 +439,10 @@ def main():
     with open("final_centroids.txt","w") as f:
         for i in centroids_list:
             f.write(f"{i[0]},{i[1]}\n")
+
     plotter()
     sys.exit(0)
-
+    
     
 if __name__ == "__main__":
     main()
