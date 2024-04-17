@@ -1,20 +1,125 @@
-Response from id (in Master) = 0 True
-Response from id (in Master) = 1 True
-All Mapper finished.
+Response from Mapper id (in Master) = 9 False
+Response from Mapper id (in Master) = 2 False
+Response from Mapper id (in Master) = 8 True
+Response from Mapper id (in Master) = 9 True
+Response from Mapper id (in Master) = 0 True
+Response from Mapper id (in Master) = 3 True
+Response from Mapper id (in Master) = 7 True
+Response from Mapper id (in Master) = 4 True
+Response from Mapper id (in Master) = 1 True
+Response from Mapper id (in Master) = 6 True
+Response from Mapper id (in Master) = 2 True
+Response from Mapper id (in Master) = 5 True
+All Mapper finished
 Reducers Started
-All reducers are  finished.
-Response from id (in Master) = 0 True
-Response from id (in Master) = 1 True
-All Mapper finished.
+Response from Reducer id (in Master)= 3 2
+Response from Reducer id (in Master)= 5 2
+Response from Reducer id (in Master)= 7 2
+Response from Reducer id (in Master)= 3 2
+Response from Reducer id (in Master)= 5 2
+Response from Reducer id (in Master)= 5 2
+Response from Reducer id (in Master)= 5 2
+Response from Reducer id (in Master)= 1 3
+Response from Reducer id (in Master)= 4 3
+Response from Reducer id (in Master)= 8 3
+Response from Reducer id (in Master)= 3 3
+Response from Reducer id (in Master)= 9 3
+Response from Reducer id (in Master)= 7 3
+Response from Reducer id (in Master)= 0 3
+Response from Reducer id (in Master)= 6 3
+Response from Reducer id (in Master)= 5 3
+Response from Reducer id (in Master)= 2 3
+All Reducers are  finished
+Restarting Mapper 0
+Response from Mapper id (in Master) = 3 False
+Response from Mapper id (in Master) = 6 False
+Response from Mapper id (in Master) = 4 False
+Response from Mapper id (in Master) = 5 False
+Response from Mapper id (in Master) = 8 False
+Response from Mapper id (in Master) = 9 False
+Response from Mapper id (in Master) = 8 False
+Response from Mapper id (in Master) = 1 True
+Response from Mapper id (in Master) = 2 True
+Response from Mapper id (in Master) = 9 True
+Response from Mapper id (in Master) = 7 True
+Response from Mapper id (in Master) = 8 True
+Response from Mapper id (in Master) = 3 True
+Response from Mapper id (in Master) = 6 True
+Response from Mapper id (in Master) = 4 True
+Response from Mapper id (in Master) = 5 True
+Response from Mapper id (in Master) = 0 False
+Response from Mapper id (in Master) = 0 True
+All Mapper finished
 Reducers Started
-All reducers are  finished.
-Response from id (in Master) = 1 True
-Response from id (in Master) = 0 True
-All Mapper finished.
+Response from Reducer id (in Master)= 0 2
+Response from Reducer id (in Master)= 1 2
+Response from Reducer id (in Master)= 5 2
+Response from Reducer id (in Master)= 0 2
+Response from Reducer id (in Master)= 6 2
+Response from Reducer id (in Master)= 1 2
+Response from Reducer id (in Master)= 6 2
+Response from Reducer id (in Master)= 6 2
+Response from Reducer id (in Master)= 6 2
+Response from Reducer id (in Master)= 6 2
+Response from Reducer id (in Master)= 6 2
+Response from Reducer id (in Master)= 3 1
+Response from Reducer id (in Master)= 4 1
+Response from Reducer id (in Master)= 2 1
+Response from Reducer id (in Master)= 9 1
+Response from Reducer id (in Master)= 8 1
+Response from Reducer id (in Master)= 5 1
+Response from Reducer id (in Master)= 7 1
+Response from Reducer id (in Master)= 6 1
+Response from Reducer id (in Master)= 1 1
+Response from Reducer id (in Master)= 0 1
+All Reducers are  finished
+centroids_list [(10.5, -0.1), (11.5, -1.9)]
+Temp Centroids = [('0', [5.196428617196424, 4.364285710932953]), ('1', [11.266666730244955, -1.5333333412806194])]
+New Centroids after it 1, is [(5.196428617196424, 4.364285710932953), (11.266666730244955, -1.5333333412806194)]
+Response from Mapper id (in Master) = 3 False
+Response from Mapper id (in Master) = 1 False
+Response from Mapper id (in Master) = 5 False
+Response from Mapper id (in Master) = 4 False
+Response from Mapper id (in Master) = 7 False
+Response from Mapper id (in Master) = 3 False
+Response from Mapper id (in Master) = 9 False
+Response from Mapper id (in Master) = 7 False
+Response from Mapper id (in Master) = 3 False
+Response from Mapper id (in Master) = 9 False
+Response from Mapper id (in Master) = 3 False
+Response from Mapper id (in Master) = 8 True
+Response from Mapper id (in Master) = 0 True
+Response from Mapper id (in Master) = 2 True
+Response from Mapper id (in Master) = 6 True
+Response from Mapper id (in Master) = 9 True
+Response from Mapper id (in Master) = 1 True
+Response from Mapper id (in Master) = 4 True
+Response from Mapper id (in Master) = 5 True
+Response from Mapper id (in Master) = 7 True
+Response from Mapper id (in Master) = 3 True
+All Mapper finished
 Reducers Started
-All reducers are  finished.
-Response from id (in Master) = 1 True
-Response from id (in Master) = 0 True
-All Mapper finished.
-Reducers Started
-All reducers are  finished.
+Response from Reducer id (in Master)= 0 2
+Response from Reducer id (in Master)= 1 2
+Response from Reducer id (in Master)= 2 2
+Response from Reducer id (in Master)= 4 2
+Response from Reducer id (in Master)= 7 2
+Response from Reducer id (in Master)= 8 2
+Response from Reducer id (in Master)= 2 2
+Response from Reducer id (in Master)= 4 2
+Response from Reducer id (in Master)= 2 2
+Response from Reducer id (in Master)= 4 2
+Response from Reducer id (in Master)= 3 1
+Response from Reducer id (in Master)= 5 1
+Response from Reducer id (in Master)= 6 1
+Response from Reducer id (in Master)= 9 1
+Response from Reducer id (in Master)= 7 1
+Response from Reducer id (in Master)= 8 1
+Response from Reducer id (in Master)= 4 1
+Response from Reducer id (in Master)= 2 1
+Response from Reducer id (in Master)= 1 1
+Response from Reducer id (in Master)= 0 1
+All Reducers are  finished
+centroids_list [(5.196428617196424, 4.364285710932953), (11.266666730244955, -1.5333333412806194)]
+Temp Centroids = [('0', [2.973684277973677, 6.163157889717503]), ('1', [10.233333349227905, 0.041666664804021515])]
+New Centroids after it 2, is [(2.973684277973677, 6.163157889717503), (10.233333349227905, 0.041666664804021515)]

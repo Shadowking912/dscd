@@ -14,8 +14,8 @@ import json
 from mapper import run_mapper
 from reducer import run_reducer
 
-logfile = open("master_log.txt","w")
-centroid_file=open("centroids_new.txt","w")
+logfile = "master_log.txt"
+centroid_file="centroids_new.txt"
 folder=os.path.join(os.getcwd(),f"Data")
 eps=1e-8
 temp_centroids = {}
@@ -43,7 +43,6 @@ def send_to_mapper(mapper_id,mapper_partitions,num_centroids,centroids_list,num_
         stub = master_pb2_grpc.MasterMapperCommunicationStub(channel)
         request=master_pb2.MapRequest()
         lengths=master_pb2.length()
-        
         for j in mapper_partitions[mapper_id]:
             if(j[0]!=j[1]):
                 lengths.startLength=j[0]+1
@@ -51,7 +50,7 @@ def send_to_mapper(mapper_id,mapper_partitions,num_centroids,centroids_list,num_
                 request.Lengths.append(lengths)
         
         centroids=master_pb2.DataPoint()
-        
+
         for j in range(num_centroids):
             centroids.x=centroids_list[j][0]
             centroids.y=centroids_list[j][1]
@@ -60,10 +59,13 @@ def send_to_mapper(mapper_id,mapper_partitions,num_centroids,centroids_list,num_
         request.reducers = num_reducers
         response = stub.MapperParameters(request)
         if response.success==False:
-            # print(f"Response from id (in Master) = {mapper_id} {response.success}")
+            with open(logfile,"a") as f:
+                f.write(f"Response from Mapper id (in Master) = {mapper_id} {response.success}\n")
             send_to_mapper(mapper_id,mapper_partitions,num_centroids,centroids_list,num_reducers)
-        else:
-            print(f"Response from id (in Master) = {mapper_id} {response.success}",file=logfile,flush=True)
+       
+        elif response.success==True:
+            with open(logfile,"a") as f:
+                f.write(f"Response from Mapper id (in Master) = {mapper_id} {response.success}\n")
             lock = threading.Lock()
             lock.acquire()
             succesmappers.add(mapper_id)
@@ -72,7 +74,7 @@ def send_to_mapper(mapper_id,mapper_partitions,num_centroids,centroids_list,num_
 
     except grpc.RpcError as e:
         pass
-       
+    channel.close()
         
 def send_to_reducer(reducer_id,num_mappers):
     global temp_centroids,succesreducers,restartmappers
@@ -84,12 +86,15 @@ def send_to_reducer(reducer_id,num_mappers):
             request.mapperportnumbers.append(f"5555{i}")
         response = stub.ReducerParameters(request)
         if response.success==2:
-            # print(f"Response from id (in Master)= {reducer_id} {response.success}")
+            with open(logfile,"a") as f:
+                f.write(f"Response from Reducer id (in Master)= {reducer_id} {response.success}\n")
+
             send_to_reducer(reducer_id,num_mappers)
     
         elif response.success==1:
             lock = threading.Lock()
-            # print(f"Response from id (in Master)= {reducer_id} {response.success}")
+            with open(logfile,"a") as f:
+                f.write(f"Response from Reducer id (in Master)= {reducer_id} {response.success}\n")
             lock.acquire()
             temp_centroids.update(json.loads(response.centroids))
             succesreducers.add(reducer_id)
@@ -97,15 +102,17 @@ def send_to_reducer(reducer_id,num_mappers):
             lock.release()
 
         elif response.success==3:
-            
+            with open(logfile,"a") as f:
+                f.write(f"Response from Reducer id (in Master)= {reducer_id} {response.success}\n")
+
             lock = threading.Lock()
             lock.acquire()
             restartmappers.add(response.mapper_id)
             lock.release()
     
-    except:
-       pass
-        
+    except Exception as e:
+       print(e)
+    channel.close()
     
     # return json.loads(response.centroids)
     # print(f"Response from id  = {reducer_id} {response.success}")
@@ -150,9 +157,11 @@ def create_partitions(points,shard_size,num_mappers):
     start_index = 0
     partitions=[]
     for i in range(num_partitions):
-        partitions.append(tuple([start_index,min(start_index+shard_size,len(points))]))
-        start_index+=shard_size
-    
+        if start_index+shard_size<=len(points):
+            partitions.append(tuple([start_index,start_index+shard_size]))
+            start_index+=shard_size
+    if start_index<len(points):
+        partitions.append(tuple([start_index,len(points)]))
     print(partitions)
     mapper_partitions={}
     for i in range(num_mappers):
@@ -205,20 +214,31 @@ def killers_of_doom(stop_event,mapperpids, reducerpids):
         elif x[0]=='e':
             break
 
-def update_centroids():
+def update_centroids(centroids_list):
     global temp_centroids
     # print(temp_centroids,type(temp_centroids))
-    new_centroids = {}
+    new_centroids = centroids_list.copy()
     x=sorted(temp_centroids.items())
+
+    with open(logfile,"a") as f:
+        f.write(f"Temp Centroids = {x}\n")
+
     for i in x:
-        new_centroids[i[0]]=(float(i[1][0]),float(i[1][1]))
+        new_centroids[int(i[0])]=(float(i[1][0]),float(i[1][1]))
     
-    print("(Master) New Centroids = ",new_centroids,file=centroid_file,flush=True)
+    with open(centroid_file,"a") as f:
+        f.write(f"New Centroids = {new_centroids}\n")
     
-    return list(new_centroids.values())
+    return new_centroids
     
 def main():
-    global succesmappers,succesreducers
+    global succesmappers,succesreducers,restartmappers
+    with open(logfile,"w") as f:
+        pass
+    with open(centroid_file,"w") as f:
+        pass
+    with open("Data/dump.txt","w") as f:
+        pass
     if len(sys.argv) != 5:
         print("Usage: python master.py <number_of_mappers> <number_of_reducers> <number_of_centroids> <number_of_iterations>")
         sys.exit(1)
@@ -261,7 +281,6 @@ def main():
     print(f"Points{points}, len(points)={len(points)} ")    
 
     centroids_list = random.sample(points,num_centroids)
-    # centroids_list=[(2,2),(1,1)]
     print("Centroids = ",centroids_list)
     mapper_partitions=create_partitions(points,shard_size,num_mappers)
     print(f"Partitions = {mapper_partitions}")
@@ -289,6 +308,7 @@ def main():
     time.sleep(2)
     iter=0
     while iter<num_iterations:
+        
         succesreducers=set()
         succesmappers=set()
         # print(f"Iteration {iter+1}")
@@ -317,20 +337,21 @@ def main():
                     threadings[i].start()
 
         # print("Responses = ",responses)
-        print("All Mapper finished.",file=logfile,flush=True)
+        with open(logfile,"a") as f:
+            f.write("All Mapper finished\n")
+
         # Fork for the number of reducers
-        print("Reducers Started",file=logfile,flush=True)
-        
+        with open(logfile,"a") as f:
+            f.write("Reducers Started\n")
+
+
         threadings=[]
         for reducer_id in range(num_reducers):
             sentrequest=threading.Thread(target=send_to_reducer,args=(reducer_id,num_mappers))
             sentrequest.daemon=True
             threadings.append(sentrequest)
             sentrequest.start()
-
-        
-        
-        
+            
         while len(succesreducers)!=num_reducers:
             for i in threadings:
                 i.join()
@@ -347,24 +368,32 @@ def main():
                         threadings[i].start()
                     except Exception as e:
                         print("here",e)
-                        sys.exit(0)
-        
+                        # sys.exit(0)
+
+        with open(logfile,"a") as f:
+            f.write("All Reducers are  finished\n")
+
         if len(restartmappers)>0:
             for i in restartmappers:
+                with open(logfile,"a") as f:
+                    f.write(f"Restarting Mapper {i}\n")
                 pidListMappers[i]=multiprocessing.Process(target=run_mapper, args=(f"5555{i}",))
                 pidListMappers[i].start()
+            restartmappers=set()
             continue
-        
-        print("All reducers are  finished.",file=logfile,flush=True)
 
-        
-        new_centroids=update_centroids()
-        # print(f"New Centroids after it {iter+1}, is ",new_centroids)
-        
+        with open(logfile,"a") as f:
+            f.write(f"centroids_list {centroids_list}\n")
+
+        new_centroids=update_centroids(centroids_list)
+        with open(logfile,"a") as f:
+            f.write(f"New Centroids after it {iter+1}, is {new_centroids}\n")
+    
         if all(abs(centroids_list[i][0]-new_centroids[i][0])<eps and abs(centroids_list[i][1]-new_centroids[i][1])<eps for i in range(num_centroids)):
             break
         else:
             centroids_list=new_centroids
+            # for i in new_centroids:
             # print("Deb",centroids_list)
         # if iter<num_iterations-1:
         #     break

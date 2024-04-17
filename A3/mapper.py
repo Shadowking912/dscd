@@ -14,6 +14,7 @@ from decimal import Decimal, getcontext
 getcontext().prec = 50  # Set the precision to 50 decimal places
 
 # Calculate the exponential function
+dumpfile=open("Data/dump.txt","a")
 
 server=None
 folder=None
@@ -106,7 +107,7 @@ class MasterMapperCommunication(master_pb2_grpc.MasterMapperCommunicationService
         
         global server
         
-        print("received request from master",file=logfile,flush=True)
+        print("Received Map request from master",file=logfile,flush=True)
         
         lengths = request.Lengths
         centroid_coordinates=request.CentroidCoordinates
@@ -141,7 +142,6 @@ class MasterMapperCommunication(master_pb2_grpc.MasterMapperCommunicationService
 
        
         response.success=True
-        # time.sleep(5)
         return response
     
 def serve():
@@ -159,9 +159,12 @@ def run_mapper(port):
     
     global folder,logfile,flag,port_number
     port_number=port
-    #print("mapper starting",port_number)
+    print("mapper starting",port_number,file=dumpfile,flush=True)
     folder=os.path.join(os.getcwd(),f"Data/Mappers/Mapper_{port_number}")
-    os.mkdir(folder)
+    try:
+        os.mkdir(folder)
+    except:
+        pass
     flag=0.5
     logfile=open(f"{folder}/log.txt","w")
     serve()
