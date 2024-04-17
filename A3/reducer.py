@@ -16,7 +16,7 @@ flag=None
 folder=None
 logfile=None
 port_number=None
-
+dumpfile=open("Data/dump.txt","a")
 class MasterReducerCommunication(master_pb2_grpc.MasterReducerCommunicationServicer):
     
     def reduce(self,responses):
@@ -25,7 +25,11 @@ class MasterReducerCommunication(master_pb2_grpc.MasterReducerCommunicationServi
         number_of_points=0
         final_response={}
         with open(f"{folder}reducer{port_number}.txt","w") as f:
+            print("reduce responses",responses,file=logfile,flush=True)
             for i in responses.keys():
+                sum_x=0
+                sum_y=0
+                number_of_points=0
                 for j in responses[i]:
                     sum_x+=j[0][0]
                     sum_y+=j[0][1]
@@ -52,14 +56,14 @@ class MasterReducerCommunication(master_pb2_grpc.MasterReducerCommunicationServi
         
         response.success=1
         for j in mappers:
-            channel = grpc.insecure_channel(f'localhost:{j}')
-            stub = master_pb2_grpc.MapperReducerCommunicationStub(channel)
-            request=master_pb2.PartionRequest()
-            request.reducerid=int(port_number[-1])
             try:
+                channel = grpc.insecure_channel(f'localhost:{j}')
+                stub = master_pb2_grpc.MapperReducerCommunicationStub(channel)
+                request=master_pb2.PartionRequest()
+                request.reducerid=int(port_number[-1])
                 mapresponse=stub.PartitionParameters(request)
                 mapresponse=mapresponse.mappartion
-                if mapresponse!=[]:
+                if mapresponse is not None:
                     for i in mapresponse:
                         if i.key in responses:
                             responses[i.key].append([tuple([i.point.x,i.point.y]),i.freq])
@@ -67,6 +71,7 @@ class MasterReducerCommunication(master_pb2_grpc.MasterReducerCommunicationServi
                             responses[i.key]=[[tuple([i.point.x,i.point.y]),i.freq]]
                     
             except:
+                print(f"Mapper {j} not available",file=logfile,flush=True)
                 response.mapper_id = int(j[-1])
                 response.success=3
                 return response
@@ -108,6 +113,7 @@ def run_reducer(port):
     global folder,logfile,port_number,flag
     flag=0.5
     port_number = port
+    print("reducer starting",port_number,file=dumpfile,flush=True)
     folder=os.path.join(os.getcwd(),f"Data/Reducers/")
     logfile=open(f"{folder}/reducer{port_number}log.txt","w")
     serve()

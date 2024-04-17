@@ -14,7 +14,8 @@ from decimal import Decimal, getcontext
 getcontext().prec = 50  # Set the precision to 50 decimal places
 
 # Calculate the exponential function
-
+dumpfile=open("Data/dump.txt","a")
+points_file=None
 server=None
 folder=None
 logfile=None
@@ -72,7 +73,7 @@ class MasterMapperCommunication(master_pb2_grpc.MasterMapperCommunicationService
     
     def read_points(self,indices):
         points = []
-        with open(os.path.join(os.getcwd(),f'Data/Input/points.txt'),"r") as file:
+        with open(os.path.join(os.getcwd(),points_file),"r") as file:
             r=file.readlines()
             #print(r,file=logfile,flush=True)
             for i in indices:
@@ -106,7 +107,7 @@ class MasterMapperCommunication(master_pb2_grpc.MasterMapperCommunicationService
         
         global server
         
-        print("received request from master",file=logfile,flush=True)
+        print("Received Map request from master",file=logfile,flush=True)
         
         lengths = request.Lengths
         centroid_coordinates=request.CentroidCoordinates
@@ -141,7 +142,6 @@ class MasterMapperCommunication(master_pb2_grpc.MasterMapperCommunicationService
 
        
         response.success=True
-        # time.sleep(5)
         return response
     
 def serve():
@@ -155,13 +155,17 @@ def serve():
     #print("SERVER STARTED")
     server.wait_for_termination()
 
-def run_mapper(port):    
+def run_mapper(port,pointsfile):    
     
-    global folder,logfile,flag,port_number
+    global folder,logfile,flag,port_number,points_file
+    points_file=pointsfile
     port_number=port
-    #print("mapper starting",port_number)
+    print("mapper starting",port_number,file=dumpfile,flush=True)
     folder=os.path.join(os.getcwd(),f"Data/Mappers/Mapper_{port_number}")
-    os.mkdir(folder)
+    try:
+        os.mkdir(folder)
+    except:
+        pass
     flag=0.5
     logfile=open(f"{folder}/log.txt","w")
     serve()

@@ -1,0 +1,11 @@
+mapper starting 55551
+mapper starting 55553
+mapper starting 55556
+mapper starting 55557
+mapper starting 55550
+mapper starting 55559
+mapper starting 55558
+mapper starting 55555
+mapper starting 55554
+mapper starting 55552
+reducer starting 66660
