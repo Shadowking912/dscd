@@ -17,7 +17,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 
-points_file="Data/Input/points2.txt"
+points_file="Data/Input/points.txt"
 final_centroid_file="final_centroids.txt"
 logfile = "master_log.txt"
 centroid_file="centroids_new.txt"
@@ -156,11 +156,11 @@ def send_to_reducer(reducer_id,num_mappers):
             lock.release()
     
     except Exception as e:
-       print(e)
+        pass
+
     channel.close()
     
-    # return json.loads(response.centroids)
-    # print(f"Response from id  = {reducer_id} {response.success}")
+
     
 def delete_folder_recursive(folder):
     # Recursively delete all files and subdirectories within the folder
@@ -175,8 +175,6 @@ def get_response(response):
     response = response.result()
     # print("Response in Master",response)
     
-
-
 def read_file():
     with open(os.path.join(os.getcwd(),points_file),"r") as f:
         points = f.readlines()
@@ -218,16 +216,21 @@ def killers_of_doom(stop_event,mapperpids, reducerpids):
     print("mapperpids: ",mapperpids)
     print("reducerpids: ",reducerpids)
     while stop_event.is_set()==False:
-        x=input("Enter to kill process (m/r/e,index)").split()
-        if x[0]=='m':
-            mapperpids[int(x[1])].terminate()
-            mapperpids[int(x[1])].close()
-        
-        elif x[0]=='r':
-            reducerpids[int(x[1])].terminate()
-            reducerpids[int(x[1])].close()
-        
-        elif x[0]=='e':
+        try:
+            x=input("Enter to kill process (m/r/e,index)").split()
+            if x[0]=='m':
+                mapperpids[int(x[1])].terminate()
+                mapperpids[int(x[1])].close()
+            
+            elif x[0]=='r':
+                reducerpids[int(x[1])].terminate()
+                reducerpids[int(x[1])].close()
+            
+            elif x[0]=='e':
+                print("cannot kill processes now")
+                return
+        except:
+            print("cannot kill processes now")
             return
 
 def update_centroids(centroids_list):
@@ -307,14 +310,12 @@ def main():
     #start mappers
     for mapper_id in range(num_mappers):
         process = multiprocessing.Process(target=run_mapper, args=(f"5555{mapper_id}",points_file))
-        process.daemon=True
         pidListMappers.append(process)
         process.start()
 
     pidListReducers = []
     for reducer_id in range(num_reducers):
         process = multiprocessing.Process(target=run_reducer, args=(f"6666{reducer_id}",))
-        process.daemon=True
         pidListReducers.append(process)
         process.start()
         
@@ -350,7 +351,6 @@ def main():
             for i in range(num_mappers):
                 if i not in succesmappers:
                     pidListMappers[i]=multiprocessing.Process(target=run_mapper, args=(f"5555{i}",points_file))
-                    pidListMappers[i].daemon=True
                     pidListMappers[i].start()
                     threadings[i]=threading.Thread(target=send_to_mapper,args=(i,mapper_partitions,num_centroids,centroids_list,num_reducers))
                     threadings[i].daemon=True
@@ -383,7 +383,6 @@ def main():
                 if i not in succesreducers:
                     try:
                         pidListReducers[i]=multiprocessing.Process(target=run_reducer, args=(f"6666{i}",))
-                        pidListReducers[i].daemon=True
                         pidListReducers[i].start()
                         threadings[i]=threading.Thread(target=send_to_reducer,args=(i,num_mappers))
                         threadings[i].daemon=True
@@ -400,7 +399,6 @@ def main():
                 with open(logfile,"a") as f:
                     f.write(f"Restarting Mapper {i}\n")
                 pidListMappers[i]=multiprocessing.Process(target=run_mapper, args=(f"5555{i}",))
-                pidListMappers[i].daemon=True
                 pidListMappers[i].start()
             restartmappers=set()
             continue

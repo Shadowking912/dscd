@@ -1,65 +1,76 @@
-Response from Mapper id (in Master) = 2 True
-Response from Mapper id (in Master) = 1 False
-Response from Mapper id (in Master) = 1 True
-Response from Mapper id (in Master) = 0 False
+Response from Mapper id (in Master) = 8 True
+Response from Mapper id (in Master) = 9 True
+Response from Mapper id (in Master) = 4 False
 Response from Mapper id (in Master) = 0 True
-Response from Mapper id (in Master) = 3 True
-All Mapper finished
-Reducers Started
-Response from Reducer id (in Master)= 2 2
-Response from Reducer id (in Master)= 2 2
-Response from Reducer id (in Master)= 2 2
-Response from Reducer id (in Master)= 5 2
-Response from Reducer id (in Master)= 6 2
-Response from Reducer id (in Master)= 6 2
-Response from Reducer id (in Master)= 0 1
-Response from Reducer id (in Master)= 7 2
-Response from Reducer id (in Master)= 8 2
-Response from Reducer id (in Master)= 3 1
-Response from Reducer id (in Master)= 8 2
-Response from Reducer id (in Master)= 7 2
-Response from Reducer id (in Master)= 1 1
-Response from Reducer id (in Master)= 2 1
-Response from Reducer id (in Master)= 6 1
-Response from Reducer id (in Master)= 8 1
-Response from Reducer id (in Master)= 5 1
-Response from Reducer id (in Master)= 4 1
-Response from Reducer id (in Master)= 9 1
-Response from Reducer id (in Master)= 7 1
-All Reducers are  finished
-centroids_list [(31.557122052707076, 36.90041258086754), (14.536067497498816, 51.3905894486027)]
-Temp Centroids = [('0', [53.92458730273776, 35.707297219170464]), ('1', [23.05101169239391, 69.78228343616833])]
-New Centroids after it 1, is [(53.92458730273776, 35.707297219170464), (23.05101169239391, 69.78228343616833)]
-Response from Mapper id (in Master) = 0 False
-Response from Mapper id (in Master) = 2 False
-Response from Mapper id (in Master) = 0 False
 Response from Mapper id (in Master) = 1 True
+Response from Mapper id (in Master) = 2 True
+Response from Mapper id (in Master) = 7 True
+Response from Mapper id (in Master) = 4 True
 Response from Mapper id (in Master) = 3 False
-Response from Mapper id (in Master) = 2 True
-Response from Mapper id (in Master) = 0 True
+Response from Mapper id (in Master) = 5 True
+Response from Mapper id (in Master) = 3 False
+Response from Mapper id (in Master) = 6 True
+Response from Mapper id (in Master) = 3 False
+Response from Mapper id (in Master) = 3 False
 Response from Mapper id (in Master) = 3 True
 All Mapper finished
 Reducers Started
 Response from Reducer id (in Master)= 0 2
-Response from Reducer id (in Master)= 2 2
-Response from Reducer id (in Master)= 4 2
-Response from Reducer id (in Master)= 5 2
+Response from Reducer id (in Master)= 0 2
 Response from Reducer id (in Master)= 0 1
-Response from Reducer id (in Master)= 2 1
-Response from Reducer id (in Master)= 3 1
-Response from Reducer id (in Master)= 5 1
-Response from Reducer id (in Master)= 1 1
-Response from Reducer id (in Master)= 4 1
-Response from Reducer id (in Master)= 7 1
-Response from Reducer id (in Master)= 8 2
-Response from Reducer id (in Master)= 8 2
-Response from Reducer id (in Master)= 9 2
-Response from Reducer id (in Master)= 9 2
-Response from Reducer id (in Master)= 9 2
-Response from Reducer id (in Master)= 9 2
-Response from Reducer id (in Master)= 9 1
-Response from Reducer id (in Master)= 8 1
 All Reducers are  finished
-centroids_list [(53.92458730273776, 35.707297219170464), (23.05101169239391, 69.78228343616833)]
-Temp Centroids = [('0', [53.92458730273776, 35.707297219170464]), ('1', [23.05101169239391, 69.78228343616833])]
-New Centroids after it 2, is [(53.92458730273776, 35.707297219170464), (23.05101169239391, 69.78228343616833)]
+centroids_list [(-1.5, 7.3), (-1.6, 7.4)]
+Temp Centroids = [('0', [7.034615442156792, 2.9000000028082957]), ('1', [-0.7200000047683716, 8.439999961853028])]
+New Centroids after it 1, is [(7.034615442156792, 2.9000000028082957), (-0.7200000047683716, 8.439999961853028)]
+Response from Mapper id (in Master) = 1 False
+Response from Mapper id (in Master) = 2 False
+Response from Mapper id (in Master) = 0 True
+Response from Mapper id (in Master) = 4 False
+Response from Mapper id (in Master) = 5 False
+Response from Mapper id (in Master) = 8 True
+Response from Mapper id (in Master) = 7 False
+Response from Mapper id (in Master) = 2 False
+Response from Mapper id (in Master) = 3 True
+Response from Mapper id (in Master) = 9 True
+Response from Mapper id (in Master) = 4 False
+Response from Mapper id (in Master) = 1 True
+Response from Mapper id (in Master) = 5 False
+Response from Mapper id (in Master) = 7 True
+Response from Mapper id (in Master) = 6 True
+Response from Mapper id (in Master) = 4 False
+Response from Mapper id (in Master) = 5 False
+Response from Mapper id (in Master) = 2 True
+Response from Mapper id (in Master) = 5 True
+Response from Mapper id (in Master) = 4 True
+All Mapper finished
+Reducers Started
+Response from Reducer id (in Master)= 0 2
+Response from Reducer id (in Master)= 0 2
+Response from Reducer id (in Master)= 0 1
+All Reducers are  finished
+centroids_list [(7.034615442156792, 2.9000000028082957), (-0.7200000047683716, 8.439999961853028)]
+Temp Centroids = [('0', [9.547368501362048, 1.0473684248955626]), ('1', [-0.17500000447034836, 8.141666650772095])]
+New Centroids after it 2, is [(9.547368501362048, 1.0473684248955626), (-0.17500000447034836, 8.141666650772095)]
+Response from Mapper id (in Master) = 1 False
+Response from Mapper id (in Master) = 0 True
+Response from Mapper id (in Master) = 3 False
+Response from Mapper id (in Master) = 2 True
+Response from Mapper id (in Master) = 4 True
+Response from Mapper id (in Master) = 1 False
+Response from Mapper id (in Master) = 5 True
+Response from Mapper id (in Master) = 6 True
+Response from Mapper id (in Master) = 8 True
+Response from Mapper id (in Master) = 9 True
+Response from Mapper id (in Master) = 3 False
+Response from Mapper id (in Master) = 7 True
+Response from Mapper id (in Master) = 1 False
+Response from Mapper id (in Master) = 1 False
+Response from Mapper id (in Master) = 3 True
+Response from Mapper id (in Master) = 1 True
+All Mapper finished
+Reducers Started
+Response from Reducer id (in Master)= 0 1
+All Reducers are  finished
+centroids_list [(9.547368501362048, 1.0473684248955626), (-0.17500000447034836, 8.141666650772095)]
+Temp Centroids = [('0', [9.547368501362048, 1.0473684248955626]), ('1', [-0.17500000447034836, 8.141666650772095])]
+New Centroids after it 3, is [(9.547368501362048, 1.0473684248955626), (-0.17500000447034836, 8.141666650772095)]
