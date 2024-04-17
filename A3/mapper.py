@@ -15,7 +15,7 @@ getcontext().prec = 50  # Set the precision to 50 decimal places
 
 # Calculate the exponential function
 dumpfile=open("Data/dump.txt","a")
-
+points_file=None
 server=None
 folder=None
 logfile=None
@@ -73,7 +73,7 @@ class MasterMapperCommunication(master_pb2_grpc.MasterMapperCommunicationService
     
     def read_points(self,indices):
         points = []
-        with open(os.path.join(os.getcwd(),f'Data/Input/points.txt'),"r") as file:
+        with open(os.path.join(os.getcwd(),points_file),"r") as file:
             r=file.readlines()
             #print(r,file=logfile,flush=True)
             for i in indices:
@@ -155,9 +155,10 @@ def serve():
     #print("SERVER STARTED")
     server.wait_for_termination()
 
-def run_mapper(port):    
+def run_mapper(port,pointsfile):    
     
-    global folder,logfile,flag,port_number
+    global folder,logfile,flag,port_number,points_file
+    points_file=pointsfile
     port_number=port
     print("mapper starting",port_number,file=dumpfile,flush=True)
     folder=os.path.join(os.getcwd(),f"Data/Mappers/Mapper_{port_number}")
